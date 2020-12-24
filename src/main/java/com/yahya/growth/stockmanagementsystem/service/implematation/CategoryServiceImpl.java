@@ -14,7 +14,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryDao categoryDao;
 
-
     @Override
     public Category findById(int categoryId) {
         return categoryDao.getOne(categoryId);

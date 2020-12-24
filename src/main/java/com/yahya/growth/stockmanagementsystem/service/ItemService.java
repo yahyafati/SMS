@@ -8,7 +8,9 @@ public interface ItemService {
 
     Item findById(int itemId);
 
-    int save(Item item);
+    Item save(Item item);
 
     List<Item> findAll();
+
+    void deleteById(Integer itemId);
 }
