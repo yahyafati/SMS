@@ -15,9 +15,9 @@ public class SubCategory {
     private String name;
     private String description;
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Category category;
-//
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    private Category category;
+
 //    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    private List<Item> itemList;
 

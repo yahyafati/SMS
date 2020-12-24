@@ -25,4 +25,7 @@ public class Item {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private  Set<SubCategory> subCategoryList = new HashSet<>();
+
+    @ManyToOne
+    private Brand brand;
 }
