@@ -13,7 +13,7 @@ public class ItemRestController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Item> getAllItems() {
         return itemService.findAll();
     }
@@ -37,7 +37,7 @@ public class ItemRestController {
     @DeleteMapping("/{item_id}")
     public String deleteItem(@PathVariable(name = "item_id") Integer itemId) {
         itemService.deleteById(itemId);
-        return "Category has been deleted";
+        return "Item has been deleted";
     }
 
 }

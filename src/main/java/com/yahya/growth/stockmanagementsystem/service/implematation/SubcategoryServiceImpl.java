@@ -16,7 +16,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     @Override
     public SubCategory findById(int subcategoryId) {
-        return subCategoryDao.getOne(subcategoryId);
+        return subCategoryDao.findById(subcategoryId).orElseThrow();
     }
 
     @Override

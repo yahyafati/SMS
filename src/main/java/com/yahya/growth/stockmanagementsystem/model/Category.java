@@ -15,11 +15,11 @@ public class Category {
     private String name;
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Item> itemList;
-
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<SubCategory> subCategoryList;
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<Item> itemList;
+//
+//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private List<SubCategory> subCategoryList;
 
 //    @JoinTable(name = "category_subcategory",
 //            joinColumns = {@JoinColumn(name = "category_id")},

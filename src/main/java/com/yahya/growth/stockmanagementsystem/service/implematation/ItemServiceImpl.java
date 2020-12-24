@@ -19,7 +19,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item findById(int itemId) {
-        return itemDao.getOne(itemId);
+        return itemDao.findById(itemId).orElseThrow();
     }
 
     @Override

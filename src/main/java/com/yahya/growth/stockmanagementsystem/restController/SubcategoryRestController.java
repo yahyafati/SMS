@@ -13,7 +13,7 @@ public class SubcategoryRestController {
     @Autowired
     private SubcategoryService subcategoryService;
 
-    @GetMapping("/subcategory/")
+    @GetMapping("/subcategory")
     public List<SubCategory> getAllItems() {
         return subcategoryService.findAll();
     }
