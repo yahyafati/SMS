@@ -1,26 +1,20 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
+import com.yahya.growth.stockmanagementsystem.model.Category;
 import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.service.CategoryService;
+import com.yahya.growth.stockmanagementsystem.model.SubCategory;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
-import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @RestController
 public class ItemRestController {
 
     @Autowired
     private ItemService itemService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubcategoryService subcategoryService;
 
     @GetMapping("")
     public List<Item> getAllItems() {
@@ -47,6 +41,50 @@ public class ItemRestController {
     public String deleteItem(@PathVariable(name = "item_id") Integer itemId) {
         itemService.deleteById(itemId);
         return "Item has been deleted";
+    }
+
+    /*
+        Category Set Manipulations
+     */
+    @GetMapping("/{item_id}/category")
+    public Set<Category> getCategories(@PathVariable(name = "item_id") Integer itemId) {
+        return itemService.findById(itemId).getCategoryList();
+    }
+
+    @PostMapping("/{item_id}/category")
+    public Item addCategory(@PathVariable(name = "item_id") Integer itemId, @RequestBody Category category) {
+        Item item = itemService.findById(itemId);
+        item.getCategoryList().add(category);
+        return itemService.save(item);
+    }
+
+    @DeleteMapping("/{item_id}/category/{category_id}")
+    public Item removeCategory(@PathVariable(name = "item_id") Integer itemId, @PathVariable(name = "category_id") Integer categoryId) {
+        Item item = itemService.findById(itemId);
+        item.getCategoryList().removeIf(category -> category.getId() == categoryId);
+        return itemService.save(item);
+    }
+
+    /*
+        Sub Category Set Manipulations
+     */
+    @GetMapping("/{item_id}/subcategory")
+    public Set<SubCategory> getSubCategories(@PathVariable(name = "item_id") Integer itemId) {
+        return itemService.findById(itemId).getSubCategoryList();
+    }
+
+    @PostMapping("/{item_id}/subcategory")
+    public Item addSubcategory(@PathVariable(name = "item_id") Integer itemId, @RequestBody SubCategory subcategory) {
+        Item item = itemService.findById(itemId);
+        item.getSubCategoryList().add(subcategory);
+        return itemService.save(item);
+    }
+
+    @DeleteMapping("/{item_id}/subcategory/{subcategory_id}")
+    public Item removeSubcategory(@PathVariable(name = "item_id") Integer itemId, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
+        Item item = itemService.findById(itemId);
+        item.getSubCategoryList().removeIf(subCategory -> subCategory.getId() == subcategoryId);
+        return itemService.save(item);
     }
 
 }
