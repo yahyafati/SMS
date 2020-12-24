@@ -20,12 +20,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public int save(Category category) {
-        return categoryDao.save(category).getId();
+    public Category save(Category category) {
+        return categoryDao.save(category);
     }
 
     @Override
     public List<Category> findAll() {
         return categoryDao.findAll();
+    }
+
+    @Override
+    public void deleteById(Integer categoryId) {
+        categoryDao.deleteById(categoryId);
     }
 }
