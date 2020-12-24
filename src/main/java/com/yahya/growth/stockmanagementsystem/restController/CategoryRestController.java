@@ -1,7 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
 import com.yahya.growth.stockmanagementsystem.model.Category;
-import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -9,7 +9,9 @@ public interface SubcategoryService {
 
     SubCategory findById(int subcategoryId);
 
-    int save(SubCategory subCategory);
+    SubCategory save(SubCategory subCategory);
 
     List<SubCategory> findAll();
+
+    void deleteById(Integer subcategoryId);
 }

@@ -37,7 +37,7 @@ public class ItemRestController {
     @DeleteMapping("/{item_id}")
     public String deleteItem(@PathVariable(name = "item_id") Integer itemId) {
         itemService.deleteById(itemId);
-        return "Item has been deleted";
+        return "Category has been deleted";
     }
 
 }

@@ -20,12 +20,17 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     @Override
-    public int save(SubCategory subCategory) {
-        return subCategoryDao.save(subCategory).getId();
+    public SubCategory save(SubCategory subCategory) {
+        return subCategoryDao.save(subCategory);
     }
 
     @Override
     public List<SubCategory> findAll() {
         return subCategoryDao.findAll();
+    }
+
+    @Override
+    public void deleteById(Integer subcategoryId) {
+        subCategoryDao.deleteById(subcategoryId);
     }
 }
