@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 import com.yahya.growth.stockmanagementsystem.dao.CategoryDao;
 import com.yahya.growth.stockmanagementsystem.dao.ItemDao;
 import com.yahya.growth.stockmanagementsystem.model.Item;
+import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
@@ -21,6 +22,8 @@ public class ItemServiceImpl implements ItemService {
     private CategoryService categoryService;
     @Autowired
     private SubcategoryService subcategoryService;
+    @Autowired
+    private BrandService brandService;
 
     @Override
     public Item findById(int itemId) {
@@ -41,6 +44,7 @@ public class ItemServiceImpl implements ItemService {
                         .map(subCategory -> subcategoryService.findById(subCategory.getId()))
                         .collect(Collectors.toSet())
         );
+        item.setBrand(brandService.findById(item.getBrand().getId()));
         return itemDao.save(item);
     }
 
