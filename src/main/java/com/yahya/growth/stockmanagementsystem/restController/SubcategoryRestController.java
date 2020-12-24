@@ -8,33 +8,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/subcategory")
 public class SubcategoryRestController {
 
     @Autowired
     private SubcategoryService subcategoryService;
 
-    @GetMapping("/subcategory")
+    @GetMapping("")
     public List<SubCategory> getAllItems() {
         return subcategoryService.findAll();
     }
 
-    @GetMapping("/subcategory/{subcategory_id}")
+    @GetMapping("/{subcategory_id}")
     public SubCategory getItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
         return subcategoryService.findById(subcategoryId);
     }
 
-    @PostMapping("/subcategory/")
+    @PostMapping("")
     public SubCategory addItem(@RequestBody SubCategory subCategory) {
         return subcategoryService.save(subCategory);
     }
 
-    @PutMapping("/subcategory/{subcategory_id}")
+    @PutMapping("/{subcategory_id}")
     public SubCategory updateItem(@RequestBody SubCategory subCategory, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
         subCategory.setId(subcategoryId);
         return subcategoryService.save(subCategory);
     }
 
-    @DeleteMapping("/subcategory/{subcategory_id}")
+    @DeleteMapping("/{subcategory_id}")
     public String deleteItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
         subcategoryService.deleteById(subcategoryId);
         return "Subcategory has been deleted";

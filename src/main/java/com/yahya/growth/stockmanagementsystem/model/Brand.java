@@ -1,7 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

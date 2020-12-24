@@ -1,9 +1,8 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -15,10 +14,7 @@ public class SubCategory {
     private String name;
     private String description;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Category category;
-
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Item> itemList;
 
 }

@@ -1,9 +1,10 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -15,14 +16,8 @@ public class Category {
     private String name;
     private String description;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Item> itemList;
-//
-//    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<SubCategory> subCategoryList;
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<SubCategory> subCategories = new HashSet<>();
 
-//    @JoinTable(name = "category_subcategory",
-//            joinColumns = {@JoinColumn(name = "category_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "subcategory_id")}
-//    )
 }
