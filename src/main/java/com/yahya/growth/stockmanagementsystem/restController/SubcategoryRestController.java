@@ -13,28 +13,28 @@ public class SubcategoryRestController {
     @Autowired
     private SubcategoryService subcategoryService;
 
-    @GetMapping("/")
+    @GetMapping("/subcategory/")
     public List<SubCategory> getAllItems() {
         return subcategoryService.findAll();
     }
 
-    @GetMapping("/{subcategory_id}")
+    @GetMapping("/subcategory/{subcategory_id}")
     public SubCategory getItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
         return subcategoryService.findById(subcategoryId);
     }
 
-    @PostMapping("/")
+    @PostMapping("/subcategory/")
     public SubCategory addItem(@RequestBody SubCategory subCategory) {
         return subcategoryService.save(subCategory);
     }
 
-    @PutMapping("/{subcategory_id}")
+    @PutMapping("/subcategory/{subcategory_id}")
     public SubCategory updateItem(@RequestBody SubCategory subCategory, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
         subCategory.setId(subcategoryId);
         return subcategoryService.save(subCategory);
     }
 
-    @DeleteMapping("/{subcategory_id}")
+    @DeleteMapping("/subcategory/{subcategory_id}")
     public String deleteItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
         subcategoryService.deleteById(subcategoryId);
         return "Subcategory has been deleted";

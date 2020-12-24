@@ -13,28 +13,28 @@ public class CategoryRestController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/")
+    @GetMapping("/category/")
     public List<Category> getAllItems() {
         return categoryService.findAll();
     }
 
-    @GetMapping("/{category_id}")
+    @GetMapping("/category/{category_id}")
     public Category getItem(@PathVariable(name = "category_id") Integer categoryId) {
         return categoryService.findById(categoryId);
     }
 
-    @PostMapping("/")
+    @PostMapping("/category/")
     public Category addItem(@RequestBody Category category) {
         return categoryService.save(category);
     }
 
-    @PutMapping("/{category_id}")
+    @PutMapping("/category/{category_id}")
     public Category updateItem(@RequestBody Category category, @PathVariable(name = "category_id") Integer categoryId) {
         category.setId(categoryId);
         return categoryService.save(category);
     }
 
-    @DeleteMapping("/{category_id}")
+    @DeleteMapping("/category/{category_id}")
     public String deleteItem(@PathVariable(name = "category_id") Integer categoryId) {
         categoryService.deleteById(categoryId);
         return "Item has been deleted";
