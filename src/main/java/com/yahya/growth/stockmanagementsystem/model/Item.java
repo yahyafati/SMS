@@ -21,10 +21,8 @@ public class Item {
     private float price;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
     private Set<Category> categoryList = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
     private  Set<SubCategory> subCategoryList = new HashSet<>();
 }

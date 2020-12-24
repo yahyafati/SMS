@@ -1,17 +1,26 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
 import com.yahya.growth.stockmanagementsystem.model.Item;
+import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
+import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @RestController
 public class ItemRestController {
 
     @Autowired
     private ItemService itemService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private SubcategoryService subcategoryService;
 
     @GetMapping("")
     public List<Item> getAllItems() {
