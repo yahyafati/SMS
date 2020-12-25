@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -16,9 +17,11 @@ public class Brand {
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    Set<Category> categorySet = new HashSet<>();
+    @JsonIgnore
+    private Set<Category> categorySet = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    Set<SubCategory> subcategorySet = new HashSet<>();
+    @JsonIgnore
+    private Set<SubCategory> subcategorySet = new HashSet<>();
 
 }

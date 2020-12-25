@@ -20,8 +20,8 @@ public class Item {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Category> categoryList = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private  Set<SubCategory> subCategoryList = new HashSet<>();
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private  SubCategory subCategory;
 
     @ManyToOne
     private Brand brand;

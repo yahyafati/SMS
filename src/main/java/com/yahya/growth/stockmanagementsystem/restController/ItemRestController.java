@@ -65,26 +65,4 @@ public class ItemRestController {
         return itemService.save(item);
     }
 
-    /*
-        Sub Category Set Manipulations
-     */
-    @GetMapping("/{item_id}/subcategory")
-    public Set<SubCategory> getSubCategories(@PathVariable(name = "item_id") Integer itemId) {
-        return itemService.findById(itemId).getSubCategoryList();
-    }
-
-    @PostMapping("/{item_id}/subcategory")
-    public Item addSubcategory(@PathVariable(name = "item_id") Integer itemId, @RequestBody SubCategory subcategory) {
-        Item item = itemService.findById(itemId);
-        item.getSubCategoryList().add(subcategory);
-        return itemService.save(item);
-    }
-
-    @DeleteMapping("/{item_id}/subcategory/{subcategory_id}")
-    public Item removeSubcategory(@PathVariable(name = "item_id") Integer itemId, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
-        Item item = itemService.findById(itemId);
-        item.getSubCategoryList().removeIf(subCategory -> subCategory.getId() == subcategoryId);
-        return itemService.save(item);
-    }
-
 }
