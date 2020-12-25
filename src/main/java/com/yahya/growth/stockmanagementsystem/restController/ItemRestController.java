@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@RequestMapping("/api")
 public class ItemRestController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class ItemRestController {
         return itemService.findById(itemId);
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     public Item addItem(@RequestBody Item item) {
         return itemService.save(item);
     }

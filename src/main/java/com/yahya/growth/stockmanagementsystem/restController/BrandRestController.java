@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/api/brand")
 public class BrandRestController {
 
     @Autowired

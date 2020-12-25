@@ -8,22 +8,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/category")
 public class CategoryRestController {
 
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping("/category")
+    @GetMapping("")
     public List<Category> getAllItems() {
         return categoryService.findAll();
     }
 
-    @GetMapping("/category/{category_id}")
+    @GetMapping("/{category_id}")
     public Category getItem(@PathVariable(name = "category_id") Integer categoryId) {
         return categoryService.findById(categoryId);
     }
 
-    @PostMapping("/category")
+    @PostMapping("")
     public Category addItem(@RequestBody Category category) {
         return categoryService.save(category);
     }
@@ -34,7 +35,7 @@ public class CategoryRestController {
         return categoryService.save(category);
     }
 
-    @DeleteMapping("/category/{category_id}")
+    @DeleteMapping("/{category_id}")
     public String deleteItem(@PathVariable(name = "category_id") Integer categoryId) {
         categoryService.deleteById(categoryId);
         return "Category has been deleted";

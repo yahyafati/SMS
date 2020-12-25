@@ -38,8 +38,10 @@ public class ItemServiceImpl implements ItemService {
                         .map(category -> categoryService.findById(category.getId()))
                         .collect(Collectors.toSet())
         );
-        item.setSubCategory(subcategoryService.findById(item.getSubCategory().getId()));
-        item.setBrand(brandService.findById(item.getBrand().getId()));
+        if (item.getSubCategory() != null)
+            item.setSubCategory(subcategoryService.findById(item.getSubCategory().getId()));
+        if (item.getBrand() != null)
+            item.setBrand(brandService.findById(item.getBrand().getId()));
         return itemDao.save(item);
     }
 
