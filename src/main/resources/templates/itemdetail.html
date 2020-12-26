@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/mouse2.png}" th:alt="${item.name}">
+            <h1 class="h1" th:text="${item.name}">Item Name</h1>
+        </div>
+        <div class="col col-8">
+            <p>Name: <span th:text="${item.name}"></span></p>
+            <p>Description: <span th:text="${item.description}"></span></p>
+            <p>Quantity: <span th:text="${item.quantity}"></span></p>
+            <p>Prce: <span th:text="${item.price}"></span></p>
+            <!--        <p>Subcategory: <span th:text="${item.subCategory.name}"></span></p>-->
+        </div>
+        <a th:href="${item.id} + '/edit'" class="btn btn-primary">Edit</a>
+    </div>
+
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>
