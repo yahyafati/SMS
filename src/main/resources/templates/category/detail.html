@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/laptopstand.jpg}" th:alt="${category.name}">
+            <h1 class="h1" th:text="${category.name}">Item Name</h1>
+        </div>
+        <div class="col col-8">
+            <p>Name: <span th:text="${category.name}"></span></p>
+            <p>Description: <span th:text="${category.description}"></span></p>
+        </div>
+        <a th:href="${category.id} + '/edit'" class="btn btn-primary">Edit</a>
+    </div>
+
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

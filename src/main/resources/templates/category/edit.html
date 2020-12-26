@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/mouse.webp}" th:alt="${category.name}" alt="Category Photo" src="/images/mouse.webp">
+            <h1 class="h1" th:text="${category.name}">Category Name</h1>
+        </div>
+        <div class="col col-8">
+            <form action="" th:action="${action}" th:object="${category}" method="post">
+                <label class="d-block">
+                    Name: <input type="text" th:field="*{name}">
+                </label>
+                <label class="d-block">
+                    Description: <input type="text" th:field="*{description}">
+                </label>
+
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
+                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                </div>
+
+            </form>
+
+            <a th:if="${action} == 'edit'" th:href="'delete'" class="btn btn-danger">Delete Category</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>
