@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div class="row">
+        <div th:each="subcategory : ${subcategories}" class="card col col-3">
+            <img th:src="@{/images/oppomobile.jpg}" class="card-img-top" th:alt="${subcategory.name}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${subcategory.name}"></h5>
+                <p class="card-text"  th:text="${subcategory.description}"></p>
+                <a th:href="@{/subcategory/{id}(id=${subcategory.id})}" class="btn btn-outline-primary">More</a>
+            </div>
+        </div>
+        <a th:href="@{/subcategory/new}" class="btn btn-outline-primary">Add New Subcategory</a>
+    </div>
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

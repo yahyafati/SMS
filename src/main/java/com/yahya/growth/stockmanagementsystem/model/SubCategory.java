@@ -14,7 +14,7 @@ public class SubCategory {
     private String name;
     private String description;
 
-    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Category category;
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    private Category category = new Category();
 
 }
