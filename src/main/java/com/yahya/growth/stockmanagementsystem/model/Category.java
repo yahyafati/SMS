@@ -20,9 +20,9 @@ public class Category {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    @ToString.Exclude
-    private Set<SubCategory> subCategories = new HashSet<>();
+//    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    @ToString.Exclude
+//    private Set<SubCategory> subCategories = new HashSet<>();
 
 }
