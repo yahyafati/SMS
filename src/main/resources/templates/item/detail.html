@@ -3,9 +3,10 @@
 <head th:replace="common/header :: common-header"></head>
 <body>
 <div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
         <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/mouse2.png}" th:alt="${item.name}">
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
         <div class="col col-8">

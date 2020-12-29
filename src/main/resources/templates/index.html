@@ -3,9 +3,10 @@
 <head th:replace="common/header :: common-header"></head>
 <body>
 <div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
         <div th:each="item : ${items}" class="card col col-3">
-            <img th:src="@{/images/diningtable.jpg}" class="card-img-top" th:alt="${item.name}">
+            <img th:src="@{/images/placeholder/placeholder.png}" class="card-img-top" th:alt="${item.name}">
             <div class="card-body">
                 <h5 class="card-title" th:text="${item.name}"></h5>
                 <p class="card-text"  th:text="${item.description}">This is a random dining table</p>
