@@ -16,7 +16,27 @@
         <a th:href="${category.id} + '/edit'" class="btn btn-primary">Edit</a>
     </div>
 
-
+    <div class="row">
+        <table class="table">
+            <thead>
+            <td>#</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>
+                <a class="btn btn-outline-primary" href="#" th:href="@{/subcategory/new(category=${category.id})}">
+                    Add Subcategory
+                </a>
+            </td>
+            </thead>
+            <tbody>
+            <tr th:each="subcategory, rowStat : ${subcategories}">
+                <td th:text="${rowStat.count}">1</td>
+                <td th:text="${subcategory.name}">Electronics</td>
+                <td th:text="${subcategory.description}">Electronics Description</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div th:replace="common/header :: body-bottom-scripts"></div>
