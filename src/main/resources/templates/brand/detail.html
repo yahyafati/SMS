@@ -20,10 +20,10 @@
         <h3>Categories</h3>
         <table class="table">
             <thead>
-            <td>#</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>
 <!--                th:href="@{/category/new(brand=${brand.id})}"-->
                 <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-category" toggledClass="d-none">
                     <i class="fas fa-plus-circle"></i>
@@ -35,7 +35,7 @@
                     </select>
                     <input type="submit" value="Submit" class="btn btn-success">
                 </form>
-            </td>
+            </th>
             </thead>
             <tbody>
             <tr th:each="category, rowStat : ${brand.categorySet}">
@@ -47,6 +47,45 @@
                         <i class="fas fa-edit"></i>
                     </a>
                     <a class="btn btn-outline-warning" href="#" th:href="@{/category/delete(brand=${brand.id})}">
+                        <i class="fas fa-minus-circle"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <h3>Subcategories</h3>
+        <table class="table">
+            <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>
+                <!--                th:href="@{/category/new(brand=${brand.id})}"-->
+                <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-subcategory" toggledClass="d-none">
+                    <i class="fas fa-plus-circle"></i>
+                </a>
+                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{{id}/addSubcategory(id = ${brand.id})}" method="post" th:object="${subcategory}">
+                    Category:
+                    <select th:field="*{id}">
+                        <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Mobiles</option>
+                    </select>
+                    <input type="submit" value="Submit" class="btn btn-success">
+                </form>
+            </th>
+            </thead>
+            <tbody>
+            <tr th:each="subcategory, rowStat : ${brand.subcategorySet}">
+                <td th:text="${rowStat.count}">1</td>
+                <td th:text="${subcategory.name}">Electronics</td>
+                <td th:text="${subcategory.description}">Electronics Description</td>
+                <td>
+                    <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(brand=${brand.id})}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-outline-warning" href="#" th:href="@{/subcategory/delete(brand=${brand.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

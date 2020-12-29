@@ -1,19 +1,19 @@
 package com.yahya.growth.stockmanagementsystem.service;
 
 
-import com.yahya.growth.stockmanagementsystem.model.SubCategory;
+import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 
 import java.util.List;
 
 public interface SubcategoryService {
 
-    SubCategory findById(int subcategoryId);
+    Subcategory findById(int subcategoryId);
 
-    SubCategory save(SubCategory subCategory);
+    Subcategory save(Subcategory subCategory);
 
-    List<SubCategory> findAll();
+    List<Subcategory> findAll();
 
-    List<SubCategory> findAllByCategory(int categoryId);
+    List<Subcategory> findAllByCategory(int categoryId);
 
     void deleteById(Integer subcategoryId);
 }

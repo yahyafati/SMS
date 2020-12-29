@@ -1,7 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
-import com.yahya.growth.stockmanagementsystem.model.Category;
-import com.yahya.growth.stockmanagementsystem.model.SubCategory;
+import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class SubcategoryController {
 
     @GetMapping("/new")
     public String addSubcategory(Model model) {
-        SubCategory subCategory = new SubCategory();
+        Subcategory subCategory = new Subcategory();
 //        subCategory.setCategory(new Category());
         model.addAttribute("subcategory", subCategory);
         model.addAttribute("categories", categoryService.findAll());
@@ -41,7 +40,7 @@ public class SubcategoryController {
     }
 
     @PostMapping("/new")
-    public String addSubcategory(@ModelAttribute SubCategory subCategory) {
+    public String addSubcategory(@ModelAttribute Subcategory subCategory) {
         subCategory = subcategoryService.save(subCategory);
         return "redirect:/subcategory/" + subCategory.getId();
     }
@@ -55,7 +54,7 @@ public class SubcategoryController {
     }
 
     @PostMapping("/{subcategoryId}/edit")
-    public String editPOST(@PathVariable int subcategoryId, @ModelAttribute SubCategory subCategory) {
+    public String editPOST(@PathVariable int subcategoryId, @ModelAttribute Subcategory subCategory) {
         subCategory.setId(subcategoryId);
         subcategoryService.save(subCategory);
         return "redirect:/subcategory/" + subcategoryId;

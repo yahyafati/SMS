@@ -21,7 +21,7 @@ public class Item {
     private Set<Category> categoryList = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private  SubCategory subCategory;
+    private Subcategory subCategory;
 
     @ManyToOne
     private Brand brand;

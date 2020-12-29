@@ -2,8 +2,10 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.BrandDao;
 import com.yahya.growth.stockmanagementsystem.model.Brand;
+import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
+import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class BrandServiceImpl implements BrandService {
     private BrandDao brandDao;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private SubcategoryService subcategoryService;
 
     @Override
     public Brand findById(int brandId) {
@@ -29,6 +33,12 @@ public class BrandServiceImpl implements BrandService {
                 brand.getCategorySet()
                 .stream()
                 .map(category -> categoryService.findById(category.getId()))
+                .collect(Collectors.toSet())
+        );
+        brand.setSubcategorySet(
+                brand.getSubcategorySet()
+                .stream()
+                .map(subcategory -> subcategoryService.findById(subcategory.getId()))
                 .collect(Collectors.toSet())
         );
         return brandDao.save(brand);

@@ -1,7 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.Category;
-import com.yahya.growth.stockmanagementsystem.model.SubCategory;
+import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class CategoryController {
 
     @GetMapping("/{categoryId}")
     public String detail(@PathVariable int categoryId, Model model) {
-        List<SubCategory> subCategories = subcategoryService.findAllByCategory(categoryId);
+        List<Subcategory> subCategories = subcategoryService.findAllByCategory(categoryId);
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("subcategories", subCategories);
         return "category/detail";

@@ -1,6 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
-import com.yahya.growth.stockmanagementsystem.model.SubCategory;
+import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,22 +15,22 @@ public class SubcategoryRestController {
     private SubcategoryService subcategoryService;
 
     @GetMapping("")
-    public List<SubCategory> getAllItems() {
+    public List<Subcategory> getAllItems() {
         return subcategoryService.findAll();
     }
 
     @GetMapping("/{subcategory_id}")
-    public SubCategory getItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
+    public Subcategory getItem(@PathVariable(name = "subcategory_id") Integer subcategoryId) {
         return subcategoryService.findById(subcategoryId);
     }
 
     @PostMapping("")
-    public SubCategory addItem(@RequestBody SubCategory subCategory) {
+    public Subcategory addItem(@RequestBody Subcategory subCategory) {
         return subcategoryService.save(subCategory);
     }
 
     @PutMapping("/{subcategory_id}")
-    public SubCategory updateItem(@RequestBody SubCategory subCategory, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
+    public Subcategory updateItem(@RequestBody Subcategory subCategory, @PathVariable(name = "subcategory_id") Integer subcategoryId) {
         subCategory.setId(subcategoryId);
         return subcategoryService.save(subCategory);
     }
