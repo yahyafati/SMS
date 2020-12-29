@@ -23,11 +23,22 @@
                 <label class="d-block">
                     Price: <input type="text" th:field="*{price}">
                 </label>
+                <label class="d-block">
+                    Category:
+                    <select th:field="*{category}" >
+                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>
+                    </select>
+                </label>
+                <label class="d-block">
+                    Subcategory:
+                    <select th:field="*{subcategory}" >
+                        <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Cell Phones & Accessories</option>
+                    </select>
+                </label>
 
                 <div>
                     <input type="submit" value="Submit" class="btn btn-success" />
                     <input type="reset" value="Reset" class="btn btn-outline-success"/>
-<!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
                 </div>
 
             </form>

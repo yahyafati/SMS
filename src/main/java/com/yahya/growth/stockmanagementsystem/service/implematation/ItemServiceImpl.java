@@ -32,14 +32,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item save(Item item) {
-        item.setCategoryList(
-                item.getCategoryList()
-                        .stream()
-                        .map(category -> categoryService.findById(category.getId()))
-                        .collect(Collectors.toSet())
-        );
-        if (item.getSubCategory() != null)
-            item.setSubCategory(subcategoryService.findById(item.getSubCategory().getId()));
+        if (item.getCategory() != null)
+            item.setCategory(categoryService.findById(item.getCategory().getId()));
+//        if (item.getSubcategory() != null)
+//            item.setSubcategory(subcategoryService.findById(item.getSubcategory().getId()));
         if (item.getBrand() != null)
             item.setBrand(brandService.findById(item.getBrand().getId()));
         return itemDao.save(item);

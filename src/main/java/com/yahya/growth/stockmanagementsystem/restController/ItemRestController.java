@@ -46,23 +46,23 @@ public class ItemRestController {
     /*
         Category Set Manipulations
      */
-    @GetMapping("/{item_id}/category")
-    public Set<Category> getCategories(@PathVariable(name = "item_id") Integer itemId) {
-        return itemService.findById(itemId).getCategoryList();
-    }
-
-    @PostMapping("/{item_id}/category")
-    public Item addCategory(@PathVariable(name = "item_id") Integer itemId, @RequestBody Category category) {
-        Item item = itemService.findById(itemId);
-        item.getCategoryList().add(category);
-        return itemService.save(item);
-    }
-
-    @DeleteMapping("/{item_id}/category/{category_id}")
-    public Item removeCategory(@PathVariable(name = "item_id") Integer itemId, @PathVariable(name = "category_id") Integer categoryId) {
-        Item item = itemService.findById(itemId);
-        item.getCategoryList().removeIf(category -> category.getId() == categoryId);
-        return itemService.save(item);
-    }
+//    @GetMapping("/{item_id}/category")
+//    public Set<Category> getCategories(@PathVariable(name = "item_id") Integer itemId) {
+//        return itemService.findById(itemId).getCategoryList();
+//    }
+//
+//    @PostMapping("/{item_id}/category")
+//    public Item addCategory(@PathVariable(name = "item_id") Integer itemId, @RequestBody Category category) {
+//        Item item = itemService.findById(itemId);
+//        item.getCategoryList().add(category);
+//        return itemService.save(item);
+//    }
+//
+//    @DeleteMapping("/{item_id}/category/{category_id}")
+//    public Item removeCategory(@PathVariable(name = "item_id") Integer itemId, @PathVariable(name = "category_id") Integer categoryId) {
+//        Item item = itemService.findById(itemId);
+//        item.getCategoryList().removeIf(category -> category.getId() == categoryId);
+//        return itemService.save(item);
+//    }
 
 }

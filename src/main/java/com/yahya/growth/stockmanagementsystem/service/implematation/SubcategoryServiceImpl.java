@@ -3,11 +3,13 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 import com.yahya.growth.stockmanagementsystem.dao.SubCategoryDao;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
+import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SubcategoryServiceImpl implements SubcategoryService {
@@ -16,6 +18,8 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     private SubCategoryDao subCategoryDao;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ItemService itemService;
 
     @Override
     public Subcategory findById(int subcategoryId) {
@@ -26,6 +30,12 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     public Subcategory save(Subcategory subCategory) {
         System.out.println(subCategory.getCategory());
 //        subCategory.setCategory(categoryService.findById(subCategory.getCategory().getId()));
+        subCategory.setItems(
+                subCategory.getItems()
+                .stream()
+                .map(item -> itemService.findById(item.getId()))
+                .collect(Collectors.toSet())
+        );
         return subCategoryDao.save(subCategory);
     }
 

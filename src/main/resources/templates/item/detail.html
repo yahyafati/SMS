@@ -10,10 +10,12 @@
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
         <div class="col col-8">
-            <p>Name: <span th:text="${item.name}"></span></p>
-            <p>Description: <span th:text="${item.description}"></span></p>
-            <p>Quantity: <span th:text="${item.quantity}"></span></p>
-            <p>Prce: <span th:text="${item.price}"></span></p>
+            <p>Name: <span th:text="${item.name}">Pan</span></p>
+            <p>Description: <span th:text="${item.description}">Frying Pan</span></p>
+            <p>Quantity: <span th:text="${item.quantity}">200</span></p>
+            <p>Price: <span th:text="${item.price}">12</span></p>
+            <p>Category: <span th:text="${item.category.name}">Kitchen</span></p>
+            <p>Subcategory: <span th:text="${item.subcategory.name}">Utensils</span></p>
             <!--        <p>Subcategory: <span th:text="${item.subCategory.name}"></span></p>-->
         </div>
         <a th:href="${item.id} + '/edit'" class="btn btn-primary">Edit</a>

@@ -35,10 +35,10 @@
                 <td th:text="${subcategory.name}">Electronics</td>
                 <td th:text="${subcategory.description}">Electronics Description</td>
                 <td>
-                    <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(category=${category.id})}">
+                    <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(id=${subcategory.id}, category=${category.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{/subcategory/delete(category=${category.id})}">
+                    <a class="btn btn-outline-warning" href="#" th:href="@{/subcategory/delete(id=${subcategory.id}, category=${category.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>
