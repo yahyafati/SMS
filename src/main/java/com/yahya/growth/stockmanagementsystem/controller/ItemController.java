@@ -7,10 +7,7 @@ import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ItemController {
@@ -49,8 +46,8 @@ public class ItemController {
         return "redirect:/" + item.getId();
     }
 
-    @GetMapping("/{item_id}/edit")
-    public String edit(@PathVariable(name = "item_id") int itemId, Model model) {
+    @GetMapping("/edit")
+    public String edit(@RequestParam(name = "id") int itemId, Model model) {
         model.addAttribute("item", itemService.findById(itemId));
         model.addAttribute("action", "edit");
         model.addAttribute("categories", categoryService.findAll());
@@ -58,15 +55,15 @@ public class ItemController {
         return "item/edit";
     }
 
-    @PostMapping("/{item_id}/edit")
-    public String editPost(@PathVariable(name = "item_id") int itemId, @ModelAttribute Item item) {
+    @PostMapping("/edit")
+    public String editPost(@RequestParam(name = "id") int itemId, @ModelAttribute Item item) {
         item.setId(itemId);
         itemService.save(item);
         return "redirect:/" + itemId;
     }
 
-    @GetMapping("/{item_id}/delete")
-    public String delete(@PathVariable(name = "item_id") int itemId) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") int itemId) {
         itemService.deleteById(itemId);
         return "redirect:/";
     }

@@ -47,22 +47,23 @@ public class CategoryController {
         return "redirect:/category/" + category.getId();
     }
 
-    @GetMapping("/{categoryId}/edit")
-    public String edit(@PathVariable int categoryId, Model model) {
+    @GetMapping("/edit")
+    public String edit(@RequestParam(name = "id") int categoryId, Model model) {
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("action", "edit");
         return "category/edit";
     }
 
-    @PostMapping("/{categoryId}/edit")
-    public String editPOST(@PathVariable int categoryId, @ModelAttribute Category category) {
+    @PostMapping("/edit")
+    public String editPOST(@RequestParam(name = "id") int categoryId, @ModelAttribute Category category) {
         category.setId(categoryId);
         categoryService.save(category);
         return "redirect:/category/" + categoryId;
     }
 
-    @GetMapping("/{categoryId}/delete")
-    public String delete(@PathVariable int categoryId) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") int categoryId) {
+        // FIXME Cannot delete or update a parent row: a foreign key constraint fails (`stockms`.`item`, ...)
         categoryService.deleteById(categoryId);
         return "redirect:/category";
     }

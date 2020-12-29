@@ -49,8 +49,7 @@ public class SubcategoryController {
     }
 
     @GetMapping("/edit")
-    public String edit(Model model,
-                       @RequestParam(name = "id") int subcategoryId) {
+    public String edit(Model model, @RequestParam(name = "id") int subcategoryId) {
         model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("action", "edit");

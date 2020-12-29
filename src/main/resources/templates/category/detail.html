@@ -13,7 +13,7 @@
             <p>Name: <span th:text="${category.name}"></span></p>
             <p>Description: <span th:text="${category.description}"></span></p>
         </div>
-        <a th:href="${category.id} + '/edit'" class="btn btn-primary">Edit</a>
+        <a th:href="@{edit(id=${category.id})}" class="btn btn-primary">Edit</a>
     </div>
 
     <div class="row">

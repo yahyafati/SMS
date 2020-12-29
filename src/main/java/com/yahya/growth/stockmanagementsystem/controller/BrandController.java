@@ -51,40 +51,38 @@ public class BrandController {
         return "redirect:/brand/" + brand.getId();
     }
 
-    @PostMapping("/{brandId}/addCategory")
-    public String addCategoryPOST(@PathVariable int brandId, @ModelAttribute Category category) {
+    @PostMapping("/addCategory")
+    public String addCategoryPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Category category) {
         Brand brand = brandService.findById(brandId);
         brand.getCategorySet().add(category);
         brandService.save(brand);
         return "redirect:/brand/" + brandId;
     }
 
-    @PostMapping("/{brandId}/addSubcategory")
-    public String addSubcategoryPOST(@PathVariable int brandId, @ModelAttribute Subcategory subCategory) {
+    @PostMapping("/addSubcategory")
+    public String addSubcategoryPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Subcategory subCategory) {
         Brand brand = brandService.findById(brandId);
         brand.getSubcategorySet().add(subCategory);
         brandService.save(brand);
         return "redirect:/brand/" + brandId;
     }
 
-
-
-    @GetMapping("/{brandId}/edit")
-    public String edit(@PathVariable int brandId, Model model) {
+    @GetMapping("/edit")
+    public String edit(@RequestParam(name = "id") int brandId, Model model) {
         model.addAttribute("brand", brandService.findById(brandId));
         model.addAttribute("action", "edit");
         return "brand/edit";
     }
 
-    @PostMapping("/{brandId}/edit")
-    public String editPOST(@PathVariable int brandId, @ModelAttribute Brand brand) {
+    @PostMapping("/edit")
+    public String editPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Brand brand) {
         brand.setId(brandId);
         brandService.save(brand);
         return "redirect:/brand/" + brandId;
     }
 
-    @GetMapping("/{brandId}/delete")
-    public String delete(@PathVariable int brandId) {
+    @GetMapping("/delete")
+    public String delete(@RequestParam(name = "id") int brandId) {
         brandService.deleteById(brandId);
         return "redirect:/brand";
     }

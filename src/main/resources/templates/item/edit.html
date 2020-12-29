@@ -10,7 +10,7 @@
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
         <div class="col col-8">
-            <form action="" th:action="${action}" th:object="${item}" method="post">
+            <form action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
                 <label class="d-block">
                     Name: <input type="text" th:field="*{name}">
                 </label>
@@ -43,7 +43,7 @@
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="'delete'" class="btn btn-danger">Delete Item</a>
+            <a th:if="${action} == 'edit'" th:href="@{delete(id = ${item.id})}" class="btn btn-danger">Delete Item</a>
         </div>
     </div>
 

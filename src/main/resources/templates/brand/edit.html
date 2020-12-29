@@ -10,7 +10,7 @@
             <h1 class="h1" th:text="${brand.name}">Category Name</h1>
         </div>
         <div class="col col-8">
-            <form action="" th:action="${action}" th:object="${brand}" method="post">
+            <form action="" th:action="@{{action}(action=${action}, id=${brand.id})}" th:object="${brand}" method="post">
                 <label class="d-block">
                     Name: <input type="text" th:field="*{name}">
                 </label>
@@ -26,7 +26,7 @@
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="'delete'" class="btn btn-danger">Delete Brand</a>
+            <a th:if="${action} == 'edit'" th:href="@{/brand/delete(id=${brand.id})}" class="btn btn-danger">Delete Brand</a>
         </div>
     </div>
 </div>

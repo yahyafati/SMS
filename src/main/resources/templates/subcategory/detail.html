@@ -14,7 +14,7 @@
             <p>Description: <span th:text="${subcategory.description}"></span></p>
             <p>Category: <span th:text="${subcategory.category.name}"></span></p>
         </div>
-        <a th:href="${subcategory.id} + '/edit'" class="btn btn-primary">Edit</a>
+        <a th:href="@{edit(id=${subcategory.id})}" class="btn btn-primary">Edit</a>
     </div>
 
 
