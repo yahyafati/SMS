@@ -1,11 +1,15 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.Category;
+import com.yahya.growth.stockmanagementsystem.model.SubCategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
+import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/category")
@@ -13,6 +17,8 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private SubcategoryService subcategoryService;
 
     @GetMapping("")
     public String categories(Model model) {
@@ -20,9 +26,11 @@ public class CategoryController {
         return "category/all";
     }
 
-    @GetMapping("/{category_id}")
-    public String detail(@PathVariable(name = "category_id") int categoryId, Model model) {
+    @GetMapping("/{categoryId}")
+    public String detail(@PathVariable int categoryId, Model model) {
+        List<SubCategory> subCategories = subcategoryService.findAllByCategory(categoryId);
         model.addAttribute("category", categoryService.findById(categoryId));
+        model.addAttribute("subcategories", subCategories);
         return "category/detail";
     }
 
@@ -39,22 +47,22 @@ public class CategoryController {
         return "redirect:/category/" + category.getId();
     }
 
-    @GetMapping("/{category_id}/edit")
-    public String edit(@PathVariable(name = "category_id") int categoryId, Model model) {
+    @GetMapping("/{categoryId}/edit")
+    public String edit(@PathVariable int categoryId, Model model) {
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("action", "edit");
         return "category/edit";
     }
 
-    @PostMapping("/{category_id}/edit")
-    public String editPOST(@PathVariable(name = "category_id") int categoryId, @ModelAttribute Category category) {
+    @PostMapping("/{categoryId}/edit")
+    public String editPOST(@PathVariable int categoryId, @ModelAttribute Category category) {
         category.setId(categoryId);
         categoryService.save(category);
         return "redirect:/category/" + categoryId;
     }
 
-    @GetMapping("/{category_id}/delete")
-    public String delete(@PathVariable(name = "category_id") int categoryId) {
+    @GetMapping("/{categoryId}/delete")
+    public String delete(@PathVariable int categoryId) {
         categoryService.deleteById(categoryId);
         return "redirect:/category";
     }

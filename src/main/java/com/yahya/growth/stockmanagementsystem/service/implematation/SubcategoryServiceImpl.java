@@ -35,6 +35,11 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     }
 
     @Override
+    public List<SubCategory> findAllByCategory(int categoryId) {
+        return subCategoryDao.findAllByCategory(categoryService.findById(categoryId));
+    }
+
+    @Override
     public void deleteById(Integer subcategoryId) {
         subCategoryDao.deleteById(subcategoryId);
     }
