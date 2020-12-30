@@ -16,11 +16,12 @@ public class Brand {
     private String name;
     private String description;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Category> categorySet = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    // TODO TEST in case of ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Subcategory> subcategorySet = new HashSet<>();
 

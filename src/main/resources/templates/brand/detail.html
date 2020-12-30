@@ -28,7 +28,7 @@
                 <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-category" toggledClass="d-none">
                     <i class="fas fa-plus-circle"></i>
                 </a>
-                <form id="add-category" class="d-inline d-none" action="#" th:action="@{{id}/addCategory(id = ${brand.id})}" method="post" th:object="${category}">
+                <form id="add-category" class="d-inline d-none" action="#" th:action="@{addCategory(id = ${brand.id})}" method="post" th:object="${category}">
                     Category:
                     <select th:field="*{id}">
                         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
@@ -46,7 +46,7 @@
                     <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(brand=${brand.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{/category/delete(brand=${brand.id})}">
+                    <a class="btn btn-outline-warning" href="#" th:href="@{removeCategory(category=${category.id}, brand=${brand.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>
@@ -67,7 +67,7 @@
                 <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-subcategory" toggledClass="d-none">
                     <i class="fas fa-plus-circle"></i>
                 </a>
-                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{{id}/addSubcategory(id = ${brand.id})}" method="post" th:object="${subcategory}">
+                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{addSubcategory(id = ${brand.id})}" method="post" th:object="${subcategory}">
                     Category:
                     <select th:field="*{id}">
                         <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Mobiles</option>
@@ -85,7 +85,7 @@
                     <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(brand=${brand.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{/subcategory/delete(brand=${brand.id})}">
+                    <a class="btn btn-outline-warning" href="#" th:href="@{removeSubcategory(brand=${brand.id}, subcategory=${subcategory.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

@@ -25,11 +25,11 @@ public class Supplier {
     // TODO Make this address field atomic
     private String address;
 
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "supplier", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore
     @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Category> categories = new HashSet<>();
 }

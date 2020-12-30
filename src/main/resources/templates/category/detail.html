@@ -38,7 +38,7 @@
                     <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(id=${subcategory.id}, category=${category.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{/subcategory/delete(id=${subcategory.id}, category=${category.id})}">
+                    <a class="btn btn-outline-warning" href="#" th:href="@{removeSubcategory(subcategoryId=${subcategory.id}, categoryId=${category.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

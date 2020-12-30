@@ -19,15 +19,15 @@ public class Category {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Subcategory> subcategories = new HashSet<>();
 
-    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Supplier> suppliers = new HashSet<>();
 

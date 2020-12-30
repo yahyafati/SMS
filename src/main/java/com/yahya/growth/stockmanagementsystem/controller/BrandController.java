@@ -59,6 +59,22 @@ public class BrandController {
         return "redirect:/brand/" + brandId;
     }
 
+    @GetMapping("/removeCategory")
+    public String removeCategory(@RequestParam(name = "category") int categoryId, @RequestParam(name = "brand") int brandId) {
+        Brand brand = brandService.findById(brandId);
+        brand.getCategorySet().removeIf(category -> category.getId() == categoryId);
+        brandService.save(brand);
+        return "redirect:/brand/" + brandId;
+    }
+
+    @GetMapping("/removeSubcategory")
+    public String removeSubcategory(@RequestParam(name = "subcategory") int subcategoryId, @RequestParam(name = "brand") int brandId) {
+        Brand brand = brandService.findById(brandId);
+        brand.getSubcategorySet().removeIf(subcategory -> subcategory.getId() == subcategoryId);
+        brandService.save(brand);
+        return "redirect:/brand/" + brandId;
+    }
+
     @PostMapping("/addSubcategory")
     public String addSubcategoryPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Subcategory subCategory) {
         Brand brand = brandService.findById(brandId);
