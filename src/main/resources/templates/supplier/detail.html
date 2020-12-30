@@ -30,7 +30,7 @@
             </td>
             </thead>
             <tbody>
-            <tr th:each="category, rowStat : ${categories}">
+            <tr th:each="category, rowStat : ${supplier.categories}">
                 <td th:text="${rowStat.count}">1</td>
                 <td th:text="${category.name}">Electronics</td>
                 <td th:text="${category.description}">Electronics Description</td>
