@@ -2,6 +2,7 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.SubCategoryDao;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
+import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
@@ -29,7 +30,6 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     @Override
     public Subcategory save(Subcategory subCategory) {
         System.out.println(subCategory.getCategory());
-//        subCategory.setCategory(categoryService.findById(subCategory.getCategory().getId()));
         subCategory.setItems(
                 subCategory.getItems()
                 .stream()

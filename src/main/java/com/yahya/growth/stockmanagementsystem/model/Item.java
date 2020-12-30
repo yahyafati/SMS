@@ -16,6 +16,9 @@ import java.util.Set;
 @Data
 public class Item {
 
+    /*
+        Do not use CascadeType.REMOVE
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

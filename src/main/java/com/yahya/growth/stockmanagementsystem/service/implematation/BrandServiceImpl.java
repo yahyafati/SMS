@@ -29,14 +29,14 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand save(Brand brand) {
-        brand.setCategorySet(
-                brand.getCategorySet()
+        brand.setCategories(
+                brand.getCategories()
                 .stream()
                 .map(category -> categoryService.findById(category.getId()))
                 .collect(Collectors.toSet())
         );
-        brand.setSubcategorySet(
-                brand.getSubcategorySet()
+        brand.setSubcategories(
+                brand.getSubcategories()
                 .stream()
                 .map(subcategory -> subcategoryService.findById(subcategory.getId()))
                 .collect(Collectors.toSet())

@@ -29,8 +29,22 @@ public class Subcategory {
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
-//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategorySet")
-//    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
-//    private Set<Brand> brands = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subcategories")
+    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+    private Set<Brand> brands = new HashSet<>();
 
+    public void addBrand(Brand brand) {
+        this.brands.add(brand);
+        brand.getSubcategories().add(this);
+    }
+
+    public void removeBrand(Brand brand) {
+        this.brands.remove(brand);
+        brand.getSubcategories().remove(this);
+    }
+
+    @PreRemove
+    private void removeAllBrands() {
+        this.brands.forEach(this::removeBrand);
+    }
 }

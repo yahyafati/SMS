@@ -38,7 +38,7 @@
             </th>
             </thead>
             <tbody>
-            <tr th:each="category, rowStat : ${brand.categorySet}">
+            <tr th:each="category, rowStat : ${brand.categories}">
                 <td th:text="${rowStat.count}">1</td>
                 <td th:text="${category.name}">Electronics</td>
                 <td th:text="${category.description}">Electronics Description</td>
@@ -77,7 +77,7 @@
             </th>
             </thead>
             <tbody>
-            <tr th:each="subcategory, rowStat : ${brand.subcategorySet}">
+            <tr th:each="subcategory, rowStat : ${brand.subcategories}">
                 <td th:text="${rowStat.count}">1</td>
                 <td th:text="${subcategory.name}">Electronics</td>
                 <td th:text="${subcategory.description}">Electronics Description</td>
