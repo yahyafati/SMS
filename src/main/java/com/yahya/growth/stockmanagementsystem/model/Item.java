@@ -1,6 +1,9 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -31,4 +34,10 @@ public class Item {
 
     @ManyToOne
     private Brand brand;
+
+    @ManyToMany(mappedBy = "items", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude @ToString.Exclude
+    private Set<Supplier> suppliers = new HashSet<>();
+
 }

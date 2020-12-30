@@ -26,4 +26,9 @@ public class Category {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Subcategory> subcategories = new HashSet<>();
+
+    @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+    private Set<Supplier> suppliers = new HashSet<>();
+
 }
