@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div th:each="supplier : ${suppliers}" class="card col col-3">
+            <img th:src="@{/images/placeholder/placeholder2.webp}" class="card-img-top" th:alt="${supplier.name}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${supplier.name}"></h5>
+                <p class="card-text"  th:text="${supplier.description}">This is a random dining table</p>
+                <a th:href="@{/supplier/{id}(id=${supplier.id})}" class="btn btn-outline-primary">More</a>
+            </div>
+        </div>
+        <a th:href="@{/supplier/new}" class="btn btn-outline-primary">Add New Supplier</a>
+    </div>
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>
