@@ -29,4 +29,8 @@ public class Subcategory {
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
+//    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategorySet")
+//    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+//    private Set<Brand> brands = new HashSet<>();
+
 }

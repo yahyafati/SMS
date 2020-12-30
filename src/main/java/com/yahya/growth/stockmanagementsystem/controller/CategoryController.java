@@ -47,6 +47,12 @@ public class CategoryController {
         return "redirect:/category/" + category.getId();
     }
 
+    @GetMapping("/removeSubcategory")
+    public String removeSubcategory(@RequestParam int subcategoryId, @RequestParam int categoryId) {
+        subcategoryService.deleteById(subcategoryId);
+        return "redirect:/category/" + categoryId;
+    }
+
     @GetMapping("/edit")
     public String edit(@RequestParam(name = "id") int categoryId, Model model) {
         model.addAttribute("category", categoryService.findById(categoryId));

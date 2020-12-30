@@ -23,7 +23,7 @@ public class Category {
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
-    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Subcategory> subcategories = new HashSet<>();
 

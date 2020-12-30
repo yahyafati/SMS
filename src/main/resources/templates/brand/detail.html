@@ -28,7 +28,7 @@
                 <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-category" toggledClass="d-none">
                     <i class="fas fa-plus-circle"></i>
                 </a>
-                <form id="add-category" class="d-inline d-none" action="#" th:action="@{addCategory(id = ${brand.id})}" method="post" th:object="${category}">
+                <form id="add-category" class="d-inline d-none" action="#" th:action="@{addCategory(brandId = ${brand.id})}" method="post" th:object="${category}">
                     Category:
                     <select th:field="*{id}">
                         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
@@ -67,7 +67,7 @@
                 <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-subcategory" toggledClass="d-none">
                     <i class="fas fa-plus-circle"></i>
                 </a>
-                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{addSubcategory(id = ${brand.id})}" method="post" th:object="${subcategory}">
+                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{addSubcategory(brandId = ${brand.id})}" method="post" th:object="${subcategory}">
                     Category:
                     <select th:field="*{id}">
                         <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Mobiles</option>

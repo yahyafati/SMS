@@ -52,7 +52,7 @@ public class BrandController {
     }
 
     @PostMapping("/addCategory")
-    public String addCategoryPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Category category) {
+    public String addCategoryPOST(@RequestParam int brandId, @ModelAttribute Category category) {
         Brand brand = brandService.findById(brandId);
         brand.getCategorySet().add(category);
         brandService.save(brand);
@@ -76,9 +76,9 @@ public class BrandController {
     }
 
     @PostMapping("/addSubcategory")
-    public String addSubcategoryPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Subcategory subCategory) {
+    public String addSubcategoryPOST(@RequestParam int brandId, @ModelAttribute Subcategory subcategory) {
         Brand brand = brandService.findById(brandId);
-        brand.getSubcategorySet().add(subCategory);
+        brand.getSubcategorySet().add(subcategory);
         brandService.save(brand);
         return "redirect:/brand/" + brandId;
     }

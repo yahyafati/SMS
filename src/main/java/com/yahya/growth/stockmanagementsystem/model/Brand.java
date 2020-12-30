@@ -24,5 +24,4 @@ public class Brand {
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<Subcategory> subcategorySet = new HashSet<>();
-
 }
