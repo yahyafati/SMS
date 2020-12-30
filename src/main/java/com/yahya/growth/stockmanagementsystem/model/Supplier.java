@@ -1,6 +1,9 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,9 +25,11 @@ public class Supplier {
     // TODO Make this address field atomic
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Item> items = new HashSet<>();
 
-    @ManyToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Category> categories = new HashSet<>();
 }

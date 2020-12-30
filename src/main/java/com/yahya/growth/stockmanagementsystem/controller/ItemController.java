@@ -1,9 +1,8 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.service.CategoryService;
-import com.yahya.growth.stockmanagementsystem.service.ItemService;
-import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
+import com.yahya.growth.stockmanagementsystem.model.Supplier;
+import com.yahya.growth.stockmanagementsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +17,10 @@ public class ItemController {
     private SubcategoryService subcategoryService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private BrandService brandService;
+    @Autowired
+    private SupplierService supplierService;
 
     @GetMapping("")
     public String index(Model model) {
@@ -37,6 +40,8 @@ public class ItemController {
         model.addAttribute("action", "new");
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
+        model.addAttribute("suppliers", supplierService.findAll());
         return "item/edit";
     }
 
@@ -52,6 +57,8 @@ public class ItemController {
         model.addAttribute("action", "edit");
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
+        model.addAttribute("brands", brandService.findAll());
+        model.addAttribute("suppliers", supplierService.findAll());
         return "item/edit";
     }
 

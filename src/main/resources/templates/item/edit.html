@@ -35,6 +35,18 @@
                         <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Cell Phones & Accessories</option>
                     </select>
                 </label>
+                <label class="d-block">
+                    Brand:
+                    <select th:field="*{brand}" >
+                        <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}">Cell Phones & Accessories</option>
+                    </select>
+                </label>
+                <label class="d-block">
+                    Supplier:
+                    <select th:field="*{supplier}" >
+                        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}">HepsiBurada</option>
+                    </select>
+                </label>
 
                 <div>
                     <input type="submit" value="Submit" class="btn btn-success" />
