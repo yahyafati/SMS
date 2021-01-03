@@ -42,4 +42,7 @@ public class Item {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
+
+    @OneToMany(mappedBy = "item")
+    private Set<Order> orders = new HashSet<>();
 }
