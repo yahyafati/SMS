@@ -1,9 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,6 +12,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Item {
 
     /*
@@ -44,5 +44,8 @@ public class Item {
     private Supplier supplier;
 
     @OneToMany(mappedBy = "item")
+    @Builder.Default
     private Set<Order> orders = new HashSet<>();
+
+    public Item(){}
 }

@@ -30,12 +30,12 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     @Override
     public Subcategory save(Subcategory subCategory) {
         System.out.println(subCategory.getCategory());
-        subCategory.setItems(
-                subCategory.getItems()
-                .stream()
-                .map(item -> itemService.findById(item.getId()))
-                .collect(Collectors.toSet())
-        );
+//        subCategory.setItems(
+//                subCategory.getItems()
+//                .stream()
+//                .map(item -> itemService.findById(item.getId()))
+//                .collect(Collectors.toSet())
+//        );
         return subCategoryDao.save(subCategory);
     }
 

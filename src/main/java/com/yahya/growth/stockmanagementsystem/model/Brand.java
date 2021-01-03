@@ -2,6 +2,8 @@ package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yahya.growth.stockmanagementsystem.service.implematation.SubcategoryServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +11,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Brand {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +26,7 @@ public class Brand {
     @JoinTable(name = "brand_categories",
             joinColumns = {@JoinColumn(name = "brand_id")},
             inverseJoinColumns = {@JoinColumn(name = "category_id")})
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
     // TODO TEST in case of ManyToMany
@@ -30,5 +35,8 @@ public class Brand {
     @JoinTable(name = "brand_subcategories",
             joinColumns = {@JoinColumn(name = "brand_id")},
             inverseJoinColumns = {@JoinColumn(name = "subcategory_id")})
+    @Builder.Default
     private Set<Subcategory> subcategories = new HashSet<>();
+
+    public Brand() {}
 }

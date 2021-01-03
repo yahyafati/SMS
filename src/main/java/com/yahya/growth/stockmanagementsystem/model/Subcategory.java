@@ -1,9 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -12,6 +10,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Subcategory {
 
     @Id
@@ -23,14 +23,17 @@ public class Subcategory {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @EqualsAndHashCode.Exclude
+    @Builder.Default
     private Category category = new Category();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategory")
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+    @Builder.Default
     private Set<Item> items = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subcategories")
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+    @Builder.Default
     private Set<Brand> brands = new HashSet<>();
 
     public void addBrand(Brand brand) {
@@ -47,4 +50,6 @@ public class Subcategory {
     private void removeAllBrands() {
         this.brands.forEach(this::removeBrand);
     }
+
+    public Subcategory() {}
 }

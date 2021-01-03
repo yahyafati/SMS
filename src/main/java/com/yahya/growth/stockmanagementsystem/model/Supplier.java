@@ -1,9 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -11,6 +9,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@AllArgsConstructor
+@Builder
 public class Supplier {
 
     @Id
@@ -28,8 +28,12 @@ public class Supplier {
     @OneToMany(mappedBy = "supplier", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore
     @EqualsAndHashCode.Exclude @ToString.Exclude
+    @Builder.Default
     private Set<Item> items = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @Builder.Default
     private Set<Category> categories = new HashSet<>();
+
+    public Supplier() {}
 }

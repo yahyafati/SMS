@@ -17,6 +17,6 @@ public class Order {
     @ManyToOne(fetch = FetchType.EAGER)
     private Item item;
 
-
+    public Order() {}
 
 }
