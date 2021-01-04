@@ -18,7 +18,7 @@
                 </label>
                 <label class="d-block">
                     Item:
-                    <select th:field="*{item}" >
+                    <select th:field="*{item.id}" >
                         <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Samsung Galaxy S10</option>
                     </select>
                 </label>

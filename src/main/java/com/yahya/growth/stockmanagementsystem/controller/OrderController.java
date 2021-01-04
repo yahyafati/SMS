@@ -50,6 +50,30 @@ public class OrderController {
     public String addOrderPOST(@ModelAttribute Order order) {
         order = orderService.save(order);
         order.setOrderedTime(new Timestamp(System.currentTimeMillis()));
+        order.setLastModifiedTime(new Timestamp(System.currentTimeMillis()));
         return "redirect:/order/" + order.getId();
+    }
+
+    @GetMapping("/edit")
+    public String editOrder(@RequestParam int id, Model model) {
+        model.addAttribute("order", orderService.findById(id));
+        model.addAttribute("action", "edit");
+        model.addAttribute("items", itemService.findAll());
+        model.addAttribute("customers", customerService.findAll());
+        return "order/edit";
+    }
+
+    @PostMapping("/edit")
+    public String editOrderPOST(@RequestParam int id, @ModelAttribute Order order) {
+        order.setId(id);
+        order = orderService.save(order);
+        order.setLastModifiedTime(new Timestamp(System.currentTimeMillis()));
+        return "redirect:/order/" + id;
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id) {
+        orderService.deleteById(id);
+        return "redirect:/order";
     }
 }

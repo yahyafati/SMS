@@ -39,4 +39,26 @@ public class CustomerController {
         customer = customerService.save(customer);
         return "redirect:/customer/" + customer.getId();
     }
+
+    @GetMapping("/edit")
+    public String editCustomer(@RequestParam int id, Model model) {
+        model.addAttribute("customer", customerService.findById(id));
+        model.addAttribute("action", "edit");
+        return "customer/edit";
+    }
+
+    @PostMapping("/edit")
+    public String editCustomerPOST(@RequestParam int id, @ModelAttribute Customer customer) {
+        customer.setId(id);
+        customer = customerService.save(customer);
+        return "redirect:/customer/" + id;
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id) {
+        customerService.deleteById(id);
+        return "redirect:/customer";
+    }
+
+
 }

@@ -13,7 +13,8 @@
             <p>Customer Info: <span th:text="${order.customer.name}"></span></p>
             <p>Item Name: <span th:text="${order.item.name}"></span></p>
             <p>Description: <span th:text="${order.item.description}"></span></p>
-            <p>Ordered Date: <span th:text="${order.orderDate}"></span></p>
+            <p>Last Modified Date: <span th:text="${order.lastModifiedTime}"></span></p>
+            <p>Ordered Date: <span th:text="${order.orderedTime}"></span></p>
             <p>Paid: <span th:text="${order.paid}"></span></p>
         </div>
         <a th:href="@{edit(id=${order.id})}" class="btn btn-primary">Edit</a>

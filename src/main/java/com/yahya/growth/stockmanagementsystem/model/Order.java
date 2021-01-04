@@ -4,8 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Data
@@ -17,9 +15,10 @@ public class Order {
     private int id;
     private int quantity;
     private Timestamp orderedTime;
+    private Timestamp lastModifiedTime;
     private boolean isPaid;
     @ManyToOne(fetch = FetchType.EAGER)
-    private Item item;
+    private Item item = new Item();
     @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
