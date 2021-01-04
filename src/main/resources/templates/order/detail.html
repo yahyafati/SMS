@@ -15,9 +15,18 @@
             <p>Description: <span th:text="${order.item.description}"></span></p>
             <p>Last Modified Date: <span th:text="${order.lastModifiedTime}"></span></p>
             <p>Ordered Date: <span th:text="${order.orderedTime}"></span></p>
-            <p>Paid: <span th:text="${order.paid}"></span></p>
+
+            <p>Paid:
+                <span th:text="${order.paid} ? 'Paid' : 'Not Paid'">Paid</span>
+                <a th:href="@{togglePay(id=${order.id})}">
+                    <i th:class="${order.paid} ? 'fas fa-toggle-on' : 'fas fa-toggle-on'" th:style="${order.paid} ? 'color:green;' : 'color:gray'"></i>
+                </a>
+<!--                <span></span>-->
+<!--                <a class="btn btn-outline-warning" th:text="'Change'">Change</a>-->
+            </p>
+            <a th:href="@{delete(id=${order.id})}" class="btn btn-danger">Remove Order</a>
         </div>
-        <a th:href="@{edit(id=${order.id})}" class="btn btn-primary">Edit</a>
+<!--        <a th:href="@{edit(id=${order.id})}" class="btn btn-primary">Edit</a>-->
     </div>
 
 </div>

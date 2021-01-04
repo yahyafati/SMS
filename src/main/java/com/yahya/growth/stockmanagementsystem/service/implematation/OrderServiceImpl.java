@@ -50,4 +50,22 @@ public class OrderServiceImpl implements OrderService {
         itemService.save(item);
         orderDao.deleteById(orderId);
     }
+
+    @Override
+    public Order setPaid(int orderId, boolean value) {
+        Order order = findById(orderId);
+        return setPaid(order, value);
+    }
+
+    @Override
+    public Order setPaid(Order order, boolean value) {
+        order.setPaid(value);
+        return orderDao.save(order);
+    }
+
+    @Override
+    public Order togglePay(int orderId) {
+        Order order = findById(orderId);
+        return setPaid(order, !order.isPaid());
+    }
 }

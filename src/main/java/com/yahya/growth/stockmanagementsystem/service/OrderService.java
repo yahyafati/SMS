@@ -13,4 +13,10 @@ public interface OrderService {
     List<Order> findAll();
 
     void deleteById(Integer orderId);
+
+    Order setPaid(int orderId, boolean value);
+
+    Order setPaid(Order order, boolean value);
+
+    Order togglePay(int orderId);
 }
