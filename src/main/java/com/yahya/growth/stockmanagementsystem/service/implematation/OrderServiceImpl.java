@@ -1,19 +1,23 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.OrderDao;
+import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.Order;
+import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderDao orderDao;
-
+    @Autowired
+    private ItemService itemService;
     @Override
     public Order findById(int orderId) {
         return orderDao.findById(orderId).orElseThrow();
@@ -21,6 +25,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order save(Order order) {
+        Item item = itemService.findById(order.getItem().getId());
+        if (order.getQuantity() > item.getQuantity()) {
+            throw new UnsupportedOperationException(String.format("Ordered quantity (%d) is larger than total item in stock (%d)", order.getQuantity(), item.getQuantity()));
+        }
+        item.setQuantity(item.getQuantity() - order.getQuantity());
+        itemService.save(item);
         return orderDao.save(order);
     }
 
@@ -31,6 +41,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void deleteById(Integer orderId) {
+        Order order = findById(orderId);
+        if (order.isPaid()) {
+            throw new UnsupportedOperationException("This order has already been paid for."); // TODO Make it possible to cancel order even after it being already paid.
+        }
+        Item item = itemService.findById(order.getItem().getId());
+        item.setQuantity(item.getQuantity() + order.getQuantity());
+        itemService.save(item);
         orderDao.deleteById(orderId);
     }
 }

@@ -18,7 +18,7 @@ public class StockManagementSystemApplication {
         SpringApplication.run(StockManagementSystemApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public CommandLineRunner categoryData(
             CategoryService categoryService, SubcategoryService subcategoryService, BrandService brandService,
             StoreService storeService, ItemService itemService, CustomerService customerService) {

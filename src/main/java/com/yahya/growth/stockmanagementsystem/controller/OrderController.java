@@ -41,7 +41,7 @@ public class OrderController {
     public String addOrder(Model model) {
         model.addAttribute("order", new Order());
         model.addAttribute("action", "new");
-        model.addAttribute("items", itemService.findAll());
+        model.addAttribute("items", itemService.findAllAvailableItems());
         model.addAttribute("customers", customerService.findAll());
         return "order/edit";
     }
@@ -58,7 +58,7 @@ public class OrderController {
     public String editOrder(@RequestParam int id, Model model) {
         model.addAttribute("order", orderService.findById(id));
         model.addAttribute("action", "edit");
-        model.addAttribute("items", itemService.findAll());
+        model.addAttribute("items", itemService.findAllAvailableItems()); // FIXME It will not show the current item, if this order exhausts the items
         model.addAttribute("customers", customerService.findAll());
         return "order/edit";
     }

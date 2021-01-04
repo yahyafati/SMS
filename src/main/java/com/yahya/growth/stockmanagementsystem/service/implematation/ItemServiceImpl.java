@@ -47,6 +47,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<Item> findAllAvailableItems() {
+        return itemDao.findAllByQuantityGreaterThan(0);
+    }
+
+    @Override
     public void deleteById(Integer itemId) {
         itemDao.deleteById(itemId);
     }

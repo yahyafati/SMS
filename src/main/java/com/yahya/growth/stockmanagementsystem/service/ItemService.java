@@ -12,5 +12,7 @@ public interface ItemService {
 
     List<Item> findAll();
 
+    List<Item> findAllAvailableItems();
+
     void deleteById(Integer itemId);
 }
