@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${customer.name}">
+            <h1 class="h1" th:text="${customer.name}">Item Name</h1>
+        </div>
+        <div class="col col-8">
+            <p>Name: <span th:text="${customer.name}"></span></p>
+            <p>Description: <span th:text="${customer.description}"></span></p>
+        </div>
+        <a th:href="@{edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
+    </div>
+
+<!--    <div class="row">-->
+<!--        <h3>Categories</h3>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <td>#</td>-->
+<!--            <td>Name</td>-->
+<!--            <td>Description</td>-->
+<!--            <td>-->
+<!--                <a class="btn btn-outline-primary" href="#" th:href="@{/category/new(store=${store.id})}">-->
+<!--                    <i class="fas fa-plus-circle"></i>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="category, rowStat : ${store.categories}">-->
+<!--                <td th:text="${rowStat.count}">1</td>-->
+<!--                <td th:text="${category.name}">Electronics</td>-->
+<!--                <td th:text="${category.description}">Electronics Description</td>-->
+<!--                <td>-->
+<!--                    <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(id=${category.id}, store=${store.id})}">-->
+<!--                        <i class="fas fa-edit"></i>-->
+<!--                    </a>-->
+<!--                    <a class="btn btn-outline-warning" href="#" th:href="@{/category/delete(id=${category.id}, store=${store.id})}">-->
+<!--                        <i class="fas fa-minus-circle"></i>-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>
