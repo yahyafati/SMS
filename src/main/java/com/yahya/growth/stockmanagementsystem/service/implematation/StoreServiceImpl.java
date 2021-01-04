@@ -22,8 +22,8 @@ public class StoreServiceImpl implements StoreService {
     private ItemService itemService;
 
     @Override
-    public Store findById(int supplierId) {
-        return storeDao.findById(supplierId).orElseThrow();
+    public Store findById(int storeId) {
+        return storeDao.findById(storeId).orElseThrow();
     }
 
     @Override

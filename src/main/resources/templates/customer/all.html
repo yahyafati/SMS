@@ -8,12 +8,11 @@
         <div th:each="customer : ${customers}" class="card col col-3">
             <img th:src="@{/images/placeholder/placeholder2.webp}" class="card-img-top" th:alt="${customer.name}">
             <div class="card-body">
-                <h5 class="card-title" th:text="${customer.name}"></h5>
-                <p class="card-text"  th:text="${customer.description}">This is a random dining table</p>
-                <a th:href="@{/store/{id}(id=${customer.id})}" class="btn btn-outline-primary">More</a>
+                <h5 class="card-title" th:text="${customer.name}">John Doe</h5>
+                <a th:href="@{/customer/{id}(id=${customer.id})}" class="btn btn-outline-primary">More</a>
             </div>
         </div>
-        <a th:href="@{/store/new}" class="btn btn-outline-primary">Add New Supplier</a>
+        <a th:href="@{/customer/new}" class="btn btn-outline-primary">Add New Customer</a>
     </div>
 
 </div>

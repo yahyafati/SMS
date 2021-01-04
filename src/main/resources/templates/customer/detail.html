@@ -10,8 +10,10 @@
             <h1 class="h1" th:text="${customer.name}">Item Name</h1>
         </div>
         <div class="col col-8">
-            <p>Name: <span th:text="${customer.name}"></span></p>
-            <p>Description: <span th:text="${customer.description}"></span></p>
+            <p>Name: <span th:text="${customer.name}">John Doe</span></p>
+            <p>Address: <span th:text="${customer.address}">Istanbul, Turkey</span></p>
+            <p>Phone: <span th:text="${customer.phone}">5396667845</span></p>
+            <p>Email: <span th:text="${customer.email}">him@him.her</span></p>
         </div>
         <a th:href="@{edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
     </div>

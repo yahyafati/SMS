@@ -15,10 +15,6 @@
                     Name: <input type="text" th:field="*{name}">
                 </label>
                 <label class="d-block">
-                    Description: <input type="text" th:field="*{description}">
-                </label>
-
-                <label class="d-block">
                     Email: <input type="email" th:field="*{email}">
                 </label>
 
@@ -38,7 +34,7 @@
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="btn btn-danger">Delete Category</a>
+            <a th:if="${action} == 'edit'" th:href="@{delete(id=${customer.id})}" class="btn btn-danger">Delete Category</a>
         </div>
     </div>
 </div>
