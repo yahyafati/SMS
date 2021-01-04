@@ -20,7 +20,7 @@ public class Customer {
     private int id;
     private String name;
     // TODO Make all addresses atomic
-    private String Address;
+    private String address;
     private String phone;
     private String email;
 

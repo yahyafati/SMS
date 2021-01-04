@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${'Order Thumbnail'}" alt="Category Photo" src="/images/mouse.webp">
+        </div>
+        <div class="col col-8">
+            <form action="" th:action="@{{action}(action=${action}, id=${order.id})}" th:object="${order}" method="post">
+                <label class="d-block">
+                    Customer:
+                    <select th:field="*{customer}" >
+                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Mrs. Hansen</option>
+                    </select>
+                </label>
+                <label class="d-block">
+                    Item:
+                    <select th:field="*{item}" >
+                        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Samsung Galaxy S10</option>
+                    </select>
+                </label>
+                <label class="d-block">
+                    Quantity: <input type="number" th:field="*{quantity}">
+                </label>
+
+                <label class="d-block">
+                    Paid: <input type="checkbox" th:field="*{paid}">
+                </label>
+
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
+                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                </div>
+
+            </form>
+
+            <a th:if="${action} == 'edit'" th:href="@{delete(id=${order.id})}" class="btn btn-danger">Delete Order</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

@@ -25,7 +25,7 @@ public class Store {
     // TODO Make this address field atomic
     private String address;
 
-    @OneToMany(mappedBy = "supplier", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "store", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
     private Set<Item> items = new HashSet<>();

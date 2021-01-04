@@ -21,7 +21,7 @@ public class StockManagementSystemApplication {
     @Bean
     public CommandLineRunner categoryData(
             CategoryService categoryService, SubcategoryService subcategoryService, BrandService brandService,
-            SupplierService supplierService, ItemService itemService) {
+            StoreService storeService, ItemService itemService, CustomerService customerService) {
         return args -> {
             Category electronicsCategory =
                     Category.builder()
@@ -140,10 +140,10 @@ public class StockManagementSystemApplication {
                             .email("migros@migros.mg")
                             .phone("448")
                             .build();
-            supplierService.save(vatanStore);
-            supplierService.save(mediaStore);
-            supplierService.save(hepsiStore);
-            supplierService.save(migrosStore);
+            storeService.save(vatanStore);
+            storeService.save(mediaStore);
+            storeService.save(hepsiStore);
+            storeService.save(migrosStore);
 
             List<String> itemNames = Arrays.asList(
                     "boom box", "spring", "hair tie", "floor",  "newspaper", "tissue box", "headphones", "picture frame", "pillow", "shirt"
@@ -169,6 +169,23 @@ public class StockManagementSystemApplication {
                     "Gregor then turned to look out the window at the dull weather.",
                     "Drops"
             );
+            List<String> customerNames = Arrays.asList(
+                    "Nabiha Pham", "Sheena Pearce", "Annika Sanford", "Leja Sloan", "Marissa Strong", "Gerald Dotson", "Orlando Plummer", "Bear Guest", "Charly Justice", "Gregory Horn"
+            );
+            List<String> customerAddresses = Arrays.asList(
+                    "8129 Linden St. Roslindale, MA 02131", "8338 Shipley Court Toms River, NJ 08753", "8142 Mechanic Lane District Heights, MD 20747",
+                    "8015 La Sierra Ave. Kenosha, WI 53140", "33 Hilldale St. Evans, GA 30809", "810 Oakwood Street Altoona, PA 16601",
+                    "24 S. Yukon Lane Horn Lake, MS 38637", "8781 Wintergreen Lane Dundalk, MD 21222", "90 Delaware Court Gallatin, TN 37066",
+                    "7 Branch Drive Conway, SC 29526"
+            );
+            List<String> customerEmails = Arrays.asList(
+                    "stakasa@att.net", "greear@msn.com","dialworld@icloud.com","parasite@me.com", "techie@att.net", "brainless@icloud.com",
+                    "wikinerd@icloud.com", "jesse@sbcglobal.net", "flaviog@me.com", "ewaters@icloud.com", "galbra@att.net", "stewwy@me.com"
+            );
+            List<String> customerPhone = Arrays.asList(
+                    "(487) 389-3856", "(260) 803-0952", "(832) 829-1280", "(635) 370-8208", "(342) 637-3526",
+                    "(874) 240-3413", "(796) 330-2425", "(967) 974-5319", "(332) 289-4788", "(799) 209-3858"
+            );
             Random random = new Random();
             for (int i = 0; i < itemNames.size(); i++) {
                 Item item =
@@ -183,6 +200,16 @@ public class StockManagementSystemApplication {
                                 .store(Store.builder().id(random.nextInt(3)+1).build())
                                 .build();
                 itemService.save(item);
+            }
+            for (int i = 0; i < 10; i++) {
+                Customer customer =
+                        Customer.builder()
+                                .name(customerNames.get(i))
+                                .address(customerAddresses.get(i))
+                                .phone(customerPhone.get(i))
+                                .email(customerEmails.get(i))
+                                .build();
+                customerService.save(customer);
             }
         };
     }

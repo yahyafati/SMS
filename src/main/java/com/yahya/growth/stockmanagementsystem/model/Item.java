@@ -36,7 +36,7 @@ public class Item {
     private Brand brand;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "supplier_id")
+    @JoinColumn(name = "store_id")
     private Store store;
 
     @OneToMany(mappedBy = "item")

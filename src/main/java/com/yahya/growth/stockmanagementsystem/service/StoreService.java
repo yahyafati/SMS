@@ -4,7 +4,7 @@ import com.yahya.growth.stockmanagementsystem.model.Store;
 
 import java.util.List;
 
-public interface SupplierService {
+public interface StoreService {
 
     Store findById(int supplierId);
 

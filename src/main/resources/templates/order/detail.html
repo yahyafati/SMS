@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${order.item.name}">
+            <h2 class="h1" th:text="${order.item.name}">Item Name</h2>
+        </div>
+        <div class="col col-8">
+            <p>Customer Info: <span th:text="${order.customer.name}"></span></p>
+            <p>Item Name: <span th:text="${order.item.name}"></span></p>
+            <p>Description: <span th:text="${order.item.description}"></span></p>
+            <p>Ordered Date: <span th:text="${order.orderDate}"></span></p>
+            <p>Paid: <span th:text="${order.paid}"></span></p>
+        </div>
+        <a th:href="@{edit(id=${order.id})}" class="btn btn-primary">Edit</a>
+    </div>
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

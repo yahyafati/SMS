@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="container">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div th:each="order : ${orders}" class="card col col-3">
+            <img th:src="@{/images/placeholder/placeholder2.webp}" class="card-img-top" th:alt="${order.item.name}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${order.item.name} + ' (' + ${order.quantity} + ')'">Item Name (12)</h5>
+                <p class="card-text"  th:text="${order.customer.name}">John Doe</p>
+                <p class="card-text"  th:text="${order.customer.address}">His Address</p>
+                <p>Paid: <i class="fas fa-handshake" style="color: green;"></i></p>
+                <a th:href="@{/order/{id}(id=${order.id})}" class="btn btn-outline-primary">More</a>
+            </div>
+        </div>
+        <a th:href="@{/order/new}" class="btn btn-outline-primary">Place an Order</a>
+    </div>
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

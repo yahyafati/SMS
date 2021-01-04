@@ -19,7 +19,7 @@ public class ItemController {
     @Autowired
     private BrandService brandService;
     @Autowired
-    private SupplierService supplierService;
+    private StoreService storeService;
 
     @GetMapping("")
     public String index(Model model) {
@@ -40,7 +40,7 @@ public class ItemController {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
-        model.addAttribute("suppliers", supplierService.findAll());
+        model.addAttribute("suppliers", storeService.findAll());
         return "item/edit";
     }
 
@@ -57,7 +57,7 @@ public class ItemController {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
-        model.addAttribute("suppliers", supplierService.findAll());
+        model.addAttribute("suppliers", storeService.findAll());
         return "item/edit";
     }
 

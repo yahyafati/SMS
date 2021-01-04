@@ -3,6 +3,9 @@ package com.yahya.growth.stockmanagementsystem.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -13,10 +16,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int quantity;
-    private String deliveryAddress;
+    private Timestamp orderedTime;
+    private boolean isPaid;
     @ManyToOne(fetch = FetchType.EAGER)
     private Item item;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
     public Order() {}

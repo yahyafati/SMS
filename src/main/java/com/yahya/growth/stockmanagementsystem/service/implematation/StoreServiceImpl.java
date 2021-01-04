@@ -1,10 +1,10 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
-import com.yahya.growth.stockmanagementsystem.dao.SupplierDao;
+import com.yahya.growth.stockmanagementsystem.dao.StoreDao;
 import com.yahya.growth.stockmanagementsystem.model.Store;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
-import com.yahya.growth.stockmanagementsystem.service.SupplierService;
+import com.yahya.growth.stockmanagementsystem.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SupplierServiceImpl implements SupplierService {
+public class StoreServiceImpl implements StoreService {
 
     @Autowired
-    private SupplierDao supplierDao;
+    private StoreDao storeDao;
     @Autowired
     private CategoryService categoryService;
     @Autowired
@@ -23,7 +23,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Store findById(int supplierId) {
-        return supplierDao.findById(supplierId).orElseThrow();
+        return storeDao.findById(supplierId).orElseThrow();
     }
 
     @Override
@@ -40,16 +40,16 @@ public class SupplierServiceImpl implements SupplierService {
                 .map(category -> categoryService.findById(category.getId()))
                 .collect(Collectors.toSet())
         );
-        return supplierDao.save(store);
+        return storeDao.save(store);
     }
 
     @Override
     public List<Store> findAll() {
-        return supplierDao.findAll();
+        return storeDao.findAll();
     }
 
     @Override
     public void deleteById(Integer supplierId) {
-        supplierDao.deleteById(supplierId);
+        storeDao.deleteById(supplierId);
     }
 }
