@@ -1,14 +1,11 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
-import com.yahya.growth.stockmanagementsystem.model.Category;
-import com.yahya.growth.stockmanagementsystem.model.Supplier;
+import com.yahya.growth.stockmanagementsystem.model.Store;
 import com.yahya.growth.stockmanagementsystem.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/supplier")
@@ -32,15 +29,15 @@ public class SupplierController {
 
     @GetMapping("/new")
     public String addSupplier(Model model) {
-        model.addAttribute("supplier", new Supplier());
+        model.addAttribute("supplier", new Store());
         model.addAttribute("action", "new");
         return "supplier/edit";
     }
 
     @PostMapping("/new")
-    public String addSupplierPOST(@ModelAttribute Supplier supplier) {
-        supplier = supplierService.save(supplier);
-        return "redirect:/supplier/" + supplier.getId();
+    public String addSupplierPOST(@ModelAttribute Store store) {
+        store = supplierService.save(store);
+        return "redirect:/supplier/" + store.getId();
     }
 
     @GetMapping("/edit")
@@ -51,9 +48,9 @@ public class SupplierController {
     }
 
     @PostMapping("/edit")
-    public String editPOST(@RequestParam(name = "id") int supplierId, @ModelAttribute Supplier supplier) {
-        supplier.setId(supplierId);
-        supplierService.save(supplier);
+    public String editPOST(@RequestParam(name = "id") int supplierId, @ModelAttribute Store store) {
+        store.setId(supplierId);
+        supplierService.save(store);
         return "redirect:/supplier/" + supplierId;
     }
 

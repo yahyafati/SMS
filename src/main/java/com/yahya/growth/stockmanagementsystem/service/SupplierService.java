@@ -1,16 +1,16 @@
 package com.yahya.growth.stockmanagementsystem.service;
 
-import com.yahya.growth.stockmanagementsystem.model.Supplier;
+import com.yahya.growth.stockmanagementsystem.model.Store;
 
 import java.util.List;
 
 public interface SupplierService {
 
-    Supplier findById(int supplierId);
+    Store findById(int supplierId);
 
-    Supplier save(Supplier supplier);
+    Store save(Store store);
 
-    List<Supplier> findAll();
+    List<Store> findAll();
 
     void deleteById(Integer supplierId);
 

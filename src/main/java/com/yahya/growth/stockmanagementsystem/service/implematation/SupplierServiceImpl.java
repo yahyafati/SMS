@@ -1,7 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.SupplierDao;
-import com.yahya.growth.stockmanagementsystem.model.Supplier;
+import com.yahya.growth.stockmanagementsystem.model.Store;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.SupplierService;
@@ -22,29 +22,29 @@ public class SupplierServiceImpl implements SupplierService {
     private ItemService itemService;
 
     @Override
-    public Supplier findById(int supplierId) {
+    public Store findById(int supplierId) {
         return supplierDao.findById(supplierId).orElseThrow();
     }
 
     @Override
-    public Supplier save(Supplier supplier) {
-        supplier.setItems(
-                supplier.getItems()
+    public Store save(Store store) {
+        store.setItems(
+                store.getItems()
                 .stream()
                 .map(item -> itemService.findById(item.getId()))
                 .collect(Collectors.toSet())
         );
-        supplier.setCategories(
-                supplier.getCategories()
+        store.setCategories(
+                store.getCategories()
                 .stream()
                 .map(category -> categoryService.findById(category.getId()))
                 .collect(Collectors.toSet())
         );
-        return supplierDao.save(supplier);
+        return supplierDao.save(store);
     }
 
     @Override
-    public List<Supplier> findAll() {
+    public List<Store> findAll() {
         return supplierDao.findAll();
     }
 

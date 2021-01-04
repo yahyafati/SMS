@@ -16,6 +16,8 @@ public class Order {
     private String deliveryAddress;
     @ManyToOne(fetch = FetchType.EAGER)
     private Item item;
+    @ManyToOne
+    private Customer customer;
 
     public Order() {}
 

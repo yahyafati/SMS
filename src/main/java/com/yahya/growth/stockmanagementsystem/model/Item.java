@@ -1,10 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -41,7 +37,7 @@ public class Item {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id")
-    private Supplier supplier;
+    private Store store;
 
     @OneToMany(mappedBy = "item")
     @Builder.Default

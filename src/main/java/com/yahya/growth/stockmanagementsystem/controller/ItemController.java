@@ -1,7 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.model.Supplier;
 import com.yahya.growth.stockmanagementsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

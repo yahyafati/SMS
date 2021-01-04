@@ -6,11 +6,11 @@
     <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
         <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${supplier.name}" alt="Category Photo" src="/images/mouse.webp">
-            <h1 class="h1" th:text="${supplier.name}">Category Name</h1>
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${store.name}" alt="Category Photo" src="/images/mouse.webp">
+            <h1 class="h1" th:text="${store.name}">Category Name</h1>
         </div>
         <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${supplier.id})}" th:object="${supplier}" method="post">
+            <form action="" th:action="@{{action}(action=${action}, id=${store.id})}" th:object="${store}" method="post">
                 <label class="d-block">
                     Name: <input type="text" th:field="*{name}">
                 </label>
@@ -38,7 +38,7 @@
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${supplier.id})}" class="btn btn-danger">Delete Category</a>
+            <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="btn btn-danger">Delete Category</a>
         </div>
     </div>
 </div>

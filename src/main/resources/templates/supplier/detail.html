@@ -6,14 +6,14 @@
     <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
         <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${supplier.name}">
-            <h1 class="h1" th:text="${supplier.name}">Item Name</h1>
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${store.name}">
+            <h1 class="h1" th:text="${store.name}">Item Name</h1>
         </div>
         <div class="col col-8">
-            <p>Name: <span th:text="${supplier.name}"></span></p>
-            <p>Description: <span th:text="${supplier.description}"></span></p>
+            <p>Name: <span th:text="${store.name}"></span></p>
+            <p>Description: <span th:text="${store.description}"></span></p>
         </div>
-        <a th:href="@{edit(id=${supplier.id})}" class="btn btn-primary">Edit</a>
+        <a th:href="@{edit(id=${store.id})}" class="btn btn-primary">Edit</a>
     </div>
 
     <div class="row">
@@ -24,21 +24,21 @@
             <td>Name</td>
             <td>Description</td>
             <td>
-                <a class="btn btn-outline-primary" href="#" th:href="@{/category/new(supplier=${supplier.id})}">
+                <a class="btn btn-outline-primary" href="#" th:href="@{/category/new(store=${store.id})}">
                     <i class="fas fa-plus-circle"></i>
                 </a>
             </td>
             </thead>
             <tbody>
-            <tr th:each="category, rowStat : ${supplier.categories}">
+            <tr th:each="category, rowStat : ${store.categories}">
                 <td th:text="${rowStat.count}">1</td>
                 <td th:text="${category.name}">Electronics</td>
                 <td th:text="${category.description}">Electronics Description</td>
                 <td>
-                    <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(id=${category.id}, supplier=${supplier.id})}">
+                    <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(id=${category.id}, store=${store.id})}">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{/category/delete(id=${category.id}, supplier=${supplier.id})}">
+                    <a class="btn btn-outline-warning" href="#" th:href="@{/category/delete(id=${category.id}, store=${store.id})}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

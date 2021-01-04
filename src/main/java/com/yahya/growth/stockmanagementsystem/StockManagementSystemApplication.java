@@ -108,42 +108,42 @@ public class StockManagementSystemApplication {
             brandService.save(amazonBrand);
             brandService.save(microsoftBrand);
 
-            Supplier vatanSupplier =
-                    Supplier.builder()
+            Store vatanStore =
+                    Store.builder()
                             .name("Vatan")
                             .description("Vatan Turkiye")
                             .address("Istanbul, Turkey")
                             .email("vatan@vatan.vt")
                             .phone("+905364859687")
                             .build();
-            Supplier mediaSupplier =
-                    Supplier.builder()
+            Store mediaStore =
+                    Store.builder()
                             .name("Media Markt")
                             .description("Media Markt Distributer")
                             .address("Merter, Istanbul, Turkey")
                             .email("media@makt.pl")
                             .phone("+906358884512")
                             .build();
-            Supplier hepsiSupplier =
-                    Supplier.builder()
+            Store hepsiStore =
+                    Store.builder()
                             .name("Hepsi")
                             .description("hepsi burada")
                             .address("Bakirkoy, Istanbul, Turkey")
                             .email("hepsi@hepsi.burada")
                             .phone("+903651253698")
                             .build();
-            Supplier migrosSupplier =
-                    Supplier.builder()
+            Store migrosStore =
+                    Store.builder()
                             .name("Migros")
                             .description("Migros Turkiye")
                             .address("Florya, Istanbul, Turkey")
                             .email("migros@migros.mg")
                             .phone("448")
                             .build();
-            supplierService.save(vatanSupplier);
-            supplierService.save(mediaSupplier);
-            supplierService.save(hepsiSupplier);
-            supplierService.save(migrosSupplier);
+            supplierService.save(vatanStore);
+            supplierService.save(mediaStore);
+            supplierService.save(hepsiStore);
+            supplierService.save(migrosStore);
 
             List<String> itemNames = Arrays.asList(
                     "boom box", "spring", "hair tie", "floor",  "newspaper", "tissue box", "headphones", "picture frame", "pillow", "shirt"
@@ -180,7 +180,7 @@ public class StockManagementSystemApplication {
                                 .category(Category.builder().id(random.nextInt(3) + 1).build())
                                 .brand(Brand.builder().id(random.nextInt(4) + 1).build())
                                 .subcategory(Subcategory.builder().id(random.nextInt(3) + 1).build())
-                                .supplier(Supplier.builder().id(random.nextInt(3)+1).build())
+                                .store(Store.builder().id(random.nextInt(3)+1).build())
                                 .build();
                 itemService.save(item);
             }

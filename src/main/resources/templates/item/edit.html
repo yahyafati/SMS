@@ -43,8 +43,8 @@
                 </label>
                 <label class="d-block">
                     Supplier:
-                    <select th:field="*{supplier}" >
-                        <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.name}">HepsiBurada</option>
+                    <select th:field="*{store}" >
+                        <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>
                     </select>
                 </label>
 

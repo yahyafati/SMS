@@ -1,7 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
 import com.yahya.growth.stockmanagementsystem.model.Category;
-import com.yahya.growth.stockmanagementsystem.model.Supplier;
+import com.yahya.growth.stockmanagementsystem.model.Store;
 import com.yahya.growth.stockmanagementsystem.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,24 +17,24 @@ public class SupplierRestController {
     private SupplierService supplierService;
 
     @GetMapping("")
-    public List<Supplier> getAllSuppliers(){
+    public List<Store> getAllSuppliers(){
         return supplierService.findAll();
     }
 
     @GetMapping("/{supplierId}")
-    public Supplier getSupplier(@PathVariable int supplierId) {
+    public Store getSupplier(@PathVariable int supplierId) {
         return supplierService.findById(supplierId);
     }
 
     @PostMapping("")
-    public Supplier addSupplier(@RequestBody Supplier supplier) {
-        return supplierService.save(supplier);
+    public Store addSupplier(@RequestBody Store store) {
+        return supplierService.save(store);
     }
 
     @PutMapping("/{supplierId}")
-    public Supplier updateSupplier(@RequestBody Supplier supplier, @PathVariable int supplierId) {
-        supplier.setId(supplierId);
-        return supplierService.save(supplier);
+    public Store updateSupplier(@RequestBody Store store, @PathVariable int supplierId) {
+        store.setId(supplierId);
+        return supplierService.save(store);
     }
 
     @DeleteMapping("/{supplierId}")
@@ -53,17 +53,17 @@ public class SupplierRestController {
     }
 
     @PostMapping("/{supplierId}/category")
-    public Supplier addCategory(@PathVariable int supplierId, @RequestBody Category category) {
-        Supplier supplier = supplierService.findById(supplierId);
-        supplier.getCategories().add(category);
-        return supplierService.save(supplier);
+    public Store addCategory(@PathVariable int supplierId, @RequestBody Category category) {
+        Store store = supplierService.findById(supplierId);
+        store.getCategories().add(category);
+        return supplierService.save(store);
     }
 
     @DeleteMapping("/{supplierId}/category/{categoryId}")
-    public Supplier removeCategory(@PathVariable int supplierId, @PathVariable int categoryId) {
-        Supplier supplier = supplierService.findById(supplierId);
-        supplier.getCategories().removeIf(category -> category.getId() == categoryId);
-        return supplierService.save(supplier);
+    public Store removeCategory(@PathVariable int supplierId, @PathVariable int categoryId) {
+        Store store = supplierService.findById(supplierId);
+        store.getCategories().removeIf(category -> category.getId() == categoryId);
+        return supplierService.save(store);
     }
 
 }

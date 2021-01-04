@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @Builder
-public class Supplier {
+public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,8 +26,7 @@ public class Supplier {
     private String address;
 
     @OneToMany(mappedBy = "supplier", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude @ToString.Exclude
+    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
     private Set<Item> items = new HashSet<>();
 
@@ -35,5 +34,5 @@ public class Supplier {
     @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
-    public Supplier() {}
+    public Store() {}
 }

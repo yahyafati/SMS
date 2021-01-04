@@ -33,7 +33,7 @@ public class Category {
     @ManyToMany(mappedBy = "categories", cascade = {CascadeType.REMOVE}, fetch = FetchType.LAZY)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
-    private Set<Supplier> suppliers = new HashSet<>();
+    private Set<Store> stores = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
