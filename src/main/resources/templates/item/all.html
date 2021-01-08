@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${item.name}"></h5>
                 <p class="card-text"  th:text="${item.description}">This is a random dining table</p>
-                <a th:href="${item.id}" class="btn btn-primary">Info</a>
+                <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-primary">Info</a>
             </div>
         </div>
         <a th:href="'new'" class="btn btn-outline-primary">Add New Item</a>

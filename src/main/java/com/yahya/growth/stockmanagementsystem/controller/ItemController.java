@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/items")
 public class ItemController {
 
     @Autowired
@@ -24,7 +25,7 @@ public class ItemController {
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("items", itemService.findAll());
-        return "index";
+        return "item/all";
     }
 
     @GetMapping("/{item_id}")
@@ -47,7 +48,7 @@ public class ItemController {
     @PostMapping("/new")
     public String addNewItemPOST(@ModelAttribute Item item) {
         item = itemService.save(item);
-        return "redirect:/" + item.getId();
+        return "redirect:/items/" + item.getId();
     }
 
     @GetMapping("/edit")
@@ -65,13 +66,13 @@ public class ItemController {
     public String editPost(@RequestParam(name = "id") int itemId, @ModelAttribute Item item) {
         item.setId(itemId);
         itemService.save(item);
-        return "redirect:/" + itemId;
+        return "redirect:/items/" + itemId;
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam(name = "id") int itemId) {
         itemService.deleteById(itemId);
-        return "redirect:/";
+        return "redirect:/items";
     }
 
 }
