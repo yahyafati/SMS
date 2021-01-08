@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import static com.yahya.growth.stockmanagementsystem.security.Permission.*;
 
+@Deprecated
 public enum UserRole {
     NEW_STAFF(Sets.newHashSet(
             ITEM_READ, ORDER_READ, CUSTOMER_READ, BRAND_READ, SUBCATEGORY_READ, STORE_READ, CATEGORY_READ,

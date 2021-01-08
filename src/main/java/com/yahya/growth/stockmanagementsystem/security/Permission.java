@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.security;
 
+@Deprecated
 public enum Permission {
     ITEM_READ("item:read"),
     ITEM_WRITE("item:write"),

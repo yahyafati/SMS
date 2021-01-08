@@ -1,11 +1,17 @@
 package com.yahya.growth.stockmanagementsystem;
 
 import com.yahya.growth.stockmanagementsystem.model.*;
+import com.yahya.growth.stockmanagementsystem.model.security.Authority;
+import com.yahya.growth.stockmanagementsystem.model.security.Role;
+import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.security.Permission;
+import com.yahya.growth.stockmanagementsystem.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -214,4 +220,50 @@ public class StockManagementSystemApplication {
         };
     }
 
+//    @Bean
+    public CommandLineRunner initializeSecurityData(AuthorityService authorityService, RoleService roleService) {
+        return args -> {
+            Arrays.stream(Permission.values())
+                    .map(permission -> new Authority(permission.getPermission()))
+                    .forEach(authorityService::save);
+            Arrays.stream(UserRole.values())
+                    .map(userRole -> {
+                        Role role = new Role();
+                        role.setName("ROLE_" + userRole.name());
+                        userRole.getPermissions()
+                                .stream()
+                                .map(Permission::getPermission)
+                                .map(authorityService::findByName)
+                                .forEach(role.getAuthorities()::add);
+                        System.out.println(role);
+                        return role;
+                    })
+                    .forEach(roleService::save);
+
+        };
+    }
+
+//    @Bean
+    public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
+        return args -> {
+            User staffUser = new User(
+                    "staff",
+                    passwordEncoder.encode("123"),
+                    roleService.findByName("ROLE_STAFF").getAuthorities()
+            );
+            User managerUser = new User(
+                    "manager",
+                    passwordEncoder.encode("123"),
+                    roleService.findByName("ROLE_MANAGER").getAuthorities()
+            );
+            User itUser = new User(
+                    "it",
+                    passwordEncoder.encode("1234"),
+                    roleService.findByName("ROLE_IT_PERSON").getAuthorities()
+            );
+            userService.save(staffUser);
+            userService.save(managerUser);
+            userService.save(itUser);
+        };
+    }
 }
