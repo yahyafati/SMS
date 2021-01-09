@@ -1,6 +1,9 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
+import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/users")
@@ -39,11 +46,28 @@ public class UserController implements BasicControllerSkeleton<User>{
     @Override
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        var k = authorityService.findAll();
-        System.out.println(k);
-        model.addAttribute("allAuthorities", k);
+        User user = userService.findById(id);
+        System.out.println(user.getAuthorities());
+        model.addAttribute("user", user);
+        Set<String> authorities = Arrays.stream(Permission.values())
+                .filter(permission -> !permission.getPermission().contains("report") && !permission.getPermission().contains("it:"))
+                .map(permission -> permission.getPermission().split(":")[0])
+                .collect(Collectors.toSet());
+        model.addAttribute("currentAuthority", user.getAuthorities().stream().map(Authority::getAuthority).collect(Collectors.toSet()));
+        model.addAttribute("allAuthorities", authorities);
+        model.addAttribute("permissions", Lists.newArrayList());
         return "user/detail";
+    }
+
+    @PostMapping("/{id}")
+    public String changePermissions(@PathVariable int id, @RequestParam("idPermission") List<String> permissions) {
+        User user = userService.findById(id);
+        user.getAuthorities().clear();
+        permissions.stream()
+                .map(authorityService::findByName)
+                .forEach(user.getAuthorities()::add);
+        userService.save(user);
+        return "redirect:/users/" + id;
     }
 
     @Override

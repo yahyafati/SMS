@@ -17,30 +17,45 @@
             <p>Email: <span th:text="${user.email}">him@him.her</span></p>
         </div>
         <a th:href="@{delete(id=${user.id})}" class="btn btn-danger">Delete</a>
-        <div class="permissions">
-            <table class="table table-striped table-light">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Permission</th>
-                    <th>Read</th>
-                    <th>Write</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="authority, iterStat : ${allAuthorities}">
-                    <td th:text="${iterStat.count}">1</td>
-                    <td th:text="${authority.authority}">User</td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                    <td>
-                        <input type="checkbox" />
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <form th:object="${permissions}" th:action="@{/users/{id}(id=${user.id})}" method="post">
+            <div class="permissions">
+                <table class="table table-striped table-light">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Permission</th>
+                        <th>Read</th>
+                        <th>Write</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="authority, iterStat : ${allAuthorities}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${authority}">Category</td>
+                        <td>
+                            <input type="checkbox" value="" name="idPermission" th:value="${authority} + ':read'" th:checked="${#lists.contains(currentAuthority, #strings.concat(authority, ':read'))}"/>
+                        </td>
+                        <td>
+                            <input type="checkbox" value="" name="idPermission" th:value="${authority} + ':write'" th:checked="${#lists.contains(currentAuthority, #strings.concat(authority, ':write'))}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td th:text="'XX'">1</td>
+                        <td th:text="'View Store Report'">User</td>
+                        <td>
+                            <p><input type="checkbox" name="idPermission" value="report:store" th:checked="${#lists.contains(currentAuthority, 'report:store')}"/> Store Report</p>
+                        </td>
+                        <td>
+                            <p><input type="checkbox" name="idPermission" value="report:all" th:checked="${#lists.contains(currentAuthority, 'report:all')}"/> All Report</p>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <input type="submit" value="save" class="btn btn-success">
+        </form>
+
     </div>
 
 </div>

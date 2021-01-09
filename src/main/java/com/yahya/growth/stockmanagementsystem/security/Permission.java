@@ -16,11 +16,11 @@ public enum Permission {
     CUSTOMER_WRITE("customer:write"),
     ORDER_READ("order:read"),
     ORDER_WRITE("order:write"),
-    VIEW_STORE_REPORT("report:store"),
-    VIEW_ALL_REPORT("report:all"),
     IT_PERMISSION("it:reset"),
     USER_READ("user:read"),
-    USER_WRITE("user:write");
+    USER_WRITE("user:write"),
+    VIEW_STORE_REPORT("report:store"),
+    VIEW_ALL_REPORT("report:all");
 
     private final String permission;
 
