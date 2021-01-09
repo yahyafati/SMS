@@ -66,7 +66,7 @@ ul li a {
     background: #1b1b1b;
 }
 .main_content {
-    margin-left: 240px;
+    margin-left: 250px;
     margin-top: 75px;
     padding-top: 10px;
     transition: all 0.3s;
@@ -79,3 +79,87 @@ p {
     padding: 0 20px 10px 20px;
     text-align: justify;
 }
+
+/* Item Cards */
+
+.items-grid {
+
+}
+
+.itemCard * {
+    margin: 0;
+    padding: 0;
+}
+.itemCard {
+    display: inline-block;
+    margin: 5px;
+    max-width: 300px;
+    padding: 15px;
+    height: 300px;
+    width: fit-content;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-image: linear-gradient(to top, #4e7b96 0%, #368b81 100%);
+    color: white;
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.itemCard h4 {
+    font-family: 'Rubik', sans-serif;
+    font-size: 120%;
+    padding: 5px 5px 2px 5px;
+    color: white;
+}
+
+.itemCard .highlight {
+    font-size: 80%;
+    display: inline-block;
+    width: fit-content;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, .25);
+    margin-bottom: 5px;
+    background-color: rgba(25, 179, 71, 0.5);
+    color: white;
+}
+
+.itemCard .brand {
+    width: fit-content;
+    display: block;
+    background-color: rgba(25, 132, 182, 0.5);
+}
+
+.itemCard .description {
+    height: 100px;
+    overflow: hidden;
+}
+
+.itemCard .quantity {
+    width: fit-content;
+    font-size: 95%;
+    /* background-color: rgba(70, 100, 88, .25); */
+    margin-top: 10px;
+    align-self: flex-end;
+    color: #bebdbde0;
+}
+
+.itemCard .quantity .number {
+    font-weight: bolder;
+    font-size: 120%;
+    color: #daa209;
+}
+
+.itemCard .price {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 28px;
+    text-align: right;
+    color: rgb(3, 190, 3);
+}
+
+/*.main_content .items-grid {*/
+/*    display: inline-flex;*/
+/*    flex-direction: column;*/
+/*    flex-wrap: wrap;*/
+/*    height: 500px;*/
+/*    align-content: flex-start;*/
+/*}*/
