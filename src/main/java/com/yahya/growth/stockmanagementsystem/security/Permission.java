@@ -18,7 +18,9 @@ public enum Permission {
     ORDER_WRITE("order:write"),
     VIEW_STORE_REPORT("report:store"),
     VIEW_ALL_REPORT("report:all"),
-    IT_PERMISSION("it:reset");
+    IT_PERMISSION("it:reset"),
+    USER_READ("user:read"),
+    USER_WRITE("user:write");
 
     private final String permission;
 

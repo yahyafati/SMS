@@ -2,19 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
 <body>
-<div class="container">
+<div class="main_content">
     <div th:replace="common/header :: navbar-fragment"></div>
-    <div class="row">
-        <div th:each="subcategory : ${subcategories}" class="card col col-3">
-            <img th:src="@{/images/placeholder/placeholder3.png}" class="card-img-top" th:alt="${subcategory.name}">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${subcategory.name}"></h5>
-                <p class="card-text"  th:text="${subcategory.description}"></p>
-                <a th:href="@{/subcategory/{id}(id=${subcategory.id})}" class="btn btn-outline-primary">More</a>
-            </div>
-        </div>
-        <a th:href="@{/subcategory/new}" class="btn btn-outline-primary">Add New Subcategory</a>
-    </div>
+    <table class="table table-striped table-hover table-light">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Subategory</th>
+            <th>Description</th>
+            <th>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/subcategory/new}">New Subcategory</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subcategory, iterStat : ${subcategories}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${subcategory.name}">James Doe</td>
+            <td th:text="${subcategory.description}">0911871115</td>
+            <td>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/subcategory/edit(id=${subcategory.id})}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/subcategory/delete(id=${subcategory.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 

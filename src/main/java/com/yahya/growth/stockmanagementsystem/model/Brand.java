@@ -2,9 +2,8 @@ package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yahya.growth.stockmanagementsystem.service.implematation.SubcategoryServiceImpl;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -37,6 +36,12 @@ public class Brand {
             inverseJoinColumns = {@JoinColumn(name = "subcategory_id")})
     @Builder.Default
     private Set<Subcategory> subcategories = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand", cascade = CascadeType.REMOVE)
+    @JsonIgnore @ToString.Exclude @EqualsAndHashCode.Exclude
+    @Builder.Default
+    private  Set<Item> items = new HashSet<>();
+
 
     public Brand() {}
 }

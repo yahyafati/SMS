@@ -2,19 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
 <body>
-<div class="container">
+<div class="main_content">
     <div th:replace="common/header :: navbar-fragment"></div>
-    <div class="row">
-        <div th:each="item : ${items}" class="card col col-3">
-            <img th:src="@{/images/placeholder/placeholder.png}" class="card-img-top" th:alt="${item.name}">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${item.name}"></h5>
-                <p class="card-text"  th:text="${item.description}">This is a random dining table</p>
-                <a th:href="@{/items/{id}(id=${item.id})}" class="btn btn-primary">Info</a>
-            </div>
-        </div>
-        <a th:href="'new'" class="btn btn-outline-primary">Add New Item</a>
-    </div>
+    <table class="table table-striped table-hover table-light">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Quantity</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>Store</th>
+            <th>Price</th>
+            <th>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/items/new}">Add Product</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iterStat : ${items}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${item.name}">Samsung Galaxy A51</td>
+            <td th:text="${item.description}">Description of the Object</td>
+            <td th:text="${item.quantity}">21</td>
+            <td th:text="${item.brand.name}">Apple</td>
+            <td th:text="${item.category.name}">Electronics</td>
+            <td th:text="${item.subcategory.name}">Mobile</td>
+            <td th:text="${item.store.name}">Vatan</td>
+            <td th:text="${item.price}">3,500 TL</td>
+            <td>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/items/edit(id=${item.id})}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/items/delete(id=${item.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 

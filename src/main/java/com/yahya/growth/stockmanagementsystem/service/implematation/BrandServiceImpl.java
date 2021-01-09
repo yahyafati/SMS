@@ -8,6 +8,7 @@ import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,18 +30,18 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand save(Brand brand) {
-        brand.setCategories(
-                brand.getCategories()
-                .stream()
-                .map(category -> categoryService.findById(category.getId()))
-                .collect(Collectors.toSet())
-        );
-        brand.setSubcategories(
-                brand.getSubcategories()
-                .stream()
-                .map(subcategory -> subcategoryService.findById(subcategory.getId()))
-                .collect(Collectors.toSet())
-        );
+//        brand.setCategories(
+//                brand.getCategories()
+//                .stream()
+//                .map(category -> categoryService.findById(category.getId()))
+//                .collect(Collectors.toSet())
+//        );
+//        brand.setSubcategories(
+//                brand.getSubcategories()
+//                .stream()
+//                .map(subcategory -> subcategoryService.findById(subcategory.getId()))
+//                .collect(Collectors.toSet())
+//        );
         return brandDao.save(brand);
     }
 
@@ -50,6 +51,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Integer brandId) {
         brandDao.deleteById(brandId);
     }

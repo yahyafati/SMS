@@ -2,19 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
 <body>
-<div class="container">
+<div class="main_content">
+
     <div th:replace="common/header :: navbar-fragment"></div>
-    <div class="row">
-        <div th:each="category : ${categories}" class="card col col-3">
-            <img th:src="@{/images/placeholder/placeholder2.webp}" class="card-img-top" th:alt="${category.name}">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${category.name}"></h5>
-                <p class="card-text"  th:text="${category.description}">This is a random dining table</p>
-                <a th:href="@{/category/{id}(id=${category.id})}" class="btn btn-outline-primary">More</a>
-            </div>
-        </div>
-        <a th:href="@{/category/new}" class="btn btn-outline-primary">Add New Category</a>
-    </div>
+    <table class="table table-striped table-hover table-light">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/category/new}">New Category</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category, iterStat : ${categories}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${category.name}">James Doe</td>
+            <td th:text="${category.description}">0911871115</td>
+            <td>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/category/edit(id=${category.id})}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/category/delete(id=${category.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 

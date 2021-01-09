@@ -2,21 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
 <body>
-<div class="container">
+<div class="main_content">
     <div th:replace="common/header :: navbar-fragment"></div>
-    <div class="row">
-        <div th:each="order : ${orders}" class="card col col-3">
-            <img th:src="@{/images/placeholder/placeholder2.webp}" class="card-img-top" th:alt="${order.item.name}">
-            <div class="card-body">
-                <h5 class="card-title" th:text="${order.item.name} + ' (' + ${order.quantity} + ')'">Item Name (12)</h5>
-                <p class="card-text"  th:text="${order.customer.name}">John Doe</p>
-                <p class="card-text"  th:text="${order.customer.address}">His Address</p>
-                <p>Paid: <i class="fas fa-handshake" style="color: green;"></i></p>
-                <a th:href="@{/order/{id}(id=${order.id})}" class="btn btn-outline-primary">More</a>
-            </div>
-        </div>
-        <a th:href="@{/order/new}" class="btn btn-outline-primary">Place an Order</a>
-    </div>
+    <table class="table table-striped table-hover table-light">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Time</th>
+            <th>Paid</th>
+            <th>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/order/new}">New Customer</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order, iterStat : ${orders}">
+            <td th:text="${iterStat.count}">1</td>
+            <td th:text="${order.customer.name}">James Doe</td>
+            <td th:text="${order.item.name}">0911871115</td>
+            <td th:text="${order.quantity}">nuriamussa@gmail.com</td>
+            <td th:text="${order.orderedTime}">Burayu, Ethiopia</td>
+            <td>
+                <i class="fas fa-check-circle text-success" th:if="${order.paid}"></i>
+                <i class="fas fa-times-circle text-warning" th:unless="${order.paid}"></i>
+            </td>
+            <td>
+<!--                <a class="btn btn-sm btn-outline-dark" th:href="@{{id}(id=${order.id})}">Edit</a>-->
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/order/delete(id=${order.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 
