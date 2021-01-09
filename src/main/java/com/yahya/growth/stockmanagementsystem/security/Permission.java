@@ -4,8 +4,8 @@ package com.yahya.growth.stockmanagementsystem.security;
 public enum Permission {
     ITEM_READ("item:read"),
     ITEM_WRITE("item:write"),
-    BRAND_READ("brand_read"),
-    BRAND_WRITE("brand_write"),
+    BRAND_READ("brand:read"),
+    BRAND_WRITE("brand:write"),
     CATEGORY_READ("category:read"),
     CATEGORY_WRITE("category:write"),
     SUBCATEGORY_READ("subcategory:read"),

@@ -2,9 +2,12 @@ package com.yahya.growth.stockmanagementsystem.model.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Set;
 
 @Data
@@ -24,6 +27,7 @@ public class User implements UserDetails {
 
     // Custom Fields
     private String firstName;
+    private Timestamp creationTime;
     private String lastName;
     private String email;
     private String phone;
@@ -56,5 +60,10 @@ public class User implements UserDetails {
     public void removeAuthority(Authority authority) {
         this.authorities.remove(authority);
         authority.getUsers().remove(this);
+    }
+
+    @Override
+    public Set<Authority> getAuthorities() {
+        return authorities;
     }
 }

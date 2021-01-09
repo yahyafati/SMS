@@ -26,7 +26,6 @@
             <h1><i class="fas fa-align-center"></i> Logos</h1>
         </div>
         <ul>
-<!--            <li><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></li>-->
             <li><a href="#" th:href="@{/dashboard}">Dashboard</a></li>
             <li><a href="#" th:href="@{/users}">Users</a></li>
             <li><a href="#" th:href="@{/customer}">Customers</a></li>
@@ -34,6 +33,7 @@
             <li><a href="#" th:href="@{/brand}">Brands</a></li>
             <li><a href="#" th:href="@{/category}">Categories</a></li>
             <li><a href="#" th:href="@{/store}">Stores</a></li>
+            <li><a href="#" th:href="@{/order}">Order</a></li>
             <li><a href="#" th:href="@{/items}">Products</a></li>
             <li><a href="#" th:href="@{/reports}">Reports</a></li>
             <li><a href="#" th:href="@{/company}">Company</a></li>
@@ -41,41 +41,6 @@
             <li><a href="#" th:href="@{/logout}">Logout</a></li>
         </ul>
     </div>
-
-<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
-<!--        <a class="navbar-brand" href="#" th:href="@{/items}">Stonk</a>-->
-<!--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-
-<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--            <ul class="navbar-nav mr-auto">-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/category}">Category</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/brand}">Brand</a>-->
-<!--                </li>-->
-
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/subcategory}">Subcategory</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/store}">Supplier</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/order}">Order</a>-->
-<!--                </li>-->
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="#" th:href="@{/customer}">Customer</a>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </div>-->
-<!--        <form class="" method="get" action="/logout">-->
-<!--            <button class="btn btn-outline-secondary btn-block" type="submit">Logout</button>-->
-<!--        </form>-->
-<!--    </nav>-->
-
 </div>
 
 <div th:fragment="body-bottom-scripts">
@@ -84,16 +49,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
     <!--main js-->
-<!--    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>-->
-
-<!--    <script>-->
-<!--        jQuery(document).ready(function () {-->
-<!--            $('.items-grid').masonry({-->
-<!--                itemSelector: '.itemCard',-->
-<!--                columnWidth: 200-->
-<!--            })-->
-<!--        })-->
-<!--    </script>-->
 </div>
 </body>
 

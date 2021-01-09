@@ -10,8 +10,6 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    color: whitesmoke;
-    /*background-color: #1f1e1e;*/
     font-family: "Roboto", sans-serif;
 }
 .sidebar {

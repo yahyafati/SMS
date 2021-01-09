@@ -44,7 +44,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     @SneakyThrows
     public Authority findByName(String authorityName) {
         Optional<Authority> authority = authorityDao.findAuthorityByName(authorityName);
-        System.out.println(authority);
+//        System.out.println(authority);
         return authority.orElseThrow(() -> new AuthorityNotFoundException(String.format("There is no authority with the name: %s ", authorityName)));
     }
 
