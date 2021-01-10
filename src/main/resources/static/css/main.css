@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab&display=swap');
 * {
     padding: 0;
     margin: 0;
     text-decoration: none;
     list-style: none;
-    box-sizing: border-box;
+    /*box-sizing: border-box;*/
 }
 html {
     scroll-behavior: smooth;
@@ -161,3 +162,67 @@ p {
 /*    height: 500px;*/
 /*    align-content: flex-start;*/
 /*}*/
+
+/* Login Page */
+.login {
+    font-family: 'Roboto Slab', serif;
+    padding: 200px 100px 50px 100px;
+    width: 500px;
+    margin: auto;
+    height: fit-content;
+    background-image: linear-gradient(-225deg, #CBBACCFF 0%, #2580B3FD 100%);
+
+}
+
+.login img {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.login .imgDIV {
+    text-align: center;
+}
+
+.login .header {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin: 10px;
+}
+
+.login input[type="text"], .login input[type="password"] {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: none;
+    border-radius: 2px;
+}
+
+.login .remember_me p {
+    margin: 10px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.login .forgot_password {
+    margin: 10px;
+    display: inline;
+    color: rgb(65, 65, 65);
+    font-size: 14px;
+    font-style: italic;
+    text-decoration: none;
+}
+
+.login .submit_btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    margin: 20px auto;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.555);
+}
