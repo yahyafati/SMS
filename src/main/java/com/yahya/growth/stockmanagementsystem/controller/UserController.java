@@ -6,6 +6,8 @@ import com.yahya.growth.stockmanagementsystem.model.security.User;
 import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
+import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,13 +35,8 @@ public class UserController implements BasicControllerSkeleton<User>{
     }
 
     @Override
-    public String index(Model model) {
-        return null;
-    }
-
-    @Override
     @GetMapping("")
-    public String index(Model model, Principal principal) {
+    public String index(Model model) {
         model.addAttribute("users", userService.findAll());
         return "user/all";
     }
@@ -47,14 +45,15 @@ public class UserController implements BasicControllerSkeleton<User>{
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
         User user = userService.findById(id);
-        System.out.println(user.getAuthorities());
         model.addAttribute("user", user);
-        Set<String> authorities = Arrays.stream(Permission.values())
-                .filter(permission -> !permission.getPermission().contains("report") && !permission.getPermission().contains("it:"))
-                .map(permission -> permission.getPermission().split(":")[0])
-                .collect(Collectors.toSet());
-        model.addAttribute("currentAuthority", user.getAuthorities().stream().map(Authority::getAuthority).collect(Collectors.toSet()));
+        Set<String> currentAuthority = user.getAuthorities().stream().map(Authority::getAuthority).collect(Collectors.toSet());
+
+        /*
+          maps authority to read&write possibility respectively
+         */
+        Map<String, Boolean[]> authorities = AuthorityUtils.getPermissionMap(currentAuthority);
         model.addAttribute("allAuthorities", authorities);
+        model.addAttribute("reportPermissions", new boolean[] {currentAuthority.contains("report:store"), currentAuthority.contains("report:all")});
         model.addAttribute("permissions", Lists.newArrayList());
         return "user/detail";
     }

@@ -5,19 +5,11 @@
 <div class="main_content">
     <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail rounded-0" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.username}">
-            <h1 class="h1" th:text="${user.firstName} + ' ' + ${user.lastName}">James Maddison</h1>
-        </div>
         <div class="col col-8">
-            <p>Username: <span th:text="${user.username}">@JohnDoe</span></p>
-            <p>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}">John Doe</span></p>
-            <p>Email: <span th:text="${user.firstName}">John</span></p>
-            <p>Phone: <span th:text="${user.phone}">5396667845</span></p>
-            <p>Email: <span th:text="${user.email}">him@him.her</span></p>
+            <p>Role: <span th:text="${group.displayName}">Manager</span></p>
         </div>
-        <a th:href="@{delete(id=${user.id})}" class="btn btn-danger">Delete</a>
-        <form th:object="${permissions}" th:action="@{/users/{id}(id=${user.id})}" method="post">
+        <a th:href="@{delete(id=${group.id})}" class="btn btn-danger">Delete</a>
+        <form th:object="${permissions}" th:action="@{/group/{id}(id=${group.id})}" method="post">
             <div class="permissions">
                 <table class="table table-striped table-light">
                     <thead>

@@ -1,5 +1,11 @@
 package com.yahya.growth.stockmanagementsystem.security;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Deprecated
 public enum Permission {
     ITEM_READ("item:read"),
@@ -30,5 +36,12 @@ public enum Permission {
 
     public String getPermission() {
         return permission;
+    }
+
+    public static Set<String> getPermissionParents() {
+        return Arrays.stream(values())
+                .map(Permission::getPermission)
+                .map(s -> StringUtils.substringBefore(s, ":"))
+                .collect(Collectors.toSet());
     }
 }
