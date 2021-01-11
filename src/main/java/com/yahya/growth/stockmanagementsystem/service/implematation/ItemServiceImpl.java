@@ -16,14 +16,15 @@ import java.util.stream.Collectors;
 @Service
 public class ItemServiceImpl implements ItemService {
 
-    @Autowired
-    private ItemDao itemDao;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubcategoryService subcategoryService;
-    @Autowired
-    private BrandService brandService;
+    private final ItemDao itemDao;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
+
+    public ItemServiceImpl(ItemDao itemDao, CategoryService categoryService, BrandService brandService) {
+        this.itemDao = itemDao;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
+    }
 
     @Override
     public Item findById(int itemId) {

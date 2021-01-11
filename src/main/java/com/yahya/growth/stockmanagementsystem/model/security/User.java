@@ -32,8 +32,7 @@ public class User implements UserDetails {
     private String email;
     private String phone;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonIgnore
-    @EqualsAndHashCode.Exclude @ToString.Exclude
+    @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Authority> authorities;
 
     public User(String username, String password, Set<Authority> authorities) {

@@ -16,6 +16,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class StockManagementSystemApplication {
@@ -24,7 +26,7 @@ public class StockManagementSystemApplication {
         SpringApplication.run(StockManagementSystemApplication.class, args);
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner categoryData(
             CategoryService categoryService, SubcategoryService subcategoryService, BrandService brandService,
             StoreService storeService, ItemService itemService, CustomerService customerService) {
@@ -220,7 +222,7 @@ public class StockManagementSystemApplication {
         };
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner initializeSecurityData(AuthorityService authorityService, RoleService roleService) {
         return args -> {
             Arrays.stream(Permission.values())
@@ -228,6 +230,7 @@ public class StockManagementSystemApplication {
                     .forEach(authorityService::save);
             Arrays.stream(UserRole.values())
                     .map(userRole -> {
+                        System.out.println(userRole);
                         Role role = new Role();
                         role.setName("ROLE_" + userRole.name());
                         userRole.getPermissions()
@@ -235,31 +238,41 @@ public class StockManagementSystemApplication {
                                 .map(Permission::getPermission)
                                 .map(authorityService::findByName)
                                 .forEach(role.getAuthorities()::add);
-                        System.out.println(role);
                         return role;
                     })
                     .forEach(roleService::save);
-
+            roleService.findAll()
+                    .forEach(role -> System.out.println(role.getName() + ": " + role.getAuthorities()));
         };
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
+        // FIXME Why do I have to make a new instance of authority?
         return args -> {
             User staffUser = new User(
                     "staff",
                     passwordEncoder.encode("123"),
                     roleService.findByName("ROLE_STAFF").getAuthorities()
+                            .stream()
+                            .map(authority -> new Authority(authority.getId()))
+                            .collect(Collectors.toSet())
             );
             User managerUser = new User(
                     "manager",
                     passwordEncoder.encode("123"),
                     roleService.findByName("ROLE_MANAGER").getAuthorities()
+                            .stream()
+                            .map(authority -> new Authority(authority.getId()))
+                            .collect(Collectors.toSet())
             );
             User itUser = new User(
                     "it",
                     passwordEncoder.encode("1234"),
                     roleService.findByName("ROLE_IT_PERSON").getAuthorities()
+                            .stream()
+                            .map(authority -> new Authority(authority.getId()))
+                            .collect(Collectors.toSet())
             );
             userService.save(staffUser);
             userService.save(managerUser);

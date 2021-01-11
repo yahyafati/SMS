@@ -19,7 +19,7 @@ public class Authority implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
@@ -38,6 +38,9 @@ public class Authority implements GrantedAuthority {
 
     public Authority(String name) {
         this.name = name;
+    }
+    public Authority(int id) {
+        this.id = id;
     }
     public Authority() {}
 

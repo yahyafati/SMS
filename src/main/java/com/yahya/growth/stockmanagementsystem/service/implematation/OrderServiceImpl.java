@@ -14,10 +14,14 @@ import java.util.Optional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
-    private OrderDao orderDao;
-    @Autowired
-    private ItemService itemService;
+    private final OrderDao orderDao;
+    private final ItemService itemService;
+
+    public OrderServiceImpl(OrderDao orderDao, ItemService itemService) {
+        this.orderDao = orderDao;
+        this.itemService = itemService;
+    }
+
     @Override
     public Order findById(int orderId) {
         return orderDao.findById(orderId).orElseThrow();

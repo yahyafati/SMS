@@ -15,12 +15,15 @@ import java.util.stream.Collectors;
 @Service
 public class SubcategoryServiceImpl implements SubcategoryService {
 
-    @Autowired
-    private SubCategoryDao subCategoryDao;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private ItemService itemService;
+    private final SubCategoryDao subCategoryDao;
+    private final CategoryService categoryService;
+    private final ItemService itemService;
+
+    public SubcategoryServiceImpl(SubCategoryDao subCategoryDao, CategoryService categoryService, ItemService itemService) {
+        this.subCategoryDao = subCategoryDao;
+        this.categoryService = categoryService;
+        this.itemService = itemService;
+    }
 
     @Override
     public Subcategory findById(int subcategoryId) {

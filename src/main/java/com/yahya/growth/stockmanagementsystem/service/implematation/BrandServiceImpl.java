@@ -2,26 +2,22 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.BrandDao;
 import com.yahya.growth.stockmanagementsystem.model.Brand;
-import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.BrandService;
-import com.yahya.growth.stockmanagementsystem.service.CategoryService;
-import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BrandServiceImpl implements BrandService {
 
+    private final BrandDao brandDao;
+
     @Autowired
-    private BrandDao brandDao;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubcategoryService subcategoryService;
+    public BrandServiceImpl(BrandDao brandDao) {
+        this.brandDao = brandDao;
+    }
 
     @Override
     public Brand findById(int brandId) {

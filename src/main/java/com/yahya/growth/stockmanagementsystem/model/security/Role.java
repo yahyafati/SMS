@@ -20,7 +20,7 @@ public class Role {
     private int id;
     @Column(nullable = false, unique = true)
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();
 

@@ -14,12 +14,15 @@ import java.util.stream.Collectors;
 @Service
 public class StoreServiceImpl implements StoreService {
 
-    @Autowired
-    private StoreDao storeDao;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private ItemService itemService;
+    private final StoreDao storeDao;
+    private final CategoryService categoryService;
+    private final ItemService itemService;
+
+    public StoreServiceImpl(StoreDao storeDao, CategoryService categoryService, ItemService itemService) {
+        this.storeDao = storeDao;
+        this.categoryService = categoryService;
+        this.itemService = itemService;
+    }
 
     @Override
     public Store findById(int storeId) {
