@@ -2,8 +2,11 @@ package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
+import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
+import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +26,14 @@ public class UserController implements BasicControllerSkeleton<User>{
 
     private final UserService userService;
     private final AuthorityService authorityService;
+    private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService, AuthorityService authorityService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, AuthorityService authorityService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -70,8 +75,13 @@ public class UserController implements BasicControllerSkeleton<User>{
     @Override
     @GetMapping("/new")
     public String addNewItem(Model model) {
+        List<Role> roles = roleService.findAll();
+        roles.forEach(System.out::println);
         model.addAttribute("user", new User());
         model.addAttribute("action", "new");
+//        model.addAttribute("role", new Role());
+        model.addAttribute("allRoles", roles);
+
         return "user/edit";
     }
 
@@ -82,7 +92,7 @@ public class UserController implements BasicControllerSkeleton<User>{
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
-        user = userService.save(user);
+        user = userService.saveNewUser(user, user.getRole());
         return "redirect:/users/" + user.getId();
     }
 
@@ -95,21 +105,6 @@ public class UserController implements BasicControllerSkeleton<User>{
     public String editPost(int id, User obj) {
         throw new UnsupportedOperationException("Users can not be edited by other users.");
     }
-
-//    @Override
-//    @GetMapping("/edit")
-//    public String edit(@RequestParam int id, Model model) {
-//        model.addAttribute("user", userService.findById(id));
-//        return "user/edit";
-//    }
-//
-//    @Override
-//    @PostMapping("/edit")
-//    public String editPost(@RequestParam int id, User user) {
-//        user.setId(id);
-//        userService.save(user);
-//        return "redirect:/users/" + user.getId();
-//    }
 
     @Override
     @GetMapping("/delete")

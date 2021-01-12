@@ -32,7 +32,12 @@
                 <label class="d-block">
                     Enabled: <input type="checkbox" th:field="*{enabled}">
                 </label>
-
+                <label class="d-block">
+                    Role:
+                    <select th:field="*{role}" >
+                        <option th:each="curRole : ${allRoles}" th:value="${curRole.id}" th:text="${curRole.getDisplayName()}"></option>
+                    </select>
+                </label>
                 <div>
                     <input type="submit" value="Submit" class="btn btn-success" />
                     <input type="reset" value="Reset" class="btn btn-outline-success"/>

@@ -1,7 +1,10 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.UserDao;
+import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
+import com.yahya.growth.stockmanagementsystem.service.UserRoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +22,7 @@ public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, UserRoleService userRoleService) {
         this.userDao = userDao;
     }
 
@@ -38,6 +41,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User save(User item) {
         return userDao.save(item);
+    }
+
+    @Override
+    @Transactional
+    public User saveNewUser(User user, Role role) {
+        user = save(user);
+        UserRole userRole = new UserRole(user, role);
+        user.setUserRole(userRole);
+        user.getAuthorities().clear();
+        user.getAuthorities().addAll(role.getAuthorities());
+        return save(user);
     }
 
     @Override

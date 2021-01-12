@@ -8,16 +8,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
 @Entity
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // Implemented fields
+    @Column(nullable = false, unique = true)
     private String username;
     private String password;
     private boolean isAccountNonExpired;
@@ -29,11 +32,19 @@ public class User implements UserDetails {
     private String firstName;
     private Timestamp creationTime;
     private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
     private String phone;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UserRole userRole;
+
+    @Transient
+    private Role role;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
-    private Set<Authority> authorities;
+    private Set<Authority> authorities = new HashSet<>();
 
     @Override
     public Set<Authority> getAuthorities() {
@@ -47,7 +58,9 @@ public class User implements UserDetails {
         this(username, password, authorities, true, true, true, true);
     }
 
-    public User(String username, String password, Set<Authority> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public User(
+            String username, String password, Set<Authority> authorities,
+            boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.password = password;
         this.username = username;
         this.authorities = authorities;
@@ -56,8 +69,6 @@ public class User implements UserDetails {
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
     }
-
-    public User() { }
 
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);

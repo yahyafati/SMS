@@ -30,7 +30,7 @@
             <td th:text="${user.email}">nuriamussa@gmail.com</td>
             <td th:text="${user.phone}">0911871115</td>
             <td>
-                <a class="link link-info" href="#" th:href="@{/user/permissions(id=${user.id})}">Show Permissions</a>
+                <a class="link link-info" href="#" th:href="@{/user/{id}(id=${user.id})}">Show Permissions</a>
             </td>
             <td>
                 <a class="btn btn-sm btn-outline-dark" th:href="@{/users/edit(id=${user.id})}">Edit</a>

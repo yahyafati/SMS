@@ -24,6 +24,10 @@ public class Role {
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<UserRole> userRole = new HashSet<>();
+
     public Role() { }
 
     public String getDisplayName() {
