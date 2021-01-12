@@ -8,11 +8,12 @@
         <select hidden id="availableItemsElement">
             <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
         </select>
-        <form method="post" action="#" th:action="@{new}" th:object="${transaction}">
+        <form method="post" action="#" th:action="@{${action}(id=${transaction.id})}" th:object="${transaction}">
+            <input hidden type="number" th:field="*{id}">
             <label class="d-block">
                 Type:
                 <select th:field="*{type}" >
-                    <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.name}">Sales</option>
+                    <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
                 </select>
             </label>
             <label class="d-block">
@@ -44,36 +45,20 @@
                     <td>
                         <label class="d-block">
                             <select name="item">
-                                <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}">Mango</option>
+                                <option th:selected="${item.id == itemTransaction.item.id}" th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}">Mango</option>
                             </select>
                         </label>
-
+                        <input hidden name="transactionID" type="number" th:value="${itemTransaction.id}">
                     </td>
                     <td>
                         <label class="d-block">
-                            <input name="price" type="text">
+                            <input name="price" type="text" th:value="${itemTransaction.unitPrice}" th:text="${itemTransaction.unitPrice}">
                         </label>
                     </td>
                     <td>
                         <label class="d-block">
-                            <input name="quantity" type="number">
+                            <input name="quantity" type="number" th:value="${itemTransaction.quantity}" th:text="${itemTransaction.quantity}">
                         </label>
-                    </td>
-                    <td>
-                        <button onclick="return removeTransactionRow(this)" type="button" class="btn btn-outline-warning btn-sm">Remove Row</button>
-                    </td>
-                </tr>
-                <tr> <!-- Final Row -->
-                    <td>
-                        <select name="item">
-                            <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
-                        </select>
-                    </td>
-                    <td>
-                        <input name="price" type="text">
-                    </td>
-                    <td>
-                        <input name="quantity" type="number">
                     </td>
                     <td>
                         <button onclick="return removeTransactionRow(this)" type="button" class="btn btn-outline-warning btn-sm">Remove Row</button>

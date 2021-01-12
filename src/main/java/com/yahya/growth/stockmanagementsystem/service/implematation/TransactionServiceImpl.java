@@ -41,13 +41,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction save(Transaction transaction, String[] items, String[] prices, String[] quantities) {
+    public Transaction save(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) {
 //        transaction = save(transaction);
         for (int i = 0; i < items.length; i++) {
+            int id = Integer.parseInt(ids[i]);
             Item item = Item.builder().id(Integer.parseInt(items[i])).build();
             double price = Double.parseDouble(prices[i]);
             int quantity = Integer.parseInt(quantities[i]);
             ItemTransaction itemTransaction = ItemTransaction.builder()
+                    .id(id)
                     .item(item)
                     .unitPrice(price)
                     .quantity(quantity)

@@ -39,7 +39,14 @@ function addTransactionRow() {
     }
     selectElement.required = true
     selectElement.name = "item"
+    // <input hidden name="id" type="number" value="0">
+    let idElement = document.createElement("input")
+    idElement.hidden = true
+    idElement.name = "transactionID"
+    idElement.type = "number"
+    idElement.value = "0"
     cell1.appendChild(selectElement)
+    cell1.appendChild(idElement)
 
     // <input name="price" type="text">
     let cell2 = row.insertCell()

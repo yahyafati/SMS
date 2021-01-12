@@ -1,7 +1,5 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
-import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
@@ -10,10 +8,7 @@ import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,7 +28,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @Override
+    @GetMapping("")
     public String index(Model model) {
+        model.addAttribute("transactions", transactionService.findAll());
         return "transaction/all";
     }
 
@@ -50,6 +47,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         model.addAttribute("transactionTypes", TransactionType.values());
         model.addAttribute("customers", customerService.findAll());
         model.addAttribute("allItems", itemService.findAll());
+        model.addAttribute("action", "new");
         return "transaction/transaction";
     }
 
@@ -60,18 +58,40 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
 
     @PostMapping("/new")
     public String addNewPOST(Transaction transaction, HttpServletRequest request) {
-//        request.getHeaderNames()
+        /*
+        TODO LEARN HOW TO PARSE DATES
+         */
+        String[] ids = request.getParameterValues("transactionID");
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
-        transactionService.save(transaction, items, prices, quantities);
+        transactionService.save(transaction, ids, items, prices, quantities);
         return "redirect:/transaction/new";
     }
 
     @Override
-    public String edit(int id, Model model) {
-        return null;
+    @GetMapping("/edit")
+    public String edit(@RequestParam int id, Model model) {
+        model.addAttribute("transaction", transactionService.findById(id));
+        model.addAttribute("transactionTypes", TransactionType.values());
+        model.addAttribute("customers", customerService.findAll());
+        model.addAttribute("allItems", itemService.findAll());
+        model.addAttribute("action", "edit");
+        return "transaction/transaction";
     }
+
+    @PostMapping("/edit")
+    public String editPOST(Transaction transaction, HttpServletRequest request) {
+//        request.getHeaderNames()
+        // Repeated Code with add new post
+        String[] items = request.getParameterValues("item");
+        String[] prices = request.getParameterValues("price");
+        String[] quantities = request.getParameterValues("quantity");
+        String[] ids = request.getParameterValues("transactionID");
+        transactionService.save(transaction, ids, items, prices, quantities);
+        return "redirect:/transaction/new";
+    }
+
 
     @Override
     public String editPost(int id, Transaction obj) {
@@ -79,7 +99,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @Override
-    public String delete(int id) {
-        return null;
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id) {
+        transactionService.deleteById(id);
+        return "redirect:/transaction";
     }
 }
