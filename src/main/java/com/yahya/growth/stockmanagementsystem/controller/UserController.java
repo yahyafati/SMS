@@ -3,19 +3,15 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.User;
-import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,11 +23,13 @@ public class UserController implements BasicControllerSkeleton<User>{
 
     private final UserService userService;
     private final AuthorityService authorityService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService, AuthorityService authorityService) {
+    public UserController(UserService userService, AuthorityService authorityService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -73,12 +71,17 @@ public class UserController implements BasicControllerSkeleton<User>{
     @GetMapping("/new")
     public String addNewItem(Model model) {
         model.addAttribute("user", new User());
-        return "user/signup";
+        model.addAttribute("action", "new");
+        return "user/edit";
     }
 
     @Override
     @PostMapping("/new")
     public String addNewPOST(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
         user = userService.save(user);
         return "redirect:/users/" + user.getId();
     }

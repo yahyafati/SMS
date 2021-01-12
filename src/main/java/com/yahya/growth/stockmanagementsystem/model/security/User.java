@@ -35,6 +35,14 @@ public class User implements UserDetails {
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Authority> authorities;
 
+    @Override
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public String getFullName() {
+        return String.format("%s %s", firstName, lastName);
+    }
     public User(String username, String password, Set<Authority> authorities) {
         this(username, password, authorities, true, true, true, true);
     }
@@ -61,8 +69,4 @@ public class User implements UserDetails {
         authority.getUsers().remove(this);
     }
 
-    @Override
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
 }
