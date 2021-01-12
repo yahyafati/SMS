@@ -31,8 +31,9 @@ ul {
     top: 75px;
     left: 0;
     width: 240px;
+    padding-bottom: 240px;
     background: #1e1e1e;
-    height: 100vh;
+    min-height: 100vh;
     overflow-y: auto;
     transition: all 0.3s;
     list-style-type: none;

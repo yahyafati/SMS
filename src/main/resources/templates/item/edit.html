@@ -10,19 +10,19 @@
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
         <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
+            <form class="form-control" action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
                 <label class="d-block">
                     Name: <input type="text" th:field="*{name}">
                 </label>
                 <label class="d-block">
                     Description: <input type="text" th:field="*{description}">
                 </label>
-                <label class="d-block">
-                    Quantity: <input type="number" th:field="*{quantity}">
-                </label>
-                <label class="d-block">
-                    Price: <input type="text" th:field="*{price}">
-                </label>
+<!--                <label class="d-block">-->
+<!--                    Quantity: <input type="number" th:field="*{quantity}">-->
+<!--                </label>-->
+<!--                <label class="d-block">-->
+<!--                    Price: <input type="text" th:field="*{price}">-->
+<!--                </label>-->
                 <label class="d-block">
                     Category:
                     <select th:field="*{category}" >

@@ -200,8 +200,8 @@ public class StockManagementSystemApplication {
                         Item.builder()
                                 .name(itemNames.get(i))
                                 .description(itemDescriptionStrings.get(i))
-                                .quantity(random.nextInt(100))
-                                .price(random.nextFloat()*100)
+//                                .quantity(random.nextInt(100))
+//                                .price(random.nextFloat()*100)
                                 .category(Category.builder().id(random.nextInt(3) + 1).build())
                                 .brand(Brand.builder().id(random.nextInt(4) + 1).build())
                                 .subcategory(Subcategory.builder().id(random.nextInt(3) + 1).build())
@@ -250,33 +250,30 @@ public class StockManagementSystemApplication {
     public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
         // FIXME Why do I have to make a new instance of authority?
         return args -> {
-            User staffUser = new User(
-                    "staff",
-                    passwordEncoder.encode("123"),
-                    roleService.findByName("ROLE_STAFF").getAuthorities()
-                            .stream()
-                            .map(authority -> new Authority(authority.getId()))
-                            .collect(Collectors.toSet())
-            );
-            User managerUser = new User(
-                    "manager",
-                    passwordEncoder.encode("123"),
-                    roleService.findByName("ROLE_MANAGER").getAuthorities()
-                            .stream()
-                            .map(authority -> new Authority(authority.getId()))
-                            .collect(Collectors.toSet())
-            );
-            User itUser = new User(
-                    "it",
-                    passwordEncoder.encode("1234"),
-                    roleService.findByName("ROLE_IT_PERSON").getAuthorities()
-                            .stream()
-                            .map(authority -> new Authority(authority.getId()))
-                            .collect(Collectors.toSet())
-            );
-            userService.save(staffUser);
-            userService.save(managerUser);
-            userService.save(itUser);
+            User staffUser = User.builder()
+                    .username("staff")
+                    .password(passwordEncoder.encode("123"))
+                    .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
+                    .role(roleService.findByName("ROLE_STAFF"))
+                    .email("staff@default.com")
+                    .build();
+            User managerUser = User.builder()
+                    .username("manager")
+                    .password(passwordEncoder.encode("123"))
+                    .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
+                    .role(roleService.findByName("ROLE_MANAGER"))
+                    .email("manager@default.com")
+                    .build();
+            User itUser = User.builder()
+                    .username("it")
+                    .password(passwordEncoder.encode("1234"))
+                    .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
+                    .role(roleService.findByName("ROLE_IT_PERSON"))
+                    .email("it@default.com")
+                    .build();
+            userService.saveNewUser(staffUser);
+            userService.saveNewUser(managerUser);
+            userService.saveNewUser(itUser);
         };
     }
 }

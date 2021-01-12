@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/items")
 public class ItemController {
 
-    @Autowired
-    private ItemService itemService;
-    @Autowired
-    private SubcategoryService subcategoryService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private BrandService brandService;
-    @Autowired
-    private StoreService storeService;
+    private final ItemService itemService;
+    private final SubcategoryService subcategoryService;
+    private final CategoryService categoryService;
+    private final BrandService brandService;
+    private final StoreService storeService;
+
+    public ItemController(ItemService itemService, SubcategoryService subcategoryService, CategoryService categoryService, BrandService brandService, StoreService storeService) {
+        this.itemService = itemService;
+        this.subcategoryService = subcategoryService;
+        this.categoryService = categoryService;
+        this.brandService = brandService;
+        this.storeService = storeService;
+    }
 
     @GetMapping("")
     public String index(Model model) {

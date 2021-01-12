@@ -55,6 +55,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
+    public User saveNewUser(User user) {
+        return saveNewUser(user, user.getRole());
+    }
+
+    @Override
     public List<User> findAll() {
         return userDao.findAll();
     }

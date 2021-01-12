@@ -14,6 +14,8 @@ import java.util.Set;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User implements UserDetails {
 
     @Id
@@ -40,10 +42,12 @@ public class User implements UserDetails {
     private UserRole userRole;
 
     @Transient
-    private Role role;
+    @Builder.Default
+    private Role role = new Role();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
+    @Builder.Default
     private Set<Authority> authorities = new HashSet<>();
 
     @Override
@@ -53,9 +57,6 @@ public class User implements UserDetails {
 
     public String getFullName() {
         return String.format("%s %s", firstName, lastName);
-    }
-    public User(String username, String password, Set<Authority> authorities) {
-        this(username, password, authorities, true, true, true, true);
     }
 
     public User(

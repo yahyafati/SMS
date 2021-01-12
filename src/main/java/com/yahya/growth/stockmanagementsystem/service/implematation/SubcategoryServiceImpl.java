@@ -17,12 +17,10 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     private final SubCategoryDao subCategoryDao;
     private final CategoryService categoryService;
-    private final ItemService itemService;
 
-    public SubcategoryServiceImpl(SubCategoryDao subCategoryDao, CategoryService categoryService, ItemService itemService) {
+    public SubcategoryServiceImpl(SubCategoryDao subCategoryDao, CategoryService categoryService) {
         this.subCategoryDao = subCategoryDao;
         this.categoryService = categoryService;
-        this.itemService = itemService;
     }
 
     @Override

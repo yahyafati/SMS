@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface ItemDao extends JpaRepository<Item, Integer> {
 
-    List<Item> findAllByQuantityGreaterThan(int quantity);
+//    List<Item> findAllByQuantityGreaterThan(int quantity);
 
 }
