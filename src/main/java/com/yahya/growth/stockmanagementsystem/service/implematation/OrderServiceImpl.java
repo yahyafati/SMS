@@ -30,10 +30,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order save(Order order) {
         Item item = itemService.findById(order.getItem().getId());
-        if (order.getQuantity() > item.getQuantity()) {
-            throw new UnsupportedOperationException(String.format("Ordered quantity (%d) is larger than total item in stock (%d)", order.getQuantity(), item.getQuantity()));
-        }
-        item.setQuantity(item.getQuantity() - order.getQuantity());
+//        if (order.getQuantity() > item.getQuantity()) {
+//            throw new UnsupportedOperationException(String.format("Ordered quantity (%d) is larger than total item in stock (%d)", order.getQuantity(), item.getQuantity()));
+//        }
+//        item.setQuantity(item.getQuantity() - order.getQuantity());
         itemService.save(item);
         return orderDao.save(order);
     }

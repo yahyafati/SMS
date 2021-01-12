@@ -20,7 +20,7 @@ public class Item {
     private int id;
     private String name;
     private String description;
-    private int quantity;
+    private int quantity; // TODO Priority 1 -> Remove Quantity and Price
     private float price;
 
     @ManyToOne(fetch = FetchType.EAGER)
