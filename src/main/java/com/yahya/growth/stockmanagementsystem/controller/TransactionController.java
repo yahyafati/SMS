@@ -1,5 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.yahya.growth.stockmanagementsystem.model.Item;
+import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
@@ -59,14 +61,11 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @PostMapping("/new")
     public String addNewPOST(Transaction transaction, HttpServletRequest request) {
 //        request.getHeaderNames()
-
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
-        for (int i = 0; i < items.length; i++) {
-            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
-        }
-        return "transaction/transaction";
+        transactionService.save(transaction, items, prices, quantities);
+        return "redirect:/transaction/new";
     }
 
     @Override

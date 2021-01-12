@@ -22,7 +22,7 @@ public class Transaction {
     private Timestamp addedTime; // for logging purpose and hidden from end-users
     private LocalDate transactionDate;
     private TransactionType type;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ItemTransaction> itemTransactions = new ArrayList<>();
     @ManyToOne
     private User user; // for logging purpose, username of the user who added this transaction
