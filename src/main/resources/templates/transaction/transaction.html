@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="main_content">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div>
+        <select hidden id="availableItemsElement">
+            <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
+        </select>
+        <form method="post" action="#" th:action="@{new}" th:object="${transaction}">
+            <label class="d-block">
+                Type:
+                <select th:field="*{type}" >
+                    <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.name}">Sales</option>
+                </select>
+            </label>
+            <label class="d-block">
+                From:
+                <select th:field="*{fromTo}" >
+                    <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Electronics</option>
+                </select>
+            </label>
+            <label class="d-block">
+                Reference No: <input type="number" th:field="*{refNumber}">
+            </label>
+            <label class="d-block">
+                Date: <input type="date" th:field="*{transactionDate}">
+            </label>
+
+            <table class="table table-striped table-primary" id="itemTransaction">
+                <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>
+                        <button onclick="return addTransactionRow()" type="button" class="btn btn-outline-primary btn-sm">Add Row</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="itemTransaction, iterStat : *{itemTransactions}">
+                    <td>
+                        <label class="d-block">
+                            <select name="item">
+                                <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}">Mango</option>
+                            </select>
+                        </label>
+
+                    </td>
+                    <td>
+                        <label class="d-block">
+                            <input name="price" type="text">
+                        </label>
+                    </td>
+                    <td>
+                        <label class="d-block">
+                            <input name="quantity" type="number">
+                        </label>
+                    </td>
+                    <td>
+                        <button onclick="return removeTransactionRow(this)" type="button" class="btn btn-outline-warning btn-sm">Remove Row</button>
+                    </td>
+                </tr>
+                <tr> <!-- Final Row -->
+                    <td>
+                        <select name="item">
+                            <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input name="price" type="text">
+                    </td>
+                    <td>
+                        <input name="quantity" type="number">
+                    </td>
+                    <td>
+                        <button onclick="return removeTransactionRow(this)" type="button" class="btn btn-outline-warning btn-sm">Remove Row</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <input type="submit" value="Submit" class="btn btn-success" />
+                <input type="reset" value="Reset" class="btn btn-outline-success"/>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

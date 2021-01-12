@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/items", true)
+                .defaultSuccessUrl("/items")
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds(((int) TimeUnit.DAYS.toSeconds(21)))// defaults to 2 weeks
