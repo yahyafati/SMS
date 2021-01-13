@@ -19,7 +19,9 @@
         <tbody>
         <tr th:each="category, iterStat : ${categories}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${category.name}">James Doe</td>
+            <td>
+                <a class="link-info" th:text="${category.name}" th:href="@{/category/{id}(id=${category.id})}">James Doe</a>
+            </td>
             <td th:text="${category.description}">0911871115</td>
             <td>
                 <a class="btn btn-sm btn-outline-dark" th:href="@{/category/edit(id=${category.id})}">Edit</a>

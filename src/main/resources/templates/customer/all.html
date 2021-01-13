@@ -20,7 +20,9 @@
         <tbody>
         <tr th:each="customer, iterStat : ${customers}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${customer.name}">James Doe</td>
+            <td>
+                <a class="link-info" th:text="${customer.name}" th:href="@{/customer/{id}(id=${customer.id})}">James Doe</a>
+            </td>
             <td th:text="${customer.phone}">0911871115</td>
             <td th:text="${customer.email}">nuriamussa@gmail.com</td>
             <td th:text="${customer.address}">Burayu, Ethiopia</td>

@@ -21,7 +21,9 @@
         <tbody>
         <tr th:each="store, iterStat : ${stores}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${store.name}">James Doe</td>
+            <td>
+                <a class="link-info" th:text="${store.name}" th:href="@{/store/{id}(id=${store.id})}">Store 1</a>
+            </td>
             <td th:text="${store.description}">0911871115</td>
             <td th:text="${store.phone}">0911871115</td>
             <td th:text="${store.email}">nuriamussa@gmail.com</td>

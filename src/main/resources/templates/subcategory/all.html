@@ -1,3 +1,4 @@
+<!--TODO This page is useless currently so don't forget to do something about it later.-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
@@ -18,7 +19,9 @@
         <tbody>
         <tr th:each="subcategory, iterStat : ${subcategories}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${subcategory.name}">James Doe</td>
+            <td>
+                <a class="link-info" th:text="${subcategory.name}" th:href="@{/subcategory/{id}(id=${subcategory.id})}">Mobile</a>
+            </td>
             <td th:text="${subcategory.description}">0911871115</td>
             <td>
                 <a class="btn btn-sm btn-outline-dark" th:href="@{/subcategory/edit(id=${subcategory.id})}">Edit</a>
