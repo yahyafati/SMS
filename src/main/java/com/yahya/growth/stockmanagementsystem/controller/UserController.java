@@ -97,11 +97,13 @@ public class UserController implements BasicControllerSkeleton<User>{
     }
 
     @Override
+    @GetMapping("/edit")
     public String edit(int id, Model model) {
         throw new UnsupportedOperationException("Users can not be edited by other users.");
     }
 
     @Override
+    @PostMapping("/edit")
     public String editPost(int id, User obj) {
         throw new UnsupportedOperationException("Users can not be edited by other users.");
     }
@@ -109,6 +111,7 @@ public class UserController implements BasicControllerSkeleton<User>{
     @Override
     @GetMapping("/delete")
     public String delete(@RequestParam int id) {
+        // TODO Make Sure User Doesn't Delete itself.
         userService.deleteById(id);
         return "redirect:/users";
     }

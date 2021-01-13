@@ -25,8 +25,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role save(Role item) {
-        return roleDao.save(item);
+    public Role save(Role role) {
+        if (!role.getName().toUpperCase().startsWith("ROLE_")) {
+            role.setName("ROLE_" + role.getName().toUpperCase());
+        }
+        return roleDao.save(role);
     }
 
     @Override

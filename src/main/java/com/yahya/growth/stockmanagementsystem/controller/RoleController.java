@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
+import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,10 +21,12 @@ import java.util.stream.Collectors;
 public class RoleController implements BasicControllerSkeleton<Role>{
 
     private final RoleService roleService;
+    private final AuthorityService authorityService;
 
     @Autowired
-    public RoleController(RoleService roleService) {
+    public RoleController(RoleService roleService, AuthorityService authorityService) {
         this.roleService = roleService;
+        this.authorityService = authorityService;
     }
 
     @Override
@@ -46,7 +50,18 @@ public class RoleController implements BasicControllerSkeleton<Role>{
         return "group/detail";
     }
 
-    @Override
+    @PostMapping("/{id}")
+    public String changePermissions(@PathVariable int id, @RequestParam("idPermission") List<String> permissions) {
+        Role role = roleService.findById(id);
+        role.getAuthorities().clear();
+        permissions.stream()
+                .map(authorityService::findByName)
+                .forEach(role.getAuthorities()::add);
+        roleService.save(role);
+        return "redirect:/group/" + id;
+    }
+
+        @Override
     @GetMapping("/new")
     public String addNewItem(Model model) {
         model.addAttribute("group", new Role());
@@ -72,6 +87,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     @Override
     @PostMapping("/edit")
     public String editPost(@RequestParam int id, Role role) {
+
         role.setId(id);
         roleService.save(role);
         return "redirect:/group/" + id;
@@ -80,6 +96,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     @Override
     @GetMapping("/delete")
     public String delete(@RequestParam int id) {
+        // TODO What should happen to users who are members of a role when the role gets deleted?
         roleService.deleteById(id);
         return "redirect:/group";
     }
