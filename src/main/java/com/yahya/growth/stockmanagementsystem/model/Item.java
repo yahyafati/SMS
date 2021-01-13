@@ -21,8 +21,9 @@ public class Item {
     private int id;
     private String name;
     private String description;
+    private int reorderNumber;
     @Transient
-    private int quantity = 0;
+    private int quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
