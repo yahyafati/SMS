@@ -8,6 +8,7 @@ import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction save(Transaction transaction) {
+        transaction.setAddedTime(new Timestamp(System.currentTimeMillis()));
         return transactionDao.save(transaction);
     }
 

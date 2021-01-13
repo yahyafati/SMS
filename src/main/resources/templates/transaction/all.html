@@ -25,7 +25,7 @@
         <tbody>
         <tr th:each="transaction, iterStat : ${transactions}">
             <td th:text="${iterStat.count}">1</td>
-            <td th:text="${transaction.addedTime}">1051151316831</td>
+            <td th:text="${transaction.formattedAddedTime}">1051151316831</td>
             <td>
                 <a class="btn-link" th:href="@{/transaction/{id}(id=${transaction.id})}" th:text="${transaction.refNumber}">035215</a>
             </td>

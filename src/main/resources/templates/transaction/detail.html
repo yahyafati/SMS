@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="main_content">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div class="col">
+            <p>Added Time: <span th:text="${transaction.formattedAddedTime}"></span></p>
+            <p>Reference No: <span th:text="${transaction.refNumber}"></span></p>
+            <p>Transaction Type: <span th:text="${transaction.type.name}"></span></p>
+            <p>From/To: <span th:text="${transaction.fromTo.name}"></span></p>
+            <p>Transaction Date: <span th:text="${transaction.transactionDate}"></span></p>
+            <p>User: <span th:text="${transaction.user}"></span></p>
+        </div>
+<!--        <a th:href="@{edit(id=${category.id})}" class="btn btn-primary">Edit</a>-->
+    </div>
+
+    <div class="row">
+        <h3>Items Bought/Sold</h3>
+        <table class="table table-info table-striped">
+            <thead>
+            <td>#</td>
+            <td>Item</td>
+            <td>Unit Price</td>
+            <td>Quantity</td>
+            </thead>
+            <tbody>
+            <tr th:each="itemTransaction, rowStat : ${transaction.itemTransactions}">
+                <td th:text="${rowStat.count}">1</td>
+                <td th:text="${itemTransaction.item.name}">
+                    <a class="link-info" th:text="${itemTransaction.item.name}" th:href="@{/item/{id}(id=${itemTransaction.item.id})}">Samsung Galaxy A51</a>
+                </td>
+                <td th:text="${itemTransaction.unitPrice}">205</td>
+                <td th:text="${itemTransaction.quantity}">205</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

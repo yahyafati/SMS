@@ -37,6 +37,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @Override
     @GetMapping("/{id}")
     public String detail(@PathVariable int id, Model model) {
+        Transaction transaction = transactionService.findById(id);
+
+        model.addAttribute("transaction", transaction);
         return "transaction/detail";
     }
 
