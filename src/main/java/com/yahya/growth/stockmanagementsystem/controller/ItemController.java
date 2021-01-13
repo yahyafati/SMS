@@ -1,11 +1,13 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.Item;
+import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/items")
@@ -16,24 +18,49 @@ public class ItemController {
     private final CategoryService categoryService;
     private final BrandService brandService;
     private final StoreService storeService;
+    private final ItemTransactionService itemTransactionService;
 
-    public ItemController(ItemService itemService, SubcategoryService subcategoryService, CategoryService categoryService, BrandService brandService, StoreService storeService) {
+    public ItemController(ItemService itemService, SubcategoryService subcategoryService, CategoryService categoryService, BrandService brandService, StoreService storeService, ItemTransactionService itemTransactionService) {
         this.itemService = itemService;
         this.subcategoryService = subcategoryService;
         this.categoryService = categoryService;
         this.brandService = brandService;
         this.storeService = storeService;
+        this.itemTransactionService = itemTransactionService;
+    }
+
+    // TODO Move this to a more appropriate class
+    /**
+     * This function takes in an item entity and returns the amount left in stock from the ItemTransaction table
+     * @param item an Item Entity
+     * @return amount left in stock
+     */
+    public int getQuantity(Item item) {
+        return itemTransactionService.findAllByItem(item).stream()
+                .mapToInt(itemTransaction -> {
+                            if (itemTransaction.getTransaction().getType() == TransactionType.PURCHASE) {
+                                return itemTransaction.getQuantity();
+                            } else {
+                                return -itemTransaction.getQuantity();
+                            }
+                        }
+                )
+                .sum();
     }
 
     @GetMapping("")
     public String index(Model model) {
-        model.addAttribute("items", itemService.findAll());
+        List<Item> items = itemService.findAll();
+        items.forEach(item -> item.setQuantity(getQuantity(item)));
+        model.addAttribute("items", items);
         return "item/all";
     }
 
     @GetMapping("/{item_id}")
     public String detail(@PathVariable(name = "item_id") int itemId, Model model) {
-        model.addAttribute("item", itemService.findById(itemId));
+        Item item = itemService.findById(itemId);
+        item.setQuantity(getQuantity(item));
+        model.addAttribute("item", item);
         return "item/detail";
     }
 

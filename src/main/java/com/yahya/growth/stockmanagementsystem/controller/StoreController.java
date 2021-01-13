@@ -22,7 +22,6 @@ public class StoreController {
 
     @GetMapping("/{storeId}")
     public String detail(@PathVariable int storeId, Model model) {
-        // FIXME Probable Error DON'T FORGET TO TEST THIS
         model.addAttribute("store", storeService.findById(storeId));
         return "store/detail";
     }

@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     public void deleteById(Integer orderId) {
         Order order = findById(orderId);
         if (order.isPaid()) {
-            throw new UnsupportedOperationException("This order has already been paid for."); // TODO Make it possible to cancel order even after it being already paid.
+            throw new UnsupportedOperationException("This order has already been paid for.");
         }
 //        Item item = itemService.findById(order.getItem().getId());
 //        item.setQuantity(item.getQuantity() + order.getQuantity());

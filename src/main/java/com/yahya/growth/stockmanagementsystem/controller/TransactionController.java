@@ -61,15 +61,12 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
 
     @PostMapping("/new")
     public String addNewPOST(Transaction transaction, HttpServletRequest request) {
-        /*
-        TODO LEARN HOW TO PARSE DATES
-         */
         String[] ids = request.getParameterValues("transactionID");
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
         transactionService.save(transaction, ids, items, prices, quantities);
-        return "redirect:/transaction/new";
+        return "redirect:/transaction/";
     }
 
     @Override
@@ -92,7 +89,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         String[] quantities = request.getParameterValues("quantity");
         String[] ids = request.getParameterValues("transactionID");
         transactionService.save(transaction, ids, items, prices, quantities);
-        return "redirect:/transaction/new";
+        return "redirect:/transaction";
     }
 
 

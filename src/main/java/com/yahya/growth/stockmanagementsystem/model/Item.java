@@ -1,6 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import lombok.*;
+import org.springframework.data.jpa.repository.Query;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -20,8 +21,8 @@ public class Item {
     private int id;
     private String name;
     private String description;
-//    private int quantity; // TODO Priority 1 -> Remove Quantity and Price
-//    private float price;
+    @Transient
+    private int quantity = 0;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")

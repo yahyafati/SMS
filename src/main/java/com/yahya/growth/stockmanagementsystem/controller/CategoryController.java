@@ -69,7 +69,7 @@ public class CategoryController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam(name = "id") int categoryId) {
-        // FIXME Cannot delete or update a parent row: a foreign key constraint fails (`stockms`.`item`, ...)
+        // FIXED Cannot delete or update a parent row: a foreign key constraint fails (`stockms`.`item`, ...)
         categoryService.deleteById(categoryId);
         return "redirect:/category";
     }

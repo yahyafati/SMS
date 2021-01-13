@@ -28,7 +28,6 @@ public class Brand {
     @Builder.Default
     private Set<Category> categories = new HashSet<>();
 
-    // TODO TEST in case of ManyToMany
     @ManyToMany(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinTable(name = "brand_subcategories",
