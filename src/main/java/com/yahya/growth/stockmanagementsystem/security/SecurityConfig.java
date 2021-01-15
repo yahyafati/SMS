@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.concurrent.TimeUnit;
 
 import static com.yahya.growth.stockmanagementsystem.security.Permission.USER_READ;
-import static com.yahya.growth.stockmanagementsystem.security.Permission.USER_WRITE;
 
 @Configuration
 @EnableWebSecurity

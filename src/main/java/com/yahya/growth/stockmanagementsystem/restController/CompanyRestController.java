@@ -1,6 +1,5 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yahya.growth.stockmanagementsystem.utilities.Company;
 import org.springframework.web.bind.annotation.GetMapping;

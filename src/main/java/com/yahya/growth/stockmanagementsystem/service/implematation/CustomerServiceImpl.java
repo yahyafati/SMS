@@ -3,7 +3,6 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 import com.yahya.growth.stockmanagementsystem.dao.CustomerDao;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

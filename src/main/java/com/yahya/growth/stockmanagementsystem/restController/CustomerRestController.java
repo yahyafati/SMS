@@ -3,7 +3,6 @@ package com.yahya.growth.stockmanagementsystem.restController;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

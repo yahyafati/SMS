@@ -1,7 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yahya.growth.stockmanagementsystem.service.implematation.SubcategoryServiceImpl;
 import lombok.*;
 
 import javax.persistence.*;

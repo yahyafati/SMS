@@ -1,9 +1,9 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.google.common.collect.Lists;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
-import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;

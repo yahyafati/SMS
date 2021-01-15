@@ -1,7 +1,8 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
-import lombok.*;
-import org.springframework.data.jpa.repository.Query;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.HashSet;

@@ -2,15 +2,11 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.SubCategoryDao;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
-import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
-import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SubcategoryServiceImpl implements SubcategoryService {

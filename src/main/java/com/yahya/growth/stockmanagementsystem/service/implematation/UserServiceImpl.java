@@ -1,9 +1,8 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.UserDao;
-import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.model.User;
-import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
+import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserRoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;

@@ -3,14 +3,12 @@ package com.yahya.growth.stockmanagementsystem;
 import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
-import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
