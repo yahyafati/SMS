@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="main_content">
+    <div th:replace="common/header :: navbar-fragment"></div>
+    <div class="row">
+        <div class="col col-2">
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${company.name}">
+            <h1 class="h1" th:text="${company.name}">Company Name</h1>
+        </div>
+        <div class="col col-8">
+            <form class="form-control" action="" th:action="@{{action}(action=${action})}" th:object="${company}" method="post">
+                <label class="d-block">
+                    Name: <input disabled type="text" th:field="*{name}" />
+                </label>
+                <!--       Branch Object         -->
+                <label class="d-block">
+                    Branch: <input type="text" th:field="*{branch.name}" />
+                </label>
+                <!--       Address Object         -->
+                <label class="d-block">
+                    Region: <input type="text" th:field="*{branch.address.region}" />
+                </label>
+                <label class="d-block">
+                    District: <input type="text" th:field="*{branch.address.district}" />
+                </label>
+                <label class="d-block">
+                    House No: <input type="text" th:field="*{branch.address.houseNo}" />
+                </label>
+                <label class="d-block">
+                    Street: <input type="text" th:field="*{branch.address.street}" />
+                </label>
+                <label class="d-block">
+                    Post Code: <input type="text" th:field="*{branch.address.postCode}" />
+                </label>
+                <!--      Address Object Over          -->
+                <!--      Branch Object Over          -->
+                <label class="d-block">
+                    VAT: <input type="text" th:field="*{vat}" />
+                </label>
+                <label class="d-block">
+                    Service Charge: <input type="text" th:field="*{serviceCharge}" />
+                </label>
+                <label class="d-block">
+                    Special Discount: <input type="text" th:field="*{specialDiscount}" />
+                </label>
+
+                <div>
+                    <input type="submit" value="Submit" class="btn btn-success" />
+                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
+                </div>
+
+            </form>
+
+            <a th:if="${action} == 'edit'" th:href="@{delete(id = ${item.id})}" class="btn btn-danger">Delete Item</a>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

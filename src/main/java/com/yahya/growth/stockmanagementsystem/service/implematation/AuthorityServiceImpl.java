@@ -41,7 +41,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    @SneakyThrows
+    @SneakyThrows // TODO Remove Sneaky Throws, doesn't look pretty.
     public Authority findByName(String authorityName) {
         Optional<Authority> authority = authorityDao.findAuthorityByName(authorityName);
 //        System.out.println(authority);
