@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.model.security.User;
-import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
@@ -65,9 +64,13 @@ public class UserController implements BasicControllerSkeleton<User>{
     public String changePermissions(@PathVariable int id, @RequestParam("idPermission") List<String> permissions) {
         User user = userService.findById(id);
         user.getAuthorities().clear();
-        permissions.stream()
+        Set<Authority> selectedAuthorities = permissions.stream()
                 .map(authorityService::findByName)
-                .forEach(user.getAuthorities()::add);
+                .collect(Collectors.toSet());
+        Role role = user.getUserRole().getRole();
+        boolean isDefault = AuthorityUtils.authoritiesSetEquality(selectedAuthorities, role.getAuthorities());
+        user.getUserRole().setDefault(isDefault);
+        user.getAuthorities().addAll(selectedAuthorities);
         userService.save(user);
         return "redirect:/users/" + id;
     }
