@@ -2,8 +2,9 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.UserDao;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
-import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
+import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserRoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
+    private final RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, UserRoleService userRoleService) {
+    public UserServiceImpl(UserDao userDao, UserRoleService userRoleService, RoleService roleService) {
         this.userDao = userDao;
+        this.roleService = roleService;
     }
 
     @Override
@@ -34,7 +37,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        return userDao.findById(id).orElseThrow();
+        User user =userDao.findById(id).orElseThrow();
+        user.setRole(user.getUserRole().getRole());
+        return user;
     }
 
     @Override
@@ -45,10 +50,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User saveNewUser(User user, Role role) {
+    public User saveUserWithRoles(User user, Role role) {
         user = save(user);
-        UserRole userRole = new UserRole(user, role);
-        user.setUserRole(userRole);
+        role = roleService.findById(role.getId());
+        user.getUserRole().setUser(user);
+        user.getUserRole().setRole(role);
+//        UserRole userRole = new UserRole(user, role);
+//        user.setUserRole(userRole);
         user.getAuthorities().clear();
         user.getAuthorities().addAll(role.getAuthorities());
         return save(user);
@@ -57,7 +65,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User saveNewUser(User user) {
-        return saveNewUser(user, user.getRole());
+        return saveUserWithRoles(user, user.getRole());
     }
 
     @Override

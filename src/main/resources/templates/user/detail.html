@@ -7,14 +7,20 @@
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail rounded-0" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.username}">
-            <h1 class="h1" th:text="${user.firstName} + ' ' + ${user.lastName}">James Maddison</h1>
+            <h1 class="h1" th:text="${user.profile.fullName}">James Maddison</h1>
         </div>
         <div class="col col-8">
             <p>Username: <span th:text="${user.username}">@JohnDoe</span></p>
-            <p>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}">John Doe</span></p>
-            <p>Email: <span th:text="${user.firstName}">John</span></p>
-            <p>Phone: <span th:text="${user.phone}">5396667845</span></p>
-            <p>Email: <span th:text="${user.email}">him@him.her</span></p>
+            <p>Name: <span th:text="${user.profile.fullName}">John Doe</span></p>
+            <p>Email: <span th:text="${user.profile.email}">him@him.her</span></p>
+            <p>Phone: <span th:text="${user.profile.phone}">5396667845</span></p>
+            <form class="form-control" action="#" th:action="@{/users/changeRole(uid = ${user.id})}" method="post" th:object="${role}">
+                Role:
+                <select class="form-control form-select" th:field="*{id}">
+                    <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"></option>
+                </select>
+                <input type="submit" value="Change Role" class="btn btn-success btn-sm">
+            </form>
         </div>
         <a th:href="@{delete(id=${user.id})}" class="btn btn-danger">Delete</a>
         <form th:object="${permissions}" th:action="@{/users/{id}(id=${user.id})}" method="post">

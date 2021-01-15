@@ -3,7 +3,7 @@ package com.yahya.growth.stockmanagementsystem;
 import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
-import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.*;
@@ -16,8 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @SpringBootApplication
 public class StockManagementSystemApplication {
@@ -255,21 +253,33 @@ public class StockManagementSystemApplication {
                     .password(passwordEncoder.encode("123"))
                     .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
                     .role(roleService.findByName("ROLE_STAFF"))
-                    .email("staff@default.com")
+                    .profile(
+                            UserProfile.builder()
+                                    .email("staff@default.com")
+                                    .build()
+                    )
                     .build();
             User managerUser = User.builder()
                     .username("manager")
                     .password(passwordEncoder.encode("123"))
                     .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
                     .role(roleService.findByName("ROLE_MANAGER"))
-                    .email("manager@default.com")
+                    .profile(
+                            UserProfile.builder()
+                                    .email("manager@default.com")
+                                    .build()
+                    )
                     .build();
             User itUser = User.builder()
                     .username("it")
                     .password(passwordEncoder.encode("1234"))
                     .isEnabled(true).isAccountNonExpired(true).isCredentialsNonExpired(true).isCredentialsNonExpired(true).isAccountNonLocked(true)
                     .role(roleService.findByName("ROLE_IT_PERSON"))
-                    .email("it@default.com")
+                    .profile(
+                            UserProfile.builder()
+                                    .email("it@default.com")
+                                    .build()
+                    )
                     .build();
             userService.saveNewUser(staffUser);
             userService.saveNewUser(managerUser);

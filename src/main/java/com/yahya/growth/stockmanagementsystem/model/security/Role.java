@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 @Entity
 @Data
-public class Role {
+public class Role implements Comparable<Role> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +34,10 @@ public class Role {
     public String getDisplayName() {
         String displayName = name.substring(5); // since ROLE_ will be removed from display name
         return StringUtils.capitalize(String.join(" ", displayName.split("_")));
+    }
+
+    @Override
+    public int compareTo(@NotNull Role o) {
+        return Integer.compare(id, o.id);
     }
 }

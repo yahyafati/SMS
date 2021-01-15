@@ -6,32 +6,37 @@
     <div th:replace="common/header :: navbar-fragment"></div>
     <div class="row">
         <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.fullName}" alt="User Photo" src="/images/mouse.webp">
-            <h1 class="h1" th:text="${user.fullName}">User Name</h1>
+            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.profile.fullName}" alt="User Photo" src="/images/mouse.webp">
+            <h1 class="h1" th:text="${user.profile.fullName}">User Name</h1>
         </div>
         <div class="col col-8">
             <form action="" th:action="@{{action}(action=${action}, id=${user.id})}" th:object="${user}" method="post">
                 <label class="d-block">
                     Username: <input type="text" th:field="*{username}">
                 </label>
+                <!--   TODO DO NOT PASS PASSWORDS TO HTML   -->
+                <input hidden disabled type="password" th:field="*{password}">
                 <label class="d-block">
-                    Password: <input type="password" th:field="*{password}">
+                    First Name: <input disabled type="text" th:field="*{profile.firstName}">
                 </label>
                 <label class="d-block">
-                    First Name: <input type="text" th:field="*{firstName}">
+                    Last Name: <input disabled type="text" th:field="*{profile.lastName}">
                 </label>
                 <label class="d-block">
-                    Last Name: <input type="text" th:field="*{lastName}">
+                    Email: <input disabled type="email" th:field="*{profile.email}">
                 </label>
                 <label class="d-block">
-                    Email: <input type="email" th:field="*{email}">
-                </label>
-                <label class="d-block">
-                    Phone: <input type="tel" th:field="*{phone}">
+                    Phone: <input disabled type="tel" th:field="*{profile.phone}">
                 </label>
                 <label class="d-block">
                     Enabled: <input type="checkbox" th:field="*{enabled}">
                 </label>
+                <label class="d-block">
+                    Locked: <input type="checkbox" th:field="*{!accountNonLocked}">
+                </label>
+                <input disabled hidden type="checkbox" th:field="*{!accountNonExpired}">
+                <input disabled hidden type="checkbox" th:field="*{!credentialsNonExpired}">
+
                 <label class="d-block">
                     Role:
                     <select th:field="*{role}" >

@@ -1,6 +1,5 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
-import com.yahya.growth.stockmanagementsystem.model.security.User;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

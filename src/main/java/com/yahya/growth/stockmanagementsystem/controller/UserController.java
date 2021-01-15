@@ -3,7 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
-import com.yahya.growth.stockmanagementsystem.model.security.User;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
@@ -57,7 +57,16 @@ public class UserController implements BasicControllerSkeleton<User>{
         model.addAttribute("allAuthorities", authorities);
         model.addAttribute("reportPermissions", new boolean[] {currentAuthority.contains("report:store"), currentAuthority.contains("report:all")});
         model.addAttribute("permissions", Lists.newArrayList());
+        model.addAttribute("role", user.getRole());
+        model.addAttribute("allRoles", roleService.findAll().stream().sorted().collect(Collectors.toList()));
         return "user/detail";
+    }
+
+    @PostMapping("/changeRole")
+    public String changeRole(@RequestParam int uid, @ModelAttribute Role role) {
+        User user = userService.findById(uid);
+        userService.saveUserWithRoles(user, role);
+        return "redirect:/users/" + uid;
     }
 
     @PostMapping("/{id}")
@@ -95,7 +104,7 @@ public class UserController implements BasicControllerSkeleton<User>{
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
-        user = userService.saveNewUser(user, user.getRole());
+        user = userService.saveUserWithRoles(user, user.getRole());
         return "redirect:/users/" + user.getId();
     }
 

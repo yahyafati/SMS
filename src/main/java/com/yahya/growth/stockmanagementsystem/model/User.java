@@ -1,13 +1,13 @@
-package com.yahya.growth.stockmanagementsystem.model.security;
+package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yahya.growth.stockmanagementsystem.model.security.Authority;
+import com.yahya.growth.stockmanagementsystem.model.security.Role;
+import com.yahya.growth.stockmanagementsystem.model.security.UserRole;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,15 +31,13 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
     // Custom Fields
-    private String firstName;
-    private Timestamp creationTime;
-    private String lastName;
-    @Column(nullable = false, unique = true)
-    private String email;
-    private String phone;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @Builder.Default
+    private UserProfile profile = new UserProfile();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private UserRole userRole;
+    @Builder.Default
+    private UserRole userRole = new UserRole();
 
     @Transient
     @Builder.Default
@@ -50,27 +48,8 @@ public class User implements UserDetails {
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();
 
-    @Override
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
 
-    public String getFullName() {
-        return String.format("%s %s", firstName, lastName);
-    }
-
-    public User(
-            String username, String password, Set<Authority> authorities,
-            boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
-        this.password = password;
-        this.username = username;
-        this.authorities = authorities;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.isEnabled = isEnabled;
-    }
-
+    // TODO Many to Many Utilities on non InnoDB MySQL database
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
         authority.getUsers().add(this);

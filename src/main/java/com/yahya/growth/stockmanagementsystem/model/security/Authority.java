@@ -1,6 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.model.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

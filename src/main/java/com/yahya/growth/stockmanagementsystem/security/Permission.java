@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Deprecated
 public enum Permission {
     ITEM_READ("item:read"),
     ITEM_WRITE("item:write"),

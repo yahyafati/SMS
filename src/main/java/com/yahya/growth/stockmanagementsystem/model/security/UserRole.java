@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.model.security;
 
+import com.yahya.growth.stockmanagementsystem.model.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

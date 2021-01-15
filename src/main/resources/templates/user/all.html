@@ -25,10 +25,10 @@
             <td>
                 <a class="link-info" th:text="${user.username}" th:href="@{/users/{id}(id=${user.id})}">@jameslynch</a>
             </td>
-            <td th:text="${user.firstName}">James</td>
-            <td th:text="${user.lastName}">Lynch</td>
-            <td th:text="${user.email}">nuriamussa@gmail.com</td>
-            <td th:text="${user.phone}">0911871115</td>
+            <td th:text="${user.profile.firstName}">James</td>
+            <td th:text="${user.profile.lastName}">Lynch</td>
+            <td th:text="${user.profile.email}">nuriamussa@gmail.com</td>
+            <td th:text="${user.profile.phone}">0911871115</td>
             <td>
                 <a class="link link-info" href="#" th:href="@{/users/{id}(id=${user.id})}">Show Permissions</a>
             </td>
