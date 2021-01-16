@@ -30,28 +30,28 @@ public class ItemController {
     }
 
     // TODO Move this to a more appropriate class
-    /**
-     * This function takes in an item entity and returns the amount left in stock from the ItemTransaction table
-     * @param item an Item Entity
-     * @return amount left in stock
-     */
-    public int getQuantity(Item item) {
-        return itemTransactionService.findAllByItem(item).stream()
-                .mapToInt(itemTransaction -> {
-                            if (itemTransaction.getTransaction().getType() == TransactionType.PURCHASE) {
-                                return itemTransaction.getQuantity();
-                            } else {
-                                return -itemTransaction.getQuantity();
-                            }
-                        }
-                )
-                .sum();
-    }
+//    /**
+//     * This function takes in an item entity and returns the amount left in stock from the ItemTransaction table
+//     * @param item an Item Entity
+//     * @return amount left in stock
+//     */
+//    public int getQuantity(Item item) {
+//        return itemTransactionService.findAllByItem(item).stream()
+//                .mapToInt(itemTransaction -> {
+//                            if (itemTransaction.getTransaction().getType() == TransactionType.PURCHASE) {
+//                                return itemTransaction.getQuantity();
+//                            } else {
+//                                return -itemTransaction.getQuantity();
+//                            }
+//                        }
+//                )
+//                .sum();
+//    }
 
     @GetMapping("")
     public String index(Model model) {
         List<Item> items = itemService.findAll();
-        items.forEach(item -> item.setQuantity(getQuantity(item)));
+        items.forEach(item -> item.setQuantity(itemTransactionService.getQuantityOfItem(item)));
         model.addAttribute("items", items);
         return "item/all";
     }
@@ -59,7 +59,7 @@ public class ItemController {
     @GetMapping("/{item_id}")
     public String detail(@PathVariable(name = "item_id") int itemId, Model model) {
         Item item = itemService.findById(itemId);
-        item.setQuantity(getQuantity(item));
+        item.setQuantity(itemTransactionService.getQuantityOfItem(item));
         model.addAttribute("item", item);
         return "item/detail";
     }

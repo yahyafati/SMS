@@ -4,6 +4,7 @@ import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ItemTransactionService extends BasicServiceSkeleton<ItemTransaction> {
@@ -15,4 +16,14 @@ public interface ItemTransactionService extends BasicServiceSkeleton<ItemTransac
     List<ItemTransaction> findAllByItemId(int itemId);
 
     List<ItemTransaction> findAllByItem(Item item);
+
+    List<ItemTransaction> findAllByItemSorted(Item item);
+
+    List<ItemTransaction> findAllByItemIdSorted(int itemId);
+
+    int getQuantityOfItem(Item item);
+
+    int getQuantityOfItem(int id);
+
+    List<ItemTransaction> saveAll(Collection<ItemTransaction> itemTransactions);
 }

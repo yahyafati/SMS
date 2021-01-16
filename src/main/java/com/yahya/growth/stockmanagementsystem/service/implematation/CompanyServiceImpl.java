@@ -2,7 +2,7 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yahya.growth.stockmanagementsystem.service.CompanyService;
-import com.yahya.growth.stockmanagementsystem.utilities.Company;
+import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

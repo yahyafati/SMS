@@ -15,7 +15,7 @@ import java.util.List;
 public class Transaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int refNumber;
     @ManyToOne

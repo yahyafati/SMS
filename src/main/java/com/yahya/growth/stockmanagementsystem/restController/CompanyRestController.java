@@ -1,7 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.restController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yahya.growth.stockmanagementsystem.utilities.Company;
+import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

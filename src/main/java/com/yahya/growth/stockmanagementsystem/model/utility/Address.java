@@ -1,4 +1,4 @@
-package com.yahya.growth.stockmanagementsystem.utilities;
+package com.yahya.growth.stockmanagementsystem.model.utility;
 
 import lombok.Data;
 

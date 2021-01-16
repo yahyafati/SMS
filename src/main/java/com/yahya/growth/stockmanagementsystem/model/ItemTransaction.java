@@ -15,13 +15,17 @@ import javax.persistence.*;
 public class ItemTransaction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "it_generator")
+    @SequenceGenerator(name = "it_generator", sequenceName = "itemTrans_seq", allocationSize = 1, initialValue = 1)
     private int id;
+
     @ManyToOne
     private Item item;
     @ManyToOne
     private Transaction transaction;
     private double unitPrice;
     private int quantity;
+
+    private int remaining;
 
 }

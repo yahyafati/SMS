@@ -1,6 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.service;
 
-import com.yahya.growth.stockmanagementsystem.utilities.Company;
+import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 
 public interface CompanyService {
 
