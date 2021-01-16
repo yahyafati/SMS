@@ -221,6 +221,7 @@ public class StockManagementSystemApplication {
 
 //    @Bean
     public CommandLineRunner initializeSecurityData(AuthorityService authorityService, RoleService roleService) {
+
         return args -> {
             Arrays.stream(Permission.values())
                     .map(permission -> new Authority(permission.getPermission()))

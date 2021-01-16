@@ -1,4 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.service;
+import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
+
 import java.util.List;
 
 public interface BasicServiceSkeleton<T> {

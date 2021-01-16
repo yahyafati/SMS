@@ -24,8 +24,13 @@ public class ItemTransaction {
     @ManyToOne
     private Transaction transaction;
     private double unitPrice;
-    private int quantity;
+    private int initialQuantity;
 
     private int remaining;
+
+    public int getAmountSold() {
+        assert this.transaction.getType() == TransactionType.PURCHASE : "Can't be calculated for TransactionType.SALE Transaction. Item sold can only be calculated for TransactionType.PURCHASE Transaction.";
+        return initialQuantity - remaining;
+    }
 
 }

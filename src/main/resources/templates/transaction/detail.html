@@ -23,7 +23,8 @@
             <td>#</td>
             <td>Item</td>
             <td>Unit Price</td>
-            <td>Quantity</td>
+            <td>Initial Quantity</td>
+            <td>Remaining</td>
             </thead>
             <tbody>
             <tr th:each="itemTransaction, rowStat : ${transaction.itemTransactions}">
@@ -32,7 +33,8 @@
                     <a class="link-info" th:text="${itemTransaction.item.name}" th:href="@{/item/{id}(id=${itemTransaction.item.id})}">Samsung Galaxy A51</a>
                 </td>
                 <td th:text="${itemTransaction.unitPrice}">205</td>
-                <td th:text="${itemTransaction.quantity}">205</td>
+                <td th:text="${itemTransaction.initialQuantity}">205</td>
+                <td th:text="${itemTransaction.remaining}">205</td>
             </tr>
             </tbody>
         </table>

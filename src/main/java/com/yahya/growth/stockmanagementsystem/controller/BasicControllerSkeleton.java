@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.ui.Model;
 
 public interface BasicControllerSkeleton<T> {

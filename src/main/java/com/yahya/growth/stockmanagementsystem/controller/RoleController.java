@@ -6,6 +6,7 @@ import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
+import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
