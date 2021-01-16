@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UserService extends UserDetailsService, BasicServiceSkeleton<User> {
 
+    User findByUsername(String username);
+
     User saveUserWithRoles(User user, Role role);
 
     @Transactional

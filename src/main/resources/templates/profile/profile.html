@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="common/header :: common-header"></head>
+<body>
+<div class="main_content">
+    <div th:replace="common/header :: navbar-fragment"></div>
+
+    <div class="profile">
+        <div class="head">
+            <img class="profile_img" src="images/profile.jpg" th:src="@{/images/placeholder/profile.jpg}" alt="Profile Pic" th:alt="${profile.fullName}">
+            <div class="profile_name">
+                <p class="name">
+                    <span th:text="${profile.fullName}">Yahya Haji</span>
+                    <a href="#" th:href="@{profile/edit}" class="edit-link"><em class="fas fa-edit"></em></a>
+                </p>
+                <p class="role" th:text="${profile.user.userRole.role.displayName}">Manager</p>
+            </div>
+
+        </div>
+        <div class="body">
+            <p class="label">Name: <span class="value" th:text="${profile.fullName}">Yahya Haji</span> </p>
+            <p class="label">Date of Birth: <span class="value" th:text="${profile.dateOfBirth}">22/01/1999</span> </p>
+            <p class="label">Email: <span class="value" th:text="${profile.email}">yahya123@hotmail.com</span> </p>
+            <p class="label">Phone: <span class="value" th:text="${profile.phone}">0911223366</span> </p>
+            <div class="label">
+                <p class="emergency">Emergency Contact</p>
+                <div class="contactCard">
+                    <p class="name">Mr. John Smith</p>
+                    <p class="phone">0915365845</p>
+                    <p class="address">Addis Ababa, Ethiopia</p>
+                </div>
+                <div class="contactCard">
+                    <p class="name">Mr. John Smith</p>
+                    <p class="phone">0915365845</p>
+                    <p class="address">Addis Ababa, Ethiopia</p>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

@@ -25,17 +25,19 @@ public class User implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
     private String password;
-    private boolean isAccountNonExpired;
-    private boolean isAccountNonLocked;
-    private boolean isCredentialsNonExpired;
-    private boolean isEnabled;
+    private boolean isAccountNonExpired = true;
+    private boolean isAccountNonLocked = true;
+    private boolean isCredentialsNonExpired = true;
+    private boolean isEnabled = true;
 
     // Custom Fields
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @ToString.Exclude @EqualsAndHashCode.Exclude @JsonIgnore
     @Builder.Default
     private UserProfile profile = new UserProfile();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ToString.Exclude @EqualsAndHashCode.Exclude @JsonIgnore
     @Builder.Default
     private UserRole userRole = new UserRole();
 

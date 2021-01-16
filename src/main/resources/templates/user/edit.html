@@ -17,25 +17,23 @@
                 <!--   TODO DO NOT PASS PASSWORDS TO HTML   -->
                 <input hidden disabled type="password" th:field="*{password}">
                 <label class="d-block">
-                    First Name: <input disabled type="text" th:field="*{profile.firstName}">
+                    First Name: <input th:disabled="${action == 'edit'}" type="text" th:field="*{profile.firstName}">
                 </label>
                 <label class="d-block">
-                    Last Name: <input disabled type="text" th:field="*{profile.lastName}">
+                    Last Name: <input th:disabled="${action == 'edit'}" type="text" th:field="*{profile.lastName}">
                 </label>
                 <label class="d-block">
-                    Email: <input disabled type="email" th:field="*{profile.email}">
+                    Email: <input th:disabled="${action == 'edit'}" type="email" th:field="*{profile.email}">
                 </label>
                 <label class="d-block">
-                    Phone: <input disabled type="tel" th:field="*{profile.phone}">
+                    Phone: <input th:disabled="${action == 'edit'}" type="tel" th:field="*{profile.phone}">
                 </label>
                 <label class="d-block">
                     Enabled: <input type="checkbox" th:field="*{enabled}">
                 </label>
-                <label class="d-block">
-                    Locked: <input type="checkbox" th:field="*{!accountNonLocked}">
-                </label>
-                <input disabled hidden type="checkbox" th:field="*{!accountNonExpired}">
-                <input disabled hidden type="checkbox" th:field="*{!credentialsNonExpired}">
+                <input disabled hidden type="checkbox" th:field="*{accountNonLocked}">
+                <input disabled hidden type="checkbox" th:field="*{accountNonExpired}">
+                <input disabled hidden type="checkbox" th:field="*{credentialsNonExpired}">
 
                 <label class="d-block">
                     Role:

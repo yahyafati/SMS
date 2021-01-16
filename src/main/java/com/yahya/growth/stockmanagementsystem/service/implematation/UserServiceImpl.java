@@ -48,14 +48,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userDao.findUserByUsername(username).orElseThrow();
+    }
+
+    @Override
     @Transactional
     public User saveUserWithRoles(User user, Role role) {
         user = save(user);
         role = roleService.findById(role.getId());
         user.getUserRole().setUser(user);
         user.getUserRole().setRole(role);
-//        UserRole userRole = new UserRole(user, role);
-//        user.setUserRole(userRole);
         user.getAuthorities().clear();
         user.getAuthorities().addAll(role.getAuthorities());
         return save(user);
@@ -64,6 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User saveNewUser(User user) {
+        user.getProfile().setUser(user);
         return saveUserWithRoles(user, user.getRole());
     }
 

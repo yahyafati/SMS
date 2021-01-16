@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@200&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 * {
     padding: 0;
     margin: 0;
@@ -225,4 +227,74 @@ p {
     cursor: pointer;
     color: white;
     background-color: rgba(0, 0, 0, 0.555);
+}
+
+/* Profile Page CSS */
+
+.profile {
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #f12711;
+    width: 400px;
+}
+
+.profile .head {
+    height: 200px;
+}
+
+.profile .head .profile_img {
+    display: inline;
+    object-fit: cover;
+    height: 150px;
+    width: 150px;
+    border-radius: 150px;
+    vertical-align: bottom;
+
+}
+
+.profile .head .profile_name {
+    display: inline-block;
+    margin: 0;
+}
+
+.profile .head .name {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.profile .head .name .edit-link {
+    color: #333;
+    font-size: 15px;
+}
+
+.profile .head .role {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.profile .body {
+    margin: 10px;
+}
+
+.profile .body .label {
+    margin: 5px;
+    padding: 5px;
+}
+
+.profile .body .label .emergency {
+    padding: 10px 0 10px 0;
+}
+
+.profile .body .label .value {
+    font-weight: bolder;
+}
+
+.profile .body .label .contactCard {
+    background: linear-gradient(to right, #f12711, #f5af19);
+    color: white;
+    border: 1px solid #333;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 10px;
+    width: 280px;
 }

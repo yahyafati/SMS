@@ -100,11 +100,9 @@ public class UserController implements BasicControllerSkeleton<User>{
     @Override
     @PostMapping("/new")
     public String addNewPOST(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setAccountNonExpired(true);
-        user.setAccountNonLocked(true);
-        user.setCredentialsNonExpired(true);
-        user = userService.saveUserWithRoles(user, user.getRole());
+        // FIXME : HACK => Password
+        user.setPassword(passwordEncoder.encode("123"));
+        user = userService.saveNewUser(user);
         return "redirect:/users/" + user.getId();
     }
 

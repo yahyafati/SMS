@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -27,6 +28,7 @@ public class UserProfile {
     @Column(nullable = false, unique = true)
     private String email;
     private String phone;
+    private LocalDate dateOfBirth;
 
     public String getFullName() {
         return String.format("%s %s", firstName, lastName);
