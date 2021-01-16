@@ -71,40 +71,41 @@ public class TransactionServiceImpl implements TransactionService {
      */
     private void preDeletePurchase(Transaction transaction) throws TransactionException {
         assert transaction.getType() == TransactionType.PURCHASE;
-        if (transactionUtils.isTransactionUpdated(transaction)) {
-            if (transactionUtils.isTransactionNecessary(transaction)) {
-                throw new TransactionException("You can not delete a necessary transaction. This transaction is necessary. TODO Make this message a bit more clearer later on");
-            }
-
-            // itemTransaction - ItemTransaction in the Transaction to be deleted
-            for (ItemTransaction itemTransaction : transaction.getItemTransactions()) {
-                /*
-                 * Gets all transaction in ascending order.
-                 * Remove item from other ItemTransaction(iTransaction) and add it into current ItemTransaction(itemTransaction)
-                 * until the itemTransaction.initialQuantity == itemTransaction.remainingQuantity (Returned to Original State - no-update stated)
-                 */
-                List<ItemTransaction> curItemTransactions = itemTransactionService.findAllByItemSorted(itemTransaction.getItem());
-                for (ItemTransaction iTransaction: curItemTransactions) {
-                    if (iTransaction.getTransaction().getType() == TransactionType.SALE
-                            || iTransaction.getTransaction().getId() == transaction.getId()) {
-                        continue;
-                    }
-                    if (itemTransaction.getAmountSold() < iTransaction.getRemaining()) {
-                        iTransaction.setRemaining(iTransaction.getRemaining() - itemTransaction.getAmountSold());
-                        itemTransaction.setRemaining(itemTransaction.getInitialQuantity());
-                    } else {
-                        itemTransaction.setRemaining(itemTransaction.getRemaining() + iTransaction.getRemaining());
-                        iTransaction.setRemaining(0);
-                    }
-                    // Break once the amountSold(= initialQuantity - remaining) == 0
-                    if (itemTransaction.getAmountSold() == 0) {
-                        break;
-                    }
-                }
-                itemTransactionService.saveAll(curItemTransactions);
-            }
-            assert transactionUtils.isTransactionNecessary(transaction) : "Transaction is supposed to be unnecessary before being deleted.";
+        if (!transactionUtils.isTransactionUpdated(transaction)) {
+            return;
         }
+        if (transactionUtils.isTransactionNecessary(transaction)) {
+            throw new TransactionException("You can not delete a necessary transaction. This transaction is necessary. TODO Make this message a bit more clearer later on");
+        }
+
+        // itemTransaction - ItemTransaction in the Transaction to be deleted
+        for (ItemTransaction itemTransaction : transaction.getItemTransactions()) {
+            /*
+             * Gets all transaction in ascending order.
+             * Remove item from other ItemTransaction(iTransaction) and add it into current ItemTransaction(itemTransaction)
+             * until the itemTransaction.initialQuantity == itemTransaction.remainingQuantity (Returned to Original State - no-update stated)
+             */
+            List<ItemTransaction> curItemTransactions = itemTransactionService.findAllByItemSorted(itemTransaction.getItem());
+            for (ItemTransaction iTransaction: curItemTransactions) {
+                if (iTransaction.getTransaction().getType() == TransactionType.SALE
+                        || iTransaction.getTransaction().getId() == transaction.getId()) {
+                    continue;
+                }
+                if (itemTransaction.getAmountSold() < iTransaction.getRemaining()) {
+                    iTransaction.setRemaining(iTransaction.getRemaining() - itemTransaction.getAmountSold());
+                    itemTransaction.setRemaining(itemTransaction.getInitialQuantity());
+                } else {
+                    itemTransaction.setRemaining(itemTransaction.getRemaining() + iTransaction.getRemaining());
+                    iTransaction.setRemaining(0);
+                }
+                // Break once the amountSold(= initialQuantity - remaining) == 0
+                if (itemTransaction.getAmountSold() == 0) {
+                    break;
+                }
+            }
+            itemTransactionService.saveAll(curItemTransactions);
+        }
+        assert transactionUtils.isTransactionNecessary(transaction) : "Transaction is supposed to be unnecessary before being deleted.";
     }
 
     /**
