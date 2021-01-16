@@ -19,6 +19,8 @@ public interface ItemTransactionService extends BasicServiceSkeleton<ItemTransac
 
     List<ItemTransaction> findAllByItemSorted(Item item);
 
+    List<ItemTransaction> findAllByItemSortedDescending(Item item);
+
     List<ItemTransaction> findAllByItemIdSorted(int itemId);
 
     int getQuantityOfItem(Item item);

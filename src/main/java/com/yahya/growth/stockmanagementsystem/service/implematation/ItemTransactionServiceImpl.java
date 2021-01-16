@@ -113,7 +113,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
     }
 
     /**
-     * Find and return a list of ItemTransactions with a certain Item <b>sorted by the order of entry</b>
+     * Find and return a list of ItemTransactions with a certain Item <b>sorted in ascending order by the id of entry</b>
      * @param item - the Item entity
      * @return list of ItemTransaction with certain Item
      */
@@ -123,7 +123,17 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
     }
 
     /**
-     * Find and return a list of ItemTransactions with a certain Item <b>sorted by the order of entry</b>
+     * Find and return a list of ItemTransactions with a certain Item <b>sorted in descending order by the id of entry</b>
+     * @param item - the Item entity
+     * @return list of ItemTransaction with certain Item
+     */
+    @Override
+    public List<ItemTransaction> findAllByItemSortedDescending(Item item) {
+        return itemTransactionDao.findAllByItemOrderByIdDesc(item);
+    }
+
+    /**
+     * Find and return a list of ItemTransactions with a certain Item <b>sorted in ascending order by the id of entry</b>
      * @param itemId - the id of Item entity
      * @return list of ItemTransaction with certain Item
      * @throws UnsupportedOperationException

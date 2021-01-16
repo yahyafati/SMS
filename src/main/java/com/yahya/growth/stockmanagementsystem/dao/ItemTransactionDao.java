@@ -18,6 +18,8 @@ public interface ItemTransactionDao extends JpaRepository<ItemTransaction, Integ
     List<ItemTransaction> findAllByItem(Item item);
 
     List<ItemTransaction> findAllByItemOrderByIdAsc(Item item);
+
+    List<ItemTransaction> findAllByItemOrderByIdDesc(Item item);
 //    List<ItemTransaction> findAllByItemOrderByOrderNoAsc(Item item);
 
     @Query("select sum(it.remaining) from ItemTransaction it where it.item = :item")

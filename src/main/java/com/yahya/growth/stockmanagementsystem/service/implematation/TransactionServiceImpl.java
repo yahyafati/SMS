@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -44,19 +45,60 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void deleteById(Integer id) {
-        transactionDao.deleteById(id);
+        delete(findById(id));
+    }
+
+    public void delete(Transaction transaction) {
+
+        if (transaction.getType() == TransactionType.SALE) {
+            preDeleteSale(transaction);
+        } else {
+
+        }
+        transactionDao.delete(transaction);
+    }
+
+    /**
+     *
+     * This is a reverse sale function.
+     * It gets Purchase Type ItemTransaction for each item in <b>reverse order</b> from DB.
+     * For each ItemTransaction it will add on to the remaining until the 'remaining' is full (equal to 'initialQuantity')
+     * @param transaction Transaction of type Sales to be deleted
+     *
+     */
+    private void preDeleteSale(Transaction transaction) {
+        assert transaction.getType() == TransactionType.SALE;
+        for (ItemTransaction itemTransaction : transaction.getItemTransactions()) {
+
+            List<ItemTransaction> curItemTransactions = itemTransactionService.findAllByItemSortedDescending(itemTransaction.getItem());
+            curItemTransactions = curItemTransactions
+                    .stream()
+                    .filter(iTransaction -> iTransaction.getTransaction().getType() == TransactionType.PURCHASE)
+                    .filter(iTransaction -> iTransaction.getRemaining() < iTransaction.getQuantity())
+                    .collect(Collectors.toList());
+            int quantity = itemTransaction.getQuantity();
+            // For each itemTransaction in curItemTransactions
+            for (ItemTransaction iTransaction: curItemTransactions) {
+                // iTransaction.getQuantity() - iTransaction.getRemaining() = the amount sold from this iTransaction
+                if (iTransaction.getQuantity() - iTransaction.getRemaining() < quantity) {
+                    quantity -= iTransaction.getQuantity() - iTransaction.getRemaining();
+                    iTransaction.setRemaining(iTransaction.getQuantity());
+                } else {
+                    iTransaction.setRemaining(iTransaction.getRemaining() + quantity);
+                    quantity = 0;
+                }
+            }
+
+            itemTransactionService.saveAll(curItemTransactions);
+        }
     }
 
     @Override
-    public Transaction save(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) {
+    public Transaction save(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) throws TransactionException {
         if (transaction.getType() == TransactionType.PURCHASE) {
             transaction = savePurchase(transaction, ids, items, prices, quantities);
         } else {
-            try {
-                transaction = saveSale(transaction, ids, items, prices, quantities);
-            } catch (TransactionException e) {
-                e.printStackTrace();
-            }
+            transaction = saveSale(transaction, ids, items, prices, quantities);
         }
         return transaction;
     }

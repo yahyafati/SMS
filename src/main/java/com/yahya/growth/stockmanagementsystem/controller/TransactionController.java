@@ -5,6 +5,7 @@ import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.TransactionService;
+import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +61,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @PostMapping("/new")
-    public String addNewPOST(Transaction transaction, HttpServletRequest request) {
+    public String addNewPOST(Transaction transaction, HttpServletRequest request) throws TransactionException {
         String[] ids = request.getParameterValues("transactionID");
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
@@ -81,7 +82,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @PostMapping("/edit")
-    public String editPOST(Transaction transaction, HttpServletRequest request) {
+    public String editPOST(Transaction transaction, HttpServletRequest request) throws TransactionException {
 //        request.getHeaderNames()
         // Repeated Code with add new post
         String[] items = request.getParameterValues("item");
