@@ -3,37 +3,34 @@
 <!--/*@thymesVar id="customer" type="com.yahya.growth.stockmanagementsystem.model.Customer"*/-->
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${customer.name}" alt="Category Photo" src="/images/mouse.webp">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${customer.name}" alt="Category Photo" src="/images/mouse.webp">
             <h1 class="h1" th:text="${customer.name}">Category Name</h1>
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${customer.id})}" th:object="${customer}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <label class="d-block">
-                    Email: <input type="email" th:field="*{email}">
-                </label>
-
-                <label class="d-block">
-                    Phone: <input type="tel" th:field="*{phone}">
-                </label>
-
-                <label class="d-block">
-                    Address: <input type="text" th:field="*{address}">
-                </label>
-
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+        <div class="form-div">
+            <form action="" class="form" th:action="@{{action}(action=${action}, id=${customer.id})}" th:object="${customer}" method="post">
+                <div class="form-control-wrapper">
+                    Name: <input placeholder="Customer" class="input-text" type="text" th:field="*{name}">
+                </div>
+                <div class="form-control-wrapper">
+                    Email: <input placeholder="Email Address" class="input-text" type="email" th:field="*{email}">
                 </div>
 
-            </form>
+                <div class="form-control-wrapper">
+                    Phone: <input placeholder="Phone Number" class="input-text" type="tel" th:field="*{phone}">
+                </div>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${customer.id})}" class="btn btn-danger">Delete Category</a>
+                <div class="form-control-wrapper">
+                    Address: <input placeholder="Address" class="input-text" type="text" th:field="*{address}">
+                </div>
+
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
+                </div>
+            </form>
         </div>
     </div>
 </section>

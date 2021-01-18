@@ -39,6 +39,7 @@ function addTransactionRow() {
     }
     selectElement.required = true
     selectElement.name = "item"
+    selectElement.classList.add("form-select")
     // <input hidden name="id" type="number" value="0">
     let idElement = document.createElement("input")
     idElement.hidden = true
@@ -55,15 +56,17 @@ function addTransactionRow() {
     priceElement.placeholder = "Price"
     priceElement.required = true
     priceElement.name = "price"
+    priceElement.classList.add("input-text")
     cell2.appendChild(priceElement)
 
     // <input name="price" type="text">
     let cell3 = row.insertCell()
     let quantityElement = document.createElement("input")
-    quantityElement.type = "text"
+    quantityElement.type = "number"
     quantityElement.placeholder = "Quantity"
     quantityElement.required = true
     quantityElement.name = "quantity"
+    quantityElement.classList.add("input-text")
     cell3.appendChild(quantityElement)
 
     // <button onclick="return removeTransactionRow()" type="button" class="btn btn-outline-warning btn-sm">Remove Row</button>
@@ -72,9 +75,8 @@ function addTransactionRow() {
     // removeRowElement.onclick = "return removeTransactionRow()"
     removeRowBtn.onclick = function () {removeTransactionRow(removeRowBtn)}
     removeRowBtn.type = "button"
-    removeRowBtn.classList.add("btn")
-    removeRowBtn.classList.add("btn-outline-warning")
-    removeRowBtn.classList.add("btn-sm")
+    removeRowBtn.classList.add("my-btn")
+    removeRowBtn.classList.add("my-btn-sm")
     removeRowBtn.textContent = "Remove Row"
     cell4.appendChild(removeRowBtn)
 

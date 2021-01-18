@@ -162,10 +162,11 @@ header .profile .name {
 
 /* Dashboard Items */
 .body .main-content {
-    padding: 30px;
+    padding: 10px;
 }
 
 .body .main-content .dashboard {
+    padding: 10px;
     display: inline-flex;
     justify-content: space-around;
     flex-flow: row wrap;

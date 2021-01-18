@@ -7,56 +7,61 @@
 <!--/*@thymesVar id="brands" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Brand>"*/-->
 <!--/*@thymesVar id="suppliers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Store>"*/-->
 <section th:fragment="main-content" class="main-content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
-        <div class="col col-8">
-            <form class="form-control" action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <label class="d-block">
-                    Description: <input type="text" th:field="*{description}">
-                </label>
-                <label class="d-block">
-                    Reorder Number: <input type="text" th:field="*{reorderNumber}">
-                </label>
-                <label class="d-block">
-                    Category:
-                    <select th:field="*{category}" >
-                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>
-                    </select>
-                </label>
-                <label class="d-block">
-                    Subcategory:
-                    <select th:field="*{subcategory}" >
-                        <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Cell Phones & Accessories</option>
-                    </select>
-                </label>
-                <label class="d-block">
-                    Brand:
-                    <select th:field="*{brand}" >
-                        <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}">Cell Phones & Accessories</option>
-                    </select>
-                </label>
-                <label class="d-block">
-                    Supplier:
-                    <select th:field="*{store}" >
-                        <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>
-                    </select>
-                </label>
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Name: <input class="input-text" placeholder="Product" type="text" th:field="*{name}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Description: <input class="input-text" placeholder="Description..." type="text" th:field="*{description}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Reorder Number: <input class="input-text" placeholder="Reorder Number" type="number" th:field="*{reorderNumber}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Category:
+                        <select class="form-select" th:field="*{category}" >
+                            <option value="-1">Select a Category</option>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>
+                        </select>
+                    </div>
+                    <div class="form-control-wrapper">
+                        Subcategory:
+                        <select class="form-select" th:field="*{subcategory}" >
+                            <option value="-1">Select a Subcategory</option>
+                            <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Cell Phones & Accessories</option>
+                        </select>
+                    </div>
+                    <div class="form-control-wrapper">
+                        Brand:
+                        <select class="form-select" th:field="*{brand}">
+                            <option value="-1">Select a Brand</option>
+                            <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}">Cell Phones & Accessories</option>
+                        </select>
+                    </div>
+                    <div class="form-control-wrapper">
+                        Supplier:
+                        <select class="form-select" th:field="*{store}" >
+                            <option value="-1">Select a Supplier</option>
+                            <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>
+                        </select>
+                    </div>
+                </div>
 
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id = ${item.id})}" class="my-btn delete-btn">Delete Item</a>
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id = ${item.id})}" class="btn btn-danger">Delete Item</a>
         </div>
     </div>
 

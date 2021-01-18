@@ -1,0 +1,73 @@
+.my-btn {
+    cursor: pointer;
+    font-size: 12px;
+    color: #f9dc5c;
+    background-color: #011936;
+    text-decoration: none;
+    padding: 10px 20px;
+    border: 2px solid #111;
+    border-radius: 3px;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing: border-box;
+}
+
+.my-btn:hover {
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn {
+    background-color: rgb(148, 19, 19);
+    color: #b07474;
+    border: 2px solid rgb(195, 21, 21);
+}
+
+.reset-btn {
+    background-color: rgb(171, 168, 167);
+    color: #202020;
+    border: 2px solid rgb(171, 171, 170);
+}
+
+.edit-btns-div {
+    padding: 10px;
+    margin: 10px;
+}
+
+.img-thumb {
+    object-fit: cover;
+    height: 200px;
+    width: 200px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.img-thumb-div {
+    width: 200px;
+    /* border: 1px solid black; */
+}
+
+.my-btn-sm {
+    padding: 5px 10px;
+    border: 2px solid #111;
+    border-radius: 3px;
+}
+
+.detail {
+    display: flex;
+    align-items: flex-start;
+    /* border: 1px solid orange; */
+}
+
+.detail .description-div {
+    font-weight: bold;
+    width: 500px;
+}
+
+.detail .description-div p {
+    padding: 10px;
+    margin-left: 10px;
+}
+
+.detail .description-div .info {
+    font-weight: normal;
+}

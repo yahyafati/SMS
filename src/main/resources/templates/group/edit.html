@@ -3,21 +3,21 @@
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <!--/*@thymesVar id="group" type="com.yahya.growth.stockmanagementsystem.model.security.Role"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${group.id})}" th:object="${group}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+    <div class="form-div-wrapper">
+        <div class="form-div">
+            <form action="" class="form" th:action="@{{action}(action=${action}, id=${group.id})}" th:object="${group}" method="post">
+                <div class="form-control-wrapper">
+                    Name: <input placeholder="Group/Role" class="input-text" type="text" th:field="*{name}">
+                </div>
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${group.id})}" class="my-btn delete-btn">Delete Role</a>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${group.id})}" class="btn btn-danger">Delete Category</a>
         </div>
     </div>
 </section>

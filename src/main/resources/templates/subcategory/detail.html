@@ -2,18 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="subcategory" type="com.yahya.growth.stockmanagementsystem.model.Subcategory"*/-->
 <section th:fragment="main-content" class="main-content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder3.png}" th:alt="${subcategory.name}">
+    <div class="detail">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder3.png}" th:alt="${subcategory.name}">
             <h1 class="h1" th:text="${subcategory.name}">Item Name</h1>
         </div>
-        <div class="col col-8">
-            <p>Name: <span th:text="${subcategory.name}"></span></p>
-            <p>Description: <span th:text="${subcategory.description}"></span></p>
-            <p>Category: <span th:text="${subcategory.category.name}"></span></p>
+        <div class="description-div">
+            <p>Name: <span class="info" th:text="${subcategory.name}"></span></p>
+            <p>Description: <span class="info" th:text="${subcategory.description}"></span></p>
+            <p>Category: <span class="info" th:text="${subcategory.category.name}"></span></p>
+            <div class="edit-btns-div">
+                <a th:href="@{edit(id=${subcategory.id})}" class="my-btn">Edit</a>
+                <a th:href="@{delete(id=${subcategory.id})}" class="my-btn delete-btn">Delete</a>
+            </div>
         </div>
-        <a th:href="@{edit(id=${subcategory.id})}" class="btn btn-primary">Edit</a>
     </div>
 </section>
 </html>

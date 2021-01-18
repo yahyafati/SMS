@@ -3,29 +3,29 @@
 <!--/*@thymesVar id="category" type="com.yahya.growth.stockmanagementsystem.model.Category"*/-->
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${category.name}" alt="Category Photo" src="/images/mouse.webp">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${category.name}" alt="Category Photo" src="/images/mouse.webp">
             <h1 class="h1" th:text="${category.name}">Category Name</h1>
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${category.id})}" th:object="${category}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <label class="d-block">
-                    Description: <input type="text" th:field="*{description}">
-                </label>
+        <div class="form-div">
+            <form action="" class="form" th:action="@{{action}(action=${action}, id=${category.id})}" th:object="${category}" method="post">
+                <div class="form-control-wrapper">
+                    Name: <input class="input-text" placeholder="Category" type="text" th:field="*{name}">
+                </div>
+                <div class="form-control-wrapper">
+                    Description: <input class="input-text" placeholder="Description..." type="text" th:field="*{description}">
+                </div>
 
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${category.id})}" class="my-btn delete-btn">Remove Category</a>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${category.id})}" class="btn btn-danger">Delete Category</a>
         </div>
     </div>
 </section>

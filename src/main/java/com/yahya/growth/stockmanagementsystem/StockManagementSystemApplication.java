@@ -6,6 +6,7 @@ import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.security.Permission;
 import com.yahya.growth.stockmanagementsystem.security.UserRole;
 import com.yahya.growth.stockmanagementsystem.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -195,7 +196,7 @@ public class StockManagementSystemApplication {
             for (int i = 0; i < itemNames.size(); i++) {
                 Item item =
                         Item.builder()
-                                .name(itemNames.get(i))
+                                .name(StringUtils.capitalize(itemNames.get(i)))
                                 .description(itemDescriptionStrings.get(i))
 //                                .quantity(random.nextInt(100))
 //                                .price(random.nextFloat()*100)

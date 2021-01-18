@@ -4,36 +4,38 @@
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <!--/*@thymesVar id="categories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Category>"*/-->
 <section th:fragment="main-content" class="main-content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder3.png}" th:alt="${subcategory.name}" alt="Category Photo" src="/images/mouse.webp">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder3.png}" th:alt="${subcategory.name}" alt="Category Photo" src="/images/mouse.webp">
             <h1 class="h1" th:text="${subcategory.name}">Category Name</h1>
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${subcategory.id})}" th:object="${subcategory}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <label class="d-block">
-                    Description: <input type="text" th:field="*{description}">
-                </label>
-                <label class="d-block">
-                    Category:
-                    <select th:field="*{category}" >
-                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-                    </select>
-                </label>
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action}, id=${subcategory.id})}" th:object="${subcategory}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Name: <input class="input-text" placeholder="Subcategory" type="text" th:field="*{name}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Description: <input class="input-text" placeholder="Description..." type="text" th:field="*{description}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Category:
+                        <select class="form-select" th:field="*{category}" >
+                            <option value="-1">Which Category does it belong to?</option>
+                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                        </select>
+                    </div>
+                </div>
 
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id = ${subcategory.id})}" class="my-btn delete-btn">Delete Subcategory</a>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id = ${subcategory.id})}" class="btn btn-danger">Delete Subcategory</a>
         </div>
     </div>
 </section>

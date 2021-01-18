@@ -1,0 +1,56 @@
+.form-div {
+
+}
+.form-div-wrapper {
+    display: flex;
+}
+.form-wrapper {
+    padding: 10px;
+    /* border: 1px solid #111; */
+    width: max-content;
+    font-weight: bold;
+    color: #011936;
+}
+
+.form .form-title {
+    font-family: "Montserrat", sans-serif;
+}
+
+.input-text,
+.form-select {
+    outline: none;
+    border: none;
+    width: 200px;
+    margin: 2px;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 16px;
+    -ms-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.input-text[type="number"] {
+    text-align: right;
+}
+
+.input-text:hover,
+.input-text:focus,
+.form-select:hover,
+.input-text:focus {
+    box-shadow: 0 10px 15px #0119368c;
+    border: 2px solid #011936;
+    margin: 0px;
+
+    /* outline: 1px solid #111; */
+}
+
+.form-control-wrapper {
+    /* border: 1px solid #111; */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}

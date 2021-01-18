@@ -3,41 +3,42 @@
 <!--/*@thymesVar id="store" type="com.yahya.growth.stockmanagementsystem.model.Store"*/-->
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${store.name}" alt="Category Photo" src="/images/mouse.webp">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${store.name}" alt="Category Photo" src="/images/mouse.webp">
             <h1 class="h1" th:text="${store.name}">Category Name</h1>
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${store.id})}" th:object="${store}" method="post">
-                <label class="d-block">
-                    Name: <input type="text" th:field="*{name}">
-                </label>
-                <label class="d-block">
-                    Description: <input type="text" th:field="*{description}">
-                </label>
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action}, id=${store.id})}" th:object="${store}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Name: <input class="input-text" placeholder="Store" type="text" th:field="*{name}">
+                    </div>
+                    <label class="d-block">
+                        Description: <input class="input-text" placeholder="Description..." type="text" th:field="*{description}">
+                    </label>
 
-                <label class="d-block">
-                    Email: <input type="email" th:field="*{email}">
-                </label>
+                    <label class="d-block">
+                        Email: <input class="input-text" placeholder="Email Address" type="email" th:field="*{email}">
+                    </label>
 
-                <label class="d-block">
-                    Phone: <input type="tel" th:field="*{phone}">
-                </label>
+                    <label class="d-block">
+                        Phone: <input class="input-text" placeholder="Phone Number" type="tel" th:field="*{phone}">
+                    </label>
 
-                <label class="d-block">
-                    Address: <input type="text" th:field="*{address}">
-                </label>
-
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                    <label class="d-block">
+                        Address: <input class="input-text" placeholder="Address" type="text" th:field="*{address}">
+                    </label>
+                </div>
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="my-btn delete-btn">Delete Category</a>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="btn btn-danger">Delete Category</a>
         </div>
     </div>
 </section>

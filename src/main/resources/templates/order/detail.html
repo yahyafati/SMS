@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${order.item.name}">
-            <h2 class="h1" th:text="${order.item.name}">Item Name</h2>
+<section th:fragment="main-content" class="main_content">
+    <div class="detail">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${order.item.name}">
+            <h2 th:text="${order.item.name}">Item Name</h2>
         </div>
-        <div class="col col-8">
-            <p>Customer Info: <span th:text="${order.customer.name}"></span></p>
-            <p>Item Name: <span th:text="${order.item.name}"></span></p>
-            <p>Description: <span th:text="${order.item.description}"></span></p>
-            <p>Last Modified Date: <span th:text="${order.lastModifiedTime}"></span></p>
-            <p>Ordered Date: <span th:text="${order.orderedTime}"></span></p>
+        <div class="description-div">
+            <p>Customer Info: <span class="info" th:text="${order.customer.name}"></span></p>
+            <p>Item Name: <span class="info" th:text="${order.item.name}"></span></p>
+            <p>Description: <span class="info" th:text="${order.item.description}"></span></p>
+            <p>Last Modified Date: <span class="info" th:text="${order.lastModifiedTime}"></span></p>
+            <p>Ordered Date: <span class="info" th:text="${order.orderedTime}"></span></p>
 
             <p>Paid:
-                <span th:text="${order.paid} ? 'Paid' : 'Not Paid'">Paid</span>
+                <span class="info" th:text="${order.paid} ? 'Paid' : 'Not Paid'">Paid</span>
                 <a th:href="@{togglePay(id=${order.id})}">
                     <i th:class="${order.paid} ? 'fas fa-toggle-on' : 'fas fa-toggle-on'" th:style="${order.paid} ? 'color:green;' : 'color:gray'"></i>
                 </a>
 <!--                <span></span>-->
 <!--                <a class="btn btn-outline-warning" th:text="'Change'">Change</a>-->
             </p>
-            <a th:href="@{delete(id=${order.id})}" class="btn btn-danger">Remove Order</a>
+            <div class="edit-btns-div">
+                <a th:href="@{delete(id=${order.id})}" class="my-btn delete-btn">Remove Order</a>
+            </div>
         </div>
 <!--        <a th:href="@{edit(id=${order.id})}" class="btn btn-primary">Edit</a>-->
     </div>
 
-</div>
+</section>
 
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
 </html>

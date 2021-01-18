@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="customer" type="com.yahya.growth.stockmanagementsystem.model.Customer"*/-->
-<section class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${customer.name}">
+<section th:fragment="main-content" class="main-content">
+    <div class="detail">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${customer.name}">
             <h1 class="h1" th:text="${customer.name}">Item Name</h1>
         </div>
-        <div class="col col-8">
-            <p>Name: <span th:text="${customer.name}">John Doe</span></p>
-            <p>Address: <span th:text="${customer.address}">Istanbul, Turkey</span></p>
-            <p>Phone: <span th:text="${customer.phone}">5396667845</span></p>
-            <p>Email: <span th:text="${customer.email}">him@him.her</span></p>
+        <div class="description-div">
+            <p>Name: <span class="info" th:text="${customer.name}">John Doe</span></p>
+            <p>Address: <span class="info" th:text="${customer.address}">Istanbul, Turkey</span></p>
+            <p>Phone: <span class="info" th:text="${customer.phone}">5396667845</span></p>
+            <p>Email: <span class="info" th:text="${customer.email}">him@him.her</span></p>
+            <div class="edit-btns-div">
+                <a th:href="@{edit(id=${customer.id})}" class="my-btn">Edit</a>
+                <a th:href="@{delete(id=${customer.id})}" class="my-btn delete-btn">Remove Customer</a>
+            </div>
         </div>
-        <a th:href="@{edit(id=${customer.id})}" class="btn btn-primary">Edit</a>
     </div>
 </section>
-</body>
 </html>

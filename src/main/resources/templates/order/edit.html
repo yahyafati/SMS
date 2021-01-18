@@ -1,46 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${'Order Thumbnail'}" alt="Category Photo" src="/images/mouse.webp">
+<div th:fragment="main-content" class="main-content">
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${'Order Thumbnail'}" alt="Category Photo" src="/images/mouse.webp">
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${order.id})}" th:object="${order}" method="post">
-                <label class="d-block">
-                    Customer:
-                    <select th:field="*{customer}" >
-                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Mrs. Hansen</option>
-                    </select>
-                </label>
-                <label class="d-block">
-                    Item:
-                    <select th:field="*{item.id}" >
-                        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Samsung Galaxy S10</option>
-                    </select>
-                </label>
-                <label class="d-block">
-                    Quantity: <input type="number" th:field="*{quantity}">
-                </label>
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action}, id=${order.id})}" th:object="${order}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Customer:
+                        <select class="form-select" th:field="*{customer}" >
+                            <option value="-1">Select a Customer</option>
+                            <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Mrs. Hansen</option>
+                        </select>
+                    </div>
+                    <div class="form-control-wrapper">
+                        Item:
+                        <select class="form-select" th:field="*{item.id}" >
+                            <option value="-1">Select a Product</option>
+                            <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Samsung Galaxy S10</option>
+                        </select>
+                    </div>
+                    <div class="form-control-wrapper">
+                        Quantity: <input placeholder="Quantity" class="input-text" type="number" th:field="*{quantity}">
+                    </div>
 
-                <label class="d-block">
-                    Paid: <input type="checkbox" th:field="*{paid}">
-                </label>
+                    <div class="form-control-wrapper">
+                        Paid: <input placeholder="Quantity" type="checkbox" th:field="*{paid}">
+                    </div>
+                </div>
 
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
         </div>
     </div>
 </div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
 </html>

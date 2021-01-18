@@ -4,52 +4,55 @@
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <!--/*@thymesVar id="allRoles" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.security.Role>"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.profile.fullName}" alt="User Photo" src="/images/mouse.webp">
-            <h1 class="h1" th:text="${user.profile.fullName}">User Name</h1>
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.profile.fullName}" alt="User Photo" src="/images/mouse.webp">
+            <h1 th:text="${user.profile.fullName}">User Name</h1>
         </div>
-        <div class="col col-8">
-            <form action="" th:action="@{{action}(action=${action}, id=${user.id})}" th:object="${user}" method="post">
-                <label class="d-block">
-                    Username: <input type="text" th:field="*{username}">
-                </label>
-                <!--   TODO DO NOT PASS PASSWORDS TO HTML   -->
-                <input hidden disabled type="password" th:field="*{password}">
-                <label class="d-block">
-                    First Name: <input th:disabled="${action == 'edit'}" type="text" th:field="*{profile.firstName}">
-                </label>
-                <label class="d-block">
-                    Last Name: <input th:disabled="${action == 'edit'}" type="text" th:field="*{profile.lastName}">
-                </label>
-                <label class="d-block">
-                    Email: <input th:disabled="${action == 'edit'}" type="email" th:field="*{profile.email}">
-                </label>
-                <label class="d-block">
-                    Phone: <input th:disabled="${action == 'edit'}" type="tel" th:field="*{profile.phone}">
-                </label>
-                <label class="d-block">
-                    Enabled: <input type="checkbox" th:field="*{enabled}">
-                </label>
-                <input disabled hidden type="checkbox" th:field="*{accountNonLocked}">
-                <input disabled hidden type="checkbox" th:field="*{accountNonExpired}">
-                <input disabled hidden type="checkbox" th:field="*{credentialsNonExpired}">
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action}, id=${user.id})}" th:object="${user}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Username: <input placeholder="Username" class="input-text" type="text" th:field="*{username}">
+                    </div>
+                    <!--   TODO DO NOT PASS PASSWORDS TO HTML   -->
+                    <input hidden disabled type="password" th:field="*{password}">
+                    <div class="form-control-wrapper">
+                        First Name: <input placeholder="First Name" class="input-text" th:disabled="${action == 'edit'}" type="text" th:field="*{profile.firstName}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Last Name: <input placeholder="Last Name" class="input-text" th:disabled="${action == 'edit'}" type="text" th:field="*{profile.lastName}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Email: <input placeholder="Email" class="input-text" th:disabled="${action == 'edit'}" type="email" th:field="*{profile.email}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Phone: <input placeholder="Phone" class="input-text" th:disabled="${action == 'edit'}" type="tel" th:field="*{profile.phone}">
+                    </div>
+                    <div class="form-control-wrapper">
+                        Enabled: <input placeholder="Enabled" type="checkbox" th:field="*{enabled}">
+                    </div>
+                    <input disabled hidden type="checkbox" th:field="*{accountNonLocked}">
+                    <input disabled hidden type="checkbox" th:field="*{accountNonExpired}">
+                    <input disabled hidden type="checkbox" th:field="*{credentialsNonExpired}">
 
-                <label class="d-block">
-                    Role:
-                    <select th:field="*{role}" >
-                        <option th:each="curRole : ${allRoles}" th:value="${curRole.id}" th:text="${curRole.displayName}"></option>
-                    </select>
-                </label>
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
-                    <!--                    <input type="submit" value="Delete" class="btn btn-danger"/>-->
+                    <div class="form-control-wrapper">
+                        Role:
+                        <select class="form-select" th:field="*{role}" >
+                            <option value="-1">Select a role</option>
+                            <option th:each="curRole : ${allRoles}" th:value="${curRole.id}" th:text="${curRole.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${user.id})}" class="my-btn delete-btn">Remove User</a>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 
             </form>
 
-            <a th:if="${action} == 'edit'" th:href="@{delete(id=${user.id})}" class="btn btn-danger">Remove User</a>
         </div>
     </div>
 </section>

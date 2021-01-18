@@ -4,95 +4,98 @@
 <!--/*@thymesVar id="categories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Category>"*/-->
 <!--/*@thymesVar id="subcategories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Subcategory>"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder4.jpeg}" th:alt="${brand.name}">
+    <div class="detail">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder4.jpeg}" th:alt="${brand.name}">
             <h1 class="h1" th:text="${brand.name}">Item Name</h1>
         </div>
-        <div class="col col-8">
-            <p>Name: <span th:text="${brand.name}"></span></p>
-            <p>Description: <span th:text="${brand.description}"></span></p>
+        <div class="description-div">
+            <p>Name: <span class="info" th:text="${brand.name}"></span></p>
+            <p>Description: <span class="info" th:text="${brand.description}"></span></p>
+            <div class="edit-btns-div">
+                <a th:href="@{/brand/edit(id=${brand.id})}" class="my-btn">Edit</a>
+                <a th:href="@{/brand/delete(id=${brand.id})}" class="my-btn delete-btn">Remove Brand</a>
+            </div>
         </div>
-        <a th:href="@{/brand/edit(id=${brand.id})}" class="btn btn-primary">Edit</a>
     </div>
 
-    <div class="row">
-        <h3>Categories</h3>
-        <table class="table">
-            <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>
-<!--                th:href="@{/category/new(brand=${brand.id})}"-->
-                <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-category" toggledClass="d-none">
-                    <i class="fas fa-plus-circle"></i>
-                </a>
-                <form id="add-category" class="d-inline d-none" action="#" th:action="@{addCategory(brandId = ${brand.id})}" method="post" th:object="${category}">
-                    Category:
-                    <select th:field="*{id}">
-                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-                    </select>
-                    <input type="submit" value="Submit" class="btn btn-success">
-                </form>
-            </th>
-            </thead>
-            <tbody>
-            <tr th:each="category, rowStat : ${brand.categories}">
-                <td th:text="${rowStat.count}">1</td>
-                <td th:text="${category.name}">Electronics</td>
-                <td th:text="${category.description}">Electronics Description</td>
-                <td>
-                    <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(brand=${brand.id})}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{removeCategory(category=${category.id}, brand=${brand.id})}">
-                        <i class="fas fa-minus-circle"></i>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<!--    <div class="row">-->
+<!--        <h3>Categories</h3>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <th>#</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>-->
+<!--&lt;!&ndash;                th:href="@{/category/new(brand=${brand.id})}"&ndash;&gt;-->
+<!--                <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-category" toggledClass="d-none">-->
+<!--                    <i class="fas fa-plus-circle"></i>-->
+<!--                </a>-->
+<!--                <form id="add-category" class="d-inline d-none" action="#" th:action="@{addCategory(brandId = ${brand.id})}" method="post" th:object="${category}">-->
+<!--                    Category:-->
+<!--                    <select th:field="*{id}">-->
+<!--                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>-->
+<!--                    </select>-->
+<!--                    <input type="submit" value="Submit" class="btn btn-success">-->
+<!--                </form>-->
+<!--            </th>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="category, rowStat : ${brand.categories}">-->
+<!--                <td th:text="${rowStat.count}">1</td>-->
+<!--                <td th:text="${category.name}">Electronics</td>-->
+<!--                <td th:text="${category.description}">Electronics Description</td>-->
+<!--                <td>-->
+<!--                    <a class="btn btn-outline-info" href="#" th:href="@{/category/edit(brand=${brand.id})}">-->
+<!--                        <i class="fas fa-edit"></i>-->
+<!--                    </a>-->
+<!--                    <a class="btn btn-outline-warning" href="#" th:href="@{removeCategory(category=${category.id}, brand=${brand.id})}">-->
+<!--                        <i class="fas fa-minus-circle"></i>-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
 
-    <div class="row">
-        <h3>Subcategories</h3>
-        <table class="table">
-            <thead>
-            <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>
-                <!--                th:href="@{/category/new(brand=${brand.id})}"-->
-                <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-subcategory" toggledClass="d-none">
-                    <i class="fas fa-plus-circle"></i>
-                </a>
-                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{addSubcategory(brandId = ${brand.id})}" method="post" th:object="${subcategory}">
-                    Category:
-                    <select th:field="*{id}">
-                        <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Mobiles</option>
-                    </select>
-                    <input type="submit" value="Submit" class="btn btn-success">
-                </form>
-            </th>
-            </thead>
-            <tbody>
-            <tr th:each="subcategory, rowStat : ${brand.subcategories}">
-                <td th:text="${rowStat.count}">1</td>
-                <td th:text="${subcategory.name}">Electronics</td>
-                <td th:text="${subcategory.description}">Electronics Description</td>
-                <td>
-                    <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(brand=${brand.id})}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a class="btn btn-outline-warning" href="#" th:href="@{removeSubcategory(brand=${brand.id}, subcategory=${subcategory.id})}">
-                        <i class="fas fa-minus-circle"></i>
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+<!--    <div class="row">-->
+<!--        <h3>Subcategories</h3>-->
+<!--        <table class="table">-->
+<!--            <thead>-->
+<!--            <th>#</th>-->
+<!--            <th>Name</th>-->
+<!--            <th>Description</th>-->
+<!--            <th>-->
+<!--                &lt;!&ndash;                th:href="@{/category/new(brand=${brand.id})}"&ndash;&gt;-->
+<!--                <a class="btn btn-outline-primary" href="#" onclick="toggleClass(this)" toggledElement="add-subcategory" toggledClass="d-none">-->
+<!--                    <i class="fas fa-plus-circle"></i>-->
+<!--                </a>-->
+<!--                <form id="add-subcategory" class="d-inline d-none" action="#" th:action="@{addSubcategory(brandId = ${brand.id})}" method="post" th:object="${subcategory}">-->
+<!--                    Category:-->
+<!--                    <select th:field="*{id}">-->
+<!--                        <option th:each="subcategory : ${subcategories}" th:value="${subcategory.id}" th:text="${subcategory.name}">Mobiles</option>-->
+<!--                    </select>-->
+<!--                    <input type="submit" value="Submit" class="btn btn-success">-->
+<!--                </form>-->
+<!--            </th>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="subcategory, rowStat : ${brand.subcategories}">-->
+<!--                <td th:text="${rowStat.count}">1</td>-->
+<!--                <td th:text="${subcategory.name}">Electronics</td>-->
+<!--                <td th:text="${subcategory.description}">Electronics Description</td>-->
+<!--                <td>-->
+<!--                    <a class="btn btn-outline-info" href="#" th:href="@{/subcategory/edit(brand=${brand.id})}">-->
+<!--                        <i class="fas fa-edit"></i>-->
+<!--                    </a>-->
+<!--                    <a class="btn btn-outline-warning" href="#" th:href="@{removeSubcategory(brand=${brand.id}, subcategory=${subcategory.id})}">-->
+<!--                        <i class="fas fa-minus-circle"></i>-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
 
 </section>
 </html>

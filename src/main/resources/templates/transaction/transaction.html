@@ -6,40 +6,40 @@
 <!--/*@thymesVar id="transactionTypes" type="com.yahya.growth.stockmanagementsystem.model.TransactionType[]"*/-->
 <!--/*@thymesVar id="customers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Customer>"*/-->
 <section th:fragment="main-content" class="main-content">
-    <header th:replace="common/header :: navbar-fragment"></header>
-    <div>
+    <div class=""form-div>
         <select hidden id="availableItemsElement">
             <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
         </select>
-        <form method="post" action="#" th:action="@{${action}(id=${transaction.id})}" th:object="${transaction}">
-            <input hidden type="number" th:field="*{id}">
-            <label class="d-block">
-                Type:
-                <select th:field="*{type}" >
-                    <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
-                </select>
-            </label>
-            <label class="d-block">
-                From:
-                <select th:field="*{fromTo}" >
-                    <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Electronics</option>
-                </select>
-            </label>
-            <label class="d-block">
-                Reference No: <input type="number" th:field="*{refNumber}">
-            </label>
-            <label class="d-block">
-                Date: <input type="date" th:field="*{transactionDate}">
-            </label>
-
-            <table class="table table-striped table-primary" id="itemTransaction">
+        <form class="form" method="post" action="#" th:action="@{${action}(id=${transaction.id})}" th:object="${transaction}">
+            <div class="form-wrapper">
+                <input hidden type="number" th:field="*{id}">
+                <div class="form-control-wrapper">
+                    Type:
+                    <select class="form-select" th:field="*{type}" >
+                        <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
+                    </select>
+                </div>
+                <div class="form-control-wrapper">
+                    From:
+                    <select class="form-select" th:field="*{fromTo}" >
+                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Electronics</option>
+                    </select>
+                </div>
+                <div class="form-control-wrapper">
+                    Reference No: <input class="input-text" type="number" th:field="*{refNumber}">
+                </div>
+                <div class="form-control-wrapper">
+                    Date: <input class="input-text" type="date" th:field="*{transactionDate}">
+                </div>
+            </div>
+            <table class="styled-table" id="itemTransaction">
                 <thead>
                 <tr>
                     <th>Item</th>
                     <th>Price</th>
                     <th>Quantity</th>
                     <th>
-                        <button onclick="return addTransactionRow()" type="button" class="btn btn-outline-primary btn-sm">Add Row</button>
+                        <button onclick="return addTransactionRow()" type="button" class="my-btn my-btn-sm">Add Item</button>
                     </th>
                 </tr>
                 </thead>
@@ -55,12 +55,12 @@
                     </td>
                     <td>
                         <label class="d-block">
-                            <input name="price" type="text" th:value="${itemTransaction.unitPrice}" th:text="${itemTransaction.unitPrice}">
+                            <input class="input-text" name="price" type="text" th:value="${itemTransaction.unitPrice}" th:text="${itemTransaction.unitPrice}">
                         </label>
                     </td>
                     <td>
                         <label class="d-block">
-                            <input name="quantity" type="number" th:value="${itemTransaction.quantity}" th:text="${itemTransaction.quantity}">
+                            <input class="input-text" name="quantity" type="number" th:value="${itemTransaction.initialQuantity}" th:text="${itemTransaction.initialQuantity}">
                         </label>
                     </td>
                     <td>
@@ -71,8 +71,8 @@
             </table>
 
             <div>
-                <input type="submit" value="Submit" class="btn btn-success" />
-                <input type="reset" value="Reset" class="btn btn-outline-success"/>
+                <input type="submit" value="Submit" class="my-btn" />
+                <input type="reset" value="Reset" class="my-btn delete-btn"/>
             </div>
         </form>
 
