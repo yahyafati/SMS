@@ -1,47 +1,141 @@
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
 <head th:fragment="common-header">
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="description" content="Stock Management System"/>
-    <meta name="author" content="Yahya Haji"/>
-    <title>Stock Management System</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stock Management System" />
+    <meta name="author" content="Yahya Haji" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet"  href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/css/main.css"/>
-    <script src="https://kit.fontawesome.com/53b200ce77.js" crossorigin="anonymous"></script>
+    <title>Stock Management System</title>
+    <script
+            src="https://kit.fontawesome.com/53b200ce77.js"
+            crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/style.css" />
+<!--    <link rel="stylesheet" href="/css/main.css" />-->
+    <script src="/js/app.js"></script>
     <script src="/js/custom.js"></script>
 </head>
-
 <body>
-
-<div th:fragment="navbar-fragment">
-
-    <div id="mySidenav" class="sidenav">
-        <div class="logo">
-            <h1><i class="fas fa-align-center"></i> Logos</h1>
-        </div>
-        <ul>
-            <li><a href="#" th:href="@{/dashboard}"><i class="fas fa-border-style"></i> Dashboard</a></li>
-            <li><a href="#" th:href="@{/users}"><i class="fas fa-user-cog"></i> Users</a></li>
-            <li><a href="#" th:href="@{/customer}"><i class="fas fa-female"></i> Customers</a></li>
-            <li><a href="#" th:href="@{/group}"><i class="fas fa-users"></i> Groups</a></li>
-            <li><a href="#" th:href="@{/brand}"><i class="fab fa-apple"></i> Brands</a></li>
-            <li><a href="#" th:href="@{/category}"><i class="fas fa-layer-group"></i> Categories</a></li>
-            <li><a href="#" th:href="@{/store}"><i class="fas fa-store"></i> Stores</a></li>
-            <li><a href="#" th:href="@{/transaction}"><i class="fas fa-cart-plus"></i> Transaction</a></li>
-            <li><a href="#" th:href="@{/items}"><i class="fab fa-product-hunt"></i> Products</a></li>
-            <li><a href="#" th:href="@{/reports}"><i class="fas fa-scroll"></i> Reports</a></li>
-            <li><a href="#" th:href="@{/company}"><i class="fas fa-building"></i> Company</a></li>
-            <li><a href="#" th:href="@{/profile}"><i class="fas fa-user-circle"></i> Profile</a></li>
-            <li><a href="#" th:href="@{/logout}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+<header th:fragment="navbar-fragment">
+    <div class="logo">
+        <i class="fab fa-slack"></i> Helio Inventory Solution
+    </div>
+    <div class="pageTitle">
+        <i class="fas fa-border-style"></i> Dashboard
+    </div>
+    <div class="profile">
+        <span class="name">Yahya Haji</span>
+        <img
+                class="profileImg"
+                src="profile.jpg"
+                alt="profile picture"
+        />
+        <ul id="profileMenu" class="profileMenu">
+            <li class="item">
+                <a href="#" th:href="@{/profile}">
+                    <i class="fas fa-user"></i> View Profile
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/logout}"> <i class="fa fa-sign-out"></i> Logout </a>
+            </li>
         </ul>
     </div>
+</header>
+<div class="body">
+    <section class="sidebar" id="sidebar">
+        <ul class="menu">
+            <li class="item active">
+                <a href="#" th:href="@{/dashboard}">
+                    <i class="fas fa-border-style"></i> Dashboard
+                </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/brand}"> <i class="fab fa-apple"></i> Brand </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/category}">
+                    <i class="fas fa-layer-group"></i> Category
+                </a>
+            </li>
+            <li class="item">
+                        <span
+                                class="transaction"
+                                onclick="toggleClass(this)"
+                                toggledElement="transactionSubMenu"
+                                toggledClass="hide"
+                                toggler
+                        >
+                            <i class="fas fa-exchange-alt"></i> Transaction
+                        </span>
+                <ul class="subMenu hide" id="transactionSubMenu">
+                    <li class="item">
+                        <a href="#" th:href="@{/transaction}">
+                            <i class="fas fa-exchange-alt"></i> Detail
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/purchase}">
+                            <i class="fas fa-indent"></i> Purchase
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/sale}">
+                            <i class="fas fa-outdent"></i> Sale
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/items}"> <i class="fas fa-tv"></i> Products </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/customer}"> <i class="fas fa-tv"></i> Customers </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/reports}"> <i class="fas fa-scroll"></i> Reports </a>
+            </li>
+            <li class="item">
+                        <span
+                                class="adminTools"
+                                onclick="toggleClass(this)"
+                                toggledElement="adminToolsSubMenu"
+                                toggledClass="hide"
+                                toggler
+                        >
+                            <i class="fas fa-users-cog"></i> Admin Tools
+                        </span>
+                <ul class="subMenu hide" id="adminToolsSubMenu">
+                    <li class="item">
+                        <a href="#" th:href="@{/users}">
+                            <i class="fas fa-user"></i> Users
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/group}">
+                            <i class="fas fa-users"></i> Groups
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/company}">
+                            <i class="fas fa-building"></i> Company
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+    <section th:replace="${pageName} :: main-content" class="main-content"></section>
 </div>
+
+<footer>
+    <p class="company">
+        Developed By <span class="name">Company Inc. &copy;</span>
+    </p>
+</footer>
+
 
 <div th:fragment="body-bottom-scripts">
     <!-- jQuery -->
@@ -51,5 +145,4 @@
     <!--main js-->
 </div>
 </body>
-
 </html>

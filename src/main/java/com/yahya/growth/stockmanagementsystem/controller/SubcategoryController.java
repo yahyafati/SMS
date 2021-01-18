@@ -20,13 +20,17 @@ public class SubcategoryController {
     @GetMapping("")
     public String subcategories(Model model) {
         model.addAttribute("subcategories", subcategoryService.findAll());
-        return "subcategory/all";
+//        return "subcategory/all";
+        model.addAttribute("pageName", "subcategory/all");
+        return "common/header";
     }
 
     @GetMapping("/{subcategoryId}")
     public String detail(@PathVariable int subcategoryId, Model model) {
         model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
-        return "subcategory/detail";
+//        return "subcategory/detail";
+        model.addAttribute("pageName", "subcategory/detail");
+        return "common/header";
     }
 
     @GetMapping("/new")
@@ -36,7 +40,9 @@ public class SubcategoryController {
         model.addAttribute("subcategory", subCategory);
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("action", "new");
-        return "subcategory/edit";
+//        return "subcategory/edit";
+        model.addAttribute("pageName", "subcategory/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -50,7 +56,9 @@ public class SubcategoryController {
         model.addAttribute("subcategory", subcategoryService.findById(subcategoryId));
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("action", "edit");
-        return "subcategory/edit";
+//        return "subcategory/edit";
+        model.addAttribute("pageName", "subcategory/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

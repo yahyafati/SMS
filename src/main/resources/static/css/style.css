@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #eee;
+    color: #111;
+}
+
+.hide {
+    display: none;
+}
+/* General CSS Specs */
+
+header,
+footer,
+.body .sidebar {
+    background-color: #011936;
+    color: #f9dc5c;
+}
+
+header {
+    display: flex;
+    line-height: 50px;
+    height: 50px;
+    padding: 10px;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+footer {
+    font-size: 80%;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+header .logo {
+    font-size: 25px;
+}
+
+header .profile .profileImg {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+header .profile .profileMenu {
+    display: none;
+    position: relative;
+    z-index: 1;
+    background-color: #111;
+    color: #eee;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+header .profile:hover .profileMenu {
+    display: block;
+}
+
+header .profile .profileMenu .item {
+    border: 1px ridge #eee;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+}
+
+header .profile .profileMenu .item:hover {
+    background-color: #333;
+    color: #eee;
+}
+
+header .profile .profileMenu a {
+    color: #eee;
+    text-decoration: none;
+}
+
+header .profile .profileMenu .item {
+    /* border: 1px solid #000; */
+    cursor: pointer;
+    padding: 5px;
+    margin: 2px;
+    border: 5px none #222;
+}
+
+header .profile .name {
+    line-height: 50px;
+}
+
+/* Header CSS Specs */
+
+.body section {
+    border: 1px solid #111;
+}
+
+.body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.body .sidebar {
+    flex: 1;
+    min-height: 100vh;
+}
+
+.body .main-content {
+    flex: 6;
+}
+
+.body .sidebar .item {
+    background-color: #46536299;
+    padding: 15px;
+    padding-right: 0px;
+    cursor: pointer;
+}
+
+.body .sidebar .item:hover {
+    padding-left: 10px;
+    border-left: 5px solid #17ca35;
+    color: #eee;
+    /* margin-left: 5px; */
+}
+
+.body .sidebar .item.active {
+    padding-left: 10px;
+    border-left: 5px solid #ed254e;
+    color: #eee;
+}
+
+.body .sidebar .item.active .wrapper {
+    margin-left: 5px;
+}
+
+.body .sidebar .item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.body .sidebar .item.subMenu {
+    list-style-type: none;
+    padding-left: 20px;
+    border-left: 5px solid #17ca35;
+}
+
+.body .sidebar .item.subMenu:hover {
+    padding-left: 15px;
+    border-left: 10px solid #17ca35;
+}
+
+/* Dashboard Items */
+.body .main-content {
+    padding: 30px;
+}
+
+.body .main-content .dashboard {
+    font-family: "Montserrat", sans-serif;
+}
+
+.body .main-content .dashboard .dashboard-item {
+    display: inline-flex;
+    padding: 10px;
+    margin: 10px;
+    justify-content: space-between;
+    align-items: center;
+    background-image: linear-gradient(-20deg, #366c91 0%, #645697 100%);
+    border-radius: 5px;
+    width: 300px;
+    height: 100px;
+}
+
+.body .main-content .dashboard .dashboard-item .dashboard-title {
+    /* border: 1px solid black; */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 40px;
+    color: white;
+}
+
+.body .main-content .dashboard .dashboard-item .dashboard-icon {
+    /* border: 1px solid black; */
+    font-size: 70px;
+    color: #ffffff55;
+}

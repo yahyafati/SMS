@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="common/header :: common-header"></head>
 <body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<header th:replace="common/header :: navbar-fragment"></header>
+<section th:fragment="main-content" class="main-content">
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder4.jpeg}" th:alt="${brand.name}" alt="Category Photo" src="/images/mouse.webp">
@@ -29,7 +29,7 @@
             <a th:if="${action} == 'edit'" th:href="@{/brand/delete(id=${brand.id})}" class="btn btn-danger">Delete Brand</a>
         </div>
     </div>
-</div>
+</section>
 
 <div th:replace="common/header :: body-bottom-scripts"></div>
 </body>

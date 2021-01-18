@@ -23,7 +23,9 @@ public class CategoryController {
     @GetMapping("")
     public String categories(Model model) {
         model.addAttribute("categories", categoryService.findAll());
-        return "category/all";
+        model.addAttribute("pageName", "category/all");
+        return "common/header";
+//        return "category/all";
     }
 
     @GetMapping("/{categoryId}")
@@ -31,14 +33,18 @@ public class CategoryController {
         List<Subcategory> subCategories = subcategoryService.findAllByCategory(categoryId);
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("subcategories", subCategories);
-        return "category/detail";
+//        return "category/detail";
+        model.addAttribute("pageName", "category/detail");
+        return "common/header";
     }
 
     @GetMapping("/new")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         model.addAttribute("action", "new");
-        return "category/edit";
+//        return "category/edit";
+        model.addAttribute("pageName", "category/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -57,7 +63,9 @@ public class CategoryController {
     public String edit(@RequestParam(name = "id") int categoryId, Model model) {
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("action", "edit");
-        return "category/edit";
+//        return "category/edit";
+        model.addAttribute("pageName", "category/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

@@ -32,7 +32,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("transactions", transactionService.findAll());
-        return "transaction/all";
+//        return "transaction/all";
+        model.addAttribute("pageName", "transaction/all");
+        return "common/header";
     }
 
     @Override
@@ -41,7 +43,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         Transaction transaction = transactionService.findById(id);
 
         model.addAttribute("transaction", transaction);
-        return "transaction/detail";
+//        return "transaction/detail";
+        model.addAttribute("pageName", "transaction/detail");
+        return "common/header";
     }
 
     @Override
@@ -52,7 +56,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         model.addAttribute("customers", customerService.findAll());
         model.addAttribute("allItems", itemService.findAll());
         model.addAttribute("action", "new");
-        return "transaction/transaction";
+//        return "transaction/transaction";
+        model.addAttribute("pageName", "transaction/transaction");
+        return "common/header";
     }
 
     @Override
@@ -78,7 +84,9 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         model.addAttribute("customers", customerService.findAll());
         model.addAttribute("allItems", itemService.findAll());
         model.addAttribute("action", "edit");
-        return "transaction/transaction";
+//        return "transaction/transaction";
+        model.addAttribute("pageName", "transaction/transaction");
+        return "common/header";
     }
 
     @PostMapping("/edit")

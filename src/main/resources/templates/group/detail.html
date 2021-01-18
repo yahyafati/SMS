@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="group" type="com.yahya.growth.stockmanagementsystem.model.security.Role"*/-->
+<!--/*@thymesVar id="permissions" type="java.util.List<java.lang.String>"*/-->
+<!--/*@thymesVar id="allAuthorities" type="java.util.Map<java.lang.String, java.lang.Boolean[]>"*/-->
+<!--/*@thymesVar id="reportPermissions" type="java.lang.Boolean[]"*/-->
+<section th:fragment="main-content" class="main-content">
     <div class="row">
         <div class="col col-8">
-            <p>Role: <span th:text="${group.displayName}">Manager</span></p>
+            <p>Role:
+            <span th:text="${group.displayName}">Manager</span></p>
         </div>
         <a th:href="@{delete(id=${group.id})}" class="btn btn-danger">Delete</a>
         <form th:object="${permissions}" th:action="@{/group/{id}(id=${group.id})}" method="post">
@@ -50,8 +52,5 @@
 
     </div>
 
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

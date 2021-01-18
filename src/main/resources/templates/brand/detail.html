@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="brand" type="com.yahya.growth.stockmanagementsystem.model.Brand"*/-->
+<!--/*@thymesVar id="categories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Category>"*/-->
+<!--/*@thymesVar id="subcategories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Subcategory>"*/-->
+<section th:fragment="main-content" class="main-content">
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder4.jpeg}" th:alt="${brand.name}">
@@ -94,8 +94,5 @@
         </table>
     </div>
 
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

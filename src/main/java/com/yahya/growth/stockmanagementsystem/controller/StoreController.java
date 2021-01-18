@@ -17,20 +17,26 @@ public class StoreController {
     @GetMapping("")
     public String stores(Model model) {
         model.addAttribute("stores", storeService.findAll());
-        return "store/all";
+//        return "store/all";
+        model.addAttribute("pageName", "store/all");
+        return "common/header";
     }
 
     @GetMapping("/{storeId}")
     public String detail(@PathVariable int storeId, Model model) {
         model.addAttribute("store", storeService.findById(storeId));
-        return "store/detail";
+//        return "store/detail";
+        model.addAttribute("pageName", "store/detail");
+        return "common/header";
     }
 
     @GetMapping("/new")
     public String addStore(Model model) {
         model.addAttribute("store", new Store());
         model.addAttribute("action", "new");
-        return "store/edit";
+//        return "store/edit";
+        model.addAttribute("pageName", "store/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -43,7 +49,9 @@ public class StoreController {
     public String edit(@RequestParam(name = "id") int storeId, Model model) {
         model.addAttribute("store", storeService.findById(storeId));
         model.addAttribute("action", "edit");
-        return "store/edit";
+//        return "store/edit";
+        model.addAttribute("pageName", "store/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

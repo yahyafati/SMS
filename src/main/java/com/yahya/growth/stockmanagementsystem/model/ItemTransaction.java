@@ -25,7 +25,6 @@ public class ItemTransaction {
     private Transaction transaction;
     private double unitPrice;
     private int initialQuantity;
-
     private int remaining;
 
     public int getAmountSold() {

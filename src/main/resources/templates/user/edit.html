@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="user" type="com.yahya.growth.stockmanagementsystem.model.User"*/-->
+<!--/*@thymesVar id="action" type="java.lang.String"*/-->
+<!--/*@thymesVar id="allRoles" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.security.Role>"*/-->
+<section th:fragment="main-content" class="main-content">
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${user.profile.fullName}" alt="User Photo" src="/images/mouse.webp">
@@ -38,7 +38,7 @@
                 <label class="d-block">
                     Role:
                     <select th:field="*{role}" >
-                        <option th:each="curRole : ${allRoles}" th:value="${curRole.id}" th:text="${curRole.getDisplayName()}"></option>
+                        <option th:each="curRole : ${allRoles}" th:value="${curRole.id}" th:text="${curRole.displayName}"></option>
                     </select>
                 </label>
                 <div>
@@ -52,8 +52,5 @@
             <a th:if="${action} == 'edit'" th:href="@{delete(id=${user.id})}" class="btn btn-danger">Remove User</a>
         </div>
     </div>
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

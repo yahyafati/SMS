@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="transaction" type="com.yahya.growth.stockmanagementsystem.model.Transaction"*/-->
+<section th:fragment="main-content" class="main-content">
+    <header th:replace="common/header :: navbar-fragment"></header>
     <div class="row">
         <div class="col">
-            <p>Added Time: <span th:text="${transaction.formattedAddedTime}"></span></p>
+            <p>Added Time:
+            <span th:text="${transaction.formattedAddedTime}"></span></p>
             <p>Reference No: <span th:text="${transaction.refNumber}"></span></p>
             <p>Transaction Type: <span th:text="${transaction.type.name}"></span></p>
             <p>From/To: <span th:text="${transaction.fromTo.name}"></span></p>
@@ -20,11 +20,13 @@
         <h3>Items Bought/Sold</h3>
         <table class="table table-info table-striped">
             <thead>
-            <td>#</td>
-            <td>Item</td>
-            <td>Unit Price</td>
-            <td>Initial Quantity</td>
-            <td>Remaining</td>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Initial Quantity</th>
+                <th>Remaining</th>
+            </tr>
             </thead>
             <tbody>
             <tr th:each="itemTransaction, rowStat : ${transaction.itemTransactions}">
@@ -39,8 +41,6 @@
             </tbody>
         </table>
     </div>
-</div>
+</section>
 
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
 </html>

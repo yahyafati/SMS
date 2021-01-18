@@ -29,31 +29,14 @@ public class ItemController {
         this.itemTransactionService = itemTransactionService;
     }
 
-    // TODO Move this to a more appropriate class
-//    /**
-//     * This function takes in an item entity and returns the amount left in stock from the ItemTransaction table
-//     * @param item an Item Entity
-//     * @return amount left in stock
-//     */
-//    public int getQuantity(Item item) {
-//        return itemTransactionService.findAllByItem(item).stream()
-//                .mapToInt(itemTransaction -> {
-//                            if (itemTransaction.getTransaction().getType() == TransactionType.PURCHASE) {
-//                                return itemTransaction.getQuantity();
-//                            } else {
-//                                return -itemTransaction.getQuantity();
-//                            }
-//                        }
-//                )
-//                .sum();
-//    }
-
     @GetMapping("")
     public String index(Model model) {
         List<Item> items = itemService.findAll();
         items.forEach(item -> item.setQuantity(itemTransactionService.getQuantityOfItem(item)));
         model.addAttribute("items", items);
-        return "item/all";
+//        return "item/all";
+        model.addAttribute("pageName", "item/all");
+        return "common/header";
     }
 
     @GetMapping("/{item_id}")
@@ -61,7 +44,9 @@ public class ItemController {
         Item item = itemService.findById(itemId);
         item.setQuantity(itemTransactionService.getQuantityOfItem(item));
         model.addAttribute("item", item);
-        return "item/detail";
+//        return "item/detail";
+        model.addAttribute("pageName", "item/detail");
+        return "common/header";
     }
 
     @GetMapping("/new")
@@ -72,7 +57,9 @@ public class ItemController {
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
         model.addAttribute("suppliers", storeService.findAll());
-        return "item/edit";
+//        return "item/edit";
+        model.addAttribute("pageName", "item/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -89,7 +76,9 @@ public class ItemController {
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
         model.addAttribute("suppliers", storeService.findAll());
-        return "item/edit";
+//        return "item/edit";
+        model.addAttribute("pageName", "item/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

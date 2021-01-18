@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
-
+<!--/*@thymesVar id="profile" type="com.yahya.growth.stockmanagementsystem.model.UserProfile"*/-->
+<section th:fragment="main-content" class="main-content">
     <div class="profile">
         <div class="head">
-            <img class="profile_img" src="images/profile.jpg" th:src="@{/images/placeholder/profile.jpg}" alt="Profile Pic" th:alt="${profile.fullName}">
+<!--            <img class="profile_img" src="images/profile.jpg" th:src="@{/images/placeholder/profile.jpg}" alt="Profile Pic" th:alt="${profile.fullName}">-->
             <div class="profile_name">
                 <p class="name">
                     <span th:text="${profile.fullName}">Yahya Haji</span>
@@ -36,9 +33,6 @@
                 </div>
             </div>
         </div>
-
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+    </div>
+</section>
 </html>

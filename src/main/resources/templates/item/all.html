@@ -1,10 +1,8 @@
 <!--TODO Change this page back to the classic tables page. This is to difficult to manage-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div th:replace="common/header :: navbar-fragment"></div>
-<div class="main_content">
+<!--/*@thymesVar id="items" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Item>"*/-->
+<div th:fragment="main-content" class="main_content">
     <div class="items-grid" id="items-grid">
         <div th:each="item : ${items}" class="itemCard">
             <h4>
@@ -18,10 +16,7 @@
                 <span class="number" th:text="${item.quantity}"
                       th:styleappend="${item.quantity > item.reorderNumber ? '' : 'color:red;'}">21</span> left in stock
             </div>
-<!--            <div class="price">$<span th:text="${item.price}"> 3,500</span></div>-->
         </div>
     </div>
 </div>
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
 </html>

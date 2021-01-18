@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="item" type="com.yahya.growth.stockmanagementsystem.model.Item"*/-->
+<!--/*@thymesVar id="action" type="java.lang.String"*/-->
+<!--/*@thymesVar id="categories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Category>"*/-->
+<!--/*@thymesVar id="subcategories" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Subcategory>"*/-->
+<!--/*@thymesVar id="brands" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Brand>"*/-->
+<!--/*@thymesVar id="suppliers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Store>"*/-->
+<section th:fragment="main-content" class="main-content">
+    <header th:replace="common/header :: navbar-fragment"></header>
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">
@@ -20,12 +24,6 @@
                 <label class="d-block">
                     Reorder Number: <input type="text" th:field="*{reorderNumber}">
                 </label>
-<!--                <label class="d-block">-->
-<!--                    Quantity: <input type="number" th:field="*{quantity}">-->
-<!--                </label>-->
-<!--                <label class="d-block">-->
-<!--                    Price: <input type="text" th:field="*{price}">-->
-<!--                </label>-->
                 <label class="d-block">
                     Category:
                     <select th:field="*{category}" >
@@ -63,8 +61,5 @@
     </div>
 
 
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

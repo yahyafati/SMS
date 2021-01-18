@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
-    <div>
-        <a class="btn btn-sm btn-outline-dark" th:href="@{/order/new}">Place an Order</a>
-    </div>
+<!--/*@thymesVar id="transactions" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Transaction>"*/-->
+<section th:fragment="main-content" class="main-content">
     <table class="table table-striped table-hover table-light">
         <thead>
         <tr>
@@ -36,7 +31,7 @@
             <td th:text="${transaction.transactionDate}">02/20/2020</td>
             <td th:text="${transaction.user}">
 <!--                TODO Uncomment this line once security config is enabled. -->
-<!--                <a class="link-info" th:text="${transaction.user.username}" th:href="@{/users/{id}(id=${user.id})}">@jameslynch</a>-->
+<!--                <a class="link-info" th:text="${transaction.user.username}" th:href="@{/users/{id}(id=${user.id})}">@mrWho</a>-->
                 Hello
             </td>
             <td>
@@ -47,8 +42,5 @@
         </tbody>
     </table>
 
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="allItems" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Item>"*/-->
+<!--/*@thymesVar id="action" type="java.lang.String"*/-->
+<!--/*@thymesVar id="transaction" type="com.yahya.growth.stockmanagementsystem.model.Transaction"*/-->
+<!--/*@thymesVar id="transactionTypes" type="com.yahya.growth.stockmanagementsystem.model.TransactionType[]"*/-->
+<!--/*@thymesVar id="customers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Customer>"*/-->
+<section th:fragment="main-content" class="main-content">
+    <header th:replace="common/header :: navbar-fragment"></header>
     <div>
         <select hidden id="availableItemsElement">
             <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
@@ -74,8 +77,5 @@
         </form>
 
     </div>
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

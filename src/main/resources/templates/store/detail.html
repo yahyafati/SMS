@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="store" type="com.yahya.growth.stockmanagementsystem.model.Store"*/-->
+<section th:fragment="main-content" class="main-content">
+    <header th:replace="common/header :: navbar-fragment"></header>
     <div class="row">
         <div class="col col-2">
             <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder2.webp}" th:alt="${store.name}">
@@ -20,14 +19,16 @@
         <h3>Categories</h3>
         <table class="table">
             <thead>
-            <td>#</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td>
-                <a class="btn btn-outline-primary" href="#" th:href="@{/category/new(store=${store.id})}">
-                    <i class="fas fa-plus-circle"></i>
-                </a>
-            </td>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>
+                    <a class="btn btn-outline-primary" href="#" th:href="@{/category/new(store=${store.id})}">
+                        <i class="fas fa-plus-circle"></i>
+                    </a>
+                </th>
+            </tr>
             </thead>
             <tbody>
             <tr th:each="category, rowStat : ${store.categories}">
@@ -46,8 +47,5 @@
             </tbody>
         </table>
     </div>
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

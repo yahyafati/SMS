@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,7 +41,9 @@ public class UserController implements BasicControllerSkeleton<User>{
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "user/all";
+//        return "user/all";
+        model.addAttribute("pageName", "user/all");
+        return "common/header";
     }
 
     @Override
@@ -56,10 +59,12 @@ public class UserController implements BasicControllerSkeleton<User>{
         Map<String, Boolean[]> authorities = AuthorityUtils.getPermissionMap(currentAuthority);
         model.addAttribute("allAuthorities", authorities);
         model.addAttribute("reportPermissions", new boolean[] {currentAuthority.contains("report:store"), currentAuthority.contains("report:all")});
-        model.addAttribute("permissions", Lists.newArrayList());
+        model.addAttribute("permissions", new ArrayList<String>());
         model.addAttribute("role", user.getRole());
         model.addAttribute("allRoles", roleService.findAll().stream().sorted().collect(Collectors.toList()));
-        return "user/detail";
+//        return "user/detail";
+        model.addAttribute("pageName", "user/detail");
+        return "common/header";
     }
 
     @PostMapping("/changeRole")
@@ -94,7 +99,9 @@ public class UserController implements BasicControllerSkeleton<User>{
 //        model.addAttribute("role", new Role());
         model.addAttribute("allRoles", roles);
 
-        return "user/edit";
+//        return "user/edit";
+        model.addAttribute("pageName", "user/edit");
+        return "common/header";
     }
 
     @Override

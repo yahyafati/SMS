@@ -17,20 +17,25 @@ public class CustomerController {
     @GetMapping("")
     public String customers(Model model) {
         model.addAttribute("customers", customerService.findAll());
-        return "customer/all";
+//        return "customer/all";
+        model.addAttribute("pageName", "customer/all");
+        return "common/header";
     }
 
     @GetMapping("/{customerId}")
     public String getCustomer(@PathVariable int customerId, Model model) {
         model.addAttribute("customer", customerService.findById(customerId));
-        return "customer/detail";
-    }
+//        return "customer/detail";
+        model.addAttribute("pageName", "customer/detail");
+        return "common/header";}
 
     @GetMapping("/new")
     public String addCustomer(Model model) {
         model.addAttribute("customer", new Customer());
         model.addAttribute("action", "new");
-        return "customer/edit";
+//        return "customer/edit";
+        model.addAttribute("pageName", "customer/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -43,7 +48,9 @@ public class CustomerController {
     public String editCustomer(@RequestParam int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
         model.addAttribute("action", "edit");
-        return "customer/edit";
+//        return "customer/edit";
+        model.addAttribute("pageName", "customer/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

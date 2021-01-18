@@ -26,7 +26,9 @@ public class CompanyController {
         Company thisCompany = companyService.getCurrentCompany();
         model.addAttribute("action", "");
         model.addAttribute("company", thisCompany);
-        return "company/info";
+//        return "company/info";
+        model.addAttribute("pageName", "company/info");
+        return "common/header";
     }
 
     @PostMapping("")

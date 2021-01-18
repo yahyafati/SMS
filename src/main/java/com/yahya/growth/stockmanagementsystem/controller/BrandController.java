@@ -25,7 +25,8 @@ public class BrandController {
     @GetMapping("")
     public String brands(Model model) {
         model.addAttribute("brands", brandService.findAll());
-        return "brand/all";
+        model.addAttribute("pageName", "brand/all");
+        return "common/header";
     }
 
     @GetMapping("/{brandId}")
@@ -35,14 +36,18 @@ public class BrandController {
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("category", new Category());
         model.addAttribute("subcategory", new Subcategory());
-        return "brand/detail";
+//        return "brand/detail";
+        model.addAttribute("pageName", "brand/detail");
+        return "common/header";
     }
 
     @GetMapping("/new")
     public String addBrand(Model model) {
         model.addAttribute("brand", new Brand());
         model.addAttribute("action", "new");
-        return "brand/edit";
+//        return "brand/edit";
+        model.addAttribute("pageName", "brand/edit");
+        return "common/header";
     }
 
     @PostMapping("/new")
@@ -87,7 +92,9 @@ public class BrandController {
     public String edit(@RequestParam(name = "id") int brandId, Model model) {
         model.addAttribute("brand", brandService.findById(brandId));
         model.addAttribute("action", "edit");
-        return "brand/edit";
+//        return "brand/edit";
+        model.addAttribute("pageName", "brand/edit");
+        return "common/header";
     }
 
     @PostMapping("/edit")

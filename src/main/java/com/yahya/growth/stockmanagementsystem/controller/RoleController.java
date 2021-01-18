@@ -34,7 +34,9 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("groups", roleService.findAll());
-        return "group/all";
+//        return "group/all";
+        model.addAttribute("pageName", "group/all");
+        return "common/header";
     }
 
     @Override
@@ -48,7 +50,9 @@ public class RoleController implements BasicControllerSkeleton<Role>{
         model.addAttribute("group", roleService.findById(id));
         model.addAttribute("reportPermissions", new boolean[] {currentAuthority.contains("report:store"), currentAuthority.contains("report:all")});
         model.addAttribute("permissions", Lists.newArrayList());
-        return "group/detail";
+//        return "group/detail";
+        model.addAttribute("pageName", "group/detail");
+        return "common/header";
     }
 
     @PostMapping("/{id}")
@@ -67,7 +71,9 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     public String addNewItem(Model model) {
         model.addAttribute("group", new Role());
         model.addAttribute("action", "new");
-        return "group/edit";
+//        return "group/edit";
+        model.addAttribute("pageName", "group/edit");
+        return "common/header";
     }
 
     @Override
@@ -82,7 +88,9 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     public String edit(@RequestParam int id, Model model) {
         model.addAttribute("group", roleService.findById(id));
         model.addAttribute("action", "edit");
-        return "group/edit";
+//        return "group/edit";
+        model.addAttribute("pageName", "group/edit");
+        return "common/header";
     }
 
     @Override

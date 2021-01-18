@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
-<body>
-<div class="main_content">
-    <div th:replace="common/header :: navbar-fragment"></div>
+<!--/*@thymesVar id="item" type="com.yahya.growth.stockmanagementsystem.model.Item"*/-->
+<section th:fragment="main-content" class="main-content">
     <div class="row">
         <div class="col col-2">
-            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">
+<!--            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${item.name}">-->
             <h1 class="h1" th:text="${item.name}">Item Name</h1>
         </div>
         <div class="col col-8">
@@ -21,10 +19,5 @@
         </div>
         <a th:href="@{edit(id=${item.id})}" class="btn btn-primary">Edit</a>
     </div>
-
-
-</div>
-
-<div th:replace="common/header :: body-bottom-scripts"></div>
-</body>
+</section>
 </html>

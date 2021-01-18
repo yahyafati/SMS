@@ -25,7 +25,9 @@ public class UserProfileController {
     public String index(Model model, Principal principal) {
         UserProfile userProfile = userProfileService.findByUsername(principal.getName());
         model.addAttribute("profile", userProfile);
-        return "profile/profile";
+//        return "profile/profile";
+        model.addAttribute("pageName", "profile/profile");
+        return "common/header";
     }
 
 
