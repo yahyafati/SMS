@@ -30,6 +30,11 @@ public class RoleController implements BasicControllerSkeleton<Role>{
         this.authorityService = authorityService;
     }
 
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "User Group";
+    }
+
     @Override
     @GetMapping("")
     public String index(Model model) {

@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<section th:fragment="main-content" class="main-content">
+    <div class="dashboard" id="dashboard">
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/items}">Products</a>
+            <div class="dashboard-icon">
+                <i class="fas fa-tv"></i>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/sale}">Sell</a>
+            <div class="dashboard-icon">
+                <i class="far fa-arrow-alt-circle-right"></i>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/purchase}">Buy</a>
+            <div class="dashboard-icon">
+                <i class="far fa-arrow-alt-circle-left"></i>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/reports}">Reports</a>
+            <div class="dashboard-icon">
+                <i class="fas fa-scroll"></i>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/profile}">Profile</a>
+            <div class="dashboard-icon">
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+        <div class="dashboard-item">
+            <a class="dashboard-title" href="#" th:href="@{/logout}">Logout</a>
+            <div class="dashboard-icon">
+                <i class="fa fa-sign-out"></i>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

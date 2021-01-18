@@ -15,13 +15,21 @@ import java.sql.Timestamp;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private ItemService itemService;
-    @Autowired
-    private CustomerService customerService;
+    private final OrderService orderService;
+    private final ItemService itemService;
+    private final CustomerService customerService;
 
+    @Autowired
+    public OrderController(OrderService orderService, ItemService itemService, CustomerService customerService) {
+        this.orderService = orderService;
+        this.itemService = itemService;
+        this.customerService = customerService;
+    }
+
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Order";
+    }
 
     @GetMapping("")
     public String orders(Model model) {

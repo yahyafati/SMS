@@ -11,8 +11,8 @@ html {
 
 body {
     font-family: "Open Sans", sans-serif;
-    background-color: #eee;
-    color: #111;
+    background-color: #bfcfdb;
+    color: #111111;
 }
 
 .hide {
@@ -166,6 +166,9 @@ header .profile .name {
 }
 
 .body .main-content .dashboard {
+    display: inline-flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -175,18 +178,16 @@ header .profile .name {
     margin: 10px;
     justify-content: space-between;
     align-items: center;
-    background-image: linear-gradient(-20deg, #366c91 0%, #645697 100%);
     border-radius: 5px;
     width: 300px;
-    height: 100px;
+    height: 150px;
+    border: 2px solid #c7c4d8;
 }
 
 .body .main-content .dashboard .dashboard-item .dashboard-title {
-    /* border: 1px solid black; */
     text-decoration: none;
     font-weight: bold;
     font-size: 30px;
-    margin-bottom: 40px;
     color: white;
 }
 

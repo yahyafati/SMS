@@ -12,10 +12,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/subcategory")
 public class SubcategoryController {
 
+    private final SubcategoryService subcategoryService;
+    private final CategoryService categoryService;
+
     @Autowired
-    private SubcategoryService subcategoryService;
-    @Autowired
-    private CategoryService categoryService;
+    public SubcategoryController(SubcategoryService subcategoryService, CategoryService categoryService) {
+        this.subcategoryService = subcategoryService;
+        this.categoryService = categoryService;
+    }
+
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Category";
+    }
 
     @GetMapping("")
     public String subcategories(Model model) {

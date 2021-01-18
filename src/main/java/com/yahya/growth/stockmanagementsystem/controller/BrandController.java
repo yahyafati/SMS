@@ -15,12 +15,21 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/brand")
 public class BrandController {
 
+    private final BrandService brandService;
+    private final CategoryService categoryService;
+    private final SubcategoryService subcategoryService;
+
     @Autowired
-    private BrandService brandService;
-    @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubcategoryService subcategoryService;
+    public BrandController(BrandService brandService, CategoryService categoryService, SubcategoryService subcategoryService) {
+        this.brandService = brandService;
+        this.categoryService = categoryService;
+        this.subcategoryService = subcategoryService;
+    }
+
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Brands";
+    }
 
     @GetMapping("")
     public String brands(Model model) {
@@ -31,7 +40,8 @@ public class BrandController {
 
     @GetMapping("/{brandId}")
     public String detail(@PathVariable int brandId, Model model) {
-        model.addAttribute("brand", brandService.findById(brandId));
+        Brand brand = brandService.findById(brandId);
+        model.addAttribute("brand", brand);
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("category", new Category());
@@ -90,7 +100,8 @@ public class BrandController {
 
     @GetMapping("/edit")
     public String edit(@RequestParam(name = "id") int brandId, Model model) {
-        model.addAttribute("brand", brandService.findById(brandId));
+        Brand brand = brandService.findById(brandId);
+        model.addAttribute("brand", brand);
         model.addAttribute("action", "edit");
 //        return "brand/edit";
         model.addAttribute("pageName", "brand/edit");

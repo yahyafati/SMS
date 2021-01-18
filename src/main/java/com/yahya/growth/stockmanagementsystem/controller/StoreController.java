@@ -11,8 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/store")
 public class StoreController {
 
+    private final StoreService storeService;
+
     @Autowired
-    private StoreService storeService;
+    public StoreController(StoreService storeService) {
+        this.storeService = storeService;
+    }
+
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Store";
+    }
 
     @GetMapping("")
     public String stores(Model model) {

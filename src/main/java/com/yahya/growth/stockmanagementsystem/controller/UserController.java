@@ -37,6 +37,11 @@ public class UserController implements BasicControllerSkeleton<User>{
         this.passwordEncoder = passwordEncoder;
     }
 
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "User";
+    }
+
     @Override
     @GetMapping("")
     public String index(Model model) {

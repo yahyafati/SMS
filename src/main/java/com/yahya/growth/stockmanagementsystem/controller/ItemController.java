@@ -29,6 +29,11 @@ public class ItemController {
         this.itemTransactionService = itemTransactionService;
     }
 
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Products";
+    }
+
     @GetMapping("")
     public String index(Model model) {
         List<Item> items = itemService.findAll();

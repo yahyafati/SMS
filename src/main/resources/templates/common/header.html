@@ -7,7 +7,7 @@
     <meta name="description" content="Stock Management System" />
     <meta name="author" content="Yahya Haji" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Stock Management System</title>
+    <title th:text="${title.isEmpty() ? '' : title + ' | '} + 'Stock Management System'"></title>
     <script
             src="https://kit.fontawesome.com/53b200ce77.js"
             crossorigin="anonymous"
@@ -17,19 +17,21 @@
     <script src="/js/app.js"></script>
     <script src="/js/custom.js"></script>
 </head>
-<body>
+<body onload="documentLoaded()">
 <header th:fragment="navbar-fragment">
     <div class="logo">
         <i class="fab fa-slack"></i> Helio Inventory Solution
     </div>
     <div class="pageTitle">
-        <i class="fas fa-border-style"></i> Dashboard
+        <i class="fas fa-border-style"></i>
+        <span th:text="${title}">Dashboard</span>
     </div>
     <div class="profile">
         <span class="name">Yahya Haji</span>
         <img
                 class="profileImg"
-                src="profile.jpg"
+                src="/images/placeholder/profile.jpg"
+                th:src="@{/images/placeholder/profile.jpg}"
                 alt="profile picture"
         />
         <ul id="profileMenu" class="profileMenu">

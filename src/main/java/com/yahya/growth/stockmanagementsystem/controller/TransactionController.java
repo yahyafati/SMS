@@ -28,6 +28,11 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         this.itemService = itemService;
     }
 
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Transaction";
+    }
+
     @Override
     @GetMapping("")
     public String index(Model model) {

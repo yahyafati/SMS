@@ -26,6 +26,7 @@ public class Item {
     @Transient
     private int quantity;
 
+    // TODO Remove Category and get Category from Subcategory
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;

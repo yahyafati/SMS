@@ -21,6 +21,11 @@ public class CompanyController {
         this.companyService = companyService;
     }
 
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Company";
+    }
+
     @GetMapping("")
     public String company(Model model) {
         Company thisCompany = companyService.getCurrentCompany();

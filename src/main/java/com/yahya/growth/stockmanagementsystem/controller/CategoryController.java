@@ -15,10 +15,19 @@ import java.util.List;
 @RequestMapping("/category")
 public class CategoryController {
 
+    private final CategoryService categoryService;
+    private final SubcategoryService subcategoryService;
+
     @Autowired
-    private CategoryService categoryService;
-    @Autowired
-    private SubcategoryService subcategoryService;
+    public CategoryController(CategoryService categoryService, SubcategoryService subcategoryService) {
+        this.categoryService = categoryService;
+        this.subcategoryService = subcategoryService;
+    }
+
+    @ModelAttribute("title")
+    public String getPageTitle() {
+        return "Category";
+    }
 
     @GetMapping("")
     public String categories(Model model) {

@@ -2,21 +2,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="items" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Item>"*/-->
-<div th:fragment="main-content" class="main_content">
-    <div class="items-grid" id="items-grid">
-        <div th:each="item : ${items}" class="itemCard">
-            <h4>
-                <a class="link-info" th:text="${item.name}" th:href="@{/items/{id}(id=${item.id})}">Samsung Galaxy A51</a>
-            </h4>
-            <div th:text="${item.brand.name}" class="highlight brand">Samsung</div>
-            <div th:text="${item.subcategory.name}" class="highlight category">Mobile</div>
-            <div th:text="${item.category.name}" class="highlight category">Electronics</div>
-            <div th:text="${item.description}" class="description">Samsung Galaxy A51 has great camera.</div>
-            <div class="quantity">
-                <span class="number" th:text="${item.quantity}"
-                      th:styleappend="${item.quantity > item.reorderNumber ? '' : 'color:red;'}">21</span> left in stock
-            </div>
-        </div>
-    </div>
+<div th:fragment="main-content" class="main-content">
+<!--    <div class="items-grid" id="items-grid">-->
+<!--        <div th:each="item : ${items}" class="itemCard">-->
+<!--            <h4>-->
+<!--                <a class="link-info" th:text="${item.name}" th:href="@{/items/{id}(id=${item.id})}">Samsung Galaxy A51</a>-->
+<!--            </h4>-->
+<!--            <div th:text="${item.brand.name}" class="highlight brand">Samsung</div>-->
+<!--            <div th:text="${item.subcategory.name}" class="highlight category">Mobile</div>-->
+<!--            <div th:text="${item.category.name}" class="highlight category">Electronics</div>-->
+<!--            <div th:text="${item.description}" class="description">Samsung Galaxy A51 has great camera.</div>-->
+<!--            <div class="quantity">-->
+<!--                <span class="number" th:text="${item.quantity}"-->
+<!--                      th:styleappend="${item.quantity > item.reorderNumber ? '' : 'color:red;'}">21</span> left in stock-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <table class="table table-striped table-hover table-light">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+<!--            <th>Description</th>-->
+            <th>Quantity</th>
+            <th>Reorder Number</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+            <th>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/items/new}">Add Product</a>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, iterStat : ${items}">
+            <td th:text="${iterStat.count}">1</td>
+            <td>
+                <a class="link-info" th:text="${item.name}" th:href="@{/items/{id}(id=${item.id})}">Lamp</a>
+            </td>
+<!--            <td th:text="${item.description}">Beautiful Lamp</td>-->
+            <td th:text="${item.quantity}">200</td>
+            <td th:text="${item.reorderNumber}">100</td>
+            <td>
+                <a class="link-info" th:text="${item.brand.name}" th:href="@{/brand/{id}(id=${item.brand.id})}">LG</a>
+            </td>
+            <td>
+                <a class="link-info" th:text="${item.category.name}" th:href="@{/category/{id}(id=${item.category.id})}">Electronics</a>
+            </td>
+            <td>
+                <a class="link-info" th:text="${item.subcategory.name}" th:href="@{/subcategory/{id}(id=${item.subcategory.id})}">Mobile</a>
+            </td>
+            <td>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/items/edit(id=${item.id})}">Edit</a>
+                <a class="btn btn-sm btn-outline-danger" th:href="@{/items/delete(id=${item.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </html>
