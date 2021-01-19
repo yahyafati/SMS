@@ -285,6 +285,7 @@ public class StockManagementSystemApplication {
             userService.saveNewUser(staffUser);
             userService.saveNewUser(managerUser);
             userService.saveNewUser(itUser);
+            System.out.println("\n\n\nSPRING BOOT HAS STARTED\n\n\n");
         };
     }
 }
