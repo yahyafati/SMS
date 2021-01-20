@@ -26,7 +26,7 @@
             </td>
             <td th:text="${transaction.type}">Purchase</td>
             <td>
-                <a class="btn-link" th:href="@{/customer/{id}(id=${transaction.fromTo.id})}" th:text="${transaction.fromTo.name}">Hello Technologies</a>
+                <a class="btn-link" th:href="@{/customer/{id}(id=${transaction.customer.id})}" th:text="${transaction.customer.name}">Hello Technologies</a>
             </td>
             <td th:text="${transaction.transactionDate}">02/20/2020</td>
             <td th:text="${transaction.user}">

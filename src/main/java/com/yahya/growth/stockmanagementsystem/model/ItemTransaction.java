@@ -32,4 +32,8 @@ public class ItemTransaction {
         return initialQuantity - remainingQuantity;
     }
 
+    public Double getTotalPrice() {
+        return unitPrice * initialQuantity;
+    }
+
 }

@@ -1,10 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.TransactionDao;
-import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
-import com.yahya.growth.stockmanagementsystem.model.Transaction;
-import com.yahya.growth.stockmanagementsystem.model.TransactionType;
+import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
 import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
@@ -144,11 +141,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction save(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) throws TransactionException {
+    public Transaction save(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double paidAmount) throws TransactionException {
         if (transaction.getType() == TransactionType.PURCHASE) {
-            transaction = savePurchase(transaction, ids, items, prices, quantities);
+            transaction = savePurchase(transaction, ids, items, prices, quantities, paidAmount);
         } else {
-            transaction = saveSale(transaction, ids, items, prices, quantities);
+            transaction = saveSale(transaction, ids, items, prices, quantities, paidAmount);
         }
         return transaction;
     }
@@ -163,7 +160,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .build();
     }
 
-    private Transaction saveSale(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) throws TransactionException {
+    private Transaction saveSale(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double paidAmount) throws TransactionException {
         for (int i = 0; i < items.length; i++) {
             ItemTransaction itemTransaction = buildItemTransactions(transaction, ids[i], items[i], prices[i], quantities[i]);
 
@@ -194,16 +191,28 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getItemTransactions().add(itemTransaction);
             System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
+        Credit credit = new Credit(CreditType.PAID);
+        credit.setSettlementAmount(paidAmount);
+        credit.setTransaction(transaction);
+
+        transaction.getCredits().add(credit);
         return save(transaction);
     }
 
-    private Transaction savePurchase(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) {
+    private Transaction savePurchase(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double paidAmount) {
         for (int i = 0; i < items.length; i++) {
             ItemTransaction itemTransaction = buildItemTransactions(transaction, ids[i], items[i], prices[i], quantities[i]);
             itemTransaction.setRemainingQuantity(itemTransaction.getInitialQuantity());
             transaction.getItemTransactions().add(itemTransaction);
             System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
+
+        Credit credit = new Credit(CreditType.PAID);
+        credit.setSettlementAmount(paidAmount);
+        credit.setTransaction(transaction);
+
+        transaction.getCredits().add(credit);
+
         return save(transaction);
     }
 }

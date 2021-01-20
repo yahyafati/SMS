@@ -5,6 +5,9 @@
 <!--/*@thymesVar id="transaction" type="com.yahya.growth.stockmanagementsystem.model.Transaction"*/-->
 <!--/*@thymesVar id="transactionTypes" type="com.yahya.growth.stockmanagementsystem.model.TransactionType[]"*/-->
 <!--/*@thymesVar id="customers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Customer>"*/-->
+<!--/*@thymesVar id="credit" type="com.yahya.growth.stockmanagementsystem.model.Credit"*/-->
+<!--/*@thymesVar id="paidAmount" type="java.lang.Double"*/-->
+
 <section th:fragment="main-content" class="main-content">
     <div class=""form-div>
         <select hidden id="availableItemsElement">
@@ -14,14 +17,13 @@
             <div class="form-wrapper">
                 <input hidden type="number" th:field="*{id}">
                 <div class="form-control-wrapper">
-                    Type:
-                    <select disabled class="form-select" th:field="*{type}" >
+                    <select hidden class="form-select" th:field="*{type}" >
                         <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
                     </select>
                 </div>
                 <div class="form-control-wrapper">
                     From:
-                    <select class="form-select" th:field="*{fromTo}" >
+                    <select class="form-select" th:field="*{customer}" >
                         <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Electronics</option>
                     </select>
                 </div>
@@ -55,12 +57,12 @@
                     </td>
                     <td>
                         <label class="d-block">
-                            <input class="input-text" name="price" type="text" th:value="${itemTransaction.unitPrice}" th:text="${itemTransaction.unitPrice}">
+                            <input autocomplete="off" step="any" oninput="transactionTyping()" class="input-text" name="price" type="number" th:value="${itemTransaction.unitPrice}" th:text="${itemTransaction.unitPrice}">
                         </label>
                     </td>
                     <td>
                         <label class="d-block">
-                            <input class="input-text" name="quantity" type="number" th:value="${itemTransaction.initialQuantity}" th:text="${itemTransaction.initialQuantity}">
+                            <input autocomplete="off" oninput="transactionTyping()" class="input-text" name="quantity" type="number" th:value="${itemTransaction.initialQuantity}" th:text="${itemTransaction.initialQuantity}">
                         </label>
                     </td>
                     <td>
@@ -69,8 +71,20 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div>
+            <div class="transaction-credit">
+                <div class="form-control-wrapper">
+                    Total Amount: <input id="totalAmountField" value="0.0" autocomplete="false" disabled class="input-text"type="number" step="any">
+                </div>
+                <div class="form-control-wrapper">
+                    Paid Amount:
+                    <input id="paidAmountField" autocomplete="off" oninput="amountPaidChanged(this)" class="input-text" type="number" step="any" th:name="paidAmount" th:value="${paidAmount}">
+                </div>
+                <div class="form-control-wrapper">
+                    Remaining Amount:
+                    <input id="remainingAmountField" autocomplete="off"  oninput="amountPaidChanged(this)" class="input-text" type="number" step="any">
+                </div>
+            </div>
+            <div class="edit-btns-div">
                 <input type="submit" value="Submit" class="my-btn" />
                 <input type="reset" value="Reset" class="my-btn delete-btn"/>
             </div>

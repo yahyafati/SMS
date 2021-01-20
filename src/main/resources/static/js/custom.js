@@ -10,20 +10,48 @@ function toggleClass(element) {
     }
 }
 
-/* Set the width of the side navigation to 250px */
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+function transactionTyping() {
+    console.log("Typing");
+    const table = document.getElementById("itemTransaction").getElementsByTagName("tbody")[0];
+    let total = 0.0;
+    for (let i = 0, row; row = table.rows[i]; i++) {
+        let price = 0.0, quantity = 0.0;
+        for (let j = 0, col; col = row.cells[j]; j++) {
+            const inputItem = col.children[0]
+            if (inputItem.getAttribute("name") == "price") {
+                price = parseFloat(inputItem.value);
+            } else if (inputItem.getAttribute("name") == "quantity") {
+                quantity = parseInt(inputItem.value);
+            }
+        }
+        total += price*quantity;
+    }
+    console.log("Total:" + total)
+    const totalField = document.getElementById("totalAmountField")
+    const paidField = document.getElementById("paidAmountField")
+    const remainingField = document.getElementById("remainingAmountField")
+    totalField.value = total;
+    paidField.value = total;
+    remainingField.value = 0;
 }
 
-/* Set the width of the side navigation to 0 */
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+/**
+ * @param {Element} element
+ */
+function amountPaidChanged(element) {
+    const totalField = document.getElementById("totalAmountField")
+    const paidField = document.getElementById("paidAmountField")
+    const remainingField = document.getElementById("remainingAmountField")
+    if(element.id === "remainingAmountField") {
+        paidField.value = totalField.value - remainingField.value
+    } else if(element.id === "paidAmountField") {
+        remainingField.value = totalField.value - paidField.value
+    }
 }
 
 function addTransactionRow() {
     let table = document.getElementById("itemTransaction").getElementsByTagName("tbody")[0]
     let row = table.insertRow()
-    // Column1
     let cell1 = row.insertCell();
     // <select name="item">
     //     <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
@@ -52,10 +80,13 @@ function addTransactionRow() {
     // <input name="price" type="text">
     let cell2 = row.insertCell()
     let priceElement = document.createElement("input")
-    priceElement.type = "text"
+    priceElement.type = "number"
     priceElement.placeholder = "Price"
     priceElement.required = true
     priceElement.name = "price"
+    priceElement.autocomplete = "off"
+    priceElement.step = "any"
+    priceElement.oninput = transactionTyping;
     priceElement.classList.add("input-text")
     cell2.appendChild(priceElement)
 
@@ -63,9 +94,11 @@ function addTransactionRow() {
     let cell3 = row.insertCell()
     let quantityElement = document.createElement("input")
     quantityElement.type = "number"
+    quantityElement.oninput = transactionTyping;
     quantityElement.placeholder = "Quantity"
     quantityElement.required = true
     quantityElement.name = "quantity"
+    quantityElement.autocomplete = "off"
     quantityElement.classList.add("input-text")
     cell3.appendChild(quantityElement)
 

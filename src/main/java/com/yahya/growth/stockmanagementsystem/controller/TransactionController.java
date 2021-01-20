@@ -1,16 +1,12 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
-import com.yahya.growth.stockmanagementsystem.model.Customer;
-import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.model.Transaction;
-import com.yahya.growth.stockmanagementsystem.model.TransactionType;
+import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -90,6 +86,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.PURCHASE);
         model.addAttribute("transaction", transaction);
+        model.addAttribute("paidAmount", 0.0);
         model.addAttribute("action", "new");
         model.addAttribute("pageName", "transaction/transaction");
         return "common/header";
@@ -111,37 +108,40 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @PostMapping("/new")
-    public String addNewPOST(Transaction transaction, HttpServletRequest request) throws TransactionException {
+    public String addNewPOST(Transaction transaction, Double paidAmount, HttpServletRequest request) throws TransactionException {
         String[] ids = request.getParameterValues("transactionID");
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
-        transaction = transactionService.save(transaction, ids, items, prices, quantities);
+        transaction = transactionService.save(transaction, ids, items, prices, quantities, paidAmount);
         return "redirect:/transaction/" + transaction.getId();
     }
 
     @Override
     @GetMapping("/edit")
     public String edit(@RequestParam int id, Model model) {
-        model.addAttribute("transaction", transactionService.findById(id));
+        Transaction transaction = transactionService.findById(id);
+        model.addAttribute("transaction", transaction);
         model.addAttribute("transactionTypes", TransactionType.values());
         model.addAttribute("customers", customerService.findAll());
         model.addAttribute("allItems", itemService.findAll());
         model.addAttribute("action", "edit");
+        // FIXME Get the amount paid on this credit
+        model.addAttribute("paidAttribute", transaction.getCreditDifference());
 //        return "transaction/transaction";
         model.addAttribute("pageName", "transaction/transaction");
         return "common/header";
     }
 
     @PostMapping("/edit")
-    public String editPOST(Transaction transaction, HttpServletRequest request) throws TransactionException {
+    public String editPOST(Transaction transaction, Double paidAmount, HttpServletRequest request) throws TransactionException {
 //        request.getHeaderNames()
         // Repeated Code with add new post
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
         String[] ids = request.getParameterValues("transactionID");
-        transactionService.save(transaction, ids, items, prices, quantities);
+        transactionService.save(transaction, ids, items, prices, quantities, paidAmount);
         return "redirect:/transaction";
     }
 

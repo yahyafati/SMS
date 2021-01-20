@@ -28,5 +28,4 @@ public interface ItemTransactionDao extends JpaRepository<ItemTransaction, Integ
     @Query("select sum(it.remainingQuantity) from ItemTransaction it where it.item.id = :id")
     Integer getItemSum(@Param("id") Integer id);
 
-
 }
