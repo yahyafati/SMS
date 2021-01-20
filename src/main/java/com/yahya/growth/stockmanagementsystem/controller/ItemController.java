@@ -17,15 +17,13 @@ public class ItemController {
     private final SubcategoryService subcategoryService;
     private final CategoryService categoryService;
     private final BrandService brandService;
-    private final StoreService storeService;
     private final ItemTransactionService itemTransactionService;
 
-    public ItemController(ItemService itemService, SubcategoryService subcategoryService, CategoryService categoryService, BrandService brandService, StoreService storeService, ItemTransactionService itemTransactionService) {
+    public ItemController(ItemService itemService, SubcategoryService subcategoryService, CategoryService categoryService, BrandService brandService, ItemTransactionService itemTransactionService) {
         this.itemService = itemService;
         this.subcategoryService = subcategoryService;
         this.categoryService = categoryService;
         this.brandService = brandService;
-        this.storeService = storeService;
         this.itemTransactionService = itemTransactionService;
     }
 
@@ -61,7 +59,7 @@ public class ItemController {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
-        model.addAttribute("suppliers", storeService.findAll());
+//        model.addAttribute("suppliers", storeService.findAll());
 //        return "item/edit";
         model.addAttribute("pageName", "item/edit");
         return "common/header";
@@ -80,7 +78,7 @@ public class ItemController {
         model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
-        model.addAttribute("suppliers", storeService.findAll());
+//        model.addAttribute("suppliers", storeService.findAll());
 //        return "item/edit";
         model.addAttribute("pageName", "item/edit");
         return "common/header";

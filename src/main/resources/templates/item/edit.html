@@ -45,13 +45,13 @@
                             <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}">Cell Phones & Accessories</option>
                         </select>
                     </div>
-                    <div class="form-control-wrapper">
-                        Supplier:
-                        <select class="form-select" th:field="*{store}" >
-                            <option value="-1">Select a Supplier</option>
-                            <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>
-                        </select>
-                    </div>
+<!--                    <div class="form-control-wrapper">-->
+<!--                        Supplier:-->
+<!--                        <select class="form-select" th:field="*{store}" >-->
+<!--                            <option value="-1">Select a Supplier</option>-->
+<!--                            <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                 </div>
 
                 <div class="edit-btns-div">

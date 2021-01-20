@@ -66,37 +66,38 @@ public class BrandController {
         return "redirect:/brand/" + brand.getId();
     }
 
-    @PostMapping("/addCategory")
-    public String addCategoryPOST(@RequestParam int brandId, @ModelAttribute Category category) {
-        Brand brand = brandService.findById(brandId);
-        brand.getCategories().add(category);
-        brandService.save(brand);
-        return "redirect:/brand/" + brandId;
-    }
-
-    @GetMapping("/removeCategory")
-    public String removeCategory(@RequestParam(name = "category") int categoryId, @RequestParam(name = "brand") int brandId) {
-        Brand brand = brandService.findById(brandId);
-        brand.getCategories().removeIf(category -> category.getId() == categoryId);
-        brandService.save(brand);
-        return "redirect:/brand/" + brandId;
-    }
-
-    @GetMapping("/removeSubcategory")
-    public String removeSubcategory(@RequestParam(name = "subcategory") int subcategoryId, @RequestParam(name = "brand") int brandId) {
-        Brand brand = brandService.findById(brandId);
-        brand.getSubcategories().removeIf(subcategory -> subcategory.getId() == subcategoryId);
-        brandService.save(brand);
-        return "redirect:/brand/" + brandId;
-    }
-
-    @PostMapping("/addSubcategory")
-    public String addSubcategoryPOST(@RequestParam int brandId, @ModelAttribute Subcategory subcategory) {
-        Brand brand = brandService.findById(brandId);
-        brand.getSubcategories().add(subcategory);
-        brandService.save(brand);
-        return "redirect:/brand/" + brandId;
-    }
+    /* Many To Many Mapping */
+//    @PostMapping("/addCategory")
+//    public String addCategoryPOST(@RequestParam int brandId, @ModelAttribute Category category) {
+//        Brand brand = brandService.findById(brandId);
+//        brand.getCategories().add(category);
+//        brandService.save(brand);
+//        return "redirect:/brand/" + brandId;
+//    }
+//
+//    @GetMapping("/removeCategory")
+//    public String removeCategory(@RequestParam(name = "category") int categoryId, @RequestParam(name = "brand") int brandId) {
+//        Brand brand = brandService.findById(brandId);
+//        brand.getCategories().removeIf(category -> category.getId() == categoryId);
+//        brandService.save(brand);
+//        return "redirect:/brand/" + brandId;
+//    }
+//
+//    @GetMapping("/removeSubcategory")
+//    public String removeSubcategory(@RequestParam(name = "subcategory") int subcategoryId, @RequestParam(name = "brand") int brandId) {
+//        Brand brand = brandService.findById(brandId);
+//        brand.getSubcategories().removeIf(subcategory -> subcategory.getId() == subcategoryId);
+//        brandService.save(brand);
+//        return "redirect:/brand/" + brandId;
+//    }
+//
+//    @PostMapping("/addSubcategory")
+//    public String addSubcategoryPOST(@RequestParam int brandId, @ModelAttribute Subcategory subcategory) {
+//        Brand brand = brandService.findById(brandId);
+//        brand.getSubcategories().add(subcategory);
+//        brandService.save(brand);
+//        return "redirect:/brand/" + brandId;
+//    }
 
     @GetMapping("/edit")
     public String edit(@RequestParam(name = "id") int brandId, Model model) {

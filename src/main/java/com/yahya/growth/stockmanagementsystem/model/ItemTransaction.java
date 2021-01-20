@@ -25,11 +25,11 @@ public class ItemTransaction {
     private Transaction transaction;
     private double unitPrice;
     private int initialQuantity;
-    private int remaining;
+    private int remainingQuantity;
 
     public int getAmountSold() {
         assert this.transaction.getType() == TransactionType.PURCHASE : "Can't be calculated for TransactionType.SALE Transaction. Item sold can only be calculated for TransactionType.PURCHASE Transaction.";
-        return initialQuantity - remaining;
+        return initialQuantity - remainingQuantity;
     }
 
 }

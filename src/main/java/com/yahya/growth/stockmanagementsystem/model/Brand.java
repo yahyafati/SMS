@@ -19,21 +19,21 @@ public class Brand {
     private String name;
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinTable(name = "brand_categories",
-            joinColumns = {@JoinColumn(name = "brand_id")},
-            inverseJoinColumns = {@JoinColumn(name = "category_id")})
-    @Builder.Default
-    private Set<Category> categories = new HashSet<>();
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinTable(name = "brand_subcategories",
-            joinColumns = {@JoinColumn(name = "brand_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subcategory_id")})
-    @Builder.Default
-    private Set<Subcategory> subcategories = new HashSet<>();
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    @JoinTable(name = "brand_categories",
+//            joinColumns = {@JoinColumn(name = "brand_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "category_id")})
+//    @Builder.Default
+//    private Set<Category> categories = new HashSet<>();
+//
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    @JoinTable(name = "brand_subcategories",
+//            joinColumns = {@JoinColumn(name = "brand_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "subcategory_id")})
+//    @Builder.Default
+//    private Set<Subcategory> subcategories = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "brand", cascade = CascadeType.REMOVE)
     @JsonIgnore @ToString.Exclude @EqualsAndHashCode.Exclude

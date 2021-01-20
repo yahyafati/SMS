@@ -24,10 +24,10 @@ public class StockManagementSystemApplication {
         SpringApplication.run(StockManagementSystemApplication.class, args);
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner categoryData(
             CategoryService categoryService, SubcategoryService subcategoryService, BrandService brandService,
-            StoreService storeService, ItemService itemService, CustomerService customerService) {
+            ItemService itemService, CustomerService customerService) {
         return args -> {
             Category electronicsCategory =
                     Category.builder()
@@ -114,42 +114,6 @@ public class StockManagementSystemApplication {
             brandService.save(amazonBrand);
             brandService.save(microsoftBrand);
 
-            Store vatanStore =
-                    Store.builder()
-                            .name("Vatan")
-                            .description("Vatan Turkiye")
-                            .address("Istanbul, Turkey")
-                            .email("vatan@vatan.vt")
-                            .phone("+905364859687")
-                            .build();
-            Store mediaStore =
-                    Store.builder()
-                            .name("Media Markt")
-                            .description("Media Markt Distributer")
-                            .address("Merter, Istanbul, Turkey")
-                            .email("media@makt.pl")
-                            .phone("+906358884512")
-                            .build();
-            Store hepsiStore =
-                    Store.builder()
-                            .name("Hepsi")
-                            .description("hepsi burada")
-                            .address("Bakirkoy, Istanbul, Turkey")
-                            .email("hepsi@hepsi.burada")
-                            .phone("+903651253698")
-                            .build();
-            Store migrosStore =
-                    Store.builder()
-                            .name("Migros")
-                            .description("Migros Turkiye")
-                            .address("Florya, Istanbul, Turkey")
-                            .email("migros@migros.mg")
-                            .phone("448")
-                            .build();
-            storeService.save(vatanStore);
-            storeService.save(mediaStore);
-            storeService.save(hepsiStore);
-            storeService.save(migrosStore);
 
             List<String> itemNames = Arrays.asList(
                     "boom box", "spring", "hair tie", "floor",  "newspaper", "tissue box", "headphones", "picture frame", "pillow", "shirt"
@@ -203,7 +167,6 @@ public class StockManagementSystemApplication {
                                 .category(Category.builder().id(random.nextInt(3) + 1).build())
                                 .brand(Brand.builder().id(random.nextInt(4) + 1).build())
                                 .subcategory(Subcategory.builder().id(random.nextInt(3) + 1).build())
-                                .store(Store.builder().id(random.nextInt(3)+1).build())
                                 .build();
                 itemService.save(item);
             }
@@ -220,7 +183,7 @@ public class StockManagementSystemApplication {
         };
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner initializeSecurityData(AuthorityService authorityService, RoleService roleService) {
 
         return args -> {
@@ -245,7 +208,7 @@ public class StockManagementSystemApplication {
         };
     }
 
-//    @Bean
+    @Bean
     public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
         // FIXME Why do I have to make a new instance of authority?
         return args -> {

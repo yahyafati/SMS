@@ -91,12 +91,12 @@ public class TransactionServiceImpl implements TransactionService {
                         || iTransaction.getTransaction().getId() == transaction.getId()) {
                     continue;
                 }
-                if (itemTransaction.getAmountSold() < iTransaction.getRemaining()) {
-                    iTransaction.setRemaining(iTransaction.getRemaining() - itemTransaction.getAmountSold());
-                    itemTransaction.setRemaining(itemTransaction.getInitialQuantity());
+                if (itemTransaction.getAmountSold() < iTransaction.getRemainingQuantity()) {
+                    iTransaction.setRemainingQuantity(iTransaction.getRemainingQuantity() - itemTransaction.getAmountSold());
+                    itemTransaction.setRemainingQuantity(itemTransaction.getInitialQuantity());
                 } else {
-                    itemTransaction.setRemaining(itemTransaction.getRemaining() + iTransaction.getRemaining());
-                    iTransaction.setRemaining(0);
+                    itemTransaction.setRemainingQuantity(itemTransaction.getRemainingQuantity() + iTransaction.getRemainingQuantity());
+                    iTransaction.setRemainingQuantity(0);
                 }
                 // Break once the amountSold(= initialQuantity - remaining) == 0
                 if (itemTransaction.getAmountSold() == 0) {
@@ -124,17 +124,17 @@ public class TransactionServiceImpl implements TransactionService {
             curItemTransactions = curItemTransactions
                     .stream()
                     .filter(iTransaction -> iTransaction.getTransaction().getType() == TransactionType.PURCHASE)
-                    .filter(iTransaction -> iTransaction.getRemaining() < iTransaction.getInitialQuantity())
+                    .filter(iTransaction -> iTransaction.getRemainingQuantity() < iTransaction.getInitialQuantity())
                     .collect(Collectors.toList());
             int quantity = itemTransaction.getInitialQuantity();
             // For each itemTransaction in curItemTransactions
             for (ItemTransaction iTransaction: curItemTransactions) {
                 // iTransaction.getQuantity() - iTransaction.getRemaining() = the amount sold from this iTransaction
-                if (iTransaction.getInitialQuantity() - iTransaction.getRemaining() < quantity) {
-                    quantity -= iTransaction.getInitialQuantity() - iTransaction.getRemaining();
-                    iTransaction.setRemaining(iTransaction.getInitialQuantity());
+                if (iTransaction.getInitialQuantity() - iTransaction.getRemainingQuantity() < quantity) {
+                    quantity -= iTransaction.getInitialQuantity() - iTransaction.getRemainingQuantity();
+                    iTransaction.setRemainingQuantity(iTransaction.getInitialQuantity());
                 } else {
-                    iTransaction.setRemaining(iTransaction.getRemaining() + quantity);
+                    iTransaction.setRemainingQuantity(iTransaction.getRemainingQuantity() + quantity);
                     quantity = 0;
                 }
             }
@@ -178,12 +178,12 @@ public class TransactionServiceImpl implements TransactionService {
 
             List<ItemTransaction> itemTransactions = itemTransactionService.findAllByItemSorted(item);
             for (ItemTransaction iTransaction : itemTransactions) {
-                int remaining = iTransaction.getRemaining();
+                int remaining = iTransaction.getRemainingQuantity();
                 if (remaining < quantity) {
                     quantity -= remaining;
-                    iTransaction.setRemaining(0);
+                    iTransaction.setRemainingQuantity(0);
                 } else {
-                    iTransaction.setRemaining(iTransaction.getInitialQuantity() - quantity);
+                    iTransaction.setRemainingQuantity(iTransaction.getInitialQuantity() - quantity);
                     quantity = 0;
                 }
                 if (quantity == 0) {
@@ -200,7 +200,7 @@ public class TransactionServiceImpl implements TransactionService {
     private Transaction savePurchase(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities) {
         for (int i = 0; i < items.length; i++) {
             ItemTransaction itemTransaction = buildItemTransactions(transaction, ids[i], items[i], prices[i], quantities[i]);
-            itemTransaction.setRemaining(itemTransaction.getInitialQuantity());
+            itemTransaction.setRemainingQuantity(itemTransaction.getInitialQuantity());
             transaction.getItemTransactions().add(itemTransaction);
             System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }

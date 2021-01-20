@@ -5,7 +5,6 @@ import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,7 +19,7 @@ public class TransactionUtils {
 
     public boolean isTransactionUpdated(Transaction transaction) {
         for (ItemTransaction itemTransaction: transaction.getItemTransactions()) {
-            if (itemTransaction.getInitialQuantity() > itemTransaction.getRemaining()) {
+            if (itemTransaction.getInitialQuantity() > itemTransaction.getRemainingQuantity()) {
                 return true;
             }
         }

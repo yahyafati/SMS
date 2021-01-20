@@ -39,13 +39,13 @@ public class Item {
     @JoinColumn(name = "brand_id")
     private Brand brand;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "store_id")
-    private Store store;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "store_id")
+//    private Store store;
 
-    @OneToMany(mappedBy = "item")
-    @Builder.Default
-    private Set<Order> orders = new HashSet<>();
+//    @OneToMany(mappedBy = "item")
+//    @Builder.Default
+//    private Set<Order> orders = new HashSet<>();
 
     public Item(){}
 }
