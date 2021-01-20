@@ -3,51 +3,52 @@
 <!--/*@thymesVar id="company" type="com.yahya.growth.stockmanagementsystem.model.utility.Company"*/-->
 <!--/*@thymesVar id="action" type="java.lang.String"*/-->
 <section th:fragment="main-content" class="main-content">
-    <div class="row">
-        <div class="col col-2">
-<!--            <img class="img-thumbnail" th:src="@{/images/placeholder/placeholder.png}" th:alt="${company.name}">-->
+    <div class="form-div-wrapper">
+        <div class="img-thumb-div">
+            <img class="img-thumb" th:src="@{/images/placeholder/placeholder.png}" th:alt="${company.name}">
             <h1 class="h1" th:text="${company.name}">Company Name</h1>
         </div>
-        <div class="col col-8">
-            <form class="form-control" action="" th:action="@{{action}(action=${action})}" th:object="${company}" method="post">
-                <label class="d-block">
-                    Name: <input disabled type="text" th:field="*{name}" />
-                </label>
-                <!--       Branch Object         -->
-                <label class="d-block">
-                    Branch: <input type="text" th:field="*{branch.name}" />
-                </label>
-                <!--       Address Object         -->
-                <label class="d-block">
-                    Region: <input type="text" th:field="*{branch.address.region}" />
-                </label>
-                <label class="d-block">
-                    District: <input type="text" th:field="*{branch.address.district}" />
-                </label>
-                <label class="d-block">
-                    House No: <input type="text" th:field="*{branch.address.houseNo}" />
-                </label>
-                <label class="d-block">
-                    Street: <input type="text" th:field="*{branch.address.street}" />
-                </label>
-                <label class="d-block">
-                    Post Code: <input type="text" th:field="*{branch.address.postCode}" />
-                </label>
-                <!--      Address Object Over          -->
-                <!--      Branch Object Over          -->
-                <label class="d-block">
-                    VAT: <input type="text" th:field="*{vat}" />
-                </label>
-                <label class="d-block">
-                    Service Charge: <input type="text" th:field="*{serviceCharge}" />
-                </label>
-                <label class="d-block">
-                    Special Discount: <input type="text" th:field="*{specialDiscount}" />
-                </label>
-
-                <div>
-                    <input type="submit" value="Submit" class="btn btn-success" />
-                    <input type="reset" value="Reset" class="btn btn-outline-success"/>
+        <div class="form-div">
+            <form class="form" action="" th:action="@{{action}(action=${action})}" th:object="${company}" method="post">
+                <div class="form-wrapper">
+                    <div class="form-control-wrapper">
+                        Name: <input class="input-text" disabled type="text" th:field="*{name}" />
+                    </div>
+                    <!--       Branch Object         -->
+                    <div class="form-control-wrapper">
+                        Branch: <input class="input-text" type="text" th:field="*{branch.name}" />
+                    </div>
+                    <!--       Address Object         -->
+                    <div class="form-control-wrapper">
+                        Region: <input class="input-text" type="text" th:field="*{branch.address.region}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        District: <input class="input-text" type="text" th:field="*{branch.address.district}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        House No: <input class="input-text" type="text" th:field="*{branch.address.houseNo}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        Street: <input class="input-text" type="text" th:field="*{branch.address.street}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        Post Code: <input class="input-text" type="text" th:field="*{branch.address.postCode}" />
+                    </div>
+                    <!--      Address Object Over          -->
+                    <!--      Branch Object Over          -->
+                    <div class="form-control-wrapper">
+                        VAT: <input class="input-text" type="text" th:field="*{vat}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        Service Charge: <input class="input-text" type="text" th:field="*{serviceCharge}" />
+                    </div>
+                    <div class="form-control-wrapper">
+                        Special Discount: <input class="input-text" type="text" th:field="*{specialDiscount}" />
+                    </div>
+                </div>
+                <div class="edit-btns-div">
+                    <input type="submit" value="Change" class="my-btn" />
+                    <input type="reset" value="Reset Changes" class="my-btn reset-btn"/>
                 </div>
 
             </form>

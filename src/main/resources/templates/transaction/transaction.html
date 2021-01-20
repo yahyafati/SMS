@@ -15,7 +15,7 @@
                 <input hidden type="number" th:field="*{id}">
                 <div class="form-control-wrapper">
                     Type:
-                    <select class="form-select" th:field="*{type}" >
+                    <select disabled class="form-select" th:field="*{type}" >
                         <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
                     </select>
                 </div>

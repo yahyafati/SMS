@@ -1,5 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.yahya.growth.stockmanagementsystem.model.Customer;
+import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
@@ -8,10 +10,12 @@ import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ConcurrentModel;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/transaction")
@@ -31,6 +35,21 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @ModelAttribute("title")
     public String getPageTitle() {
         return "Transaction";
+    }
+
+    @ModelAttribute("transactionTypes")
+    public TransactionType[] getTransactionTypes() {
+        return TransactionType.values();
+    }
+
+    @ModelAttribute("customers")
+    public List<Customer> getCustomers() {
+        return customerService.findAll();
+    }
+
+    @ModelAttribute("allItems")
+    public List<Item> getItems() {
+        return itemService.findAll();
     }
 
     @Override
@@ -66,6 +85,26 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         return "common/header";
     }
 
+    @GetMapping("/purchase")
+    public String purchaseItem(Model model) {
+        Transaction transaction = new Transaction();
+        transaction.setType(TransactionType.PURCHASE);
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("action", "new");
+        model.addAttribute("pageName", "transaction/transaction");
+        return "common/header";
+    }
+
+    @GetMapping("/sale")
+    public String saleItem(Model model) {
+        Transaction transaction = new Transaction();
+        transaction.setType(TransactionType.SALE);
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("action", "new");
+        model.addAttribute("pageName", "transaction/transaction");
+        return "common/header";
+    }
+
     @Override
     public String addNewPOST(Transaction obj) {
         return null;
@@ -77,8 +116,8 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
-        transactionService.save(transaction, ids, items, prices, quantities);
-        return "redirect:/transaction/";
+        transaction = transactionService.save(transaction, ids, items, prices, quantities);
+        return "redirect:/transaction/" + transaction.getId();
     }
 
     @Override

@@ -67,6 +67,12 @@
                 </a>
             </li>
             <li class="item">
+                <a href="#" th:href="@{/items}"> <i class="fas fa-tv"></i> Products </a>
+            </li>
+            <li class="item">
+                <a href="#" th:href="@{/customer}"> <i class="fas fa-tv"></i> Customers </a>
+            </li>
+            <li class="item">
                         <span
                                 class="transaction"
                                 onclick="toggleClass(this)"
@@ -83,22 +89,16 @@
                         </a>
                     </li>
                     <li class="item">
-                        <a href="#" th:href="@{/purchase}">
+                        <a href="#" th:href="@{/transaction/purchase}">
                             <i class="fas fa-indent"></i> Purchase
                         </a>
                     </li>
                     <li class="item">
-                        <a href="#" th:href="@{/sale}">
+                        <a href="#" th:href="@{/transaction/sale}">
                             <i class="fas fa-outdent"></i> Sale
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li class="item">
-                <a href="#" th:href="@{/items}"> <i class="fas fa-tv"></i> Products </a>
-            </li>
-            <li class="item">
-                <a href="#" th:href="@{/customer}"> <i class="fas fa-tv"></i> Customers </a>
             </li>
             <li class="item">
                 <a href="#" th:href="@{/reports}"> <i class="fas fa-scroll"></i> Reports </a>
