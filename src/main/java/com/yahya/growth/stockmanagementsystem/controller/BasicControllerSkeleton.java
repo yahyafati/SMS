@@ -2,8 +2,12 @@ package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 public interface BasicControllerSkeleton<T> {
+
+    @ModelAttribute("title")
+    String getPageTitle();
 
     String index(Model model);
 

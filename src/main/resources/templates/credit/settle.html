@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="settlement" type="com.yahya.growth.stockmanagementsystem.model.Settlement"*/-->
+<!--/*@thymesVar id="customerCredits" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Credit>"*/-->
+<!--/*@thymesVar id="allCustomers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Customer>"*/-->
+<section th:fragment="main-content" class="main-content">
+    <div class="form-div-wrapper">
+        <div class="form-div">
+            <form action="" class="form" th:action="@{/credit/settle}" th:object="${settlement}" method="post">
+                <div class="form-control-wrapper">
+                    Customer:
+                    <select class="form-select" th:field="*{customer}" >
+                        <option th:each="customer : ${allCustomers}" th:value="${customer.id}" th:text="${customer.name}">Superman</option>
+                    </select>
+                </div>
+                <div class="form-control-wrapper">
+                    Date: <input class="input-text" type="date" th:field="*{settledDate}">
+                </div>
+                <div class="form-control-wrapper">
+                    Settlement Amount: <input placeholder="Settlement Amount" class="input-text" type="number" step="any" th:field="*{amount}">
+                </div>
+
+                <div class="edit-btns-div">
+                    <input type="submit" value="Submit" class="my-btn" />
+                    <input type="reset" value="Reset" class="my-btn reset-btn"/>
+                    <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <table class="styled-table">
+        <caption>Credits</caption>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Transaction</th>
+            <th>Initial Credit</th>
+            <th>Unsettled Amount</th>
+<!--            <th>Settle</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="credit, iterStat : ${customerCredits}">
+            <td th:text="${iterStat.count}">1</td>
+            <td>
+                <a class="btn-link" th:href="@{/transaction/{id}(id=${credit.transaction.id})}" th:text="${credit.transaction.refNumber}">Mr. Halloween</a>
+            </td>
+            <td th:text="${credit.initialAmount}">1051151316831</td>
+            <td th:text="${credit.remainingAmount}">1051151316831</td>
+<!--            <td>-->
+<!--                <a class="btn btn-sm btn-outline-dark" th:href="@{/credit/settle(id=${instance.key.id})}">Settle Credit</a>-->
+<!--            </td>-->
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+</html>

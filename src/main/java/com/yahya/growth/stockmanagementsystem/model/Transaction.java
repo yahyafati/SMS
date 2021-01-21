@@ -48,8 +48,8 @@ public class Transaction {
 
     public Double getPaidAmount() {
         System.out.println("credits: " + credits);
-        return credits.stream()
-                .mapToDouble(Credit::getSettlementAmount)
+        return getTotalPrice() - credits.stream()
+                .mapToDouble(Credit::getInitialAmount)
                 .sum();
     }
 

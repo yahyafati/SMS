@@ -181,6 +181,7 @@ public class StockManagementSystemApplication {
                 customerService.save(customer);
             }
         };
+
     }
 
 //    @Bean
@@ -206,6 +207,7 @@ public class StockManagementSystemApplication {
             roleService.findAll()
                     .forEach(role -> System.out.println(role.getName() + ": " + role.getAuthorities()));
         };
+
     }
 
 //    @Bean

@@ -160,7 +160,7 @@ public class TransactionServiceImpl implements TransactionService {
                 .build();
     }
 
-    private Transaction saveSale(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double paidAmount) throws TransactionException {
+    private Transaction saveSale(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double amount) throws TransactionException {
         for (int i = 0; i < items.length; i++) {
             ItemTransaction itemTransaction = buildItemTransactions(transaction, ids[i], items[i], prices[i], quantities[i]);
 
@@ -189,30 +189,22 @@ public class TransactionServiceImpl implements TransactionService {
             }
             itemTransactionService.saveAll(itemTransactions);
             transaction.getItemTransactions().add(itemTransaction);
-            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
+//            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
-        Credit credit = new Credit(CreditType.PAID);
-        credit.setSettlementAmount(paidAmount);
-        credit.setTransaction(transaction);
-
+        Credit credit = new Credit(transaction, transaction.getTotalPrice() - amount);
         transaction.getCredits().add(credit);
         return save(transaction);
     }
 
-    private Transaction savePurchase(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double paidAmount) {
+    private Transaction savePurchase(Transaction transaction, String[] ids, String[] items, String[] prices, String[] quantities, Double amount) {
         for (int i = 0; i < items.length; i++) {
             ItemTransaction itemTransaction = buildItemTransactions(transaction, ids[i], items[i], prices[i], quantities[i]);
             itemTransaction.setRemainingQuantity(itemTransaction.getInitialQuantity());
             transaction.getItemTransactions().add(itemTransaction);
-            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
+//            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
-
-        Credit credit = new Credit(CreditType.PAID);
-        credit.setSettlementAmount(paidAmount);
-        credit.setTransaction(transaction);
-
+        Credit credit = new Credit(transaction, transaction.getTotalPrice() - amount);
         transaction.getCredits().add(credit);
-
         return save(transaction);
     }
 }

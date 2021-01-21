@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <!--/*@thymesVar id="payableMap" type="java.util.Map<com.yahya.growth.stockmanagementsystem.model.Customer, java.lang.Double>"*/-->
+<section th:fragment="main-content" class="main-content">
+    <table class="styled-table">
+        <caption>Payable Credit</caption>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Customer</th>
+            <th>Credit</th>
+            <th>Settle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="instance, iterStat : ${payableMap}">
+            <td th:text="${iterStat.count}">1</td>
+            <td>
+                <a class="btn-link" th:href="@{/customer/{id}(id=${instance.key.id})}" th:text="${instance.key.name}">Mr. Halloween</a>
+            </td>
+            <td th:text="${instance.value}">1051151316831</td>
+            <td>
+                <a class="btn btn-sm btn-outline-dark" th:href="@{/credit/settle(id=${instance.key.id})}">Settle Credit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+</html>
