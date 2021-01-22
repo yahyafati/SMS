@@ -52,7 +52,7 @@ public class CreditServiceImpl implements CreditService {
                 .filter(credit -> credit.getTransaction().getType() == type)
                 .collect(
                         Collectors.groupingBy(credit -> credit.getTransaction().getCustomer(),
-                                Collectors.summingDouble(Credit::getInitialAmount))
+                                Collectors.summingDouble(Credit::getRemainingAmount))
                 );
     }
 
