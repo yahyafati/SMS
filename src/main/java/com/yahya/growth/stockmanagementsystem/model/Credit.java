@@ -24,6 +24,8 @@ public class Credit {
     // TODO Don't Forget to change it to STRING
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     private Transaction transaction;
+    @Enumerated(EnumType.STRING)
+    private CreditType type;
     private LocalDate creditedDate;
     private double initialAmount;
     private double remainingAmount;
@@ -33,7 +35,8 @@ public class Credit {
     @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Settlement> settlements = new HashSet<>();
 
-    public Credit(Transaction transaction, double initialAmount) {
+    public Credit(CreditType type, Transaction transaction, double initialAmount) {
+        this.type = type;
         this.transaction = transaction;
         this.creditedDate = transaction.getTransactionDate();
         setInitialAmount(initialAmount);

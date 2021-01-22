@@ -7,6 +7,7 @@
     <div class="form-div-wrapper">
         <div class="form-div">
             <form action="" class="form" th:action="@{/credit/settle}" th:object="${settlement}" method="post">
+                <input hidden type="text" th:field="*{type}">
                 <div class="form-control-wrapper">
                     Customer:
                     <select class="form-select" th:field="*{customer}" >

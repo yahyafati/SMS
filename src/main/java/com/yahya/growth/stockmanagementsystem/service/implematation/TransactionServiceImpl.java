@@ -191,7 +191,7 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getItemTransactions().add(itemTransaction);
 //            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
-        Credit credit = new Credit(transaction, transaction.getTotalPrice() - amount);
+        Credit credit = new Credit(CreditType.LENT, transaction, transaction.getTotalPrice() - amount);
         transaction.getCredits().add(credit);
         return save(transaction);
     }
@@ -203,7 +203,7 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getItemTransactions().add(itemTransaction);
 //            System.out.printf("Item: %s,    Price: %s,    Quantity: %s\n", items[i], prices[i], quantities[i]);
         }
-        Credit credit = new Credit(transaction, transaction.getTotalPrice() - amount);
+        Credit credit = new Credit(CreditType.BORROWED, transaction, transaction.getTotalPrice() - amount);
         transaction.getCredits().add(credit);
         return save(transaction);
     }

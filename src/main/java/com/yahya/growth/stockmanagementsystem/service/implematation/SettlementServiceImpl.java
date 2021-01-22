@@ -52,6 +52,8 @@ public class SettlementServiceImpl implements SettlementService {
     public Settlement saveNewSettlement(Settlement settlement) {
         List<Credit> credits = creditService.findByCustomer(settlement.getCustomer())
                 .stream()
+                // TODO Make the filters one line
+                .filter(credit -> credit.getType() == settlement.getType().getCreditType())
                 .filter(credit -> credit.getRemainingAmount() > 0)
                 .sorted(Comparator.comparing(Credit::getCreditedDate))
                 .collect(Collectors.toList());

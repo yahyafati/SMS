@@ -23,6 +23,8 @@ public class Settlement {
     private Timestamp addedTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate settledDate;
+    @Enumerated(EnumType.STRING)
+    private SettlementType type;
     private double amount;
     @ManyToOne
     private Customer customer;

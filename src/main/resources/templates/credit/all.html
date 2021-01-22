@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <!--/*@thymesVar id="payableMap" type="java.util.Map<com.yahya.growth.stockmanagementsystem.model.Customer, java.lang.Double>"*/-->
+    <!--/*@thymesVar id="creditsMap" type="java.util.Map<com.yahya.growth.stockmanagementsystem.model.Customer, java.lang.Double>"*/-->
+    <!--/*@thymesVar id="type" type="java.lang.String"*/-->
 <section th:fragment="main-content" class="main-content">
+    <label>
+        // TODO Make this work
+        Show Settled Credits
+        <input type="checkbox">
+    </label>
     <table class="styled-table">
-        <caption>Payable Credit</caption>
+        <caption> <span th:text="${type}"></span> Credit</caption>
         <thead>
         <tr>
             <th>#</th>
@@ -13,14 +19,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="instance, iterStat : ${payableMap}">
+        <tr th:each="instance, iterStat : ${creditsMap}">
             <td th:text="${iterStat.count}">1</td>
             <td>
                 <a class="btn-link" th:href="@{/customer/{id}(id=${instance.key.id})}" th:text="${instance.key.name}">Mr. Halloween</a>
             </td>
             <td th:text="${instance.value}">1051151316831</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" th:href="@{/credit/settle(id=${instance.key.id})}">Settle Credit</a>
+                <a th:if="${instance.value != 0}" class="btn btn-sm btn-outline-dark" th:href="@{/credit/settle(id=${instance.key.id}, type=${type})}">Settle Credit</a>
             </td>
         </tr>
         </tbody>

@@ -101,7 +101,26 @@
                 </ul>
             </li>
             <li class="item">
-                <a href="#" th:href="@{/credit}"> <i class="fas fa-scroll"></i> Credit </a>
+                        <span
+                                onclick="toggleClass(this)"
+                                toggledElement="creditsSubMenu"
+                                toggledClass="hide"
+                                toggler
+                        >
+                            <i class="fas fa-exchange-alt"></i> Credits
+                        </span>
+                <ul class="subMenu hide" id="creditsSubMenu">
+                    <li class="item">
+                        <a href="#" th:href="@{/credit(type='payable')}">
+                            <i class="fas fa-indent"></i> Payable
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/credit(type='receivable')}">
+                            <i class="fas fa-outdent"></i> Receivable
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="item">
                 <a href="#" th:href="@{/reports}"> <i class="fas fa-scroll"></i> Reports </a>

@@ -16,6 +16,11 @@ public interface CreditService extends BasicServiceSkeleton<Credit> {
     Map<Customer, Double> findAllReceivablePerCustomer();
 
     List<Credit> findByCustomer(Customer customer);
-//
+
+    List<Credit> findPayableCreditsByCustomer(Customer customer);
+
+    List<Credit> findReceivableCreditsByCustomer(Customer customer);
+
+    //
     List<Credit> findByTransaction(Transaction transaction);
 }

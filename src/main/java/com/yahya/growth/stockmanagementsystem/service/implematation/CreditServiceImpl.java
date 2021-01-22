@@ -1,10 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.CreditDao;
-import com.yahya.growth.stockmanagementsystem.model.Credit;
-import com.yahya.growth.stockmanagementsystem.model.Customer;
-import com.yahya.growth.stockmanagementsystem.model.Transaction;
-import com.yahya.growth.stockmanagementsystem.model.TransactionType;
+import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.service.CreditService;
 import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +66,22 @@ public class CreditServiceImpl implements CreditService {
     @Override
     public List<Credit> findByCustomer(Customer customer) {
         return creditDao.findAllByCustomer(customer);
+    }
+
+    @Override
+    public List<Credit> findPayableCreditsByCustomer(Customer customer) {
+        return findByCustomer(customer)
+                .stream()
+                .filter(credit -> credit.getType() == CreditType.BORROWED)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Credit> findReceivableCreditsByCustomer(Customer customer) {
+        return findByCustomer(customer)
+                .stream()
+                .filter(credit -> credit.getType() == CreditType.LENT)
+                .collect(Collectors.toList());
     }
 
     @Override
