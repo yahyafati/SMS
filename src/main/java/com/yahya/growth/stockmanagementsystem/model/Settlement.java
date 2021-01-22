@@ -23,7 +23,7 @@ public class Settlement {
     private Timestamp addedTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate settledDate;
-    private int amount;
+    private double amount;
     @ManyToOne
     private Customer customer;
     @ManyToMany(cascade = CascadeType.PERSIST)

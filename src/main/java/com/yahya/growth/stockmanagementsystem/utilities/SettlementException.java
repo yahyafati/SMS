@@ -1,0 +1,7 @@
+package com.yahya.growth.stockmanagementsystem.utilities;
+
+public class SettlementException extends Throwable {
+    public SettlementException(String s) {
+        super(s);
+    }
+}

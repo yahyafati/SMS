@@ -15,7 +15,7 @@ public class ExceptionController implements ErrorController {
         return "Sorry!";
     }
 
-    @RequestMapping("/error")
+//    @RequestMapping("/error")
     @ExceptionHandler
     public String handleError(Model model, Exception exception) {
         model.addAttribute("pageName", "error/error");

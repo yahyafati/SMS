@@ -5,6 +5,8 @@ import com.yahya.growth.stockmanagementsystem.model.Credit;
 import com.yahya.growth.stockmanagementsystem.model.Settlement;
 import com.yahya.growth.stockmanagementsystem.service.CreditService;
 import com.yahya.growth.stockmanagementsystem.service.SettlementService;
+import com.yahya.growth.stockmanagementsystem.utilities.SettlementException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +46,8 @@ public class SettlementServiceImpl implements SettlementService {
         settlementDao.deleteById(id);
     }
 
+    // TODO Remove Sneaky Throws
+    @SneakyThrows
     @Override
     public Settlement saveNewSettlement(Settlement settlement) {
         List<Credit> credits = creditService.findByCustomer(settlement.getCustomer())
@@ -51,7 +55,13 @@ public class SettlementServiceImpl implements SettlementService {
                 .filter(credit -> credit.getRemainingAmount() > 0)
                 .sorted(Comparator.comparing(Credit::getCreditedDate))
                 .collect(Collectors.toList());
-        int amount = settlement.getAmount();
+        double unsettledTotal = credits.stream()
+                .reduce(0.0, (subtotal, credit) -> subtotal + credit.getRemainingAmount(), Double::sum);
+        double amount = settlement.getAmount();
+        System.out.printf("Unsettled: %f\nAmount: %f\n", unsettledTotal, amount);
+        if (amount > unsettledTotal) {
+            throw new SettlementException(String.format("Settlement Amount (%f) can't be greater than Total Unsettled Amount (%.2f)", amount, unsettledTotal));
+        }
         for (Credit credit: credits) {
             credit.addSettlement(settlement);
             if (credit.getRemainingAmount() > amount) {
