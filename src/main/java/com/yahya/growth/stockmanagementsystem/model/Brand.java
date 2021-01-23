@@ -15,8 +15,11 @@ public class Brand {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Column(name = "brand_id")
     private int id;
+    @Column(name = "brand_name")
     private String name;
+    @Column(name = "brand_description")
     private String description;
 
 //    @ManyToMany(fetch = FetchType.LAZY)

@@ -10,24 +10,28 @@ import java.util.Set;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Subcategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subcategory_id")
     private int id;
+    @Column(name = "subcategory_name")
     private String name;
+    @Column(name = "subcategory_description")
     private String description;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
     @EqualsAndHashCode.Exclude
     @Builder.Default
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "subcategory_category_id")
     private Category category = new Category();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategory")
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategory")
     private Set<Item> items = new HashSet<>();
 
 //    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subcategories")
@@ -49,6 +53,4 @@ public class Subcategory {
 //    private void removeAllBrands() {
 //        this.brands.forEach(this::removeBrand);
 //    }
-
-    public Subcategory() {}
 }

@@ -19,15 +19,22 @@ public class Credit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "credit_id")
     private Integer id;
+    @Column(name = "credit_addedTime")
     private Timestamp addedTime; // for logging purposes
     // TODO Don't Forget to change it to STRING
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "credit_transaction_id")
     private Transaction transaction;
     @Enumerated(EnumType.STRING)
+    @Column(name = "credit_type")
     private CreditType type;
+    @Column(name = "credit_creditedDate")
     private LocalDate creditedDate;
+    @Column(name = "credit_initialAmount")
     private double initialAmount;
+    @Column(name = "credit_remainingAmount")
     private double remainingAmount;
 
     @ManyToMany(mappedBy = "settledCredits")

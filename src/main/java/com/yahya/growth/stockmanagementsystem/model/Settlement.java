@@ -19,14 +19,20 @@ public class Settlement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "settlement_id")
     private int id;
+    @Column(name = "settlement_addedTime")
     private Timestamp addedTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "settlement_settledDate")
     private LocalDate settledDate;
     @Enumerated(EnumType.STRING)
+    @Column(name = "settlement_type")
     private SettlementType type;
+    @Column(name = "settlement_amount")
     private double amount;
     @ManyToOne
+    @JoinColumn(name = "settlement_customer_id")
     private Customer customer;
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
