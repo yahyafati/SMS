@@ -27,5 +27,7 @@ public interface ItemTransactionService extends BasicServiceSkeleton<ItemTransac
 
     int getQuantityOfItem(int id);
 
+    String generateReport();
+
     List<ItemTransaction> saveAll(Collection<ItemTransaction> itemTransactions);
 }

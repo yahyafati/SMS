@@ -5,9 +5,15 @@ import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
 import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
+import lombok.SneakyThrows;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.List;
 
@@ -163,6 +169,24 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
     public int getQuantityOfItem(int id) {
         Integer quantity = itemTransactionDao.getItemSum(id);
         return quantity != null ? quantity : 0;
+    }
+
+    // TODO Delete Sneaky Throw
+    @SneakyThrows
+    @Override
+    public String generateReport() {
+        List<ItemTransaction> itemTransactions = findAll();
+
+        InputStream transactionStream = getClass().getResourceAsStream("/reports/TransactionReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
+
+
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, null, dataSource);
+        String path = "C:\\Users\\yahya\\OneDrive\\Desktop\\File.pdf";
+        JasperExportManager.exportReportToPdfFile(print, path);
+        return path;
     }
 
     /**

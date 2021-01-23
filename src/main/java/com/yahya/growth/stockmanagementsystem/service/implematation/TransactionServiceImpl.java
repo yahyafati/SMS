@@ -7,9 +7,14 @@ import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionUtils;
 import lombok.SneakyThrows;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperReport;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;

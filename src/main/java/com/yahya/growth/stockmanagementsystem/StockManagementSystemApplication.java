@@ -24,7 +24,7 @@ public class StockManagementSystemApplication {
         SpringApplication.run(StockManagementSystemApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public CommandLineRunner categoryData(
             CategoryService categoryService, SubcategoryService subcategoryService, BrandService brandService,
             ItemService itemService, CustomerService customerService) {
@@ -184,7 +184,7 @@ public class StockManagementSystemApplication {
 
     }
 
-    @Bean
+//    @Bean
     public CommandLineRunner initializeSecurityData(AuthorityService authorityService, RoleService roleService) {
 
         return args -> {
@@ -210,7 +210,7 @@ public class StockManagementSystemApplication {
 
     }
 
-    @Bean
+//    @Bean
     public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
         // FIXME Why do I have to make a new instance of authority?
         return args -> {

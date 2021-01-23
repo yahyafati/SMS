@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
+import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
 import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
