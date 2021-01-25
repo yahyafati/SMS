@@ -12,12 +12,12 @@ import java.time.LocalDate;
 public class TransactionsReportInfo {
 
     private LocalDate startDate;
-    private Boolean fromBeginning;
+    private Boolean fromBeginning = true;
     private LocalDate finalDate;
-    private Boolean toLastDate;
-    private TransactionType transactionType;
-    private Customer customer;
-    private Item item;
-    private User user;
+    private Boolean toLastDate = true;
+    private TransactionType type;
+    private Customer customer = new Customer();
+    private Item item = new Item();
+    private User user = new User();
 
 }
