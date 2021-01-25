@@ -16,6 +16,7 @@ public class TransactionsReportInfo {
     private LocalDate finalDate;
     private Boolean toLastDate = true;
     private TransactionType type;
+    private Boolean bothTypes = true;
     private Customer customer = new Customer();
     private Item item = new Item();
     private User user = new User();

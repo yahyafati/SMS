@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -26,19 +28,30 @@ public class ReportServiceImpl implements ReportService {
 
     @SneakyThrows // TODO REMOVE THIS
     @Override
-    public byte[] generateTransactionReport(TransactionsReportInfo transactionsReportInfo) {
+    public byte[] generateTransactionReport(TransactionsReportInfo info) {
         List<ItemTransaction> itemTransactions = itemTransactionService.findAll();
-
+        Stream<ItemTransaction> itemTransactionStream = itemTransactions.stream();
+        if (info.getCustomer().getId() != 0) {
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> info.getCustomer().getId() == itemTransaction.getTransaction().getCustomer().getId());
+        }
+        if (info.getItem().getId() != 0) {
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> info.getItem().getId() == itemTransaction.getItem().getId());
+        }
+        if (!info.getFromBeginning()) {
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getTransactionDate().isAfter(info.getStartDate()));
+        }
+        if (!info.getToLastDate()) {
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction ->  itemTransaction.getTransaction().getTransactionDate().isBefore(info.getFinalDate()));
+        }
+        if (!info.getBothTypes()) {
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getType() == info.getType());
+        }
+        itemTransactions = itemTransactionStream.collect(Collectors.toList());
         InputStream transactionStream = getClass().getResourceAsStream("/reports/TransactionReport.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
-        jasperReport.setProperty("net.sf.jasperreports.compiler.xml.parser.cache.schemas", "false");
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
 
-        JasperPrint print = JasperFillManager.fillReport(jasperReport, null, dataSource);
-//        String path = "C:\\Users\\yahya\\OneDrive\\Desktop\\File.pdf";" WINDOWS
-        String path = "/home/blackpillow/File.pdf"; // LINUX
-        JasperExportManager.exportReportToPdfFile(print, path);
         return JasperRunManager.runReportToPdf(jasperReport, null, dataSource);
     }
 }

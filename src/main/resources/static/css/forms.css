@@ -41,7 +41,7 @@
 .input-text:focus {
     box-shadow: 0 10px 15px #0119368c;
     border: 2px solid #011936;
-    margin: 0px;
+    margin: 0;
 
     /* outline: 1px solid #111; */
 }
@@ -54,3 +54,15 @@
     align-items: center;
     padding: 5px;
 }
+
+.form-control-wrapper .extra-checkbox {
+    display: block;
+}
+
+/*.form-control-wrapper label {*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 5px;*/
+/*}*/

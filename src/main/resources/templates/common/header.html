@@ -123,7 +123,26 @@
                 </ul>
             </li>
             <li class="item">
-                <a href="#" th:href="@{/reports}"> <i class="fas fa-scroll"></i> Reports </a>
+                        <span
+                                onclick="toggleClass(this)"
+                                toggledElement="reportsSubMenu"
+                                toggledClass="hide"
+                                toggler
+                        >
+                            <i class="fas fa-scroll"></i> Reports
+                        </span>
+                <ul class="subMenu hide" id="reportsSubMenu">
+                    <li class="item">
+                        <a href="#" th:href="@{/reports/transaction}">
+                            <i class="fas fa-scroll"></i> Transactions
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="#" th:href="@{/reports/summary}">
+                            <i class="fas fa-scroll"></i> Summary
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="item">
                         <span

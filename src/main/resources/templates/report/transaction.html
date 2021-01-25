@@ -9,51 +9,80 @@
 <section th:fragment="main-content" class="main-content">
     <div class="form-div-wrapper">
         <div class="form-div">
+            <div class="form-control-wrapper">
+                Live Loading: <input type="checkbox">
+            </div>
             <form action="" class="form" th:action="@{''}" th:object="${transactionReport}" method="post">
+<!--                <div class="form-control-wrapper">-->
+<!--                    From Beginning: <input type="checkbox" th:field="*{fromBeginning}">-->
+<!--                </div>-->
+
                 <div class="form-control-wrapper">
-                    Live Loading: <input type="checkbox">
+                    Start Date:
+                    <div>
+                        <input placeholder="Start Date" class="input-text" type="date" th:field="*{startDate}">
+                        <label class="extra-checkbox">
+                            From Beginning?
+                            <input type="checkbox" th:field="*{fromBeginning}">
+                        </label>
+                    </div>
                 </div>
 
 
+<!--                <div class="form-control-wrapper">-->
+<!--                    To End: <input type="checkbox" th:field="*{toLastDate}">-->
+<!--                </div>-->
+
                 <div class="form-control-wrapper">
-                    From Beginning: <input type="checkbox" th:field="*{fromBeginning}">
+                    <label for="finalDate">End Date:</label>
+                    <div>
+                        <input id="finalDate" placeholder="End Date" class="input-text" type="date" th:field="*{finalDate}">
+                        <label class="extra-checkbox">
+                            To End?
+                            <input type="checkbox" th:field="*{toLastDate}">
+                        </label>
+                    </div>
+
                 </div>
 
                 <div class="form-control-wrapper">
-                    Start Date: <input placeholder="Start Date" class="input-text" type="date" th:field="*{startDate}">
+                    <label for="type">Type:</label>
+                    <div>
+                        <select id="type" class="form-select" th:field="*{type}">
+                            <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">
+                                Sales
+                            </option>
+                        </select>
+                        <label class="extra-checkbox">
+                            Both
+                            <input type="checkbox" th:field="*{bothTypes}">
+                        </label>
+                    </div>
                 </div>
-
-
                 <div class="form-control-wrapper">
-                    To End: <input type="checkbox" th:field="*{toLastDate}">
-                </div>
-
-                <div class="form-control-wrapper">
-                    End Date: <input placeholder="End Date" class="input-text" type="date" th:field="*{finalDate}">
-                </div>
-
-                <div class="form-control-wrapper">
-                    Type:
-                    <select class="form-select" th:field="*{type}" >
-                        <option th:each="type : ${transactionTypes}" th:value="${type}" th:text="${type.getName()}">Sales</option>
+                    <label for="customer">Customer:</label>
+                    <select id="customer" class="form-select" th:field="*{customer.id}">
+                        <option th:value="0">All</option>
+                        <option th:each="customer : ${customers}" th:value="${customer.id}"
+                                th:text="${customer.name}">Sales
+                        </option>
                     </select>
                 </div>
                 <div class="form-control-wrapper">
-                    Customer:
-                    <select class="form-select" th:field="*{customer.id}" >
-                        <option th:each="customer : ${customers}" th:value="${customer.id}" th:text="${customer.name}">Sales</option>
+                    <label for="item">Item:</label>
+                    <select id="item" class="form-select" th:field="*{item.id}">
+                        <option th:value="0">All</option>
+                        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Sales
+                        </option>
                     </select>
                 </div>
                 <div class="form-control-wrapper">
-                    Item:
-                    <select class="form-select" th:field="*{item.id}" >
-                        <option th:each="item : ${items}" th:value="${item.id}" th:text="${item.name}">Sales</option>
-                    </select>
-                </div>
-                <div class="form-control-wrapper">
-                    By:
-                    <select class="form-select" th:field="*{user.id}" >
-                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.profile.fullName}">Sales</option>
+                    <label for="user">By:</label>
+                    <select id="user" class="form-select" th:field="*{user.id}">
+                        <option th:value="0">All</option>
+                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.profile.fullName}">
+                            Sales
+                        </option>
                     </select>
                 </div>
 

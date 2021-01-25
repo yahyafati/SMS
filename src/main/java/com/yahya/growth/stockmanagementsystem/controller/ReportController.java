@@ -57,19 +57,16 @@ public class ReportController {
 
     @PostMapping(value = "/transaction", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getTransactionReportPOST(TransactionsReportInfo transactionsReportInfo) {
-        System.out.println("\n\nReport Generation Started");
+        System.out.println("\n\n" + transactionsReportInfo + "\n\n");
         final byte[] bytes = reportService.generateTransactionReport(transactionsReportInfo);
-        System.out.println("Report Generation Ended");
-        System.out.println("Length: " + bytes.length + "\n\n");
         ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=transactionReport.pdf");
+        headers.add("Content-Disposition", "inline; filename=TransactionReport.pdf");
         return ResponseEntity
                 .ok()
                 .headers(headers)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(new InputStreamResource(stream));
-//        return "redirect:/reports/transaction";
     }
 
 
