@@ -69,5 +69,18 @@ public class ReportController {
                 .body(new InputStreamResource(stream));
     }
 
+    @GetMapping(value = "/items", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getItemsReportPOST() {
+        final byte[] bytes = reportService.generateItemList();
+        ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=ItemsReport.pdf");
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(stream));
+    }
+
 
 }

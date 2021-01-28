@@ -54,4 +54,15 @@ public class ReportServiceImpl implements ReportService {
 
         return JasperRunManager.runReportToPdf(jasperReport, null, dataSource);
     }
+
+    @SneakyThrows // TODO Remove This
+    @Override
+    public byte[] generateItemList() {
+        List<ItemTransaction> itemTransactions = itemTransactionService.findAll();
+        InputStream itemsStream = getClass().getResourceAsStream("/reports/ItemTransasactionSummary.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(itemsStream);
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
+        return JasperRunManager.runReportToPdf(jasperReport, null, dataSource);
+    }
 }
