@@ -38,10 +38,10 @@ public class ReportServiceImpl implements ReportService {
             itemTransactionStream = itemTransactionStream.filter(itemTransaction -> info.getItem().getId() == itemTransaction.getItem().getId());
         }
         if (!info.getFromBeginning()) {
-            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getTransactionDate().isAfter(info.getStartDate()));
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getTransactionDate().isAfter(info.getStartDate().minusDays(1)));
         }
         if (!info.getToLastDate()) {
-            itemTransactionStream = itemTransactionStream.filter(itemTransaction ->  itemTransaction.getTransaction().getTransactionDate().isBefore(info.getFinalDate()));
+            itemTransactionStream = itemTransactionStream.filter(itemTransaction ->  itemTransaction.getTransaction().getTransactionDate().isBefore(info.getFinalDate().plusDays(1)));
         }
         if (!info.getBothTypes()) {
             itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getType() == info.getType());

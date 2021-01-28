@@ -8,7 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Entity
@@ -41,6 +43,11 @@ public class Transaction {
 
     public String getFormattedAddedTime() {
         return new Date(addedTime.getTime()).toString();
+    }
+
+    public String getFormattedTransactionDate() {
+        return this.transactionDate.format(DateTimeFormatter.ofPattern("dd LLL. yyyy"));
+//        return new SimpleDateFormat("dd LLL. yyyy").format(new Date());
     }
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transaction")
