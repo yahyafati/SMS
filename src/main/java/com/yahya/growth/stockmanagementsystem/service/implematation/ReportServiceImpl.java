@@ -1,9 +1,12 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.ItemTransaction;
+import com.yahya.growth.stockmanagementsystem.model.Transaction;
 import com.yahya.growth.stockmanagementsystem.report.TransactionsReportInfo;
 import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
 import com.yahya.growth.stockmanagementsystem.service.ReportService;
+import com.yahya.growth.stockmanagementsystem.service.TransactionService;
 import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -11,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +25,12 @@ import java.util.stream.Stream;
 public class ReportServiceImpl implements ReportService {
 
     private final ItemTransactionService itemTransactionService;
+    private final TransactionService transactionService;
 
     @Autowired
-    public ReportServiceImpl(ItemTransactionService itemTransactionService) {
+    public ReportServiceImpl(ItemTransactionService itemTransactionService, TransactionService transactionService) {
         this.itemTransactionService = itemTransactionService;
+        this.transactionService = transactionService;
     }
 
     private List<ItemTransaction> filterItemTransactions(TransactionsReportInfo info) {
@@ -76,6 +81,13 @@ public class ReportServiceImpl implements ReportService {
         List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/ItemTransactionSummary.jrxml", new HashMap<>(), dataSource);
+    }
+
+    @Override
+    public byte[] generateInvoice(Integer transactionId) {
+        List<ItemTransaction> itemTransactions = transactionService.findById(transactionId).getItemTransactions();
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
+        return generateReport("/reports/TransactionInvoice.jrxml", new HashMap<>(), dataSource);
     }
 
 }

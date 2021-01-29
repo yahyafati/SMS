@@ -16,10 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayInputStream;
 import java.util.List;
@@ -100,6 +97,12 @@ public class ReportController {
         model.addAttribute("pageName", "report/transaction");
         model.addAttribute("action", "summary");
         return "common/header";
+    }
+
+    @GetMapping(value = "/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getTransactionsInvoice(@RequestParam Integer id, Model model) {
+        final byte[] bytes = reportService.generateInvoice(id);
+        return createResponseEntity(bytes, "Invoice");
     }
 
     @PostMapping(value = "/byType", produces = MediaType.APPLICATION_PDF_VALUE)

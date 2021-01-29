@@ -8,4 +8,6 @@ public interface ReportService {
     byte[] generateTransactionReportByType(TransactionsReportInfo info);
 
     byte[] generateItemTransactionSummaryReport(TransactionsReportInfo info);
+
+    byte[] generateInvoice(Integer transactionId);
 }
