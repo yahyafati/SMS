@@ -5,6 +5,7 @@
 <!--/*@thymesVar id="customers" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Customer>"*/-->
 <!--/*@thymesVar id="items" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Item>"*/-->
 <!--/*@thymesVar id="users" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.User>"*/-->
+<!--/*@thymesVar id="action" type="java.lang.String"*/-->
 
 <section th:fragment="main-content" class="main-content">
     <div class="form-div-wrapper">
@@ -12,7 +13,7 @@
             <div class="form-control-wrapper">
                 Live Loading: <input type="checkbox">
             </div>
-            <form action="" class="form" th:action="@{''}" th:object="${transactionReport}" method="post">
+            <form action="" class="form" th:action="@{{action}(action = ${action})}" th:object="${transactionReport}" method="post">
 <!--                <div class="form-control-wrapper">-->
 <!--                    From Beginning: <input type="checkbox" th:field="*{fromBeginning}">-->
 <!--                </div>-->

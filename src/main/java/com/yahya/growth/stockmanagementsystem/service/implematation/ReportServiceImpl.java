@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,10 +28,7 @@ public class ReportServiceImpl implements ReportService {
         this.itemTransactionService = itemTransactionService;
     }
 
-
-    @SneakyThrows // TODO REMOVE THIS
-    @Override
-    public byte[] generateTransactionReport(TransactionsReportInfo info) {
+    private List<ItemTransaction> filterItemTransactions(TransactionsReportInfo info) {
         List<ItemTransaction> itemTransactions = itemTransactionService.findAll();
         Stream<ItemTransaction> itemTransactionStream = itemTransactions.stream();
         if (info.getCustomer().getId() != 0) {
@@ -46,23 +46,30 @@ public class ReportServiceImpl implements ReportService {
         if (!info.getBothTypes()) {
             itemTransactionStream = itemTransactionStream.filter(itemTransaction -> itemTransaction.getTransaction().getType() == info.getType());
         }
-        itemTransactions = itemTransactionStream.collect(Collectors.toList());
-        InputStream transactionStream = getClass().getResourceAsStream("/reports/TransactionReport.jrxml");
+        return itemTransactionStream.collect(Collectors.toList());
+    }
+
+    @SneakyThrows // TODO Delete this
+    private byte[] generateReport(String path, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) {
+        InputStream transactionStream = getClass().getResourceAsStream(path);
+//        System.out.println(transactionStream.available());
         JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
+        return JasperRunManager.runReportToPdf(jasperReport, parameters, dataSource);
 
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
-
-        return JasperRunManager.runReportToPdf(jasperReport, null, dataSource);
     }
 
-    @SneakyThrows // TODO Remove This
     @Override
-    public byte[] generateItemList() {
-        List<ItemTransaction> itemTransactions = itemTransactionService.findAll();
-        InputStream itemsStream = getClass().getResourceAsStream("/reports/ItemTransasactionSummary.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(itemsStream);
-
+    public byte[] generateTransactionReport(TransactionsReportInfo info) {
+        List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
-        return JasperRunManager.runReportToPdf(jasperReport, null, dataSource);
+        return generateReport("/reports/TransactionReport.jrxml", new HashMap<>(), dataSource);
     }
+
+    @Override
+    public byte[] generateTransactionReportByType(TransactionsReportInfo info) {
+        List<ItemTransaction> itemTransactions = filterItemTransactions(info);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
+        return generateReport("/reports/ItemByTransactionType.jrxml", new HashMap<>(), dataSource);
+    }
+
 }
