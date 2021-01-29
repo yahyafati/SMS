@@ -41,6 +41,17 @@ public class ReportController {
         this.userService = userService;
     }
 
+    private ResponseEntity<InputStreamResource> createResponseEntity(byte[] reportStreamBytes, String name) {
+        ByteArrayInputStream stream = new ByteArrayInputStream(reportStreamBytes);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", String.format("inline; filename=%s.pdf", name));
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(stream));
+    }
+
 
     @ModelAttribute("title")
     public String getPageTitle() {
@@ -67,8 +78,6 @@ public class ReportController {
         return TransactionType.values();
     }
 
-
-
     @GetMapping("/transaction")
     public String getTransactionReport(Model model) {
         model.addAttribute("transactionReport", new TransactionsReportInfo());
@@ -85,30 +94,30 @@ public class ReportController {
         return "common/header";
     }
 
+    @GetMapping("/summary")
+    public String getItemTransactionsSummary(Model model) {
+        model.addAttribute("transactionReport", new TransactionsReportInfo());
+        model.addAttribute("pageName", "report/transaction");
+        model.addAttribute("action", "summary");
+        return "common/header";
+    }
+
     @PostMapping(value = "/byType", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getItemTransactionsByTypePOST(TransactionsReportInfo transactionsReportInfo) {
         final byte[] bytes = reportService.generateTransactionReportByType(transactionsReportInfo);
-        ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=TransactionReportByType.pdf");
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(stream));
+        return createResponseEntity(bytes, "ItemTransactionReportByType");
     }
 
     @PostMapping(value = "/transaction", produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> getTransactionReportPOST(TransactionsReportInfo transactionsReportInfo) {
         final byte[] bytes = reportService.generateTransactionReport(transactionsReportInfo);
-        ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "inline; filename=TransactionReport.pdf");
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(stream));
+        return createResponseEntity(bytes, "TransactionReport");
+    }
+
+    @PostMapping(value = "/summary", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> getItemTransactionsSummaryPOST(TransactionsReportInfo transactionsReportInfo) {
+        final byte[] bytes = reportService.generateItemTransactionSummaryReport(transactionsReportInfo);
+        return createResponseEntity(bytes, "TransactionReport");
     }
 
 

@@ -52,7 +52,6 @@ public class ReportServiceImpl implements ReportService {
     @SneakyThrows // TODO Delete this
     private byte[] generateReport(String path, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) {
         InputStream transactionStream = getClass().getResourceAsStream(path);
-//        System.out.println(transactionStream.available());
         JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
         return JasperRunManager.runReportToPdf(jasperReport, parameters, dataSource);
 
@@ -70,6 +69,13 @@ public class ReportServiceImpl implements ReportService {
         List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/ItemByTransactionType.jrxml", new HashMap<>(), dataSource);
+    }
+
+    @Override
+    public byte[] generateItemTransactionSummaryReport(TransactionsReportInfo info) {
+        List<ItemTransaction> itemTransactions = filterItemTransactions(info);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
+        return generateReport("/reports/ItemTransactionSummary.jrxml", new HashMap<>(), dataSource);
     }
 
 }
