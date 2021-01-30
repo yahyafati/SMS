@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="common/header :: common-header"></head>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stock Management System" />
+    <meta name="author" content="Yahya Haji" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${title.isEmpty() ? '' : title + ' | '} + 'Stock Management System'"></title>
+    <script
+            src="https://kit.fontawesome.com/53b200ce77.js"
+            crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/css/login.css" />
+</head>
 <body>
-<div class="login">
-    <div class="imgDIV">
-        <img src="/images/placeholder/profile.webp" th:src="@{/images/placeholder/profile.webp}" alt="Profile" />
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Sign In </h2>
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img th:src="@{/images/placeholder/usericon.png}" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="/login" method="post">
+            <input autocomplete="off" type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+            <label for="remember-me" class="remember_me">
+                <p><input id="remember-me" type="checkbox" name="remember-me" /> Remember me</p>
+            </label>
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+
+        <!-- Remind Password -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+        </div>
+
     </div>
-    <h2 class="header">Sign in</h2>
-    <form action="/login" method="post">
-        <input id="username" type="text" name="username" placeholder="Username/Email" required autofocus/>
-        <input id="password" type="password" name="password" placeholder="Password" required/>
-        <label for="remember-me" class="remember_me">
-            <p><input id="remember-me" type="checkbox" name="remember-me" /> Remember me</p>
-        </label>
-        <a class="forgot_password" href="#">Forgot Password</a>
-        <input class="submit_btn" id="submit" type="submit" value="SIGN IN" >
-    </form>
 </div>
 <div th:replace="common/header :: body-bottom-scripts"></div>
 
