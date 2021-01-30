@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -85,7 +82,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public byte[] generateInvoice(Integer transactionId) {
-        List<ItemTransaction> itemTransactions = transactionService.findById(transactionId).getItemTransactions();
+        Set<ItemTransaction> itemTransactions = transactionService.findById(transactionId).getItemTransactions();
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/TransactionInvoice.jrxml", new HashMap<>(), dataSource);
     }

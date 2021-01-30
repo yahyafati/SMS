@@ -7,6 +7,7 @@ import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,7 @@ public class BrandController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('brand:write')")
     public String addBrand(Model model) {
         model.addAttribute("brand", new Brand());
         model.addAttribute("action", "new");
@@ -61,6 +63,7 @@ public class BrandController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('brand:write')")
     public String addBrandPOST(@ModelAttribute Brand brand) {
         brand = brandService.save(brand);
         return "redirect:/brand/" + brand.getId();
@@ -100,6 +103,7 @@ public class BrandController {
 //    }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('brand:write')")
     public String edit(@RequestParam(name = "id") int brandId, Model model) {
         Brand brand = brandService.findById(brandId);
         model.addAttribute("brand", brand);
@@ -110,6 +114,7 @@ public class BrandController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('brand:write')")
     public String editPOST(@RequestParam(name = "id") int brandId, @ModelAttribute Brand brand) {
         brand.setId(brandId);
         brandService.save(brand);
@@ -117,6 +122,7 @@ public class BrandController {
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('brand:write')")
     public String delete(@RequestParam(name = "id") int brandId) {
         brandService.deleteById(brandId);
         return "redirect:/brand";

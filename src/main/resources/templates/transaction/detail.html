@@ -10,7 +10,7 @@
             <p>Transaction Type: <span class="info" th:text="${transaction.type.name}"></span></p>
             <p>From/To: <span class="info" th:text="${transaction.customer.name}"></span></p>
             <p>Transaction Date: <span class="info" th:text="${transaction.transactionDate}"></span></p>
-            <p>User: <span class="info" th:text="${transaction.user}"></span></p>
+            <p>User: <span class="info" th:text="${transaction.user.username}"></span></p>
             <p>Total Price: <span class="info" th:text="${transaction.totalPrice}"></span></p>
             <p>Paid Price: <span class="info" th:text="${transaction.getPaidAmount()}"></span></p>
             <p>Unpaid Amount: <span class="info" th:text="${transaction.creditDifference}"></span></p>

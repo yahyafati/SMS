@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,6 +54,7 @@ public class ItemController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('item:write')")
     public String addNewItem(Model model) {
         model.addAttribute("item", new Item());
         model.addAttribute("action", "new");
@@ -66,12 +68,14 @@ public class ItemController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('item:write')")
     public String addNewItemPOST(@ModelAttribute Item item) {
         item = itemService.save(item);
         return "redirect:/items/" + item.getId();
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('item:write')")
     public String edit(@RequestParam(name = "id") int itemId, Model model) {
         model.addAttribute("item", itemService.findById(itemId));
         model.addAttribute("action", "edit");
@@ -85,6 +89,7 @@ public class ItemController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('item:write')")
     public String editPost(@RequestParam(name = "id") int itemId, @ModelAttribute Item item) {
         item.setId(itemId);
         itemService.save(item);
@@ -92,6 +97,7 @@ public class ItemController {
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('item:write')")
     public String delete(@RequestParam(name = "id") int itemId) {
         itemService.deleteById(itemId);
         return "redirect:/items";

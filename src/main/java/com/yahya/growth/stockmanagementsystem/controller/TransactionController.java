@@ -1,17 +1,16 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.yahya.growth.stockmanagementsystem.model.*;
-import com.yahya.growth.stockmanagementsystem.service.CustomerService;
-import com.yahya.growth.stockmanagementsystem.service.ItemService;
-import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
-import com.yahya.growth.stockmanagementsystem.service.TransactionService;
+import com.yahya.growth.stockmanagementsystem.service.*;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,12 +20,14 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     private final TransactionService transactionService;
     private final CustomerService customerService;
     private final ItemService itemService;
+    private final UserService userService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService, CustomerService customerService, ItemService itemService) {
+    public TransactionController(TransactionService transactionService, CustomerService customerService, ItemService itemService, UserService userService) {
         this.transactionService = transactionService;
         this.customerService = customerService;
         this.itemService = itemService;
+        this.userService = userService;
     }
 
     @ModelAttribute("title")
@@ -71,6 +72,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
 
     @Override
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('transaction:write')")
     public String addNewItem(Model model) {
         model.addAttribute("transaction", new Transaction());
         model.addAttribute("transactionTypes", TransactionType.values());
@@ -83,7 +85,8 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @GetMapping("/purchase")
-    public String purchaseItem(Model model) {
+    @PreAuthorize("hasAuthority('transaction:write')")
+    public String purchaseItem(Model model, Principal principal) {
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.PURCHASE);
         model.addAttribute("transaction", transaction);
@@ -94,7 +97,8 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @GetMapping("/sale")
-    public String saleItem(Model model) {
+    @PreAuthorize("hasAuthority('transaction:write')")
+    public String saleItem(Model model, Principal principal) {
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.SALE);
         model.addAttribute("transaction", transaction);
@@ -104,12 +108,17 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @Override
+    @PreAuthorize("hasAuthority('transaction:write')")
     public String addNewPOST(Transaction obj) {
         return null;
     }
 
     @PostMapping("/new")
-    public String addNewPOST(Transaction transaction, Double paidAmount, HttpServletRequest request) throws TransactionException {
+    @PreAuthorize("hasAuthority('transaction:write')")
+    public String addNewPOST(Transaction transaction,
+                             Double paidAmount, HttpServletRequest request,
+                                Principal principal) throws TransactionException {
+        transaction.setUser(userService.findByUsername(principal.getName()));
         String[] ids = request.getParameterValues("transactionID");
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
@@ -120,6 +129,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
 
     @Override
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('transaction:write')")
     public String edit(@RequestParam int id, Model model) {
         Transaction transaction = transactionService.findById(id);
         model.addAttribute("transaction", transaction);
@@ -135,9 +145,13 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     }
 
     @PostMapping("/edit")
-    public String editPOST(Transaction transaction, Double paidAmount, HttpServletRequest request) throws TransactionException {
+    @PreAuthorize("hasAuthority('transaction:write')")
+    public String editPOST(Transaction transaction,
+                           Double paidAmount, HttpServletRequest request,
+                           Principal principal) throws TransactionException {
 //        request.getHeaderNames()
         // Repeated Code with add new post
+        transaction.setUser(userService.findByUsername(principal.getName()));
         String[] items = request.getParameterValues("item");
         String[] prices = request.getParameterValues("price");
         String[] quantities = request.getParameterValues("quantity");
@@ -148,12 +162,14 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
 
 
     @Override
+    @PreAuthorize("hasAuthority('transaction:write')")
     public String editPost(int id, Transaction obj) {
         return null;
     }
 
     @Override
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('transaction:write')")
     public String delete(@RequestParam int id) {
         transactionService.deleteById(id);
         return "redirect:/transaction";

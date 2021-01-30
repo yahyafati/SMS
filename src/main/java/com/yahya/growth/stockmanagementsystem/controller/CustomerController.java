@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,7 @@ public class CustomerController {
         return "common/header";}
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('customer:write')")
     public String addCustomer(Model model) {
         model.addAttribute("customer", new Customer());
         model.addAttribute("action", "new");
@@ -48,12 +50,14 @@ public class CustomerController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('customer:write')")
     public String addCustomerPOST(@ModelAttribute Customer customer) {
         customer = customerService.save(customer);
         return "redirect:/customer/" + customer.getId();
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('customer:write')")
     public String editCustomer(@RequestParam int id, Model model) {
         model.addAttribute("customer", customerService.findById(id));
         model.addAttribute("action", "edit");
@@ -63,6 +67,7 @@ public class CustomerController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('customer:write')")
     public String editCustomerPOST(@RequestParam int id, @ModelAttribute Customer customer) {
         customer.setId(id);
         customer = customerService.save(customer);
@@ -70,6 +75,7 @@ public class CustomerController {
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('customer:write')")
     public String delete(@RequestParam int id) {
         customerService.deleteById(id);
         return "redirect:/customer";

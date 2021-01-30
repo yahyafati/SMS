@@ -13,7 +13,7 @@
         <select hidden id="availableItemsElement">
             <option th:each="item : ${allItems}" th:value="${item.id}" th:text="${item.name}"></option>
         </select>
-        <form class="form" method="post" action="#" th:action="@{${action}(id=${transaction.id})}" th:object="${transaction}">
+        <form class="form" method="post" action="#" th:action="@{${action}}" th:object="${transaction}">
             <div class="form-wrapper">
                 <input hidden type="number" th:field="*{id}">
                 <div class="form-control-wrapper">

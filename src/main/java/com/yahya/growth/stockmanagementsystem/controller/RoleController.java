@@ -8,6 +8,7 @@ import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     }
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasAuthority('role:write')")
     public String changePermissions(@PathVariable int id, @RequestParam("idPermission") List<String> permissions) {
         Role role = roleService.findById(id);
         role.getAuthorities().clear();
@@ -71,8 +73,9 @@ public class RoleController implements BasicControllerSkeleton<Role>{
         return "redirect:/group/" + id;
     }
 
-        @Override
+    @Override
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('role:write')")
     public String addNewItem(Model model) {
         model.addAttribute("group", new Role());
         model.addAttribute("action", "new");
@@ -83,6 +86,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
 
     @Override
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('role:write')")
     public String addNewPOST(Role role) {
         role = roleService.save(role);
         return "redirect:/group/" + role.getId();
@@ -90,6 +94,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
 
     @Override
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('role:write')")
     public String edit(@RequestParam int id, Model model) {
         model.addAttribute("group", roleService.findById(id));
         model.addAttribute("action", "edit");
@@ -100,6 +105,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
 
     @Override
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('role:write')")
     public String editPost(@RequestParam int id, Role role) {
 
         role.setId(id);
@@ -109,6 +115,7 @@ public class RoleController implements BasicControllerSkeleton<Role>{
 
     @Override
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('role:write')")
     public String delete(@RequestParam int id) {
         // TODO What should happen to users who are members of a role when the role gets deleted?
         roleService.deleteById(id);

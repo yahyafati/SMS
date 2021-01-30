@@ -29,10 +29,9 @@
                 <a class="btn-link" th:href="@{/customer/{id}(id=${transaction.customer.id})}" th:text="${transaction.customer.name}">Hello Technologies</a>
             </td>
             <td th:text="${transaction.transactionDate}">02/20/2020</td>
-            <td th:text="${transaction.user}">
+            <td>
 <!--                TODO Uncomment this line once security config is enabled. -->
-<!--                <a class="link-info" th:text="${transaction.user.username}" th:href="@{/users/{id}(id=${user.id})}">@mrWho</a>-->
-                Hello
+                <a class="link-info" th:text="${transaction.user.username}" th:href="@{/users/{id}(id=${transaction.user.id})}">@mrWho</a>
             </td>
             <td>
                 <!--                <a class="btn btn-sm btn-outline-dark" th:href="@{{id}(id=${order.id})}">Edit</a>-->

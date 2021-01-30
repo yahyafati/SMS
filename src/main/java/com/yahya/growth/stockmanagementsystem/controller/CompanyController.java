@@ -3,6 +3,7 @@ package com.yahya.growth.stockmanagementsystem.controller;
 import com.yahya.growth.stockmanagementsystem.service.CompanyService;
 import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class CompanyController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('company:write')")
     public String companyPOST(@ModelAttribute Company company) {
         companyService.saveCurrentCompany(company);
         return "redirect:/company";

@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.yahya.growth.stockmanagementsystem.security.Permission.USER_READ;
+import static com.yahya.growth.stockmanagementsystem.security.Permission.*;
 
 @Configuration
 @EnableWebSecurity
@@ -35,9 +35,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() // TODO Remove this line
+//                .antMatchers("/**").permitAll() // TODO Remove this line
                 .antMatchers("/", "/css/*", "/js/*", "/images/**").permitAll()
+
+                .antMatchers("/brand/**", "/brand/").hasAuthority(BRAND_READ.getPermission())
+                .antMatchers("/category/**", "/category/").hasAuthority(CATEGORY_READ.getPermission())
+                .antMatchers("/credit/**", "/credit/").hasAuthority(CREDIT_SETTLEMENT_READ.getPermission())
+                .antMatchers("/company/**", "/company/").hasAuthority(COMPANY_READ.getPermission())
+                .antMatchers("/customer/**", "/customer/").hasAuthority(CUSTOMER_READ.getPermission())
+                .antMatchers("/group/**", "/group/").hasAuthority(ROLE_READ.getPermission())
+                .antMatchers("/transaction/**", "/transaction/").hasAuthority(TRANSACTION_READ.getPermission())
                 .antMatchers("/users/**", "/users/").hasAuthority(USER_READ.getPermission())
+
                 .anyRequest()
                 .authenticated()
                 .and()

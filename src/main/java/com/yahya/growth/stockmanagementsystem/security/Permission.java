@@ -24,6 +24,14 @@ public enum Permission {
     IT_PERMISSION("it:reset"),
     USER_READ("user:read"),
     USER_WRITE("user:write"),
+    ROLE_READ("role:read"),
+    ROLE_WRITE("role:write"),
+    TRANSACTION_READ("transaction:read"),
+    TRANSACTION_WRITE("transaction:write"),
+    CREDIT_SETTLEMENT_READ("credit:read"),
+    CREDIT_SETTLEMENT_WRITE("credit:write"),
+    COMPANY_READ("company:read"),
+    COMPANY_WRITE("company:write"),
     VIEW_STORE_REPORT("report:store"),
     VIEW_ALL_REPORT("report:all");
 

@@ -21,25 +21,25 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "transaction_id")
     private int id;
-    @Column(name = "transaction_refNumber")
+    @Column(name = "transaction_ref_number")
     private int refNumber;
     @ManyToOne
     @JoinColumn(name = "transaction_customer_id")
     private Customer customer;
-    @Column(name = "transaction_addedTime")
+    @Column(name = "transaction_added_time")
     private Timestamp addedTime; // for logging purpose and hidden from end-users
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "transaction_transactionDate")
+    @Column(name = "transaction_transaction_date")
     private LocalDate transactionDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
     private TransactionType type;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
-    private List<ItemTransaction> itemTransactions = new ArrayList<>();
+    private Set<ItemTransaction> itemTransactions = new HashSet<>();
     @ManyToOne
     @JoinColumn(name = "transaction_user_id")
-    private User user; // for logging purpose, username of the user who added this transaction
+    private User user = new User(); // for logging purpose, username of the user who added this transaction
 
     public String getFormattedAddedTime() {
         return new Date(addedTime.getTime()).toString();

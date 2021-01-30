@@ -9,6 +9,7 @@ import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,6 +74,7 @@ public class UserController implements BasicControllerSkeleton<User>{
     }
 
     @PostMapping("/changeRole")
+    @PreAuthorize("hasAuthority('user:write')")
     public String changeRole(@RequestParam int uid, @ModelAttribute Role role) {
         User user = userService.findById(uid);
         userService.saveUserWithRoles(user, role);
@@ -80,6 +82,7 @@ public class UserController implements BasicControllerSkeleton<User>{
     }
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasAuthority('user:write')")
     public String changePermissions(@PathVariable int id, @RequestParam("idPermission") List<String> permissions) {
         User user = userService.findById(id);
         user.getAuthorities().clear();
@@ -96,6 +99,7 @@ public class UserController implements BasicControllerSkeleton<User>{
 
     @Override
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('user:write')")
     public String addNewItem(Model model) {
         List<Role> roles = roleService.findAll();
         roles.forEach(System.out::println);
@@ -111,6 +115,7 @@ public class UserController implements BasicControllerSkeleton<User>{
 
     @Override
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('user:write')")
     public String addNewPOST(User user) {
         // FIXME : HACK => Password
         user.setPassword(passwordEncoder.encode("123"));
@@ -120,18 +125,21 @@ public class UserController implements BasicControllerSkeleton<User>{
 
     @Override
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('user:write')")
     public String edit(int id, Model model) {
         throw new UnsupportedOperationException("Users can not be edited by other users.");
     }
 
     @Override
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('user:write')")
     public String editPost(int id, User obj) {
         throw new UnsupportedOperationException("Users can not be edited by other users.");
     }
 
     @Override
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('user:write')")
     public String delete(@RequestParam int id) {
         // TODO Make Sure User Doesn't Delete itself.
         userService.deleteById(id);

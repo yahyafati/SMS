@@ -5,6 +5,7 @@ import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,7 @@ public class CategoryController {
     }
 
     @GetMapping("/new")
+    @PreAuthorize("hasAuthority('category:write')")
     public String addCategory(Model model) {
         model.addAttribute("category", new Category());
         model.addAttribute("action", "new");
@@ -57,18 +59,21 @@ public class CategoryController {
     }
 
     @PostMapping("/new")
+    @PreAuthorize("hasAuthority('category:write')")
     public String addCategoryPOST(@ModelAttribute Category category) {
         category = categoryService.save(category);
         return "redirect:/category/" + category.getId();
     }
 
     @GetMapping("/removeSubcategory")
+    @PreAuthorize("hasAuthority('category:write')")
     public String removeSubcategory(@RequestParam int subcategoryId, @RequestParam int categoryId) {
         subcategoryService.deleteById(subcategoryId);
         return "redirect:/category/" + categoryId;
     }
 
     @GetMapping("/edit")
+    @PreAuthorize("hasAuthority('category:write')")
     public String edit(@RequestParam(name = "id") int categoryId, Model model) {
         model.addAttribute("category", categoryService.findById(categoryId));
         model.addAttribute("action", "edit");
@@ -78,6 +83,7 @@ public class CategoryController {
     }
 
     @PostMapping("/edit")
+    @PreAuthorize("hasAuthority('category:write')")
     public String editPOST(@RequestParam(name = "id") int categoryId, @ModelAttribute Category category) {
         category.setId(categoryId);
         categoryService.save(category);
@@ -85,6 +91,7 @@ public class CategoryController {
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('category:write')")
     public String delete(@RequestParam(name = "id") int categoryId) {
         // FIXED Cannot delete or update a parent row: a foreign key constraint fails (`stockms`.`item`, ...)
         categoryService.deleteById(categoryId);
