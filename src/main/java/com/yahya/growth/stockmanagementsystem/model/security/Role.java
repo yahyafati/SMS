@@ -28,6 +28,10 @@ public class Role implements Comparable<Role> {
 
     public Role() { }
 
+    public Role(Integer id) {
+        this.id = id;
+    }
+
     public String getDisplayName() {
         String displayName = name.substring(5); // since ROLE_ will be removed from display name
         return StringUtils.capitalize(String.join(" ", displayName.split("_")));

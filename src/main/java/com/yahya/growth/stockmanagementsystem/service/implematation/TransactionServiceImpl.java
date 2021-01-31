@@ -50,20 +50,19 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void deleteById(Integer id) {
-        delete(findById(id));
+    public boolean deleteById(Integer id) {
+        return delete(findById(id));
     }
 
-    // TODO Urgent Remove SneakyThrows. Remove them!
-    @SneakyThrows
-    public void delete(Transaction transaction) {
 
+    public boolean delete(Transaction transaction) {
         if (transaction.getType() == TransactionType.SALE) {
             preDeleteSale(transaction);
         } else {
             preDeletePurchase(transaction);
         }
         transactionDao.delete(transaction);
+        return true;
     }
 
     /**

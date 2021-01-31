@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.service.implematation;
 
+import com.yahya.growth.stockmanagementsystem.dao.UserDao;
 import com.yahya.growth.stockmanagementsystem.dao.security.RoleDao;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
@@ -12,10 +13,12 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleDao roleDao;
+    private final UserDao userDao; // TODO:HACK This might be a hack of sorts. Doesn't sit well with the overall design of the code so far.
 
     @Autowired
-    public RoleServiceImpl(RoleDao roleDao) {
+    public RoleServiceImpl(RoleDao roleDao, UserDao userDao) {
         this.roleDao = roleDao;
+        this.userDao = userDao;
     }
 
     @Override
@@ -37,8 +40,14 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
+//        Role role = findById(id);
+//        System.out.println(role.getUserRole());
+        if (userDao.findOneByRole(new Role(id)).isPresent()) {
+            return false;
+        }
         roleDao.deleteById(id);
+        return true;
     }
 
     @Override

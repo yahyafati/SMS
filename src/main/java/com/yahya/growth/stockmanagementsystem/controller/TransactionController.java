@@ -8,6 +8,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -54,7 +56,6 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("transactions", transactionService.findAll());
-//        return "transaction/all";
         model.addAttribute("pageName", "transaction/all");
         return "common/header";
     }
@@ -65,7 +66,6 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         Transaction transaction = transactionService.findById(id);
 
         model.addAttribute("transaction", transaction);
-//        return "transaction/detail";
         model.addAttribute("pageName", "transaction/detail");
         return "common/header";
     }
@@ -79,7 +79,6 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         model.addAttribute("customers", customerService.findAll());
         model.addAttribute("allItems", itemService.findAll());
         model.addAttribute("action", "new");
-//        return "transaction/transaction";
         model.addAttribute("pageName", "transaction/transaction");
         return "common/header";
     }
@@ -113,6 +112,11 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         return null;
     }
 
+    @Override
+    public String edit(int id, Model model) {
+        throw new UnsupportedOperationException("This method is not supported.");
+    }
+
     @PostMapping("/new")
     @PreAuthorize("hasAuthority('transaction:write')")
     public String addNewPOST(Transaction transaction,
@@ -127,37 +131,22 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         return "redirect:/transaction/" + transaction.getId();
     }
 
-    @Override
     @GetMapping("/edit")
     @PreAuthorize("hasAuthority('transaction:write')")
-    public String edit(@RequestParam int id, Model model) {
-        Transaction transaction = transactionService.findById(id);
-        model.addAttribute("transaction", transaction);
-        model.addAttribute("transactionTypes", TransactionType.values());
-        model.addAttribute("customers", customerService.findAll());
-        model.addAttribute("allItems", itemService.findAll());
-        model.addAttribute("action", "edit");
-        // FIXME Get the amount paid on this credit
-        model.addAttribute("paidAttribute", transaction.getCreditDifference());
-//        return "transaction/transaction";
-        model.addAttribute("pageName", "transaction/transaction");
-        return "common/header";
+    public RedirectView edit(@RequestParam int id, Model model, RedirectAttributes redir) {
+        RedirectView redirectView = new RedirectView("/transaction", true);
+        redir.addFlashAttribute("error", "Transaction can't be edited.");
+        return redirectView;
     }
 
     @PostMapping("/edit")
     @PreAuthorize("hasAuthority('transaction:write')")
-    public String editPOST(Transaction transaction,
+    public RedirectView editPOST(Transaction transaction,
                            Double paidAmount, HttpServletRequest request,
-                           Principal principal) throws TransactionException {
-//        request.getHeaderNames()
-        // Repeated Code with add new post
-        transaction.setUser(userService.findByUsername(principal.getName()));
-        String[] items = request.getParameterValues("item");
-        String[] prices = request.getParameterValues("price");
-        String[] quantities = request.getParameterValues("quantity");
-        String[] ids = request.getParameterValues("transactionID");
-        transactionService.save(transaction, ids, items, prices, quantities, paidAmount);
-        return "redirect:/transaction";
+                           Principal principal, RedirectAttributes redir) throws TransactionException {
+        RedirectView redirectView = new RedirectView("/transaction", true);
+        redir.addFlashAttribute("error", "Transaction can't be edited.");
+        return redirectView;
     }
 
 
@@ -171,6 +160,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('transaction:write')")
     public String delete(@RequestParam int id) {
+        // TODO Special Message when Transaction can't be deleted.
         transactionService.deleteById(id);
         return "redirect:/transaction";
     }

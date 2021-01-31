@@ -77,7 +77,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         userDao.deleteById(id);
+        return true;
     }
 }

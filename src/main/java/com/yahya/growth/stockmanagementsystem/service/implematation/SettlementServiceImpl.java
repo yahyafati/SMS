@@ -42,8 +42,9 @@ public class SettlementServiceImpl implements SettlementService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         settlementDao.deleteById(id);
+        return true;
     }
 
     // TODO Remove Sneaky Throws

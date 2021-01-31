@@ -36,8 +36,9 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         authorityDao.deleteById(id);
+        return true;
     }
 
     @Override

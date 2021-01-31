@@ -34,7 +34,8 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         userRoleDao.deleteById(id);
+        return true;
     }
 }

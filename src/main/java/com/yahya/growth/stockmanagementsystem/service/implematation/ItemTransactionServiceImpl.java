@@ -71,8 +71,9 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
      * @param id id of the ItemTransaction to be deleted
      */
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         itemTransactionDao.deleteById(id);
+        return true;
     }
 
     /**

@@ -11,5 +11,5 @@ public interface BasicServiceSkeleton<T> {
 
     List<T> findAll();
 
-    void deleteById(Integer id);
+    boolean deleteById(Integer id);
 }

@@ -37,8 +37,6 @@ public class CreditSettlementController {
         return "Credits";
     }
 
-    // TODO Remove Sneaky Throws
-    @SneakyThrows
     @GetMapping("")
     public String index(@RequestParam(value = "type", defaultValue = "payable") String type, Model model) {
         if (type.equalsIgnoreCase("payable")) {

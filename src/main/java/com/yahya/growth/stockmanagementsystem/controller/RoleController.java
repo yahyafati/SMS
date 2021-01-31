@@ -6,12 +6,13 @@ import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
-import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/group")
-public class RoleController implements BasicControllerSkeleton<Role>{
+public class RoleController implements BasicControllerSkeleton<Role> {
 
     private final RoleService roleService;
     private final AuthorityService authorityService;
@@ -114,11 +115,18 @@ public class RoleController implements BasicControllerSkeleton<Role>{
     }
 
     @Override
+    @Deprecated
+    public String delete(int id) {
+        throw new UnsupportedOperationException("This delete operation is unsupported.");
+    }
+
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('role:write')")
-    public String delete(@RequestParam int id) {
-        // TODO What should happen to users who are members of a role when the role gets deleted?
-        roleService.deleteById(id);
-        return "redirect:/group";
+    public RedirectView delete(@RequestParam int id, RedirectAttributes redir) {
+        RedirectView redirectView = new RedirectView("/group", true);
+        if (!roleService.deleteById(id)) {
+            redir.addFlashAttribute("error", "Role can't be deleted as there are currently users assigned to this role. Assign these users to different roles first.");
+        }
+        return redirectView;
     }
 }

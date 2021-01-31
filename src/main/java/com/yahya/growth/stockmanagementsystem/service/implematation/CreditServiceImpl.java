@@ -39,8 +39,9 @@ public class CreditServiceImpl implements CreditService {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public boolean deleteById(Integer id) {
         creditDao.deleteById(id);
+        return true;
     }
 
     private Map<Customer, Double> findAllGrouped(TransactionType type) {

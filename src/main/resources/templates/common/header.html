@@ -146,7 +146,7 @@
                     </li>
                 </ul>
             </li>
-            // TODO Remove isAuthenticated part
+<!--            // TODO Remove isAuthenticated part-->
             <li sec:authorize="!isAuthenticated() || hasAnyAuthority('user:read', 'role:write', 'company:read')" class="item">
                         <span
                                 class="adminTools"
