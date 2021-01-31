@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/group/**", "/group/").hasAuthority(ROLE_READ.getPermission())
                 .antMatchers("/transaction/**", "/transaction/").hasAuthority(TRANSACTION_READ.getPermission())
                 .antMatchers("/users/**", "/users/").hasAuthority(USER_READ.getPermission())
+                .antMatchers("/reports/**", "/reports/").hasAuthority(VIEW_STORE_REPORT.getPermission())
 
                 .anyRequest()
                 .authenticated()
