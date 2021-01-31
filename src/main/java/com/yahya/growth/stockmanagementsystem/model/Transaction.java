@@ -61,7 +61,6 @@ public class Transaction {
     }
 
     public Double getPaidAmount() {
-        System.out.println("credits: " + credits);
         return getTotalPrice() - credits.stream()
                 .mapToDouble(Credit::getInitialAmount)
                 .sum();
