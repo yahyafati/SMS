@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findUserByUsername(username).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
+        return userDao.findUserByUsername(username).orElseThrow(() -> {throw new UsernameNotFoundException("The Item you are looking for is no longer available.");});
     }
 
     @Override

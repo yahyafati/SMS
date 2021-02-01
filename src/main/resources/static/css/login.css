@@ -263,6 +263,12 @@ input[type=text]::placeholder, input[type=password]::placeholder {
     max-width: 100px;
 }
 
+.error-login {
+    color: #ab1818;
+    font-size: 12px;
+}
+
+
 * {
     box-sizing: border-box;
 }

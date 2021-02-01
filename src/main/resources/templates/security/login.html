@@ -24,6 +24,9 @@
             <img th:src="@{/images/placeholder/usericon.png}" id="icon" alt="User Icon" />
         </div>
 
+        <div th:if="${error}" class="error-login">
+            Invalid Username/Password combination.
+        </div>
         <!-- Login Form -->
         <form action="/login" method="post">
             <input autofocus autocomplete="off" type="text" id="username" class="fadeIn second" name="username" placeholder="Username">

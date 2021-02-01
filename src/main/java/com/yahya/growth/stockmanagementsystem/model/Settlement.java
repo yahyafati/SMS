@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,10 +20,10 @@ public class Settlement {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "settlement_id")
     private int id;
-    @Column(name = "settlement_addedTime")
+    @Column(name = "settlement_added_time")
     private Timestamp addedTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "settlement_settledDate")
+    @Column(name = "settlement_settled_date")
     private LocalDate settledDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "settlement_type")
@@ -37,16 +36,6 @@ public class Settlement {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Credit> settledCredits = new HashSet<>();
-
-    public void addCredit(Credit credit) {
-        credit.getSettlements().add(this);
-        this.settledCredits.add(credit);
-    }
-
-    public void removeCredit(Credit credit) {
-        credit.getSettlements().remove(this);
-        this.settledCredits.remove(credit);
-    }
 
     @PrePersist
     public void initSavedTime() {

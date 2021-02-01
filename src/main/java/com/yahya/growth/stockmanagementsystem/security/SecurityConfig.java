@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.security;
 
+import com.yahya.growth.stockmanagementsystem.model.security.CustomAuthenticationProvider;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
+    private final CustomAuthenticationProvider customAuthenticationProvider;
 
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService, CustomAuthenticationProvider customAuthenticationProvider) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.customAuthenticationProvider = customAuthenticationProvider;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() // TODO Remove this line
+//                .antMatchers("/**").permitAll() // TODO Remove this line
                 .antMatchers("/", "/css/*", "/js/*", "/images/**").permitAll()
 
                 .antMatchers("/brand/**", "/brand/").hasAuthority(BRAND_READ.getPermission())
@@ -51,9 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
+                .authenticationProvider(customAuthenticationProvider)
                 .formLogin()
                     .loginPage("/login").permitAll()
-                .defaultSuccessUrl("/dashboard")
+                    .defaultSuccessUrl("/dashboard")
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds(((int) TimeUnit.DAYS.toSeconds(21)))// defaults to 2 weeks

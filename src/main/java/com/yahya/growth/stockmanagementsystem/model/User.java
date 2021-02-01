@@ -27,26 +27,26 @@ public class User implements UserDetails {
     private String username;
     @Column(name = "user_password")
     private String password;
-    @Column(name = "user_isAccountNonExpired")
+    @Column(name = "user_is_account_non_expired")
     private boolean isAccountNonExpired = true;
-    @Column(name = "user_isAccountNonLocked")
+    @Column(name = "user_is_account_non_locked")
     private boolean isAccountNonLocked = true;
-    @Column(name = "user_isCredentialsNonExpired")
+    @Column(name = "user_is_credentials_non_expired")
     private boolean isCredentialsNonExpired = true;
-    @Column(name = "user_isEnabled")
+    @Column(name = "user_is_enabled")
     private boolean isEnabled = true;
 
     // Custom Fields
     @ToString.Exclude @EqualsAndHashCode.Exclude @JsonIgnore
     @Builder.Default
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_userProfile_id")
+    @JoinColumn(name = "user_user_profile_id")
     private UserProfile profile = new UserProfile();
 
     @ToString.Exclude @EqualsAndHashCode.Exclude @JsonIgnore
     @Builder.Default
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_userRole_id")
+    @JoinColumn(name = "user_user_role_id")
     private UserRole userRole = new UserRole();
 
     @Transient

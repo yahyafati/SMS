@@ -17,20 +17,20 @@ public class ItemTransaction {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "it_generator")
     @SequenceGenerator(name = "it_generator", sequenceName = "itemTrans_seq", allocationSize = 1, initialValue = 1)
-    @Column(name = "itemTransaction_id")
+    @Column(name = "item_transaction_id")
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "itemTransaction_item_id")
+    @JoinColumn(name = "item_transaction_item_id")
     private Item item;
     @ManyToOne
-    @JoinColumn(name = "itemTransaction_transaction_id")
+    @JoinColumn(name = "item_transaction_transaction_id")
     private Transaction transaction;
-    @Column(name = "itemTransaction_unitPrice")
+    @Column(name = "item_transaction_unit_price")
     private double unitPrice;
-    @Column(name = "itemTransaction_initialQuantity")
+    @Column(name = "item_transaction_initial_quantity")
     private int initialQuantity;
-    @Column(name = "itemTransaction_remainingQuantity")
+    @Column(name = "item_transaction_remaining_quantity")
     private int remainingQuantity;
 
     public int getAmountSold() {
