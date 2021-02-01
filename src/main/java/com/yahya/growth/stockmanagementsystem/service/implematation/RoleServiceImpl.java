@@ -25,7 +25,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(int id) {
-        return roleDao.findById(id).orElseThrow();
+        return roleDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override
@@ -54,6 +54,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findByName(String name) {
-        return roleDao.findByName(name).orElseThrow();
+        return roleDao.findByName(name).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 }

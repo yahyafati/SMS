@@ -23,7 +23,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public UserProfile findById(int id) {
-        return userProfileDao.findById(id).orElseThrow();
+        return userProfileDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

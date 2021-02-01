@@ -34,7 +34,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
      */
     @Override
     public ItemTransaction findById(int id) {
-        return itemTransactionDao.findById(id).orElseThrow();
+        return itemTransactionDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     /**

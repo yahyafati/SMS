@@ -28,7 +28,8 @@ public class SettlementServiceImpl implements SettlementService {
 
     @Override
     public Settlement findById(int id) {
-        return settlementDao.findById(id).orElseThrow();
+        return settlementDao.findById(id).orElseThrow(() ->             {throw new IllegalArgumentException("The Item you are looking for is no longer available.");
+        });
     }
 
     @Override

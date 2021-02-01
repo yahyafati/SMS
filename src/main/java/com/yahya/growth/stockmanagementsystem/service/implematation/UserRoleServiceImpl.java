@@ -20,7 +20,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public UserRole findById(int id) {
-        return userRoleDao.findById(id).orElseThrow();
+        return userRoleDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

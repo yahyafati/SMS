@@ -122,21 +122,20 @@ header .profile .name {
 
 .body .sidebar .item {
     background-color: #46536299;
-    padding: 15px;
-    padding-right: 0px;
+    padding: 15px 0 15px 15px;
     cursor: pointer;
 }
 
 .body .sidebar .item:hover {
     padding-left: 10px;
-    border-left: 5px solid #17ca35;
+    border-left: 5px solid #f9dc5c;
     color: #eee;
     /* margin-left: 5px; */
 }
 
 .body .sidebar .item.active {
     padding-left: 10px;
-    border-left: 5px solid #ed254e;
+    border-left: 5px solid #17ca35;
     color: #eee;
 }
 
@@ -167,9 +166,8 @@ header .profile .name {
 
 .body .main-content .dashboard {
     padding: 10px;
-    display: inline-flex;
-    justify-content: space-around;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -181,14 +179,14 @@ header .profile .name {
     align-items: center;
     border-radius: 5px;
     width: 300px;
-    height: 150px;
+    height: 100px;
     border: 2px solid #c7c4d8;
 }
 
 .body .main-content .dashboard .dashboard-item .dashboard-title {
     text-decoration: none;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
     color: white;
 }
 

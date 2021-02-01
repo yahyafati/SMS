@@ -18,7 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer findById(int customerId) {
-        return customerDao.findById(customerId).orElseThrow();
+        return customerDao.findById(customerId).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

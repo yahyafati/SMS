@@ -18,7 +18,7 @@
             <!--        <p>Subcategory: <span th:text="${item.subCategory.name}"></span></p>-->
             <div class="edit-btns-div">
                 <a th:href="@{edit(id=${item.id})}" class="my-btn">Edit</a>
-                <a th:href="@{delete(id=${item.id})}" class="my-btn delete-btn">Remove Item</a>
+                <a th:href="@{delete(id=${item.id})}" class="my-btn my-btn-danger">Remove Item</a>
             </div>
         </div>
     </div>

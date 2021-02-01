@@ -21,7 +21,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public Brand findById(int brandId) {
-        return brandDao.findById(brandId).orElseThrow();
+        return brandDao.findById(brandId).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

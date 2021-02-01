@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-        User user =userDao.findById(id).orElseThrow();
+        User user =userDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
         user.setRole(user.getUserRole().getRole());
         return user;
     }
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByUsername(String username) {
-        return userDao.findUserByUsername(username).orElseThrow();
+        return userDao.findUserByUsername(username).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

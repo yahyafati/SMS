@@ -22,7 +22,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Authority findById(int id) {
-        return authorityDao.findById(id).orElseThrow();
+        return authorityDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

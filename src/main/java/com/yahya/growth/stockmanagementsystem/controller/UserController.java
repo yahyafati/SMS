@@ -8,13 +8,17 @@ import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
+import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -143,11 +147,26 @@ public class UserController implements BasicControllerSkeleton<User>{
     }
 
     @Override
+    @Deprecated
+    public String delete(int id) {
+        throw new UnsupportedOperationException("This delete operation is unsupported.");
+    }
+
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('user:write')")
-    public String delete(@RequestParam int id) {
+    public RedirectView delete(@RequestParam int id, Principal principal, RedirectAttributes redir) {
         // TODO Make Sure User Doesn't Delete itself.
-        userService.deleteById(id);
-        return "redirect:/users";
+        RedirectView redirectView = new RedirectView("/users", true);
+        User currentUser = userService.findByUsername(principal.getName());
+        if (currentUser.getId() == id) {
+            if (!roleService.deleteById(id)) {
+                FlashMessage flashMessage = new FlashMessage("You can't delete your own account.",
+                        "", FlashMessage.Type.ERROR);
+                redir.addFlashAttribute("dialogFlash", flashMessage);
+            }
+        } else {
+            userService.deleteById(id);
+        }
+        return redirectView;
     }
 }

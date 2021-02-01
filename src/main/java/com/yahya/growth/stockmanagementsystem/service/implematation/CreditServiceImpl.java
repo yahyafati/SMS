@@ -25,7 +25,7 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public Credit findById(int id) {
-        return creditDao.findById(id).orElseThrow();
+        return creditDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

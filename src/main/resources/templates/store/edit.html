@@ -33,7 +33,7 @@
                 <div class="edit-btns-div">
                     <input type="submit" value="Submit" class="my-btn" />
                     <input type="reset" value="Reset" class="my-btn reset-btn"/>
-                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="my-btn delete-btn">Delete Category</a>
+                    <a th:if="${action} == 'edit'" th:href="@{delete(id=${store.id})}" class="my-btn my-btn-danger">Delete Category</a>
                     <!--                    <input type="submit" value="Delete" class="my-btn delete-btn"/>-->
                 </div>
 

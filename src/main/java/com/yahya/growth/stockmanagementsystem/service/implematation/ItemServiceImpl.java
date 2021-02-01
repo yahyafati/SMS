@@ -26,7 +26,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item findById(int itemId) {
-        return itemDao.findById(itemId).orElseThrow();
+        return itemDao.findById(itemId).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

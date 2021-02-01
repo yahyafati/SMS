@@ -21,7 +21,7 @@ public class SubcategoryServiceImpl implements SubcategoryService {
 
     @Override
     public Subcategory findById(int subcategoryId) {
-        return subCategoryDao.findById(subcategoryId).orElseThrow();
+        return subCategoryDao.findById(subcategoryId).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

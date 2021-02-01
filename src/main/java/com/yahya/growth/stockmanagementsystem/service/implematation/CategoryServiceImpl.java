@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findById(int categoryId) {
-        return categoryDao.findById(categoryId).orElseThrow();
+        return categoryDao.findById(categoryId).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

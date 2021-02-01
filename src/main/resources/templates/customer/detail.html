@@ -14,7 +14,7 @@
             <p>Email: <span class="info" th:text="${customer.email}">him@him.her</span></p>
             <div class="edit-btns-div">
                 <a th:href="@{edit(id=${customer.id})}" class="my-btn">Edit</a>
-                <a th:href="@{delete(id=${customer.id})}" class="my-btn delete-btn">Remove Customer</a>
+                <a th:href="@{delete(id=${customer.id})}" class="my-btn my-btn-danger">Remove Customer</a>
             </div>
         </div>
     </div>

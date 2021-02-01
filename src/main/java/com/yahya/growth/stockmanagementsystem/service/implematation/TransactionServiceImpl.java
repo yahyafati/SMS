@@ -35,7 +35,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction findById(int id) {
-        return transactionDao.findById(id).orElseThrow();
+        return transactionDao.findById(id).orElseThrow(() -> {throw new IllegalArgumentException("The Item you are looking for is no longer available.");});
     }
 
     @Override

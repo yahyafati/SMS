@@ -14,7 +14,7 @@
             <p>Description: <span class="info" th:text="${brand.description}"></span></p>
             <div class="edit-btns-div">
                 <a th:href="@{/brand/edit(id=${brand.id})}" class="my-btn">Edit</a>
-                <a th:href="@{/brand/delete(id=${brand.id})}" class="my-btn delete-btn">Remove Brand</a>
+                <a th:href="@{/brand/delete(id=${brand.id})}" class="my-btn my-btn-danger">Remove Brand</a>
             </div>
         </div>
     </div>

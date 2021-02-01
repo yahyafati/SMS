@@ -17,7 +17,7 @@
         </div>
         <div class="edit-btns-div">
             <a th:href="@{/reports/invoice(id=${transaction.id})}" class="my-btn">Generate Invoice</a>
-            <a th:href="@{/transaction/delete(id=${transaction.id})}" class="my-btn delete-btn">Reverse Transaction</a>
+            <a th:href="@{/transaction/delete(id=${transaction.id})}" class="my-btn my-btn-danger">Reverse Transaction</a>
         </div>
 <!--        <a th:href="@{edit(id=${category.id})}" class="btn btn-primary">Edit</a>-->
     </div>
