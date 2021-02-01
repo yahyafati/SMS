@@ -1,13 +1,8 @@
 "use strict"
 function toggleClass(element) {
-    // element = document.getElementById(element)
     let toggledElement = document.getElementById(element.getAttribute("toggledElement"))
     let toggledClass = element.getAttribute("toggledClass")
-    if (toggledElement.classList.contains(toggledClass)) {
-        toggledElement.classList.remove(toggledClass)
-    } else  {
-        toggledElement.classList.add(toggledClass)
-    }
+    toggledElement.classList.toggle(toggledClass)
 }
 
 function transactionTyping() {
@@ -18,15 +13,14 @@ function transactionTyping() {
         let price = 0.0, quantity = 0.0;
         for (let j = 0, col; col = row.cells[j]; j++) {
             const inputItem = col.children[0]
-            if (inputItem.getAttribute("name") == "price") {
+            if (inputItem.getAttribute("name") === "price") {
                 price = parseFloat(inputItem.value);
-            } else if (inputItem.getAttribute("name") == "quantity") {
+            } else if (inputItem.getAttribute("name") === "quantity") {
                 quantity = parseInt(inputItem.value);
             }
         }
         total += price*quantity;
     }
-    console.log("Total:" + total)
     const totalField = document.getElementById("totalAmountField")
     const paidField = document.getElementById("paidAmountField")
     const remainingField = document.getElementById("remainingAmountField")

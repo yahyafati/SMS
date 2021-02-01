@@ -2,12 +2,14 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.UserDao;
 import com.yahya.growth.stockmanagementsystem.dao.security.RoleDao;
+import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -41,9 +43,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public boolean deleteById(Integer id) {
-//        Role role = findById(id);
-//        System.out.println(role.getUserRole());
-        if (userDao.findOneByRole(new Role(id)).isPresent()) {
+        Optional<User> user = userDao.findOneByRole(new Role(id));
+        System.out.println(user);
+        if (user.isPresent()) {
             return false;
         }
         roleDao.deleteById(id);

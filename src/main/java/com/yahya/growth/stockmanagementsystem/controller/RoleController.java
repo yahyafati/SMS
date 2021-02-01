@@ -6,6 +6,7 @@ import com.yahya.growth.stockmanagementsystem.model.security.Role;
 import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
+import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -125,7 +126,9 @@ public class RoleController implements BasicControllerSkeleton<Role> {
     public RedirectView delete(@RequestParam int id, RedirectAttributes redir) {
         RedirectView redirectView = new RedirectView("/group", true);
         if (!roleService.deleteById(id)) {
-            redir.addFlashAttribute("error", "Role can't be deleted as there are currently users assigned to this role. Assign these users to different roles first.");
+            FlashMessage flashMessage = new FlashMessage("Role can't be deleted as there are currently users assigned to this role. Assign these users to different roles first.",
+                    "", FlashMessage.Type.ERROR);
+            redir.addFlashAttribute("dialogFlash", flashMessage);
         }
         return redirectView;
     }

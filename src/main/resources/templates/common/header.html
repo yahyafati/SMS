@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
+<!--/*@thymesVar id="dialogFlash" type="com.yahya.growth.stockmanagementsystem.utilities.FlashMessage"*/-->
 <head th:fragment="common-header">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,11 +20,14 @@
     <link rel="stylesheet" href="/css/table.css" />
     <link rel="stylesheet" href="/css/detail.css" />
     <link rel="stylesheet" href="/css/forms.css" />
-<!--    <link rel="stylesheet" href="/css/main.css" />-->
-    <script src="/js/app.js"></script>
-    <script src="/js/custom.js"></script>
+    <link rel="stylesheet" href="/css/dialog.css" />
+
 </head>
 <body onload="documentLoaded()">
+<div th:if="${dialogFlash}" id="dialog-popup" class="dialog" th:dialog-type="${dialogFlash.type.getName()}" th:goto="${dialogFlash.gotoURL}" th:text="${dialogFlash.message}">
+    Unfortunately, you are not authorized to do this. Please contact
+    your IT Team if you think you are getting this wrongly.
+</div>
 <header th:fragment="navbar-fragment">
     <div class="logo">
         <i class="fab fa-slack"></i> Helio Inventory Solution
@@ -188,6 +192,9 @@
 
 
 <div th:fragment="body-bottom-scripts">
+    <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/dialogs.js"></script>
 </div>
 </body>
 </html>
