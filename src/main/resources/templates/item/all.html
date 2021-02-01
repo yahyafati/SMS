@@ -1,4 +1,3 @@
-<!--TODO Change this page back to the classic tables page. This is to difficult to manage-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="items" type="java.util.List<com.yahya.growth.stockmanagementsystem.model.Item>"*/-->
@@ -32,7 +31,7 @@
                 <a class="link-info" th:text="${item.brand.name}" th:href="@{/brand/{id}(id=${item.brand.id})}">LG</a>
             </td>
             <td>
-                <a class="link-info" th:text="${item.category.name}" th:href="@{/category/{id}(id=${item.category.id})}">Electronics</a>
+                <a class="link-info" th:text="${item.subcategory.category.name}" th:href="@{/category/{id}(id=${item.subcategory.category.id})}">Electronics</a>
             </td>
             <td>
                 <a class="link-info" th:text="${item.subcategory.name}" th:href="@{/subcategory/{id}(id=${item.subcategory.id})}">Mobile</a>

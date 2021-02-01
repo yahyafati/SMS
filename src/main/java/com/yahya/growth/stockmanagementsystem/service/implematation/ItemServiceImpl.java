@@ -2,26 +2,24 @@ package com.yahya.growth.stockmanagementsystem.service.implematation;
 
 import com.yahya.growth.stockmanagementsystem.dao.ItemDao;
 import com.yahya.growth.stockmanagementsystem.model.Item;
-import com.yahya.growth.stockmanagementsystem.service.BrandService;
-import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
+import com.yahya.growth.stockmanagementsystem.service.ItemTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
     private final ItemDao itemDao;
-    private final CategoryService categoryService;
-    private final BrandService brandService;
+    private final ItemTransactionService itemTransactionService;
 
     @Autowired
-    public ItemServiceImpl(ItemDao itemDao, CategoryService categoryService, BrandService brandService) {
+    public ItemServiceImpl(ItemDao itemDao, ItemTransactionService itemTransactionService) {
         this.itemDao = itemDao;
-        this.categoryService = categoryService;
-        this.brandService = brandService;
+        this.itemTransactionService = itemTransactionService;
     }
 
     @Override
@@ -31,12 +29,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item save(Item item) {
-//        if (item.getCategory() != null)
-//            item.setCategory(categoryService.findById(item.getCategory().getId()));
-//        if (item.getSubcategory() != null)
-//            item.setSubcategory(subcategoryService.findById(item.getSubcategory().getId()));
-//        if (item.getBrand() != null)
-//            item.setBrand(brandService.findById(item.getBrand().getId()));
         return itemDao.save(item);
     }
 
@@ -46,12 +38,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     /**
-     * TODO It doesn't do what it says it does.
      * @return List of Available Items in Stock right now
      */
     @Override
     public List<Item> findAllAvailableItems() {
-        return itemDao.findAll();
+        return itemDao.findAll()
+                .stream()
+                .filter(item -> itemTransactionService.getQuantityOfItem(item) > 0)
+                .collect(Collectors.toList());
 //        return itemDao.findAllByQuantityGreaterThan(0);
     }
 

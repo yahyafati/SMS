@@ -223,7 +223,6 @@ public class StockManagementSystemApplication {
 
     @Bean
     public CommandLineRunner initializeUsersData(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
-        // FIXME Why do I have to make a new instance of authority?
         return args -> {
             if (!userService.findAll().isEmpty() && !roleService.findAll().isEmpty()) {
                 System.out.println("\n\n\nSPRING BOOT HAS STARTED\n\n\n");

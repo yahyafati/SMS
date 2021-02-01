@@ -10,6 +10,7 @@ import com.yahya.growth.stockmanagementsystem.service.CustomerService;
 import com.yahya.growth.stockmanagementsystem.service.ItemService;
 import com.yahya.growth.stockmanagementsystem.service.ReportService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -109,25 +110,25 @@ public class ReportController {
     }
 
     @GetMapping(value = "/invoice", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getTransactionsInvoice(@RequestParam Integer id, Model model) {
+    public ResponseEntity<InputStreamResource> getTransactionsInvoice(@RequestParam Integer id) throws JRException {
         final byte[] bytes = reportService.generateInvoice(id);
         return createResponseEntity(bytes, "Invoice");
     }
 
     @PostMapping(value = "/byType", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getItemTransactionsByTypePOST(TransactionsReportInfo transactionsReportInfo) {
+    public ResponseEntity<InputStreamResource> getItemTransactionsByTypePOST(TransactionsReportInfo transactionsReportInfo) throws JRException {
         final byte[] bytes = reportService.generateTransactionReportByType(transactionsReportInfo);
         return createResponseEntity(bytes, "ItemTransactionReportByType");
     }
 
     @PostMapping(value = "/transaction", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getTransactionReportPOST(TransactionsReportInfo transactionsReportInfo) {
+    public ResponseEntity<InputStreamResource> getTransactionReportPOST(TransactionsReportInfo transactionsReportInfo) throws JRException {
         final byte[] bytes = reportService.generateTransactionReport(transactionsReportInfo);
         return createResponseEntity(bytes, "TransactionReport");
     }
 
     @PostMapping(value = "/summary", produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> getItemTransactionsSummaryPOST(TransactionsReportInfo transactionsReportInfo) {
+    public ResponseEntity<InputStreamResource> getItemTransactionsSummaryPOST(TransactionsReportInfo transactionsReportInfo) throws JRException {
         final byte[] bytes = reportService.generateItemTransactionSummaryReport(transactionsReportInfo);
         return createResponseEntity(bytes, "TransactionReport");
     }

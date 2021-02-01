@@ -48,8 +48,6 @@ public class SettlementServiceImpl implements SettlementService {
         return true;
     }
 
-    // TODO Remove Sneaky Throws
-    @SneakyThrows
     @Override
     public Settlement saveNewSettlement(Settlement settlement) {
         List<Credit> credits = creditService.findByCustomer(settlement.getCustomer())

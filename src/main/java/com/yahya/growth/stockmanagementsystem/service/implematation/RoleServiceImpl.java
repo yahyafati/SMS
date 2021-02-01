@@ -15,7 +15,8 @@ import java.util.Optional;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleDao roleDao;
-    private final UserDao userDao; // TODO:HACK This might be a hack of sorts. Doesn't sit well with the overall design of the code so far.
+    private final UserDao userDao;
+    // TODO:HACK This might be a hack of sorts. Doesn't sit well with the overall design of the code so far.
 
     @Autowired
     public RoleServiceImpl(RoleDao roleDao, UserDao userDao) {

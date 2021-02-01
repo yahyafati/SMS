@@ -51,8 +51,7 @@ public class ReportServiceImpl implements ReportService {
         return itemTransactionStream.collect(Collectors.toList());
     }
 
-    @SneakyThrows // TODO Delete this
-    private byte[] generateReport(String path, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) {
+    private byte[] generateReport(String path, Map<String, Object> parameters, JRBeanCollectionDataSource dataSource) throws JRException {
         InputStream transactionStream = getClass().getResourceAsStream(path);
         JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
         return JasperRunManager.runReportToPdf(jasperReport, parameters, dataSource);
@@ -60,28 +59,28 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public byte[] generateTransactionReport(TransactionsReportInfo info) {
+    public byte[] generateTransactionReport(TransactionsReportInfo info) throws JRException {
         List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/TransactionReport.jrxml", new HashMap<>(), dataSource);
     }
 
     @Override
-    public byte[] generateTransactionReportByType(TransactionsReportInfo info) {
+    public byte[] generateTransactionReportByType(TransactionsReportInfo info) throws JRException {
         List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/ItemByTransactionType.jrxml", new HashMap<>(), dataSource);
     }
 
     @Override
-    public byte[] generateItemTransactionSummaryReport(TransactionsReportInfo info) {
+    public byte[] generateItemTransactionSummaryReport(TransactionsReportInfo info) throws JRException {
         List<ItemTransaction> itemTransactions = filterItemTransactions(info);
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/ItemTransactionSummary.jrxml", new HashMap<>(), dataSource);
     }
 
     @Override
-    public byte[] generateInvoice(Integer transactionId) {
+    public byte[] generateInvoice(Integer transactionId) throws JRException {
         Set<ItemTransaction> itemTransactions = transactionService.findById(transactionId).getItemTransactions();
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
         return generateReport("/reports/TransactionInvoice.jrxml", new HashMap<>(), dataSource);

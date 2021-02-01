@@ -172,24 +172,6 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         return quantity != null ? quantity : 0;
     }
 
-    // TODO Delete Sneaky Throw
-    @SneakyThrows
-    @Override
-    public String generateReport() {
-        List<ItemTransaction> itemTransactions = findAll();
-
-        InputStream transactionStream = getClass().getResourceAsStream("/reports/TransactionReport.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(transactionStream);
-
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(itemTransactions);
-
-
-        JasperPrint print = JasperFillManager.fillReport(jasperReport, null, dataSource);
-        String path = "C:\\Users\\yahya\\OneDrive\\Desktop\\File.pdf";
-        JasperExportManager.exportReportToPdfFile(print, path);
-        return path;
-    }
-
     /**
      * Saves a collection of ItemTransactions into database
      * @param itemTransactions Collection of ItemTransactions

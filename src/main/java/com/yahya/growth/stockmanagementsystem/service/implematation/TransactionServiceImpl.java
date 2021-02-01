@@ -59,7 +59,11 @@ public class TransactionServiceImpl implements TransactionService {
         if (transaction.getType() == TransactionType.SALE) {
             preDeleteSale(transaction);
         } else {
-            preDeletePurchase(transaction);
+            try {
+                preDeletePurchase(transaction);
+            } catch (TransactionException e) {
+                return false;
+            }
         }
         transactionDao.delete(transaction);
         return true;
@@ -68,7 +72,7 @@ public class TransactionServiceImpl implements TransactionService {
     /**
      * Performs pre delete operations of Transactions of TransactionType == PURCHASE.
      * @param transaction The transaction to be deleted.
-     * @throws TransactionException
+     * @throws TransactionException Throes Exception when there are necessary itemTransactions
      */
     private void preDeletePurchase(Transaction transaction) throws TransactionException {
         assert transaction.getType() == TransactionType.PURCHASE;
