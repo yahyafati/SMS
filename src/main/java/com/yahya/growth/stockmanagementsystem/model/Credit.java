@@ -23,7 +23,6 @@ public class Credit {
     private Integer id;
     @Column(name = "credit_addedTime")
     private Timestamp addedTime; // for logging purposes
-    // TODO Don't Forget to change it to STRING
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "credit_transaction_id")
     private Transaction transaction;

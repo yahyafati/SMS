@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-//                .antMatchers("/**").permitAll() // TODO Remove this line
+                .antMatchers("/**").permitAll() // TODO Remove this line
                 .antMatchers("/", "/css/*", "/js/*", "/images/**").permitAll()
 
                 .antMatchers("/brand/**", "/brand/").hasAuthority(BRAND_READ.getPermission())
@@ -57,7 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                     .tokenValiditySeconds(((int) TimeUnit.DAYS.toSeconds(21)))// defaults to 2 weeks
-                    .key("somethingverysecured")
+                    .key("BEAUTIFUL")
+                    .userDetailsService(userService)
                 .and()
                 .logout()
                     .logoutUrl("/logout")

@@ -5,9 +5,12 @@ import com.yahya.growth.stockmanagementsystem.service.CompanyService;
 import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -16,11 +19,18 @@ public class CompanyServiceImpl implements CompanyService {
     private final ObjectMapper mapper;
     private final File savedFile;
 
+    private final Path filePath = Paths.get(System.getProperty("user.home"), "HelioIMS", "company.json");
+
     @Autowired
-    public CompanyServiceImpl() {
+    public CompanyServiceImpl() throws IOException {
         mapper = new ObjectMapper();
-        // TODO There must be a better way.
-        savedFile = new File("src/main/resources/static/json/company.json");
+        savedFile = new File(filePath.toString());
+        Files.createDirectories(filePath.getParent());
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
+            File initialFile = ResourceUtils.getFile("classpath:json/company.json");
+            Files.writeString(filePath, Files.readString(initialFile.toPath()));
+        }
     }
 
     private Company generateNewInstance() {

@@ -24,13 +24,13 @@
                     <div class="form-control-wrapper">
                         Reorder Number: <input class="input-text" placeholder="Reorder Number" type="number" th:field="*{reorderNumber}">
                     </div>
-                    <div class="form-control-wrapper">
-                        Category:
-                        <select class="form-select" th:field="*{category}" >
-                            <option value="-1">Select a Category</option>
-                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>
-                        </select>
-                    </div>
+<!--                    <div class="form-control-wrapper">-->
+<!--                        Category:-->
+<!--                        <select class="form-select" th:field="*{category}" >-->
+<!--                            <option value="-1">Select a Category</option>-->
+<!--                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
                     <div class="form-control-wrapper">
                         Subcategory:
                         <select class="form-select" th:field="*{subcategory}" >

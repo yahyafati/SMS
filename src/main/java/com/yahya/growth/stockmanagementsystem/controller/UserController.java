@@ -155,7 +155,6 @@ public class UserController implements BasicControllerSkeleton<User>{
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('user:write')")
     public RedirectView delete(@RequestParam int id, Principal principal, RedirectAttributes redir) {
-        // TODO Make Sure User Doesn't Delete itself.
         RedirectView redirectView = new RedirectView("/users", true);
         User currentUser = userService.findByUsername(principal.getName());
         if (currentUser.getId() == id) {

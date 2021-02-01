@@ -59,7 +59,6 @@ public class User implements UserDetails {
     private Set<Authority> authorities = new HashSet<>();
 
 
-    // TODO Many to Many Utilities on non InnoDB MySQL database
     public void addAuthority(Authority authority) {
         this.authorities.add(authority);
         authority.getUsers().add(this);

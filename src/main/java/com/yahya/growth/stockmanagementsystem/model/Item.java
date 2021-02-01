@@ -32,10 +32,9 @@ public class Item {
     @Transient
     private int quantity;
 
-    // TODO Remove Category and get Category from Subcategory
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "item_category_id")
-    private Category category;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "item_category_id")
+//    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_subcategory_id")

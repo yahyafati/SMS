@@ -171,7 +171,7 @@ public class StockManagementSystemApplication {
                                 .description(itemDescriptionStrings.get(i))
 //                                .quantity(random.nextInt(100))
 //                                .price(random.nextFloat()*100)
-                                .category(Category.builder().id(random.nextInt(3) + 1).build())
+//                                .category(Category.builder().id(random.nextInt(3) + 1).build())
                                 .brand(Brand.builder().id(random.nextInt(4) + 1).build())
                                 .subcategory(Subcategory.builder().id(random.nextInt(3) + 1).build())
                                 .build();

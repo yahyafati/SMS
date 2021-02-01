@@ -42,7 +42,6 @@ public class AuthorityServiceImpl implements AuthorityService {
     }
 
     @Override
-    @SneakyThrows // TODO Remove Sneaky Throws, doesn't look pretty.
     public Authority findByName(String authorityName) {
         Optional<Authority> authority = authorityDao.findAuthorityByName(authorityName);
 //        System.out.println(authority);
@@ -51,7 +50,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 
 }
 
-class AuthorityNotFoundException extends Exception {
+class AuthorityNotFoundException extends RuntimeException {
 
     public AuthorityNotFoundException(String message) {
         super(message);

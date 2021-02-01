@@ -13,7 +13,7 @@
             <p>Reorder Number: <span class="info" th:text="${item.reorderNumber}">200</span></p>
             <p>Quantity: <span class="info" th:text="${item.quantity}">200</span></p>
 <!--            <p>Price: <span class="info" th:text="${item.price}">12</span></p>-->
-            <p>Category: <span class="info" th:text="${item.category.name}">Kitchen</span></p>
+            <p>Category: <span class="info" th:text="${item.subcategory.category.name}">Kitchen</span></p>
             <p>Subcategory: <span class="info" th:text="${item.subcategory.name}">Utensils</span></p>
             <!--        <p>Subcategory: <span th:text="${item.subCategory.name}"></span></p>-->
             <div class="edit-btns-div">

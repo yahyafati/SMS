@@ -64,7 +64,7 @@ public class ItemController {
     public String addNewItem(Model model) {
         model.addAttribute("item", new Item());
         model.addAttribute("action", "new");
-        model.addAttribute("categories", categoryService.findAll());
+//        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
 //        model.addAttribute("suppliers", storeService.findAll());
@@ -85,7 +85,7 @@ public class ItemController {
     public String edit(@RequestParam(name = "id") int itemId, Model model) {
         model.addAttribute("item", itemService.findById(itemId));
         model.addAttribute("action", "edit");
-        model.addAttribute("categories", categoryService.findAll());
+//        model.addAttribute("categories", categoryService.findAll());
         model.addAttribute("subcategories", subcategoryService.findAll());
         model.addAttribute("brands", brandService.findAll());
 //        model.addAttribute("suppliers", storeService.findAll());
