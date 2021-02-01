@@ -48,16 +48,9 @@
     height: fit-content;
 }
 
-.dialog .dialog-btn {
-    cursor: pointer;
-    outline: none;
-    margin: 5px 10px;
+.dialog .my-btn {
+    margin: 5px 5px;
     padding: 10px 20px 10px 20px;
-    min-width: 30px;
-    text-align: center;
-    color: #fff;
-    background: #011936;
-    border-radius: 5px;
 }
 
 

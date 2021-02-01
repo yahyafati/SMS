@@ -1,13 +1,16 @@
 .my-btn {
+    display: inline-block;
+    outline: none;
     cursor: pointer;
+    width: fit-content;
     font-size: 12px;
-    color: #f9dc5c;
-    background-color: #011936;
+    color: #efd45a !important;
+    background-color: #02234c !important;
     text-decoration: none;
     padding: 10px 20px;
-    border: 2px solid #111;
+    border: 1px solid #111;
     border-radius: 3px;
-    -ms-box-sizing: border-box;
+    /*-ms-box-sizing: border-box;*/
     -moz-box-sizing: border-box;
     -webkit-box-sizing:border-box;
     box-sizing: border-box;
@@ -15,6 +18,22 @@
 
 .my-btn:hover {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+}
+
+.my-btn-sm {
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.my-btn-danger {
+    border-color: #e2e2e266;
+    background: #e2e2e266 !important;
+    color: #565656 !important;
+}
+
+.my-btn-danger:hover {
+    color: rgb(238, 238, 238) !important;
+    background: #d7163d !important;
 }
 
 .delete-btn {
@@ -44,12 +63,6 @@
 .img-thumb-div {
     width: 200px;
     /* border: 1px solid black; */
-}
-
-.my-btn-sm {
-    padding: 5px 10px;
-    border: 2px solid #111;
-    border-radius: 3px;
 }
 
 .detail {

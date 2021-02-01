@@ -26,7 +26,7 @@
             </td>
             <td th:text="${instance.value}">1051151316831</td>
             <td>
-                <a th:if="${instance.value != 0}" class="btn btn-sm btn-outline-dark" th:href="@{/credit/settle(id=${instance.key.id}, type=${type})}">Settle Credit</a>
+                <a th:if="${instance.value != 0}" class="my-btn my-btn-sm my-btn-danger"  th:href="@{/credit/settle(id=${instance.key.id}, type=${type})}">Settle Credit</a>
             </td>
         </tr>
         </tbody>

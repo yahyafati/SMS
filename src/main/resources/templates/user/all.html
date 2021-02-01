@@ -32,7 +32,10 @@
             </td>
             <td>
 <!--                <a class="btn btn-sm btn-outline-dark" th:href="@{/users/edit(id=${user.id})}">Edit</a>-->
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/users/delete(id=${user.id})}">Delete</a>
+<!--                <a class="btn btn-sm btn-outline-danger" th:href="@{/users/delete(id=${user.id})}">Delete</a>-->
+                <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
+                   th:message="'Are you sure you want to remove [' + ${user.username} + '] user?'"
+                   th:goto="@{/users/delete(id=${user.id})}">Remove User</p>
             </td>
         </tr>
         </tbody>

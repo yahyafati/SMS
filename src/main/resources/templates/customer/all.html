@@ -25,8 +25,11 @@
             <td th:text="${customer.email}">nuriamussa@gmail.com</td>
             <td th:text="${customer.address}">Burayu, Ethiopia</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" th:href="@{/customer/edit(id=${customer.id})}">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/customer/delete(id=${customer.id})}">Delete</a>
+                <a class="my-btn my-btn-sm"  class="btn btn-sm btn-outline-dark" th:href="@{/customer/edit(id=${customer.id})}">Edit</a>
+<!--                <a class="btn btn-sm btn-outline-danger" th:href="@{/customer/delete(id=${customer.id})}">Delete</a>-->
+                <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
+                   th:message="'Are you sure you want to remove [' + ${customer.name} + '] customer?'"
+                   th:goto="@{/customer/delete(id=${customer.id})}">Remove</p>
             </td>
         </tr>
         </tbody>

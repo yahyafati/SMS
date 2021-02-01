@@ -24,8 +24,10 @@
                 <a class="link link-info" href="#" th:href="@{/group/{id}(id=${group.id})}">Show Permissions</a>
             </td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" th:href="@{/group/edit(id=${group.id})}">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/group/delete(id=${group.id})}">Delete</a>
+                <a class="my-btn my-btn-sm"  th:href="@{/group/edit(id=${group.id})}">Edit</a>
+                <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
+                   th:message="'Are you sure you want to remove [' + ${group.name} + '] customer?'"
+                   th:goto="@{/group/delete(id=${group.id})}">Remove</p>
             </td>
         </tr>
         </tbody>

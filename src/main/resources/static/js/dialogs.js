@@ -13,22 +13,41 @@ function htmlToElement(html) {
 function createDialog(message, type,
                       ok_button=true, cancel_button=true,
                       ok_text="Okay", cancel_text="Cancel",
-                      ok_action = "defaultOkayClick(this)", cancel_action="defaultCancelClick(this)") {
-    let htmlDoc = '<div class="dialog">\n' +
-        '  <div class="head">\n' +
-        '  <span class="dialog-icon"><i class="fas fa-bomb"></i></span> ' +
-        // '    <img class="dialog-icon" src="/images/placeholder/error.png" alt="dialog icon" />\n' +
-        '    <h2 class="dialog-title">' + type +
-        '</h2>\n' +
-        '  </div>\n' +
-        '  <div class="dialog-body">\n' + message +
-        '  </div>\n' +
-        '  <div class="dialog-buttons">\n' +
-        (ok_button ? '    <button onclick="' + ok_action + '" class="dialog-btn">' + ok_text + '</button>\n' : '') +
-        (cancel_button ? '    <button onclick="' + cancel_action + '" class="dialog-btn">' + cancel_text +'</button>\n' : '') +
-        '  </div>\n' +
-        '</div>'
-    return htmlToElement(htmlDoc);
+                      ok_action = defaultDialogButtonClick, cancel_action = defaultDialogButtonClick) {
+    const dialog = document.createElement("div");
+    dialog.classList.add("dialog")
+
+    const dialogHead = document.createElement("div")
+    dialogHead.classList.add("head")
+    const errorIcon = '<span class="dialog-icon"><i class="fas fa-bomb"></i></span>'
+    dialogHead.appendChild(htmlToElement(errorIcon))
+    const dialogTitle = '<h2 class="dialog-title">' + type + '</h2>\n';
+    dialogHead.appendChild(htmlToElement(dialogTitle))
+    dialog.appendChild(dialogHead);
+
+    const dialogBody = document.createElement("div");
+    dialogBody.classList.add("dialog-body")
+    dialogBody.innerHTML = message
+    dialog.appendChild(dialogBody)
+
+    const dialogButtons = document.createElement("div")
+    dialogButtons.classList.add("dialog-buttons")
+    if (ok_button) {
+        const btn_okay = document.createElement("button")
+        btn_okay.classList.add("my-btn")
+        btn_okay.onclick = ev => ok_action();
+        btn_okay.innerHTML = ok_text
+        dialogButtons.appendChild(btn_okay)
+    }
+    if (cancel_button) {
+        const btn_cancel = document.createElement("button")
+        btn_cancel.classList.add("my-btn")
+        btn_cancel.onclick = ev => cancel_action()
+        btn_cancel.innerHTML = cancel_text
+        dialogButtons.appendChild(btn_cancel)
+    }
+    dialog.appendChild(dialogButtons)
+    return dialog
 }
 
 function createErrorDialog(message) {
@@ -43,18 +62,28 @@ function openDialog(dialog) {
     let dimmer = createDimmer();
 
     let dialogType = dialog.getAttribute("dialog-type")
-    console.log(dialogType);
     if (dialogType === "error") {
-        dialog.innerHTML = createErrorDialog(dialog.innerHTML).innerHTML
+        dialog.remove()
+        dialog = createErrorDialog(dialog.innerHTML)
     } else if (dialogType === "confirm") {
-        let yes_action = dialog.getAttribute("goto")
-        yes_action = "openLink(" + yes_action + ")"
-        let no_action = "defaultOkayClick()"
-        dialog.innerHTML = createConfirmDialog(dialog.innerHTML, yes_action, no_action).innerHTML
+        let goto = dialog.getAttribute("goto")
+        dialog.remove()
+        dialog = createConfirmDialog(dialog.innerHTML,
+            () => openLink(goto), () =>  defaultDialogButtonClick())
     }
-    let body = document.getElementsByTagName("body")[0]
-    dimmer.prepend(dialog)
-    body.prepend(dimmer)
+    dimmer.appendChild(dialog)
+    document.body.appendChild(dimmer)
+}
+
+function openConfirmDialog(element) {
+    let message = element.getAttribute("message");
+    let dialog = document.createElement("div")
+    dialog.classList.add("dialog")
+    dialog.id = "dialog-popup"
+    dialog.setAttribute("dialog-type", "confirm")
+    dialog.setAttribute("goto", element.getAttribute("goto"))
+    dialog.innerHTML = message
+    openDialog(dialog)
 }
 
 function openLink(url) {
@@ -67,12 +96,21 @@ function createDimmer() {
     return dimmer;
 }
 
-function defaultOkayClick() {
+function defaultDialogButtonClick() {
     let dimmer = document.getElementById("dimmer-div")
     dimmer.remove();
 }
 
-let dialog = document.getElementById("dialog-popup")
-if (dialog != null) {
-    openDialog(dialog);
+document.addEventListener("DOMContentLoaded", ()=>{
+    let dialog = document.getElementById("dialog-popup")
+    if (dialog != null) {
+        openDialog(dialog);
+    }
+}, false)
+
+
+
+function dummy() {
+    // alert("It works")
+    console.log("It works")
 }

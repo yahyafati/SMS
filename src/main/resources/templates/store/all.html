@@ -27,8 +27,8 @@
             <td th:text="${store.email}">nuriamussa@gmail.com</td>
             <td th:text="${store.address}">Burayu, Ethiopia</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" th:href="@{/store/edit(id=${store.id})}">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/store/delete(id=${store.id})}">Delete</a>
+                <a class="my-btn my-btn-sm my-btn-danger"  th:href="@{/store/edit(id=${store.id})}">Edit</a>
+                <a class="my-btn my-btn-sm my-btn-danger"  th:href="@{/store/delete(id=${store.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

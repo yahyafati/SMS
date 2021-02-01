@@ -35,7 +35,10 @@
             </td>
             <td>
                 <!--                <a class="btn btn-sm btn-outline-dark" th:href="@{{id}(id=${order.id})}">Edit</a>-->
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/transaction/delete(id=${transaction.id})}">Delete</a>
+<!--                <a class="btn btn-sm btn-outline-danger" th:href="@{/transaction/delete(id=${transaction.id})}">Delete</a>-->
+                <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
+                   th:message="'Are you sure you want to remove [ Reference Number: ' + ${transaction.refNumber} + '] transaction?'"
+                   th:goto="@{/transaction/delete(id=${transaction.id})}">Remove Transaction</p>
             </td>
         </tr>
         </tbody>

@@ -20,8 +20,11 @@
             </td>
             <td th:text="${category.description}">0911871115</td>
             <td>
-                <a class="btn btn-sm btn-outline-dark" th:href="@{/category/edit(id=${category.id})}">Edit</a>
-                <a class="btn btn-sm btn-outline-danger" th:href="@{/category/delete(id=${category.id})}">Delete</a>
+                <a class="my-btn my-btn-sm"  th:href="@{/category/edit(id=${category.id})}">Edit</a>
+<!--                <a class="btn btn-sm btn-outline-danger" th:href="@{/category/delete(id=${category.id})}">Delete</a>-->
+                <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
+                   th:message="'Are you sure you want to remove [' + ${category.name} + '] category?'"
+                   th:goto="@{/category/delete(id=${category.id})}">Remove</p>
             </td>
         </tr>
         </tbody>
