@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.service.CompanyService;
 import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/company")
@@ -25,6 +28,11 @@ public class CompanyController {
     @ModelAttribute("title")
     public String getPageTitle() {
         return "Company";
+    }
+
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("company", "adminTools");
     }
 
     @GetMapping("")

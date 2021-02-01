@@ -18,7 +18,7 @@ import static com.yahya.growth.stockmanagementsystem.security.Permission.*;
 
 @Configuration
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll() // TODO Remove this line
+//                .antMatchers("/**").permitAll() // TODO Remove this line
                 .antMatchers("/", "/css/*", "/js/*", "/images/**").permitAll()
 
                 .antMatchers("/brand/**", "/brand/").hasAuthority(BRAND_READ.getPermission())

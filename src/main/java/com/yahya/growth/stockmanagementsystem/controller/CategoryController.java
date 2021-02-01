@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Category;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
@@ -28,6 +29,11 @@ public class CategoryController {
     @ModelAttribute("title")
     public String getPageTitle() {
         return "Category";
+    }
+
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("category");
     }
 
     @GetMapping("")

@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.*;
 import com.yahya.growth.stockmanagementsystem.service.*;
 import com.yahya.growth.stockmanagementsystem.utilities.TransactionException;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,6 +39,11 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         return "Transaction";
     }
 
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("transaction");
+    }
+
     @ModelAttribute("transactionTypes")
     public TransactionType[] getTransactionTypes() {
         return TransactionType.values();
@@ -55,6 +62,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @Override
     @GetMapping("")
     public String index(Model model) {
+        model.addAttribute("active", Lists.newArrayList("detailTransaction", "transaction"));
         model.addAttribute("transactions", transactionService.findAll());
         model.addAttribute("pageName", "transaction/all");
         return "common/header";
@@ -74,18 +82,20 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @GetMapping("/new")
     @PreAuthorize("hasAuthority('transaction:write')")
     public String addNewItem(Model model) {
-        model.addAttribute("transaction", new Transaction());
-        model.addAttribute("transactionTypes", TransactionType.values());
-        model.addAttribute("customers", customerService.findAll());
-        model.addAttribute("allItems", itemService.findAll());
-        model.addAttribute("action", "new");
-        model.addAttribute("pageName", "transaction/transaction");
-        return "common/header";
+//        model.addAttribute("transaction", new Transaction());
+//        model.addAttribute("transactionTypes", TransactionType.values());
+//        model.addAttribute("customers", customerService.findAll());
+//        model.addAttribute("allItems", itemService.findAll());
+//        model.addAttribute("action", "new");
+//        model.addAttribute("pageName", "transaction/transaction");
+//        return "common/header";
+        throw new UnsupportedOperationException("This method is not supported.");
     }
 
     @GetMapping("/purchase")
     @PreAuthorize("hasAuthority('transaction:write')")
     public String purchaseItem(Model model, Principal principal) {
+        model.addAttribute("active", Lists.newArrayList("purchaseTransaction", "transaction"));
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.PURCHASE);
         model.addAttribute("transaction", transaction);
@@ -98,6 +108,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @GetMapping("/sale")
     @PreAuthorize("hasAuthority('transaction:write')")
     public String saleItem(Model model, Principal principal) {
+        model.addAttribute("active", Lists.newArrayList("saleTransaction", "transaction"));
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.SALE);
         model.addAttribute("transaction", transaction);

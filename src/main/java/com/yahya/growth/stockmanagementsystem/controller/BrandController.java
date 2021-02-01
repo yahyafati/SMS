@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Brand;
 import com.yahya.growth.stockmanagementsystem.model.Category;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
@@ -11,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/brand")
@@ -30,6 +33,11 @@ public class BrandController {
     @ModelAttribute("title")
     public String getPageTitle() {
         return "Brands";
+    }
+
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("brand");
     }
 
     @GetMapping("")

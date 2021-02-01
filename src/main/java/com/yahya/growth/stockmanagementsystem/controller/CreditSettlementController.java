@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.CreditType;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.model.Settlement;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/credit")
@@ -37,11 +40,18 @@ public class CreditSettlementController {
         return "Credits";
     }
 
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("credit");
+    }
+
     @GetMapping("")
     public String index(@RequestParam(value = "type", defaultValue = "payable") String type, Model model) {
         if (type.equalsIgnoreCase("payable")) {
+            model.addAttribute("active", Lists.newArrayList("payableCredit", "credit"));
             model.addAttribute("creditsMap", creditService.findAllPayablePerCustomer());
         } else if(type.equalsIgnoreCase("receivable")) {
+            model.addAttribute("active", Lists.newArrayList("receivableCredit", "credit"));
             model.addAttribute("creditsMap", creditService.findAllReceivablePerCustomer());
         } else {
             throw new CreditException("Invalid Parameter");
@@ -59,9 +69,11 @@ public class CreditSettlementController {
         settlement.setCustomer(customer);
         CreditType creditType =CreditType.getType(type);
         if (creditType == CreditType.BORROWED) {
+            model.addAttribute("active", Lists.newArrayList("payableCredit", "credit"));
             settlement.setType(SettlementType.PAID);
             model.addAttribute("customerCredits", creditService.findPayableCreditsByCustomer(customer));
         } else {
+            model.addAttribute("active", Lists.newArrayList("receivableCredit", "credit"));
             settlement.setType(SettlementType.RECEIVED);
             model.addAttribute("customerCredits", creditService.findReceivableCreditsByCustomer(customer));
         }

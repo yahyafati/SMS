@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
@@ -55,6 +56,11 @@ public class ReportController {
         return "Reports";
     }
 
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("report");
+    }
+
     @ModelAttribute("items")
     public List<Item> getAllItems() {
         return itemService.findAll();
@@ -77,6 +83,7 @@ public class ReportController {
 
     @GetMapping("/transaction")
     public String getTransactionReport(Model model) {
+        model.addAttribute("active", Lists.newArrayList("transactionReport", "report"));
         model.addAttribute("transactionReport", new TransactionsReportInfo());
         model.addAttribute("pageName", "report/transaction");
         model.addAttribute("action", "");
@@ -85,6 +92,7 @@ public class ReportController {
 
     @GetMapping("/bytype")
     public String getItemTransactionsByType(Model model) {
+        model.addAttribute("active", Lists.newArrayList("byTypeReport", "report"));
         model.addAttribute("transactionReport", new TransactionsReportInfo());
         model.addAttribute("pageName", "report/transaction");
         model.addAttribute("action", "byType");
@@ -93,6 +101,7 @@ public class ReportController {
 
     @GetMapping("/summary")
     public String getItemTransactionsSummary(Model model) {
+        model.addAttribute("active", Lists.newArrayList("summaryReport", "report"));
         model.addAttribute("transactionReport", new TransactionsReportInfo());
         model.addAttribute("pageName", "report/transaction");
         model.addAttribute("action", "summary");

@@ -1,5 +1,6 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
+import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.model.TransactionType;
 import com.yahya.growth.stockmanagementsystem.service.*;
@@ -31,6 +32,11 @@ public class ItemController {
     @ModelAttribute("title")
     public String getPageTitle() {
         return "Products";
+    }
+
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("product");
     }
 
     @GetMapping("")

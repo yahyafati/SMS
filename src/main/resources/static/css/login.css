@@ -87,7 +87,7 @@ input[type=button], input[type=submit], input[type=reset]  {
     border: none;
     color: white;
     padding: 15px 80px;
-    text-align: center;
+    /*text-align: center;*/
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
@@ -121,7 +121,7 @@ input[type=text], input[type=password] {
     border: none;
     color: #0d0d0d;
     padding: 15px 32px;
-    text-align: center;
+    /*text-align: center;*/
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -142,7 +142,7 @@ input[type=text]:focus, input[type=password]:focus {
     border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder, input[type=password]::placeholder {
+input[type=text]::placeholder, input[type=password]::placeholder {
     color: #cccccc;
 }
 

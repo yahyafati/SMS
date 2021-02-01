@@ -38,6 +38,11 @@ public class RoleController implements BasicControllerSkeleton<Role> {
         return "User Group";
     }
 
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("group", "adminTools");
+    }
+
     @Override
     @GetMapping("")
     public String index(Model model) {

@@ -43,6 +43,11 @@ public class UserController implements BasicControllerSkeleton<User>{
         return "User";
     }
 
+    @ModelAttribute("active")
+    public List<String> getCurrentlyActive() {
+        return Lists.newArrayList("user", "adminTools");
+    }
+
     @Override
     @GetMapping("")
     public String index(Model model) {
