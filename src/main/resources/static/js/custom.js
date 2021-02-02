@@ -43,6 +43,18 @@ function amountPaidChanged(element) {
     }
 }
 
+function transactionSubmit(form) {
+    let table = document.getElementById("itemTransaction").getElementsByTagName("tbody")[0]
+    if(table.rows.length === 0) {
+        let dimmer = createDimmer()
+        let dialog = createErrorDialog("There are no items in the list.");
+        dimmer.appendChild(dialog);
+        document.body.appendChild(dimmer);
+        return false;
+    }
+    return true;
+}
+
 function addTransactionRow() {
     let table = document.getElementById("itemTransaction").getElementsByTagName("tbody")[0]
     let row = table.insertRow()

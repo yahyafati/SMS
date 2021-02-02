@@ -12,6 +12,8 @@ public interface ItemService {
 
     List<Item> findAll();
 
+    List<Item> findAllActive();
+
     List<Item> findAllAvailableItems();
 
     void deleteById(Integer itemId);

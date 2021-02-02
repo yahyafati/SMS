@@ -87,7 +87,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
         model.addAttribute("active", Lists.newArrayList("purchaseTransaction", "transaction"));
         Transaction transaction = new Transaction();
         transaction.setType(TransactionType.PURCHASE);
-        model.addAttribute("allItems", itemService.findAll());
+        model.addAttribute("allItems", itemService.findAllActive());
         model.addAttribute("transaction", transaction);
         model.addAttribute("paidAmount", 0.0);
         model.addAttribute("action", "new");

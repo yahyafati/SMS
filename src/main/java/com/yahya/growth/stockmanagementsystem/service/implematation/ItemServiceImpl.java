@@ -37,14 +37,19 @@ public class ItemServiceImpl implements ItemService {
         return itemDao.findAll();
     }
 
+    @Override
+    public List<Item> findAllActive() {
+        return itemDao.findAllByActiveTrue();
+    }
+
     /**
      * @return List of Available Items in Stock right now
      */
     @Override
     public List<Item> findAllAvailableItems() {
-        return itemDao.findAll()
+        return findAllActive()
                 .stream()
-                .filter(item -> item.isActive() && itemTransactionService.getQuantityOfItem(item) > 0)
+                .filter(item -> itemTransactionService.getQuantityOfItem(item) > 0)
                 .collect(Collectors.toList());
     }
 
