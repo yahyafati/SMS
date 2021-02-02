@@ -55,3 +55,7 @@
 .form-control-wrapper .extra-checkbox {
     display: block;
 }
+
+.transaction-credit {
+    width: fit-content;
+}

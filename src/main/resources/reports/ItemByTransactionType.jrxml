@@ -10,7 +10,7 @@
     <field name="transaction.customer.name"/>
     <field name="transaction.transactionDate" class="java.time.LocalDate"/>
 <!--    <field name="transaction.formattedTransactionDate" class="java.lang.String"/>-->
-    <field name="unitPrice" class="java.lang.Double"/>
+    <field name="realPrice" class="java.lang.Double"/>
     <field name="initialQuantity" class="java.lang.Integer"/>
     <field name="transaction.user.username"/>
     <field name="item.name"/>
@@ -20,7 +20,7 @@
     <sortField name="item.name" />
     <sortField name="transaction.transactionDate"/>
     <variable name="RowTotalPrice" class="java.lang.Double">
-        <variableExpression><![CDATA[$F{unitPrice} * $F{initialQuantity}]]></variableExpression>
+        <variableExpression><![CDATA[$F{realPrice} * $F{initialQuantity}]]></variableExpression>
     </variable>
     <variable name="PPSum" class="java.lang.Double" resetType="Group" resetGroup="ItemGroup" calculation="Sum">
         <variableExpression><![CDATA[$F{transaction.type}.getName().equalsIgnoreCase("PURCHASE") ? $V{RowTotalPrice} : 0]]></variableExpression>
@@ -335,7 +335,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#ADADAD"/>
                 </box>
                 <textElement textAlignment="Right" verticalAlignment="Middle"/>
-                <textFieldExpression><![CDATA[$F{unitPrice}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{realPrice}]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement style="Detail" x="220" y="0" width="60" height="15" uuid="7358823f-7017-45de-8b98-37aff24f3bf5">

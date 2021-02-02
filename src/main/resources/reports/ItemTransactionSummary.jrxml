@@ -12,7 +12,7 @@
     <field name="item.name"/>
     <field name="initialQuantity" class="java.lang.Integer"/>
     <field name="remainingQuantity" class="java.lang.Integer"/>
-    <field name="unitPrice" class="java.lang.Double"/>
+    <field name="realPrice" class="java.lang.Double"/>
     <field name="transaction.type" class="com.yahya.growth.stockmanagementsystem.model.TransactionType"/>
     <field name="item.id" class="java.lang.Integer"/>
     <sortField name="item.name"/>
@@ -29,7 +29,7 @@
         <variableExpression><![CDATA[$F{transaction.type}.getName().equalsIgnoreCase("SALE") ? $V{RowTotalPrice} : 0]]></variableExpression>
     </variable>
     <variable name="RowTotalPrice" class="java.lang.Double">
-        <variableExpression><![CDATA[$F{unitPrice} * $F{initialQuantity}]]></variableExpression>
+        <variableExpression><![CDATA[$F{realPrice} * $F{initialQuantity}]]></variableExpression>
     </variable>
     <group name="ItemGroup">
         <groupExpression><![CDATA[$F{item.name}]]></groupExpression>

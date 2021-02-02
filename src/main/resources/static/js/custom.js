@@ -21,25 +21,50 @@ function transactionTyping() {
         }
         total += price*quantity;
     }
-    const totalField = document.getElementById("totalAmountField")
+    const sumField = document.getElementById("sumAmountField")
+    const overallTotalField = document.getElementById("overallTotalAmountField")
     const paidField = document.getElementById("paidAmountField")
     const remainingField = document.getElementById("remainingAmountField")
-    totalField.value = total;
-    paidField.value = total;
+
+    const vat = parseFloat(document.getElementById("vatAmountField").value)
+    const serviceCharge = parseFloat(document.getElementById("serviceChargeAmountField").value)
+    const discount = parseFloat(document.getElementById("discountAmountField").value)
+
+    const overallTotal = calculateOverallPrice(total, vat, serviceCharge, discount)
+    sumField.value = total;
+    overallTotalField.value = overallTotal
+    paidField.value = overallTotal;
     remainingField.value = 0;
+}
+
+function calculateOverallPrice(total, vat, serviceCharge, discount) {
+    return total + total*(vat/100.0) + total*(serviceCharge/100.0) - total*(discount/100);
 }
 
 /**
  * @param {Element} element
  */
 function amountPaidChanged(element) {
-    const totalField = document.getElementById("totalAmountField")
+    const vat = parseFloat(document.getElementById("vatAmountField").value)
+    const serviceCharge = parseFloat(document.getElementById("serviceChargeAmountField").value)
+    const discount = parseFloat(document.getElementById("discountAmountField").value)
+
+    const sumField = document.getElementById("sumAmountField")
+    const overallTotalField = document.getElementById("overallTotalAmountField")
     const paidField = document.getElementById("paidAmountField")
     const remainingField = document.getElementById("remainingAmountField")
+
+    const total = parseFloat(sumField.value)
+    const overallTotal = calculateOverallPrice(total, vat, serviceCharge, discount)
+    overallTotalField.value = overallTotal;
+
     if(element.id === "remainingAmountField") {
-        paidField.value = totalField.value - remainingField.value
+        paidField.value = overallTotal - remainingField.value
     } else if(element.id === "paidAmountField") {
-        remainingField.value = totalField.value - paidField.value
+        remainingField.value = overallTotal - paidField.value
+    } else {
+        paidField.value = overallTotal
+        remainingField.value = 0
     }
 }
 

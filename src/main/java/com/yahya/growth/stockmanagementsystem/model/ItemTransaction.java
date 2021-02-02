@@ -38,6 +38,18 @@ public class ItemTransaction {
         return initialQuantity - remainingQuantity;
     }
 
+    public Double getRealPrice() {
+        return unitPrice + (unitPrice * transaction.getServiceCharge()/100.0)
+                + (unitPrice * transaction.getVat()/100.0)
+                - (unitPrice * transaction.getDiscount()/100.0);
+    }
+
+    public Double getRealTotalPrice() {
+        return getTotalPrice() + (getTotalPrice() * transaction.getServiceCharge()/100.0)
+                + (getTotalPrice() * transaction.getVat()/100.0)
+                - (getTotalPrice() * transaction.getDiscount()/100.0);
+    }
+
     public Double getTotalPrice() {
         return unitPrice * initialQuantity;
     }

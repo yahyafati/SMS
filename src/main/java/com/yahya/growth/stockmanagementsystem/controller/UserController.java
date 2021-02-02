@@ -129,8 +129,7 @@ public class UserController implements BasicControllerSkeleton<User>{
     @PostMapping("/new")
     @PreAuthorize("hasAuthority('user:write')")
     public String addNewPOST(User user) {
-        // FIXME : HACK => Password
-        user.setPassword(passwordEncoder.encode("123"));
+        user.setPassword(passwordEncoder.encode("12345678"));
         user = userService.saveNewUser(user);
         return "redirect:/users/" + user.getId();
     }

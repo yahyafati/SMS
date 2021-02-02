@@ -73,15 +73,41 @@
             </table>
             <div class="transaction-credit">
                 <div class="form-control-wrapper">
-                    Total Amount: <input id="totalAmountField" value="0.0" autocomplete="false" disabled class="input-text"type="number" step="any">
+                    Sum Price:
+                    <input id="sumAmountField" value="0.0" autocomplete="false" disabled class="input-text"type="number" step="any">
+                </div>
+                <div class="form-control-wrapper">
+                    VAT:
+                    <input th:field="*{vat}" oninput="amountPaidChanged(this)" id="vatAmountField"
+                           autocomplete="off"  class="input-text" type="number" step="any">
+                </div>
+                <div class="form-control-wrapper">
+                    Service Charge:
+                    <input th:field="*{serviceCharge}" oninput="amountPaidChanged(this)"
+                           id="serviceChargeAmountField" autocomplete="off" class="input-text"
+                           type="number" step="any">
+                </div>
+                <div class="form-control-wrapper">
+                    Discount:
+                    <input th:field="*{discount}" oninput="amountPaidChanged(this)"
+                           id="discountAmountField" autocomplete="off" class="input-text"
+                           type="number" step="any">
+                </div>
+                <div class="form-control-wrapper">
+                    Total Price:
+                    <input disabled id="overallTotalAmountField" value="0.0" autocomplete="false"
+                           class="input-text"type="number" step="any">
                 </div>
                 <div class="form-control-wrapper">
                     Paid Amount:
-                    <input id="paidAmountField" autocomplete="off" oninput="amountPaidChanged(this)" class="input-text" type="number" step="any" th:name="paidAmount" th:value="${paidAmount}">
+                    <input id="paidAmountField" autocomplete="off" oninput="amountPaidChanged(this)"
+                           class="input-text" type="number" step="any" th:name="paidAmount"
+                           th:value="${paidAmount}">
                 </div>
                 <div class="form-control-wrapper">
                     Remaining Amount:
-                    <input id="remainingAmountField" autocomplete="off"  oninput="amountPaidChanged(this)" class="input-text" type="number" step="any">
+                    <input id="remainingAmountField" autocomplete="off"  oninput="amountPaidChanged(this)"
+                           class="input-text" type="number" step="any">
                 </div>
             </div>
             <div class="edit-btns-div">
