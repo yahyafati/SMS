@@ -296,3 +296,37 @@ header .profile .name {
 .error-password .error-password-small {
     font-size: 10px;
 }
+
+/* Error Handler */
+.errorHandler-container {
+    display: flex;
+    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap;
+    width: 100%;
+    height: 100%;
+}
+
+.errorHandler-container .errorHandler {
+    background-color: #00000099;
+    padding: 20px;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.errorHandler-container .errorHandler .error-title {
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
+    color: #ffffff;
+    max-width: 350px;
+}
+
+.errorHandler-container .errorHandler .error-description {
+    color: #d2d2d2;
+    width: 350px;
+}
+
+
+
