@@ -7,6 +7,7 @@
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>Active</th>
 <!--            <th>Description</th>-->
             <th>Quantity</th>
             <th>Reorder Number</th>
@@ -24,6 +25,7 @@
             <td>
                 <a class="link-info" th:text="${item.name}" th:href="@{/items/{id}(id=${item.id})}">Lamp</a>
             </td>
+            <td th:text="${item.isActive() ? 'Active' : 'Not Active'}">200</td>
 <!--            <td th:text="${item.description}">Beautiful Lamp</td>-->
             <td th:text="${item.quantity}">200</td>
             <td th:text="${item.reorderNumber}">100</td>
@@ -42,6 +44,8 @@
                 <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
                    th:message="'Are you sure you want to remove [' + ${item.name} + '] product?'"
                    th:goto="@{/items/delete(id=${item.id})}">Remove Product</p>
+                <a th:href="@{/items/toggleStatus(id=${item.id}, redirectTo=${#httpServletRequest.requestURI})}"
+                   class="my-btn my-btn-secondary my-btn-sm">Change Active Status</a>
             </td>
         </tr>
         </tbody>

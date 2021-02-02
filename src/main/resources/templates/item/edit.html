@@ -16,6 +16,9 @@
             <form class="form" action="" th:action="@{{action}(action=${action}, id = ${item.id})}" th:object="${item}" method="post">
                 <div class="form-wrapper">
                     <div class="form-control-wrapper">
+                        State: <input type="checkbox" th:field="*{active}">
+                    </div>
+                    <div class="form-control-wrapper">
                         Name: <input class="input-text" placeholder="Product" type="text" th:field="*{name}">
                     </div>
                     <div class="form-control-wrapper">
@@ -24,13 +27,6 @@
                     <div class="form-control-wrapper">
                         Reorder Number: <input class="input-text" placeholder="Reorder Number" type="number" th:field="*{reorderNumber}">
                     </div>
-<!--                    <div class="form-control-wrapper">-->
-<!--                        Category:-->
-<!--                        <select class="form-select" th:field="*{category}" >-->
-<!--                            <option value="-1">Select a Category</option>-->
-<!--                            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">Electronics</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
                     <div class="form-control-wrapper">
                         Subcategory:
                         <select class="form-select" th:field="*{subcategory}" >
@@ -45,13 +41,6 @@
                             <option th:each="brand : ${brands}" th:value="${brand.id}" th:text="${brand.name}">Cell Phones & Accessories</option>
                         </select>
                     </div>
-<!--                    <div class="form-control-wrapper">-->
-<!--                        Supplier:-->
-<!--                        <select class="form-select" th:field="*{store}" >-->
-<!--                            <option value="-1">Select a Supplier</option>-->
-<!--                            <option th:each="store : ${suppliers}" th:value="${store.id}" th:text="${store.name}">HepsiBurada</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
                 </div>
 
                 <div class="edit-btns-div">

@@ -15,4 +15,8 @@ public interface ItemService {
     List<Item> findAllAvailableItems();
 
     void deleteById(Integer itemId);
+
+    boolean toggleStatus(int id);
+
+    boolean toggleStatus(Item item);
 }

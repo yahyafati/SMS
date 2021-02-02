@@ -27,14 +27,14 @@ public class Item {
     private String name;
     @Column(name = "item_description")
     private String description;
-    @Column(name = "item_reorderNumber")
+    @Column(name = "item_reorder_number")
     private int reorderNumber;
+    @Column(name = "item_is_active")
+    @Builder.Default
+    private boolean active = true;
+
     @Transient
     private int quantity;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "item_category_id")
-//    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_subcategory_id")
@@ -43,13 +43,5 @@ public class Item {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_brand_id")
     private Brand brand;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "store_id")
-//    private Store store;
-
-//    @OneToMany(mappedBy = "item")
-//    @Builder.Default
-//    private Set<Order> orders = new HashSet<>();
 
 }

@@ -44,14 +44,25 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> findAllAvailableItems() {
         return itemDao.findAll()
                 .stream()
-                .filter(item -> itemTransactionService.getQuantityOfItem(item) > 0)
+                .filter(item -> item.isActive() && itemTransactionService.getQuantityOfItem(item) > 0)
                 .collect(Collectors.toList());
-//        return itemDao.findAllByQuantityGreaterThan(0);
     }
 
     @Override
     public void deleteById(Integer itemId) {
         itemDao.deleteById(itemId);
+    }
+
+    @Override
+    public boolean toggleStatus(int id) {
+        return toggleStatus(findById(id));
+    }
+
+    @Override
+    public boolean toggleStatus(Item item) {
+        item.setActive(!item.isActive());
+        save(item);
+        return item.isActive();
     }
 
 }

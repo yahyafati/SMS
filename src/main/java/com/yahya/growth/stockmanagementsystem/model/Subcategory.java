@@ -31,7 +31,7 @@ public class Subcategory {
 
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
-    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE}, mappedBy = "subcategory")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subcategory")
     private Set<Item> items = new HashSet<>();
 
 }

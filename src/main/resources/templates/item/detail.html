@@ -9,6 +9,7 @@
         </div>
         <div class="description-div">
             <p>Name: <span class="info" th:text="${item.name}">Pan</span></p>
+            <p>State: <span class="info" th:text="${item.isActive() ? 'Active' : 'Not Active'}">Active</span></p>
             <p>Description: <span class="info" th:text="${item.description}">Frying Pan</span></p>
             <p>Reorder Number: <span class="info" th:text="${item.reorderNumber}">200</span></p>
             <p>Quantity: <span class="info" th:text="${item.quantity}">200</span></p>
@@ -18,6 +19,7 @@
             <!--        <p>Subcategory: <span th:text="${item.subCategory.name}"></span></p>-->
             <div class="edit-btns-div">
                 <a th:href="@{edit(id=${item.id})}" class="my-btn">Edit</a>
+                <a th:href="@{toggleStatus(id=${item.id}, redirectTo=${#httpServletRequest.requestURI})}" class="my-btn my-btn-secondary">Change Active Status</a>
                 <a th:href="@{delete(id=${item.id})}" class="my-btn my-btn-danger">Remove Item</a>
             </div>
         </div>
