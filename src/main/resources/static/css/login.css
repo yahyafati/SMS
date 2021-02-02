@@ -268,6 +268,9 @@ input[type=text]::placeholder, input[type=password]::placeholder {
     font-size: 12px;
 }
 
+.error-login .error-login-small {
+    font-size: 10px;
+}
 
 * {
     box-sizing: border-box;

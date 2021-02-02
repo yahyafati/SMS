@@ -54,6 +54,10 @@ function createErrorDialog(message) {
     return createDialog(message, "Error", true, false)
 }
 
+function createSuccessDialog(message) {
+    return createDialog(message, "Success", true, false)
+}
+
 function createConfirmDialog(message, yes_action, no_action) {
     return createDialog(message, "Confirm", true, true, "Yes", "No", yes_action, no_action)
 }
@@ -70,6 +74,9 @@ function openDialog(dialog) {
         dialog.remove()
         dialog = createConfirmDialog(dialog.innerHTML,
             () => openLink(goto), () =>  defaultDialogButtonClick())
+    } else if (dialogType === "success") {
+        dialog.remove()
+        dialog = createSuccessDialog(dialog.innerHTML)
     }
     dimmer.appendChild(dialog)
     document.body.appendChild(dimmer)

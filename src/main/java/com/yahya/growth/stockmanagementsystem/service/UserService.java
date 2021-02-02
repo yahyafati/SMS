@@ -11,6 +11,14 @@ public interface UserService extends UserDetailsService, BasicServiceSkeleton<Us
 
     User saveUserWithRoles(User user, Role role);
 
+    boolean checkIfPasswordIsValid(String username, String password);
+
+    boolean checkIfPasswordIsValid(User user, String password);
+
     @Transactional
     User saveNewUser(User user);
+
+    User changePassword(String username, String newPassword);
+
+    User changePassword(User user, String newPassword);
 }

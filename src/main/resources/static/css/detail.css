@@ -16,6 +16,13 @@
     box-sizing: border-box;
 }
 
+.my-btn:disabled {
+    background-color: #989797 !important;
+    color: #3c3c3c !important;
+    cursor: not-allowed;
+    border: none;
+}
+
 .my-btn:hover {
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
 }

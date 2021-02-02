@@ -9,6 +9,7 @@ import com.yahya.growth.stockmanagementsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, UserRoleService userRoleService, RoleService roleService) {
+    public UserServiceImpl(UserDao userDao, UserRoleService userRoleService, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -65,10 +68,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean checkIfPasswordIsValid(String username, String password) {
+        User user = findByUsername(username);
+        return checkIfPasswordIsValid(user, password);
+    }
+
+    @Override
+    public boolean checkIfPasswordIsValid(User user, String password) {
+        return passwordEncoder.matches(password, user.getPassword());
+    }
+
+    @Override
     @Transactional
     public User saveNewUser(User user) {
         user.getProfile().setUser(user);
         return saveUserWithRoles(user, user.getRole());
+    }
+
+    @Override
+    public User changePassword(String username, String newPassword) {
+        User user = findByUsername(username);
+        return changePassword(user, newPassword);
+    }
+
+    @Override
+    public User changePassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        return save(user);
     }
 
     @Override

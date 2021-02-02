@@ -8,6 +8,7 @@ import com.yahya.growth.stockmanagementsystem.service.AuthorityService;
 import com.yahya.growth.stockmanagementsystem.service.RoleService;
 import com.yahya.growth.stockmanagementsystem.service.UserService;
 import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
+import com.yahya.growth.stockmanagementsystem.utilities.ChangePassword;
 import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -168,4 +169,5 @@ public class UserController implements BasicControllerSkeleton<User>{
         }
         return redirectView;
     }
+
 }

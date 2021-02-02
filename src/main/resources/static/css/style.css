@@ -103,7 +103,7 @@ header .profile .name {
 /* Header CSS Specs */
 
 .body section {
-    border: 1px solid #111;
+    /*border: 1px solid #111;*/
 }
 
 .body {
@@ -203,4 +203,81 @@ header .profile .name {
     background: #c86868;
     color: #ffffff;
     border-radius: 5px;
+}
+
+.passwordChange {
+    display: flex;
+    width: fit-content;
+    align-self: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.password-input-wrapper {
+    /*background-color: white;*/
+    margin: 10px 0;
+    padding: 0;
+}
+
+.password-input-toggle-div:hover {
+    box-shadow: 0 10px 15px #0119368c;
+    border: none !important;
+}
+
+.password-input-toggle-div {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.password-input {
+    width: 300px !important;
+    margin: 1px 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+
+.showPassword i {
+    cursor: pointer;
+    margin: 5px;
+    width: 20px;
+    padding: 0;
+}
+
+.password-input:hover, .password-input:focus {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0;
+}
+
+.password-input:hover .password-input-wrapper {
+    margin: 10px 0;
+}
+
+.changePassword {
+    width: fit-content;
+}
+
+.changePassword .img-thumb-div, .changePassword-div .changeButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    align-content: center;
+}
+
+.changePassword .img-thumb-div .img-thumb {
+    width: 100px;
+    height: 100px;
+    box-shadow: none;
+}
+
+.error-password {
+    margin: 0;
+    padding: 0;
+    color: #ab1818;
+    font-size: 12px;
+}
+
+.error-password .error-password-small {
+    font-size: 10px;
 }

@@ -13,6 +13,7 @@ public class FlashMessage {
         ERROR("error"),
         CONFIRM("confirm"),
         INFO("info"),
+        SUCCESS("success"),
         WARNING("warning");
 
         private final String name;

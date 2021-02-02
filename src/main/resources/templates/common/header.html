@@ -51,6 +51,9 @@
 <!--                </a>-->
 <!--            </li> -->
             <li class="item">
+                <a href="#" th:href="@{/changePassword}"> <i class="fa fa-sign-out"></i> Change Password </a>
+            </li>
+            <li class="item">
                 <a href="#" th:href="@{/logout}"> <i class="fa fa-sign-out"></i> Logout </a>
             </li>
         </ul>
@@ -204,12 +207,68 @@
         console.log(active)
 
         active.forEach(s => {
-            document.getElementById(s + "MenuItem").classList.add("active")
+            let menu = document.getElementById(s + "MenuItem");
+            if (menu == null) {
+                return;
+            }
+            menu.classList.add("active")
             const subMenu = document.getElementById(s + "SubMenu");
             if (subMenu) {
                 subMenu.classList.remove("hide")
             }
         });
+
+        function isValidPasswordForm(form) {
+            let valid =  checkPasswordStrength() && checkPasswordMatch();
+            console.log(valid)
+            return valid;
+        }
+
+        function checkPasswordStrength() {
+            const pass = document.getElementById("newPassword").value
+            const currentPass = document.getElementById("currentPassword").value
+            const passStrengthError = document.getElementById("passwordStrengthError")
+            passStrengthError.innerHTML = ""
+            let isValid = true;
+            if (pass === currentPass) {
+                isValid = false;
+                passStrengthError.innerHTML += "<div>Your new password is the as the old one.</div>";
+            }
+            if (pass.length < 8) {
+                isValid = false;
+                passStrengthError.innerHTML += "<div>Password must have at least 8 characters.</div>";
+            }
+            if (!isValid) {
+                passStrengthError.classList.remove("hide");
+            } else {
+                passStrengthError.classList.add("hide");
+            }
+            return isValid;
+        }
+
+        function checkPasswordMatch() {
+            const pass = document.getElementById("newPassword").value
+            const passConfirm = document.getElementById("confirmPassword").value
+            const isValid = pass === passConfirm;
+            console.log(pass, passConfirm, isValid)
+            if (!isValid) {
+                document.getElementById("passMatchingError").classList.remove("hide");
+            } else {
+                document.getElementById("passMatchingError").classList.add("hide");
+            }
+            return isValid
+        }
+
+        function showPassword(element) {
+            const passField = document.getElementById(element.getAttribute("passField"))
+            if (passField.type === "password") {
+                passField.type = "text"
+                element.className = "fas fa-eye-slash"
+            } else {
+                passField.type = "password"
+                element.className = "fas fa-eye"
+            }
+        }
     </script>
 </div>
 </body>
