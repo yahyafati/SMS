@@ -47,6 +47,11 @@ header .logo {
     font-size: 25px;
 }
 
+header .profile {
+    text-align: right;
+    width: 200px;
+}
+
 header .profile .profileImg {
     cursor: pointer;
     width: 50px;
@@ -61,10 +66,9 @@ header .profile .profileMenu {
     display: none;
     position: relative;
     z-index: 1;
-    background-color: #111;
-    color: #eee;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding: 10px 0;
+    background-color: #011936;
+    color: #f9dc5c;
 }
 
 header .profile:hover .profileMenu {
@@ -73,7 +77,8 @@ header .profile:hover .profileMenu {
 
 header .profile .profileMenu .item {
     border: 1px ridge #eee;
-    padding: 0;
+    padding: 10px;
+    text-align: left;
     margin: 0;
     line-height: normal;
 }
