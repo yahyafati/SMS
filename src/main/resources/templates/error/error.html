@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<!--/*@thymesVar id="exception" type="java.lang.Exception"*/-->
-<section th:fragment="main-content" class="main-content">
-    <div class="errorHandler-container">
-        <div class="errorHandler">
-            <h1 class="error-title">We apologize. 😥</h1>
-            <p class="error-description">
-                An unexpected error occurred. Sorry, the page that you are looking for is not working at the moment.
-            </p>
-        </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stock Management System" />
+    <meta name="author" content="Yahya Haji" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Helio Inventory Management System - Error</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Open+Sans&display=swap");
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Open Sans", sans-serif;
+        }
+
+        .errorHandler-container {
+            display: flex;
+            background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+            align-items: center;
+            justify-content: center;
+            flex-flow: wrap;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .errorHandler-container .errorHandler {
+            background-color: #00000099;
+            padding: 20px;
+            border-radius: 10px;
+            width: fit-content;
+            height: fit-content;
+        }
+
+        .errorHandler-container .errorHandler .error-title {
+            font-family: "Open Sans", sans-serif;
+            font-size: 24px;
+            color: #ffffff;
+            max-width: 350px;
+        }
+
+        .errorHandler-container .errorHandler .error-description {
+            color: #d2d2d2;
+            width: 350px;
+            margin: 5px 0px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="errorHandler-container">
+    <div class="errorHandler">
+        <h1 class="error-title">We apologize. 😥</h1>
+        <p class="error-description">
+            An unexpected error occurred. Sorry, the page that you are looking for is not working at the moment.
+        </p>
+        <p class="error-description">
+            Use your browser's back button to get back to the system.
+        </p>
     </div>
-</section>
+</div>
+</body>
 </html>
