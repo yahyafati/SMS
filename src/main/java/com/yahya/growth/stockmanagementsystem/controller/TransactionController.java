@@ -25,13 +25,15 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     private final CustomerService customerService;
     private final ItemService itemService;
     private final UserService userService;
+    private final CompanyService companyService;
 
     @Autowired
-    public TransactionController(TransactionService transactionService, CustomerService customerService, ItemService itemService, UserService userService) {
+    public TransactionController(TransactionService transactionService, CustomerService customerService, ItemService itemService, UserService userService, CompanyService companyService) {
         this.transactionService = transactionService;
         this.customerService = customerService;
         this.itemService = itemService;
         this.userService = userService;
+        this.companyService = companyService;
     }
 
     @ModelAttribute("title")
@@ -85,7 +87,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @PreAuthorize("hasAuthority('transaction:write')")
     public String purchaseItem(Model model) {
         model.addAttribute("active", Lists.newArrayList("purchaseTransaction", "transaction"));
-        Transaction transaction = new Transaction();
+        Transaction transaction = new Transaction(companyService.getCurrentCompany());
         transaction.setType(TransactionType.PURCHASE);
         model.addAttribute("allItems", itemService.findAllActive());
         model.addAttribute("transaction", transaction);
@@ -99,7 +101,7 @@ public class TransactionController implements BasicControllerSkeleton<Transactio
     @PreAuthorize("hasAuthority('transaction:write')")
     public String saleItem(Model model) {
         model.addAttribute("active", Lists.newArrayList("saleTransaction", "transaction"));
-        Transaction transaction = new Transaction();
+        Transaction transaction = new Transaction(companyService.getCurrentCompany());
         transaction.setType(TransactionType.SALE);
         model.addAttribute("allItems", itemService.findAllAvailableItems());
         model.addAttribute("transaction", transaction);

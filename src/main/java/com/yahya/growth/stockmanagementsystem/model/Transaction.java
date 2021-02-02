@@ -1,8 +1,10 @@
 package com.yahya.growth.stockmanagementsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yahya.growth.stockmanagementsystem.model.utility.Company;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -15,6 +17,7 @@ import java.util.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Transaction {
 
     @Id
@@ -47,6 +50,12 @@ public class Transaction {
     private double serviceCharge = 0.0;
     @Column(name = "transaction_discount")
     private double discount = 0.0;
+
+    public Transaction(Company company) {
+        this.vat = company.getVat();
+        this.serviceCharge  = company.getServiceCharge();
+        this.discount = company.getSpecialDiscount();
+    }
 
     public String getFormattedAddedTime() {
         return new Date(addedTime.getTime()).toString();
