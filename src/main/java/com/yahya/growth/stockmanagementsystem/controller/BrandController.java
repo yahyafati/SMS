@@ -7,11 +7,15 @@ import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.BrandService;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
+import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -77,39 +81,6 @@ public class BrandController {
         return "redirect:/brand/" + brand.getId();
     }
 
-    /* Many To Many Mapping */
-//    @PostMapping("/addCategory")
-//    public String addCategoryPOST(@RequestParam int brandId, @ModelAttribute Category category) {
-//        Brand brand = brandService.findById(brandId);
-//        brand.getCategories().add(category);
-//        brandService.save(brand);
-//        return "redirect:/brand/" + brandId;
-//    }
-//
-//    @GetMapping("/removeCategory")
-//    public String removeCategory(@RequestParam(name = "category") int categoryId, @RequestParam(name = "brand") int brandId) {
-//        Brand brand = brandService.findById(brandId);
-//        brand.getCategories().removeIf(category -> category.getId() == categoryId);
-//        brandService.save(brand);
-//        return "redirect:/brand/" + brandId;
-//    }
-//
-//    @GetMapping("/removeSubcategory")
-//    public String removeSubcategory(@RequestParam(name = "subcategory") int subcategoryId, @RequestParam(name = "brand") int brandId) {
-//        Brand brand = brandService.findById(brandId);
-//        brand.getSubcategories().removeIf(subcategory -> subcategory.getId() == subcategoryId);
-//        brandService.save(brand);
-//        return "redirect:/brand/" + brandId;
-//    }
-//
-//    @PostMapping("/addSubcategory")
-//    public String addSubcategoryPOST(@RequestParam int brandId, @ModelAttribute Subcategory subcategory) {
-//        Brand brand = brandService.findById(brandId);
-//        brand.getSubcategories().add(subcategory);
-//        brandService.save(brand);
-//        return "redirect:/brand/" + brandId;
-//    }
-
     @GetMapping("/edit")
     @PreAuthorize("hasAuthority('brand:write')")
     public String edit(@RequestParam(name = "id") int brandId, Model model) {
@@ -131,8 +102,15 @@ public class BrandController {
 
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('brand:write')")
-    public String delete(@RequestParam(name = "id") int brandId) {
-        brandService.deleteById(brandId);
-        return "redirect:/brand";
+    public RedirectView delete(@RequestParam(name = "id") int brandId, RedirectAttributes redir) {
+        RedirectView redirectView = new RedirectView("/brand");
+        try {
+            brandService.deleteById(brandId);
+        } catch (DataIntegrityViolationException e) {
+            FlashMessage flashMessage = new FlashMessage("This Brand can not be deleted as there are one or more items present under it.",
+                    "", FlashMessage.Type.ERROR);
+            redir.addFlashAttribute("dialogFlash", flashMessage);
+        }
+        return redirectView;
     }
 }

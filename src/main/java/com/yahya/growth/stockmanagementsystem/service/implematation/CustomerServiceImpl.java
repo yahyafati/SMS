@@ -35,4 +35,16 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteById(Integer customerId) {
         customerDao.deleteById(customerId);
     }
+
+    @Override
+    public boolean toggleStatus(int id) {
+        return toggleStatus(findById(id));
+    }
+
+    @Override
+    public boolean toggleStatus(Customer customer) {
+        customer.setActive(!customer.isActive());
+        save(customer);
+        return customer.isActive();
+    }
 }

@@ -27,6 +27,10 @@ public class Customer {
     private String phone;
     @Column(name = "customer_email")
     private String email;
+    @Column(name = "customer_is_active")
+    @Builder.Default
+    private boolean active = true;
+
 
     public Customer(int id) {
         this.id = id;

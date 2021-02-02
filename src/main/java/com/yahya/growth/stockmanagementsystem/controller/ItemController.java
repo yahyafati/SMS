@@ -120,11 +120,11 @@ public class ItemController {
             Item item = itemService.findById(id);
             if (item.isActive()) {
                 FlashMessage flashMessage = new FlashMessage("This Item can not be deleted. Do you want to deactivate it instead?",
-                        String.format("/items/toggleStatus?id=%d&redirectURL=/items", id), FlashMessage.Type.CONFIRM);
+                        String.format("/items/toggleStatus?id=%d&redirectTo=/items", id), FlashMessage.Type.CONFIRM);
                 redir.addFlashAttribute("dialogFlash", flashMessage);
             } else {
                 FlashMessage flashMessage = new FlashMessage("This Item can not be deleted. However it is already deactivated.",
-                        String.format("/items/toggleStatus?id=%d&redirectURL=/items", id), FlashMessage.Type.ERROR);
+                        String.format("/items/toggleStatus?id=%d&redirectTo=/items", id), FlashMessage.Type.ERROR);
                 redir.addFlashAttribute("dialogFlash", flashMessage);
             }
 

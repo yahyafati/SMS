@@ -13,4 +13,8 @@ public interface CustomerService {
     List<Customer> findAll();
 
     void deleteById(Integer customerId);
+
+    boolean toggleStatus(int id);
+
+    boolean toggleStatus(Customer customer);
 }

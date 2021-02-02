@@ -21,4 +21,12 @@ public interface UserService extends UserDetailsService, BasicServiceSkeleton<Us
     User changePassword(String username, String newPassword);
 
     User changePassword(User user, String newPassword);
+
+    void deactivateById(int id);
+
+    void deactivate(User user);
+
+    void activateById(int id);
+
+    void activate(User user);
 }

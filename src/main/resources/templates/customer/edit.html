@@ -11,6 +11,9 @@
         <div class="form-div">
             <form action="" class="form" th:action="@{{action}(action=${action}, id=${customer.id})}" th:object="${customer}" method="post">
                 <div class="form-control-wrapper">
+                    State: <input type="checkbox" th:field="*{active}">
+                </div>
+                <div class="form-control-wrapper">
                     Name: <input placeholder="Customer" class="input-text" type="text" th:field="*{name}">
                 </div>
                 <div class="form-control-wrapper">

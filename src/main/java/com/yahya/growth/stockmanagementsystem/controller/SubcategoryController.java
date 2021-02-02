@@ -4,10 +4,14 @@ import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Subcategory;
 import com.yahya.growth.stockmanagementsystem.service.CategoryService;
 import com.yahya.growth.stockmanagementsystem.service.SubcategoryService;
+import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -86,9 +90,16 @@ public class SubcategoryController {
     }
 
     @GetMapping("/delete")
-    public String delete(@RequestParam(name = "id") int subcategoryId) {
-        subcategoryService.deleteById(subcategoryId);
-        return "redirect:/subcategory";
+    public RedirectView delete(@RequestParam(name = "id") int subcategoryId, RedirectAttributes redir) {
+        RedirectView redirectView = new RedirectView("/", false);
+        try {
+            subcategoryService.deleteById(subcategoryId);
+        } catch (DataIntegrityViolationException e) {
+            FlashMessage flashMessage = new FlashMessage("This Subcategory can not be deleted as there are one or more items present under it..",
+                    "", FlashMessage.Type.ERROR);
+            redir.addFlashAttribute("dialogFlash", flashMessage);
+        }
+        return redirectView;
     }
 
 }

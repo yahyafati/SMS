@@ -9,6 +9,7 @@
             <th>Username</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Status</th>
             <th>Email</th>
             <th>Phone</th>
             <th>Permission</th>
@@ -25,6 +26,7 @@
             </td>
             <td th:text="${user.profile.firstName}">James</td>
             <td th:text="${user.profile.lastName}">Lynch</td>
+            <td th:text="${user.enabled ? 'Active' : 'Not Active'}">Active</td>
             <td th:text="${user.profile.email}">nuriamussa@gmail.com</td>
             <td th:text="${user.profile.phone}">0911871115</td>
             <td>

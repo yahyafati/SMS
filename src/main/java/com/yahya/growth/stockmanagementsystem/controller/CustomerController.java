@@ -2,12 +2,17 @@ package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.google.common.collect.Lists;
 import com.yahya.growth.stockmanagementsystem.model.Customer;
+import com.yahya.growth.stockmanagementsystem.model.Item;
 import com.yahya.growth.stockmanagementsystem.service.CustomerService;
+import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -82,11 +87,33 @@ public class CustomerController {
         return "redirect:/customer/" + id;
     }
 
+    @GetMapping("/toggleStatus")
+    @PreAuthorize("hasAuthority('item:write')")
+    public RedirectView toggleStatus(@RequestParam int id, @RequestParam String redirectTo) {
+        RedirectView redirectView = new RedirectView(redirectTo);
+        customerService.toggleStatus(id);
+        return redirectView;
+    }
+
     @GetMapping("/delete")
     @PreAuthorize("hasAuthority('customer:write')")
-    public String delete(@RequestParam int id) {
-        customerService.deleteById(id);
-        return "redirect:/customer";
+    public RedirectView delete(@RequestParam int id, RedirectAttributes redir) {
+        RedirectView redirectView = new RedirectView("/customer", true);
+        try {
+            customerService.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            Customer customer = customerService.findById(id);
+            FlashMessage flashMessage;
+            if (customer.isActive()) {
+                flashMessage = new FlashMessage("This Customer can not be deleted. Do you want to deactivate it instead?",
+                        String.format("/customer/toggleStatus?id=%d&redirectTo=/customer", id), FlashMessage.Type.CONFIRM);
+            } else {
+                flashMessage = new FlashMessage("This Customer can not be deleted.",
+                        String.format("/customer/toggleStatus?id=%d&redirectTo=/customer", id), FlashMessage.Type.ERROR);
+            }
+            redir.addFlashAttribute("dialogFlash", flashMessage);
+        }
+        return redirectView;
     }
 
 

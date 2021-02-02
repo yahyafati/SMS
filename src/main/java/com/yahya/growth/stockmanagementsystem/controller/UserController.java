@@ -1,6 +1,7 @@
 package com.yahya.growth.stockmanagementsystem.controller;
 
 import com.google.common.collect.Lists;
+import com.yahya.growth.stockmanagementsystem.model.Customer;
 import com.yahya.growth.stockmanagementsystem.model.User;
 import com.yahya.growth.stockmanagementsystem.model.security.Authority;
 import com.yahya.growth.stockmanagementsystem.model.security.Role;
@@ -11,6 +12,7 @@ import com.yahya.growth.stockmanagementsystem.utilities.AuthorityUtils;
 import com.yahya.growth.stockmanagementsystem.utilities.ChangePassword;
 import com.yahya.growth.stockmanagementsystem.utilities.FlashMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -153,19 +155,19 @@ public class UserController implements BasicControllerSkeleton<User>{
         throw new UnsupportedOperationException("This delete operation is unsupported.");
     }
 
-    @GetMapping("/delete")
+    @GetMapping(value = {"/delete", "/deactivate"})
     @PreAuthorize("hasAuthority('user:write')")
     public RedirectView delete(@RequestParam int id, Principal principal, RedirectAttributes redir) {
         RedirectView redirectView = new RedirectView("/users", true);
         User currentUser = userService.findByUsername(principal.getName());
         if (currentUser.getId() == id) {
-            if (!roleService.deleteById(id)) {
-                FlashMessage flashMessage = new FlashMessage("You can't delete your own account.",
-                        "", FlashMessage.Type.ERROR);
-                redir.addFlashAttribute("dialogFlash", flashMessage);
-            }
-        } else {
-            userService.deleteById(id);
+            FlashMessage flashMessage = new FlashMessage("You can't delete your own account.",
+                    "", FlashMessage.Type.ERROR);
+            redir.addFlashAttribute("dialogFlash", flashMessage);
+        }
+        else {
+//            userService.deleteById(id);
+            userService.deactivateById(id);
         }
         return redirectView;
     }

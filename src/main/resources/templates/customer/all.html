@@ -7,6 +7,7 @@
         <tr>
             <th>#</th>
             <th>Customer</th>
+            <th>Statud</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
@@ -21,12 +22,14 @@
             <td>
                 <a class="link-info" th:text="${customer.name}" th:href="@{/customer/{id}(id=${customer.id})}">James Doe</a>
             </td>
+            <td th:text="${customer.active ? 'Active' : 'Not Active'}">Active</td>
             <td th:text="${customer.phone}">0911871115</td>
             <td th:text="${customer.email}">nuriamussa@gmail.com</td>
             <td th:text="${customer.address}">Burayu, Ethiopia</td>
             <td>
                 <a class="my-btn my-btn-sm"  th:href="@{/customer/edit(id=${customer.id})}">Edit</a>
 <!--                <a class="btn btn-sm btn-outline-danger" th:href="@{/customer/delete(id=${customer.id})}">Delete</a>-->
+                <a th:href="@{/customer/toggleStatus(id=${customer.id}, redirectTo=${#httpServletRequest.requestURI})}" class="my-btn my-btn-secondary my-btn-sm">Change Active Status</a>
                 <p class="my-btn my-btn-sm my-btn-danger"  onclick="openConfirmDialog(this)"
                    th:message="'Are you sure you want to remove [' + ${customer.name} + '] customer?'"
                    th:goto="@{/customer/delete(id=${customer.id})}">Remove</p>

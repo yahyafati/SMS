@@ -98,6 +98,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deactivateById(int id) {
+        deactivate(findById(id));
+    }
+
+    @Override
+    public void deactivate(User user) {
+        user.setEnabled(false);
+        save(user);
+    }
+
+    @Override
+    public void activateById(int id) {
+        activate(findById(id));
+    }
+
+    @Override
+    public void activate(User user) {
+        user.setEnabled(false);
+        save(user);
+    }
+
+    @Override
     public List<User> findAll() {
         return userDao.findAll();
     }
