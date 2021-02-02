@@ -2,41 +2,43 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 <section th:fragment="main-content" class="main-content">
-    <div class="dashboard" id="dashboard">
-        <div class="dashboard-item" sec:authorize-url="/items">
-            <a class="dashboard-title" href="#"  th:href="@{/items}">Products</a>
-            <div class="dashboard-icon">
-                <i class="fas fa-tv"></i>
+    <div class="dashboard-container">
+        <div class="dashboard" id="dashboard">
+            <div class="dashboard-item" sec:authorize-url="/items">
+                <a class="dashboard-title" href="#"  th:href="@{/items}">Products</a>
+                <div class="dashboard-icon">
+                    <i class="fas fa-tv"></i>
+                </div>
             </div>
-        </div>
-        <div class="dashboard-item" sec:authorize-url="/transaction/sale">
-            <a class="dashboard-title" href="#"  th:href="@{/transaction/sale}">Sell</a>
-            <div class="dashboard-icon">
-                <i class="far fa-arrow-alt-circle-right"></i>
+            <div class="dashboard-item" sec:authorize-url="/transaction/sale">
+                <a class="dashboard-title" href="#"  th:href="@{/transaction/sale}">Sell</a>
+                <div class="dashboard-icon">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                </div>
             </div>
-        </div>
-        <div class="dashboard-item" sec:authorize-url="/transaction/purchase">
-            <a class="dashboard-title" href="#" th:href="@{/transaction/purchase}">Buy</a>
-            <div class="dashboard-icon">
-                <i class="far fa-arrow-alt-circle-left"></i>
+            <div class="dashboard-item" sec:authorize-url="/transaction/purchase">
+                <a class="dashboard-title" href="#" th:href="@{/transaction/purchase}">Buy</a>
+                <div class="dashboard-icon">
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                </div>
             </div>
-        </div>
-<!--        <div class="dashboard-item" sec:authorize-url="/reports">-->
-<!--            <a class="dashboard-title" href="#" th:href="@{/reports}">Reports</a>-->
-<!--            <div class="dashboard-icon">-->
-<!--                <i class="fas fa-scroll"></i>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="dashboard-item" sec:authorize-url="/profile">
-            <a class="dashboard-title" href="#" th:href="@{/profile}">Profile</a>
-            <div class="dashboard-icon">
-                <i class="fa fa-user"></i>
+            <!--        <div class="dashboard-item" sec:authorize-url="/reports">-->
+            <!--            <a class="dashboard-title" href="#" th:href="@{/reports}">Reports</a>-->
+            <!--            <div class="dashboard-icon">-->
+            <!--                <i class="fas fa-scroll"></i>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <div class="dashboard-item" sec:authorize-url="/profile">
+                <a class="dashboard-title" href="#" th:href="@{/profile}">Profile</a>
+                <div class="dashboard-icon">
+                    <i class="fa fa-user"></i>
+                </div>
             </div>
-        </div>
-        <div class="dashboard-item" sec:authorize-url="/logout">
-            <a class="dashboard-title" href="#" th:href="@{/logout}">Logout</a>
-            <div class="dashboard-icon">
-                <i class="fa fa-sign-out"></i>
+            <div class="dashboard-item" sec:authorize-url="/logout">
+                <a class="dashboard-title" href="#" th:href="@{/logout}">Logout</a>
+                <div class="dashboard-icon">
+                    <i class="fa fa-sign-out"></i>
+                </div>
             </div>
         </div>
     </div>
