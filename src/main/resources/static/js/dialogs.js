@@ -10,7 +10,7 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-function createDialog(message, type,
+function createDialog(message, type, icon,
                       ok_button=true, cancel_button=true,
                       ok_text="Okay", cancel_text="Cancel",
                       ok_action = defaultDialogButtonClick, cancel_action = defaultDialogButtonClick) {
@@ -19,8 +19,8 @@ function createDialog(message, type,
 
     const dialogHead = document.createElement("div")
     dialogHead.classList.add("head")
-    const errorIcon = '<span class="dialog-icon"><i class="fas fa-bomb"></i></span>'
-    dialogHead.appendChild(htmlToElement(errorIcon))
+    // const errorIcon = '<span class="dialog-icon"><i class="fas fa-bomb"></i></span>'
+    dialogHead.appendChild(htmlToElement(icon))
     const dialogTitle = '<h2 class="dialog-title">' + type + '</h2>\n';
     dialogHead.appendChild(htmlToElement(dialogTitle))
     dialog.appendChild(dialogHead);
@@ -35,6 +35,7 @@ function createDialog(message, type,
     if (ok_button) {
         const btn_okay = document.createElement("button")
         btn_okay.classList.add("my-btn")
+        btn_okay.classList.add("my-btn-secondary")
         btn_okay.onclick = ev => ok_action();
         btn_okay.innerHTML = ok_text
         dialogButtons.appendChild(btn_okay)
@@ -51,15 +52,20 @@ function createDialog(message, type,
 }
 
 function createErrorDialog(message) {
-    return createDialog(message, "Error", true, false)
+    const icon = '<span class="dialog-icon error-dialog"><i class="fas fa-bomb"></i></span>'
+    return createDialog(message, "Error", icon, true, false)
 }
 
 function createSuccessDialog(message) {
-    return createDialog(message, "Success", true, false)
+    // <i className="fas fa-check"></i>
+    const icon = '<span class="dialog-icon success-dialog"><i class="fas fa-check"></i></span>'
+    return createDialog(message, "Success", icon, true, false)
 }
 
 function createConfirmDialog(message, yes_action, no_action) {
-    return createDialog(message, "Confirm", true, true, "Yes", "No", yes_action, no_action)
+    // <i className="fas fa-question"></i>
+    const icon = '<span class="dialog-icon confirm-dialog"><i class="fas fa-question"></i></span>'
+    return createDialog(message, "Confirm", icon,true, true, "Yes", "No", yes_action, no_action)
 }
 
 function openDialog(dialog) {

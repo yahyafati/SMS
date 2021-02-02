@@ -38,6 +38,18 @@
     color: #565656 !important;
 }
 
+.my-btn-secondary {
+    border-color: #e2e2e266;
+    background: #e2e2e266 !important;
+    color: #2d2d2d !important;
+}
+
+.my-btn-secondary:hover {
+    border-color: #2d2d2d;
+    background: #2d2d2d !important;
+    color: #e2e2e2 !important;
+}
+
 .my-btn-danger:hover {
     color: rgb(238, 238, 238) !important;
     background: #d7163d !important;

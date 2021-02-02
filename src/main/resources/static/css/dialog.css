@@ -29,9 +29,20 @@
     text-align: center;
     width: fit-content;
     font-size: 48px;
-    color: #a91515;
     padding: 10px;
     margin: auto;
+}
+
+.error-dialog {
+    color: #a91515;
+}
+
+.success-dialog {
+    color: #17ca35;
+}
+
+.confirm-dialog {
+    color: aqua;
 }
 
 .dialog .dialog-body {
