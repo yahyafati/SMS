@@ -37,7 +37,9 @@ public class StartupActions {
     @EventListener({ApplicationReadyEvent.class})
     public void applicationReadyEvent() {
         System.out.println("\n\n\nSPRING BOOT HAS STARTED\n\n\n");
-        System.out.println("Application started ... launching browser now");
+//        System.out.println("Application started ... launching browser now");
+        System.out.println("Spring boot is now running on the following address:\n" +
+                "http://localhost:" + environment.getProperty("server.port"));
         browse("http://localhost:" + environment.getProperty("server.port"));
     }
 
