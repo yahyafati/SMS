@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+//@Controller
 public class ExceptionController implements ErrorController {
 
     @ModelAttribute("title")
@@ -15,8 +15,8 @@ public class ExceptionController implements ErrorController {
         return "Sorry!";
     }
 
-    @RequestMapping("/error")
-    @ExceptionHandler
+//    @RequestMapping("/error")
+//    @ExceptionHandler
     public String handleError(Model model, Exception exception) {
         model.addAttribute("pageName", "error/error");
         return "error/error";

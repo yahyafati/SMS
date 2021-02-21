@@ -53,7 +53,7 @@ public class User implements UserDetails {
     @Builder.Default
     private Role role = new Role();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JsonIgnore @EqualsAndHashCode.Exclude @ToString.Exclude
     @Builder.Default
     private Set<Authority> authorities = new HashSet<>();

@@ -32,7 +32,7 @@ public enum UserRole {
             TRANSACTION_READ, TRANSACTION_WRITE, CREDIT_SETTLEMENT_READ, CREDIT_SETTLEMENT_WRITE,
             COMPANY_READ, COMPANY_WRITE
     )),
-    IT_PERSON(Sets.newHashSet(IT_PERMISSION, USER_READ, USER_WRITE));
+    IT_PERSON(Sets.newHashSet(IT_PERMISSION, USER_READ, USER_WRITE, ROLE_READ, ROLE_WRITE));
 
     private final Set<Permission> permissions;
 
